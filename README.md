@@ -1,4 +1,14 @@
 #RENDERMAN Lecture Code
+The following lines need to be added to your .bashrc in the NCCA linux labs to get renderman to work
+
+```
+export RMANTREE=/opt/pixar/RenderManProServer-20.2/
+export RMAN_SHADERPATH=$HOME/Shaders:$RMANTREE/lib/shaders
+export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$RMANTREE/lib:
+export PATH=$PATH:$RMANTREE/bin
+```
+
 
 The following folders contain examples for my Renderman lectures.
 

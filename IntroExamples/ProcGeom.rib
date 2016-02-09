@@ -1,0 +1,31 @@
+##RenderMan RIB
+#File ProcGeom.rib
+#Created by jmacey
+#Creation Date: Fri Sep 26 09:58:06 2008
+version 3.04
+Display "ProcGeom.exr" "framebuffer" "rgba" 
+Format 720 575 1
+Projection "perspective" "uniform float fov" [50]
+WorldBegin 
+	Translate 0 0 2
+	Rotate -25 1 0 0
+	TransformBegin 
+		Color [1 0 0]
+		Rotate 90 1 0 0
+		Sphere 0.0588235 -0.0588235 0 250 
+		Torus 0.117647 0.0588235 0 180 250 
+		Torus 0.235294 0.0588235 180 360 250 
+		Torus 0.352941 0.0588235 0 180 250 
+		Torus 0.470588 0.0588235 180 360 250 
+		Torus 0.588235 0.0588235 0 180 250 
+		Torus 0.705882 0.0588235 180 360 250 
+	TransformEnd 
+	TransformBegin 
+		Translate 0 -0.5 0
+		Color [0 0 1]
+		Rotate 90 1 0 0
+		Sphere 0.111111 -0.111111 0 360 
+		Torus 0.222222 0.111111 0 180 360 
+		Torus 0.444444 0.111111 180 360 360 
+	TransformEnd 
+WorldEnd 

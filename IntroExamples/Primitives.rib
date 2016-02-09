@@ -1,0 +1,45 @@
+##RenderMan RIB
+#File Primitives.rib
+#Created by jmacey
+#Creation Date: Mon Feb 23 10:13:10 2009
+version 3.04
+Display "Primitives.exr" "framebuffer" "rgba" 
+Format 720 575 1
+Projection "perspective" "uniform float fov" [20]
+WorldBegin 
+	Translate 0 0 10
+	TransformBegin 
+		Translate -4 2 0
+		Sphere 1 -1 1 360 
+	TransformEnd 
+	TransformBegin 
+		Translate -4 -2 0
+		Rotate 90 1 0 0
+		Cylinder 1 -0.5 0.5 360 
+	TransformEnd 
+	TransformBegin 
+		Translate -1 2 0
+		Rotate -90 1 0 0
+		Cone 2 1 360 
+	TransformEnd 
+	TransformBegin 
+		Translate -1 -2 0
+		Rotate -90 1 0 0
+		Paraboloid 1 1 2 360 
+	TransformEnd 
+	TransformBegin 
+		Translate 2 2 0
+		Rotate -90 1 0 0
+		Hyperboloid 1 0 0.5 1 0 -0.5 270 
+	TransformEnd 
+	TransformBegin 
+		Translate 2 -2 0
+		Rotate -90 1 0 0
+		Disk 0 1 360 
+	TransformEnd 
+	TransformBegin 
+		Translate 3 0 0
+		Rotate 45 1 0 0
+		Torus 1 0.5 0 360 360 
+	TransformEnd 
+WorldEnd 

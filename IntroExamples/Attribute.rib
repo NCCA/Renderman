@@ -1,0 +1,25 @@
+##RenderMan RIB
+#File Attribute.rib
+#Created by jmacey
+#Creation Date: Mon Feb 23 10:37:00 2009
+version 3.04
+Display "Attribute.exr" "framebuffer" "rgba" 
+Format 720 575 1
+Projection "perspective" "uniform float fov" [50]
+WorldBegin 
+	Translate 0 0 5
+	Color [1 1 1]
+	Opacity [1 1 1]
+	TransformBegin 
+		Translate -0.5 0 0
+		AttributeBegin 
+			Color [0 1 1]
+			Opacity [0.2 0.2 0.2]
+			Sphere 1 -1 1 360 
+		AttributeEnd 
+	TransformEnd 
+	TransformBegin 
+		Translate 0.5 0 0
+		Sphere 1 -1 1 360 
+	TransformEnd 
+WorldEnd 

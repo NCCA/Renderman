@@ -1,0 +1,23 @@
+##RenderMan RIB
+#Comments start with a #
+#File HelloWorld.rib #
+#Created by jmacey
+#Creation Date: Tue Nov  3 14:07:08 2009
+version 3.04
+Display "HelloWorld.exr" "framebuffer" "rgba" 
+Format 720 576 1
+
+Projection "perspective" "fov" [35]
+WorldBegin 
+#move our world back 2 in the z so we can see it
+Translate 0 0 14
+Rotate -90 1 0 0
+#draw a sphere primitive
+#Sphere 1 -1 1 360 
+TransformBegin
+Translate 0 -5 0
+Rotate 45 0 0 1
+Geometry "teapot"
+TransformEnd
+#end our world
+WorldEnd 

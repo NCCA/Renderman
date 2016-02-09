@@ -1,0 +1,49 @@
+##RenderMan RIB
+version 3.04
+ArchiveBegin "Wave"
+	Rotate 90 1 0 0
+	Sphere 0.030303 -0.030303 0 360 
+	Torus 0.0606061 0.030303 0 180 360 
+	Torus 0.121212 0.030303 180 360 360 
+	Torus 0.181818 0.030303 0 180 360 
+	Torus 0.242424 0.030303 180 360 360 
+	Torus 0.30303 0.030303 0 180 360 
+	Torus 0.363636 0.030303 180 360 360 
+	Torus 0.424242 0.030303 0 180 360 
+	Torus 0.484848 0.030303 180 360 360 
+	Torus 0.545455 0.030303 0 180 360 
+	Torus 0.606061 0.030303 180 360 360 
+	Torus 0.666667 0.030303 0 180 360 
+	Torus 0.727273 0.030303 180 360 360 
+	Torus 0.787879 0.030303 0 180 360 
+	Torus 0.848485 0.030303 180 360 360 
+ArchiveEnd 
+#File ReadArchive.rib
+#Created by jmacey
+#Creation Date: Fri Sep 26 12:21:07 2008
+Display "ReadArchive.exr" "framebuffer" "rgba" 
+Format 720 575 1
+Projection "perspective" "uniform float fov" [30]
+WorldBegin 
+	Translate 0 0 10
+	TransformBegin 
+		Rotate 30 1 0 0
+		Color [1 0 0]
+		Attribute "identifier" "name" ["Wave1"]
+		ReadArchive "Wave" 
+	TransformEnd 
+	TransformBegin 
+		Rotate 30 1 0 0
+		Color [0 1 0]
+		Translate 2.2 0 0
+		Attribute "identifier" "name" ["Wave2"]
+		ReadArchive "Wave" 
+	TransformEnd 
+	TransformBegin 
+		Rotate 30 1 0 0
+		Color [0 0 1]
+		Translate -2.2 0 0
+		Attribute "identifier" "name" ["Wave3"]
+		ReadArchive "Wave" 
+	TransformEnd 
+WorldEnd 

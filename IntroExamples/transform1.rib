@@ -1,0 +1,15 @@
+##RenderMan RIB
+#File transform1.rib
+#Created by jmacey
+#Creation Date: Mon Feb 23 09:41:27 2009
+version 3.04
+Display "transform1.exr" "framebuffer" "rgba" 
+Format 720 575 1
+Projection "perspective" 
+WorldBegin 
+Translate 0 0 2
+Translate -1 0 0
+Sphere 1 -1 1 360 
+Translate 2 0 0
+Sphere 1 -1 1 360 
+WorldEnd 

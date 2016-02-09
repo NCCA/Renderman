@@ -10,8 +10,8 @@ The following folders contain examples for my Renderman lectures.
 
 ###Lecture 4 [Basic Shaders](https://nccastaff.bournemouth.ac.uk/jmacey/Renderman/slides/RendermanShaders1.pdf)[code](https://github.com/NCCA/Renderman/tree/master/Lecture4Shaders1)
 
-### Lecture 5 [More Shaders](https://nccastaff.bournemouth.ac.uk/jmacey/Renderman/slides/RendermanShaders2.pdf)[code]()
+### Lecture 5 [More Shaders](https://nccastaff.bournemouth.ac.uk/jmacey/Renderman/slides/RendermanShaders2.pdf)[code](https://github.com/NCCA/Renderman/tree/master/Lecture5Shaders2)
 
-###AOV Examples [code]()
+###AOV Examples [code](https://github.com/NCCA/Renderman/tree/master/AOV)
 
 

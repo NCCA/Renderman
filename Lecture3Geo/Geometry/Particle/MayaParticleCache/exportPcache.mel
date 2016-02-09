@@ -1,0 +1,2 @@
+
+dynExport -mnf 1 -mxf 500 -os 2 -atr position  -p "PDA" -f "ascii" particle1;

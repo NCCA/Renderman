@@ -1,0 +1,18 @@
+##RenderMan RIB
+#File Curves.rib
+#Created by jmacey
+#Creation Date: Sat Oct 18 10:00:18 2008
+version 3.04
+Display "Curves.exr" "file" "rgba" 
+Format 720 576 1
+Projection "perspective" "uniform float fov" [50]
+WorldBegin 
+	Translate 0 0 3
+	TransformBegin 
+		Color [1 0 0]
+		Curves "cubic" [4 4 4 4] "nonperiodic" "vertex point P" [-1 0 0 -1 0.2 0 -1 0.8 0 -1 1.2 0
+			-0.5 0 0 -0.5 0.2 0 -0.5 0.8 0 -0.5 1.2 0
+			0 0 0 0 0.2 0 0 0.8 0 0 1.2 0
+			0.5 0 0 0.5 0.2 0 0.5 0.8 0 0.5 1.2 0] "varying float width" [0.1 0.01 0.1 0.01 0.1 0.01 0.1 0.01]
+	TransformEnd 
+WorldEnd 

@@ -1,0 +1,147 @@
+##RenderMan RIB
+#File CSGIntersect.rib
+#Created by jmacey
+#Creation Date: Tue Oct 14 20:16:01 2008
+version 3.04
+Declare "Light1" "string"
+Declare "Light2" "string"
+Declare "Light3" "string"
+Display "CSGIntersect.exr" "file" "rgba" 
+Format 720 575 1
+Projection "perspective" "uniform float fov" [50]
+WorldBegin 
+	LightSource "distantlight" "Light1" "float intensity" [1] "point to" [1 -0.03 0]
+	LightSource "distantlight" "Light2" "float intensity" [1] "point to" [-1 -0.03 0]
+	LightSource "distantlight" "Light3" "float intensity" [0.2] "point to" [0 -0.5 -1]
+	Illuminate "Light1" 1
+	Illuminate "Light2" 1
+	Illuminate "Light3" 1
+	Translate 0 0.2 2
+	TransformBegin 
+		Rotate -45 1 0 0
+		SolidBegin "intersection"
+			SolidBegin "primitive"
+				TransformBegin 
+					AttributeBegin 
+						Color [1 1 1]
+						Translate 0 -1 0
+						Surface "plastic" 
+						Sphere 1 -1 1 360 
+						Translate 0 -0.1 0
+						Sphere 1 -1 1 360 
+					AttributeEnd 
+				TransformEnd 
+			SolidEnd 
+			SolidBegin "primitive"
+				TransformBegin 
+					Rotate 0 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 20 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 40 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 60 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 80 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 100 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 120 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 140 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 160 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 180 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 200 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 220 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 240 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 260 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 280 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 300 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 320 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+				TransformBegin 
+					Rotate 340 0 1 0
+					Translate -0.6 -0.3 0
+					Scale 0.1 0.1 0.1
+					Sphere 1 -1 1 360 
+				TransformEnd 
+			SolidEnd 
+		SolidEnd 
+	TransformEnd 
+WorldEnd 

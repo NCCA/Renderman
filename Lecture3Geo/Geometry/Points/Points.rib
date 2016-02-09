@@ -1,0 +1,25 @@
+##RenderMan RIB
+#File Points.rib
+#Created by jmacey
+#Creation Date: Sat Oct 18 08:38:03 2008
+version 3.04
+Declare "Light1" "string"
+Declare "Light2" "string"
+Declare "Light3" "string"
+Display "Points.exr" "file" "rgba" 
+Format 720 576 1
+Projection "perspective" "uniform float fov" [50]
+WorldBegin 
+	LightSource "distantlight" "Light1" "float intensity" [2] "point to" [1 0 0]
+	LightSource "distantlight" "Light2" "float intensity" [2] "point to" [-1 0 0]
+	LightSource "distantlight" "Light3" "float intensity" [2] "point to" [0 0 0]
+	Illuminate "Light1" 1
+	Illuminate "Light2" 1
+	Illuminate "Light3" 1
+	Translate 0 0 4
+	TransformBegin 
+		Surface "plastic" 
+		Points "varying color Cs" [0.548854 0.880192 0.535627 0.476127 0.189091 0.239006] "vertex point P" [-1.13358 -0.638128 1.18703 -0.310617 1.91478 -0.773724] 
+			"varying float width" [0.131713 0.033679] "varying normal N" [0.0171959 0.446503 0.822508 0.338246 0.781155 0.171715]
+	TransformEnd 
+WorldEnd 

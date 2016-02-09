@@ -1,0 +1,145 @@
+##RenderMan RIB
+#File CSGDifference.rib
+#Created by jmacey
+#Creation Date: Tue Oct 14 20:09:19 2008
+version 3.04
+Declare "Light1" "string"
+Declare "Light2" "string"
+Declare "Light3" "string"
+Display "CSGDifference.exr" "file" "rgba" 
+Format 720 575 1
+Projection "perspective" "uniform float fov" [50]
+WorldBegin 
+	LightSource "distantlight" "Light1" "float intensity" [1] "point to" [1 -0.03 0]
+	LightSource "distantlight" "Light2" "float intensity" [1] "point to" [-1 -0.03 0]
+	LightSource "distantlight" "Light3" "float intensity" [0.2] "point to" [0 -0.5 -1]
+	Illuminate "Light1" 1
+	Illuminate "Light2" 1
+	Illuminate "Light3" 1
+	Translate -0.2 0.2 2
+	TransformBegin 
+		SolidBegin "difference"
+			SolidBegin "primitive"
+				TransformBegin 
+					AttributeBegin 
+						Color [1 1 1]
+						Translate 0 -1 0
+						Rotate -90 1 0 0
+						Rotate 36 0 0 1
+						Scale 0.4 0.4 0.4
+						Surface "plastic" 
+						Geometry "teapot" 
+					AttributeEnd 
+				TransformEnd 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 0 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 20 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 40 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 60 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 80 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 100 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 120 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 140 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 160 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 180 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 200 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 220 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 240 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 260 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 280 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 300 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 320 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+			SolidBegin "primitive"
+				Rotate 340 0 1 0
+				Translate -0.6 -0.3 0
+				Scale 0.3 0.2 0.3
+				Sphere 1 -1 1 360 
+			SolidEnd 
+		SolidEnd 
+	TransformEnd 
+WorldEnd 

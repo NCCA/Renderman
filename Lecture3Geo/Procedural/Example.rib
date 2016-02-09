@@ -1,0 +1,42 @@
+# Example rib 1  # allows for comments to be placed in the file
+
+
+
+Display "Example1.tiff" "file" "rgb"
+Projection "perspective" "fov" [60]
+Format 1024 800 1
+ShadingRate 64
+Identity
+ConcatTransform [ 1.000000 0.000000 0.000000 0.000000 0.000000 0.928477 -0.371391 0.000000 0.000000 0.371391 0.928477 0.000000 -0.000000 -0.000000 16.925824 1.000000]
+#Translate 0 0 20
+WorldBegin
+	TransformBegin
+		Color [1 0 0]
+		Translate 0 -4 0
+# param width height depth Case Height Rotation Angle
+		Procedural "RunProgram" ["spiral.py" "1 0.2 0.35 20 5"] [-5 5 -5 5 -35 35]
+	TransformEnd
+
+	TransformBegin
+		Color [1 1 1]
+		Translate -4 -6 0	
+		#Rotate 90 0 0 1
+		# param width height depth Case Height Rotation Angle
+		Procedural "RunProgram" ["spiral.py" "5 0.5 1.5 10 15"] [-5 5 -15 15 -15 15]
+	TransformEnd
+
+	TransformBegin
+		Color [1 0 1]
+		Translate 5 -4 0
+		# param width height depth Case Height Rotation Angle
+		Procedural "RunProgram" ["spiral.py" "2 0.3 0.3 10 12"] [-5 5 -15 15 -35 35]
+	TransformEnd
+
+
+WorldEnd
+
+
+
+
+
+

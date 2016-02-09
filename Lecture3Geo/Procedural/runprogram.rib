@@ -1,0 +1,36 @@
+##RenderMan RIB
+#File runprogram.rib
+#Created by jmacey
+#Creation Date: Sat Oct 18 18:16:21 2008
+version 3.04
+Declare "Light1" "string"
+Declare "Light2" "string"
+Declare "Light3" "string"
+Display "runprogram.exr" "file" "rgba" 
+Format 720 576 1
+Projection "perspective" "uniform float fov" [60]
+Identity 
+ConcatTransform [ 1 0 0 0  0 0.9 -0.4 0  0 0.4 0.9 0  0 0 16.9258 1 ]
+WorldBegin 
+	LightSource "distantlight" "Light1" "float intensity" [1] "point to" [1 0.03 0]
+	LightSource "pointlight" "Light2" "point from" [0 2 0] "float intensity" [2]
+	LightSource "distantlight" "Light3" "float intensity" [2] "point to" [0 0 -1]
+	Illuminate "Light1" 1
+	Illuminate "Light2" 1
+	Illuminate "Light3" 1
+	TransformBegin 
+		Color [1 0 0]
+		Translate 0 -1 0
+		Procedural "RunProgram" ["spiral.py" "1 0.2 0.35 20 5"] [-5 5 -5 5 -35 35]
+	TransformEnd 
+	TransformBegin 
+		Color [1 1 1]
+		Translate -6 -1 0
+		Procedural "RunProgram" ["spiral.py" "5 0.5 1.5 10 15"] [-5 5 -5 5 -35 35]
+	TransformEnd 
+	TransformBegin 
+		Color [1 0 1]
+		Translate 6 -1 0
+		Procedural "RunProgram" ["spiral.py" "2 0.3 0.3 10 12"] [-5 5 -5 5 -35 35]
+	TransformEnd 
+WorldEnd 

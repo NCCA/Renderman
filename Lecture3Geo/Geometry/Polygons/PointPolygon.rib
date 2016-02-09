@@ -1,0 +1,28 @@
+##RenderMan RIB
+#File PointPolygon.rib
+#Created by jmacey
+#Creation Date: Fri Oct 17 13:03:52 2008
+version 3.04
+Declare "Light1" "string"
+Declare "Light2" "string"
+Declare "Light3" "string"
+Display "GeneralPolygon.exr" "file" "rgba" 
+Format 720 576 1
+Projection "perspective" "uniform float fov" [50]
+WorldBegin 
+	LightSource "distantlight" "Light1" "float intensity" [2] "point to" [1 0 0]
+	LightSource "distantlight" "Light2" "float intensity" [2] "point to" [-1 0 0]
+	LightSource "distantlight" "Light3" "float intensity" [2] "point to" [0 0 0]
+	Illuminate "Light1" 1
+	Illuminate "Light2" 1
+	Illuminate "Light3" 1
+	Translate 0 0 2
+	TransformBegin 
+		Rotate 45 1 1 0
+		Color [1 0 0]
+		Surface "plastic" 
+		PointsPolygons [4 4 4 4 4 4] [0
+			2 3 1 0 1 5 4 0 4 6 2 1 3 7 5 2 6 7 3 4 5 7 6] "vertex point P" [-0.5 -0.5 -0.5 0.5 -0.5 -0.5 -0.5 0.5 -0.5 0.5 0.5 -0.5
+			-0.5 -0.5 0.5 0.5 -0.5 0.5 -0.5 0.5 0.5 0.5 0.5 0.5]
+	TransformEnd 
+WorldEnd 

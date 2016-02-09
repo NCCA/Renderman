@@ -1,0 +1,706 @@
+#======================================================
+# script: aircraft.rib
+# author: Gav Harrison <gavin@steelblueview.co.uk>
+# description: Gloster Gladiator MK I modelled using
+# RIB geometric modelling primitives.
+# MSc 2005
+#======================================================
+
+TransformBegin
+	# set the main surface
+	Surface "plastic"
+
+
+
+		#==============================================
+		# main aircraft body
+		#==============================================
+		# engine start
+		SolidBegin "difference"
+			SolidBegin "primitive"
+				AttributeBegin
+					Translate 0 0 0.52
+					Color [ 0.76 0.76 0.78 ]
+					Disk 0 0.71 360
+				AttributeEnd
+			SolidEnd
+			SolidBegin "primitive"
+				AttributeBegin
+					Translate 0 0 0.52
+					Scale 1 1 3
+					Color [ 0.76 0.76 0.78 ]
+					Torus 0.6 0.08 0 360 360
+				AttributeEnd
+			SolidEnd
+		SolidEnd
+
+		AttributeBegin
+			Translate 0 0 0.625
+			Color [ 0.76 0.76 0.78 ]
+			Torus 0.71 0.105 270 360 360
+		AttributeEnd
+
+		# engine mid
+		AttributeBegin
+			Translate 0 0 0.96
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.815 -0.335 0.335 360
+		AttributeEnd
+
+		# piston bumps
+		AttributeBegin
+			Translate 0 0.8 1
+			Scale 1 1 2
+			Color [ 0.76 0.76 0.78 ]
+			Sphere 0.1 -0.1 0.1 360
+			Translate -0.565 -0.235 0
+			Sphere 0.1 -0.1 0.1 360
+			Translate -0.235 -0.565 0
+			Sphere 0.1 -0.1 0.1 360
+			Translate 0.235 -0.565 0
+			Sphere 0.1 -0.1 0.1 360
+			Translate 0.565 -0.235 0
+			Sphere 0.1 -0.1 0.1 360
+			Translate 0.565 0.235 0
+			Sphere 0.1 -0.1 0.1 360
+			Translate 0.235 0.565 0
+			Sphere 0.1 -0.1 0.1 360
+			Translate -0.235 0.565 0
+			Sphere 0.1 -0.1 0.1 360
+		AttributeEnd
+
+		# engine rear
+		AttributeBegin
+			Translate 0 0 1.295
+			Color [ 0.76 0.76 0.78 ]
+			Torus 0.75 0.065 0 90 360
+			Disk 0.065 0.75 360
+		AttributeEnd
+
+		# body start
+		AttributeBegin
+			Translate 0 0.1 0.8
+			Color [ 0.25 0.33 0.23 ]
+			Paraboloid 0.7 0 1 360
+		AttributeEnd
+
+		# body mid
+		AttributeBegin
+			Translate 0 0.1 3.5
+			Rotate 180 0 1 0
+			Color [ 0.25 0.33 0.23 ]
+			Cylinder 0.7 -1.7 1.7 360
+		AttributeEnd
+
+		# body rear
+		AttributeBegin
+			Translate 0 0.1 9.7
+			Rotate 180 0 1 0
+			Color [ 0.25 0.33 0.23 ]
+			Paraboloid 0.7 0 4.5 360
+		AttributeEnd
+
+		# canopy panel 1
+		AttributeBegin
+			Translate 0 0.7 3.5
+			Rotate 180 0 1 0
+			Color [ 0 0 1 ]
+			Cone 0.5 0.54 360
+		AttributeEnd
+
+		# canopy rib 1
+		AttributeBegin
+			Translate 0 0.7 3.55
+			Color [ 0.25 0.33 0.23 ]
+			Cylinder 0.54 -0.05 0.05 360
+		AttributeEnd
+
+		# canopy panel 2
+		AttributeBegin
+			Translate 0 0.7 3.77
+			Color [ 0 0 1 ]
+			Cylinder 0.54 -0.17 0.17 360
+		AttributeEnd
+
+		# canopy rib 2
+		AttributeBegin
+			Translate 0 0.7 3.99
+			Color [ 0.25 0.33 0.23 ]
+			Cylinder 0.54 -0.05 0.05 360
+		AttributeEnd
+
+		# canopy panel 3
+		AttributeBegin
+			Translate 0 0.7 4.21
+			Color [ 0 0 1 ]
+			Cylinder 0.54 -0.17 0.17 360
+		AttributeEnd
+
+		# canopy rib 3
+		AttributeBegin
+			Translate 0 0.7 4.43
+			Color [ 0.25 0.33 0.23 ]
+			Cylinder 0.54 -0.05 0.05 360
+		AttributeEnd
+
+		# canopy panel 4
+		AttributeBegin
+			Translate 0 0.7 6.48
+			Color [ 0 0 1 ]
+			Rotate 180 0 1 0
+			Paraboloid 0.54 1.3 2 360
+		AttributeEnd
+
+		# canopy rib 4
+		AttributeBegin
+			Translate 0 0.73 5.1
+			Color [ 0.25 0.33 0.23 ]
+			Rotate 10 1 0 0
+			Cone 1.4 0.4 360
+		AttributeEnd
+		#==============================================
+
+		#==============================================
+		# top wing
+		#==============================================
+		AttributeBegin
+			Translate 0 1.4 2.2
+			Rotate 90 1 0 0
+			Rotate 180 0 1 0
+			Color [ 0.25 0.33 0.23 ]
+
+			# wing front
+			AttributeBegin
+				Translate 0 0 0.1
+				Rotate 90 0 1 0
+				Rotate 180 1 0 0
+				Cylinder 0.1 -5.22 5.22 180
+			AttributeEnd
+
+			# right wingtip panel
+			AttributeBegin
+				Translate 5.2 1.2 0
+				Rotate 270 0 0 1
+				Disk 0 1.2 180
+				Disk 0.2 1.2 180
+			AttributeEnd
+
+			# right wingtip edge
+			AttributeBegin
+				Translate 5.2 1.2 0.1
+				Rotate 270 0 0 1
+				Sphere 1.2 -0.1 0.1 180
+			AttributeEnd
+
+			# left wingtip
+			AttributeBegin
+				Translate -5.2 1.2 0
+				Rotate 90 0 0 1
+				Disk 0 1.2 180
+				Disk 0.2 1.2 180
+			AttributeEnd
+
+			# left wingtip edge
+			AttributeBegin
+				Translate -5.2 1.2 0.1
+				Rotate  90 0 0 1
+				Sphere 1.2 -0.1 0.1 180
+			AttributeEnd
+
+			#=====================================
+			# wing patches
+			#=====================================
+			AttributeBegin
+				# left base patch 1
+				Patch "bilinear"
+					"P" [	0    0    0
+						1.48 0    0
+						0    1.98 0
+						1.48 2.4  0	]
+
+				# left base patch 2
+				Patch "bilinear"
+					"P" [	1.48 0    0
+						5.22 0    0
+						1.48 2.4  0
+						5.22 2.4  0	]
+
+				# left top patch 1
+				Patch "bilinear"
+					"P" [	0    0    0.2
+						1.48 0    0.2
+						0    1.98 0
+						1.48 2.4  0	]
+
+				# left top patch 2
+				Patch "bilinear"
+					"P" [	1.48 0    0.2
+						5.22 0    0.2
+						1.48 2.4  0
+						5.22 2.4  0	]
+
+				# right base patch 1
+				Patch "bilinear"
+					"P" [	0    0    0
+						-1.48 0    0
+						0    1.98 0
+						-1.48 2.4  0	]
+
+				# right base patch 2
+				Patch "bilinear"
+					"P" [	-1.48 0    0
+						-5.22 0    0
+						-1.48 2.4  0
+						-5.22 2.4  0	]
+
+				# left top patch 1
+				Patch "bilinear"
+					"P" [	0    0    0.2
+						-1.48 0    0.2
+						0    1.98 0
+						-1.48 2.4  0	]
+
+				# left top patch 2
+				Patch "bilinear"
+					"P" [	-1.48 0    0.2
+						-5.22 0    0.2
+						-1.48 2.4  0
+						-5.22 2.4  0	]
+			AttributeEnd
+			#=====================================
+		AttributeEnd
+		#==============================================
+
+		#==============================================
+		# bottom wing
+		#==============================================
+		AttributeBegin
+			Translate 0 -0.5 2.8
+			Rotate 90 1 0 0
+			Rotate 180 0 1 0
+			Color [ 0.25 0.33 0.23 ]
+
+			# wing front
+			AttributeBegin
+				Translate 0 0 0.1
+				Rotate 90 0 1 0
+				Rotate 180 1 0 0
+				Cylinder 0.1 -5.22 5.22 180
+			AttributeEnd
+
+			# right wingtip panel
+			AttributeBegin
+				Translate 5.2 1.2 0
+				Rotate 270 0 0 1
+				Disk 0 1.2 180
+				Disk 0.2 1.2 180
+			AttributeEnd
+
+			# right wingtip edge
+			AttributeBegin
+				Translate 5.2 1.2 0.1
+				Rotate 270 0 0 1
+				Sphere 1.2 -0.1 0.1 180
+			AttributeEnd
+
+			# left wingtip panel
+			AttributeBegin
+				Translate -5.2 1.2 0
+				Rotate 90 0 0 1
+				Disk 0 1.2 180
+				Disk 0.2 1.2 180
+			AttributeEnd
+
+			# left wingtip edge
+			AttributeBegin
+				Translate -5.2 1.2 0.1
+				Rotate  90 0 0 1
+				Sphere 1.2 -0.1 0.1 180
+			AttributeEnd
+
+			#=====================================
+			# wing patches
+			#=====================================
+			AttributeBegin
+				# left base patch 1
+				Patch "bilinear"
+					"P" [	0    0    0
+						1.48 0    0
+						0    1.98 0
+						1.48 2.4  0	]
+
+				# left base patch 2
+				Patch "bilinear"
+					"P" [	1.48 0    0
+						5.22 0    0
+						1.48 2.4  0
+						5.22 2.4  0	]
+
+				# left top patch 1
+				Patch "bilinear"
+					"P" [	0    0    0.2
+						1.48 0    0.2
+						0    1.98 0
+						1.48 2.4  0	]
+
+				# left top patch 2
+				Patch "bilinear"
+					"P" [	1.48 0    0.2
+						5.22 0    0.2
+						1.48 2.4  0
+						5.22 2.4  0	]
+
+				# right base patch 1
+				Patch "bilinear"
+					"P" [	0    0    0
+						-1.48 0    0
+						0    1.98 0
+						-1.48 2.4  0	]
+
+				# right base patch 2
+				Patch "bilinear"
+					"P" [	-1.48 0    0
+						-5.22 0    0
+						-1.48 2.4  0
+						-5.22 2.4  0	]
+
+				# left top patch 1
+				Patch "bilinear"
+					"P" [	0    0    0.2
+						-1.48 0    0.2
+						0    1.98 0
+						-1.48 2.4  0	]
+
+				# left top patch 2
+				Patch "bilinear"
+					"P" [	-1.48 0    0.2
+						-5.22 0    0.2
+						-1.48 2.4  0
+						-5.22 2.4  0	]
+			AttributeEnd
+			#=====================================
+		AttributeEnd
+		#==============================================
+
+		#==============================================
+		# right wing struts and cables
+		#==============================================
+		# right wing strut 1
+		AttributeBegin
+			Translate -5 0.5 3
+			Rotate 65 1 0 0
+			Color [ 0.24 0.24 0.3 ]
+			Cylinder 0.05 -0.95 0.95 360
+		AttributeEnd
+
+		# right wing strut 2
+		AttributeBegin
+			Translate -5 0.5 4
+			Rotate 65 1 0 0
+			Color [ 0.24 0.24 0.3 ]
+			Cylinder 0.05 -0.95 0.95 360
+		AttributeEnd
+
+		# right wing strut 3
+		AttributeBegin
+			Translate -0.8 0.9 3
+			Rotate 65 1 0 0
+			Rotate 30 0 1 0
+			Color [ 0.24 0.24 0.3 ]
+			Cylinder 0.05 -0.6 0.6 360
+		AttributeEnd
+
+		# right wing strut 4
+		AttributeBegin
+			Translate -0.8 0.9 4
+			Rotate 65 1 0 0
+			Rotate 30 0 1 0
+			Color [ 0.24 0.24 0.3 ]
+			Cylinder 0.05 -0.6 0.6 360
+		AttributeEnd
+
+		# right wing cable 1
+		AttributeBegin
+			Translate -5 0.5 4.2
+			Rotate 65 1 0 0
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.02 -0.95 0.95 360
+		AttributeEnd
+
+		# right wing cable 2
+		AttributeBegin
+			Translate -5 0.5 4.4
+			Rotate 65 1 0 0
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.02 -0.95 0.95 360
+		AttributeEnd
+
+		# right wing cable 3
+		AttributeBegin
+			Translate -3 0.3 3.6
+			Rotate -60 1 0 0
+			Rotate -60 0 1 0
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.02 -1.6 2.5 360
+		AttributeEnd
+
+		# right wing cable 4
+		AttributeBegin
+			Translate -5 0.5 3.6
+			Rotate -80 1 0 0
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.02 -0.95 0.95 360
+		AttributeEnd
+
+		# right wing cable 5
+		AttributeBegin
+			Translate -1.2 0.5 3
+			Rotate 65 1 0 0
+			Rotate 20 0 1 0
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.02 -1.1 1.1 360
+		AttributeEnd
+
+		# right wing cable 6
+		AttributeBegin
+			Translate -1.2 0.5 4
+			Rotate 65 1 0 0
+			Rotate 20 0 1 0
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.02 -1.1 1.1 360
+		AttributeEnd
+		#==============================================
+
+		#==============================================
+		# left wing struts and cables
+		#==============================================
+		# left wing strut 1
+		AttributeBegin
+			Translate 5 0.5 3
+			Rotate 65 1 0 0
+			Color [ 0.24 0.24 0.3 ]
+			Cylinder 0.05 -0.95 0.95 360
+		AttributeEnd
+
+		# left wing strut 2
+		AttributeBegin
+			Translate 5 0.5 4
+			Rotate 65 1 0 0
+			Color [ 0.24 0.24 0.3 ]
+			Cylinder 0.05 -0.95 0.95 360
+		AttributeEnd
+
+		# left wing strut 3
+		AttributeBegin
+			Translate 0.8 0.9 3
+			Rotate 65 1 0 0
+			Rotate -30 0 1 0
+			Color [ 0.24 0.24 0.3 ]
+			Cylinder 0.05 -0.6 0.6 360
+		AttributeEnd
+
+		# left wing strut 4
+		AttributeBegin
+			Translate 0.8 0.9 4
+			Rotate 65 1 0 0
+			Rotate -30 0 1 0
+			Color [ 0.24 0.24 0.3 ]
+			Cylinder 0.05 -0.6 0.6 360
+		AttributeEnd
+
+		# left wing cable 1
+		AttributeBegin
+			Translate 5 0.5 4.2
+			Rotate 65 1 0 0
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.02 -0.95 0.95 360
+		AttributeEnd
+
+		# left wing cable 2
+		AttributeBegin
+			Translate 5 0.5 4.4
+			Rotate 65 1 0 0
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.02 -0.95 0.95 360
+		AttributeEnd
+
+		# left wing cable 3
+		AttributeBegin
+			Translate 3 0.3 3.6
+			Rotate -60 1 0 0
+			Rotate 60 0 1 0
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.02 -1.6 2.5 360
+		AttributeEnd
+
+		# left wing cable 4
+		AttributeBegin
+			Translate 5 0.5 3.6
+			Rotate -80 1 0 0
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.02 -0.95 0.95 360
+		AttributeEnd
+
+		# left wing cable 5
+		AttributeBegin
+			Translate 1.2 0.5 3
+			Rotate 65 1 0 0
+			Rotate -20 0 1 0
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.02 -1.1 1.1 360
+		AttributeEnd
+
+		# left wing cable 6
+		AttributeBegin
+			Translate 1.2 0.5 4
+			Rotate 65 1 0 0
+			Rotate -20 0 1 0
+			Color [ 0.76 0.76 0.78 ]
+			Cylinder 0.02 -1.1 1.1 360
+		AttributeEnd
+		#==============================================
+
+		#==============================================
+		# wheel gear
+		#==============================================
+		# front right wheel gear arm
+		AttributeBegin
+			Translate  -0.7 -0.7 2.5
+			Rotate 90 1 0 0
+			Rotate -30 0 1 0
+			Scale 0.5 1 6
+			Color [ 0.25 0.33 0.23 ]
+			Sphere 0.18 -0.18 0.18 360
+		AttributeEnd
+
+		# front right wheel gear
+		AttributeBegin
+			Translate -1.2 -1.5 2.5
+			Rotate 90 0 1 0
+			Color [ 0 0 0 ]
+			Torus 0.4 0.1 0 360 360
+			Disk 0.04 0.4 360
+			Disk -0.04 0.4 360
+		AttributeEnd
+
+		# front left wheel gear arm
+		AttributeBegin
+			Translate 0.7 -0.7 2.5
+			Rotate 90 1 0 0
+			Rotate 30 0 1 0
+			Scale 0.5 1 6
+			Color [ 0.25 0.33 0.23 ]
+			Sphere 0.18 -0.18 0.18 360
+		AttributeEnd
+
+		# front left wheel gear
+		AttributeBegin
+			Translate 1.2 -1.5 2.5
+			Rotate 90 0 1 0
+			Color [ 0 0 0 ]
+			Torus 0.4 0.1 0 360 360
+			Disk 0.04 0.4 360
+			Disk -0.04 0.4 360
+		AttributeEnd
+		#==============================================
+
+		#==============================================
+		# exhausts
+		#==============================================
+		# right exhaust
+		AttributeBegin
+			Translate -0.5 -0.7 0.96
+			Color [ 0.24 0.24 0.3 ]
+			Disk -0.335 0.08 360
+			Cylinder 0.08 -0.335 0.335 360
+			Translate 0 -0.11 0.64
+			Rotate 20 1 0 0
+			Cylinder 0.08 -0.335 0.335 360
+			Translate 0 0.05 0.66
+			Rotate -10 1 0 0
+			Cylinder 0.08 -0.335 0.335 360		
+		AttributeEnd
+
+		# left exhaust
+		AttributeBegin
+			Translate 0.5 -0.7 0.96
+			Color [ 0.24 0.24 0.3 ]
+			Disk -0.335 0.08 360
+			Cylinder 0.08 -0.335 0.335 360
+			Translate 0 -0.11 0.64
+			Rotate 20 1 0 0
+			Cylinder 0.08 -0.335 0.335 360
+			Translate 0 0.05 0.66
+			Rotate -10 1 0 0
+			Cylinder 0.08 -0.335 0.335 360		
+		AttributeEnd
+		#==============================================
+
+		#==============================================
+		# tail
+		#==============================================
+		# right tailplane
+		AttributeBegin
+			Translate -0.1 0 8.6
+			Color [ 0.25 0.33 0.23 ]
+			Rotate -90 1 0 0
+			Rotate 90 0 0 1
+			Scale 1 2 1
+			Disk 0 1 180
+			Translate 0 0 0.1
+			Disk 0 1 180
+			Translate 0 0 -0.05
+			Cylinder 1 -0.05 0.05 180
+		AttributeEnd
+
+		# tailfin
+		AttributeBegin
+			Translate 0 0 8.6
+			Color [ 0.25 0.33 0.23 ]
+			Rotate 90 0 1 0
+			Scale 1 2 1
+			Disk 0 1 180
+			Translate 0 0 0.1
+			Disk 0 1 180
+			Translate 0 0 -0.05
+			Cylinder 1 -0.05 0.05 180
+		AttributeEnd
+
+		# left tailplane
+		AttributeBegin
+			Translate 0.1 0 8.6
+			Color [ 0.25 0.33 0.23 ]
+			Rotate -90 1 0 0
+			Rotate -90 0 0 1
+			Scale 1 2 1
+			Disk 0 1 180
+			Translate 0 0 0.1
+			Disk 0 1 180
+			Translate 0 0 -0.05
+			Cylinder 1 -0.05 0.05 180
+		AttributeEnd
+
+		# tail wheel arm
+		AttributeBegin
+			Translate 0 -0.22 8
+			Rotate 40 1 0 0
+			Color [ 0.25 0.33 0.23 ]
+			Cylinder 0.04 -0.5 0.5 360
+		AttributeEnd
+
+		# tail wheel gear
+		AttributeBegin
+			Translate 0 -0.7 8.4
+			Rotate 90 0 1 0
+			Color [ 0 0 0 ]
+			Torus 0.2 0.05 0 360 360
+			Disk 0.02 0.2 360
+			Disk -0.02 0.2 360
+		AttributeEnd
+		#==============================================
+
+
+	#==============================================
+
+#======================================================
+TransformEnd

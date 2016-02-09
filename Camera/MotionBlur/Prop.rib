@@ -1,0 +1,12 @@
+TransformBegin
+	Rotate 90 0 0 1
+	# nose cone front
+TransformBegin
+	Paraboloid 0.28 0 0.28 360
+TransformEnd
+	# nose cone rear
+TransformBegin
+		Translate 0 0 0.1
+		Paraboloid 0.42 0 0.42 360
+TransformEnd
+TransformEnd

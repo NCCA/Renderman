@@ -1,10 +1,12 @@
 #!/usr/bin/python
 import prman
-from ..common.functions import drawTeapot
+# import the python functions
+import sys
+sys.path.append('../common')
+from functions import drawTeapot
 
 ri = prman.Ri() # create an instance of the RenderMan interface
 
-filename = "__render" 
 # this is the begining of the rib archive generation we can only
 # make RI calls after this function else we get a core dump
 ri.Begin('__render')

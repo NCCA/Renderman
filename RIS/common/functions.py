@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import prman
 
+
 def drawTeapot(ri,x=0,y=0,z=0) :
   ri.TransformBegin()
   ri.Translate(x,y,z)

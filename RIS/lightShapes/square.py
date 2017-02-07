@@ -7,6 +7,7 @@ from functions import drawTeapot
 
 
 
+
 ri = prman.Ri() # create an instance of the RenderMan interface
 
 filename = "__render" 
@@ -38,37 +39,68 @@ ri.Rotate(-20,1,0,0)
 # now we start our world
 ri.WorldBegin()
 #Lighting We need geo to emit light
+ri.TransformBegin()
 ri.AttributeBegin()
+
+ri.Translate(-2,1,0)
+ri.Rotate(-90,0,1,0)
+ri.Rotate(-90,1,0,0)
 ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", "float exposure"  : [5]})
-ri.Translate( -2, 2 , 0)
-ri.Sphere( 0.3, -0.3, 0.3, 360)
+ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", "float exposure"  : [5],
+                                       "float enableBarnDoors" : [1]
+                                       })
+s=1.0
+face=[-s,0,-s, s,0,-s,-s,0,s, s,0,s]
+ri.Patch("bilinear",{'P':face})
 ri.AttributeEnd()
+ri.TransformEnd()
+
+ri.TransformBegin()
+ri.AttributeBegin()
+
+ri.Translate(2,2,2)
+ri.Rotate(-90,1,0,0)
+ri.Declare("areaLight" ,"string")
+ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", "float exposure"  : [5],
+                                       "float enableBarnDoors" : [1]
+                                       })
+s=0.5
+face=[-s,0,-s, s,0,-s,-s,0,s, s,0,s]
+ri.Patch("bilinear",{'P':face})
+ri.AttributeEnd()
+ri.TransformEnd()
+
+
+
+
 
 # first teapot
 ri.Bxdf( "PxrDisney","bxdf", { 
                         "color baseColor" : [ 0.8, 0.2, 0.2], 
-                        "float roughness" : [ 0.0 ], 
+                        "float metallic" : [ 0 ]
                         })
 drawTeapot(ri,x=-1)
 
 # second teapot
 ri.Bxdf( "PxrDisney","bxdf", { 
                         "color baseColor" : [ 0.8, 0.2, 0.2], 
-                        "float roughness" : [ 0.5 ], 
+                        "float metallic" : [ 0.6 ]
                         })
 drawTeapot(ri)
 
 # third teapot
 ri.Bxdf( "PxrDisney","bxdf", { 
                         "color baseColor" : [ 0.8, 0.2, 0.2], 
-                        "float roughness" : [ 1.0 ], 
+                        "float roughness" : [ 0.5 ],
+                        "float metallic" : [ 1.0 ]
                         })
 drawTeapot(ri,x=1)
 # floor
 ri.TransformBegin()
 ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 0.1,0.8,0.1]
+                        "color baseColor" : [ 1,1,1],
+                        "float metallic" : [ 1.0 ]
+
                         })
 s=2.0
 face=[-s,0,-s, s,0,-s,-s,0,s, s,0,s]

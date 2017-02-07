@@ -53,27 +53,24 @@ ri.AttributeEnd()
 # first teapot
 ri.Bxdf( "PxrDisney","bxdf", { 
                         "color baseColor" : [ 0.8, 0.2, 0.2], 
-                        "float roughness" : [ 0.5 ], 
-                        "float clearcoat" : [ 0.2 ], 
-                        "float clearcoatGloss" : [1]
-                        })
+                        "float subsurface" : [ 0 ],
+                        "color subsurfaceColor" : [ 0.1, 0.1 ,0.8]                       
+                         })
 drawTeapot(ri,x=-1)
 
 # second teapot
 ri.Bxdf( "PxrDisney","bxdf", { 
                         "color baseColor" : [ 0.8, 0.2, 0.2], 
-                        "float roughness" : [ 0.5 ], 
-                        "float clearcoat" : [ 0.5 ], 
-                        "float clearcoatGloss" : [1]
+                        "float subsurface" : [ 0.2 ],
+                        "color subsurfaceColor" : [ 0.1 ,0.1 ,0.8]                       
                         })
 drawTeapot(ri)
 
 # third teapot
 ri.Bxdf( "PxrDisney","bxdf", { 
                         "color baseColor" : [ 0.8, 0.2, 0.2], 
-                        "float roughness" : [ 0.5 ], 
-                        "float clearcoat" : [ 1.0 ], 
-                        "float clearcoatGloss" : [1]
+                        "float subsurface" : [ 0.5 ],
+                        "color subsurfaceColor" : [ 0.1 ,0.1 ,0.8]                       
                         })
 drawTeapot(ri,x=1)
 # floor

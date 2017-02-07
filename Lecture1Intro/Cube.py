@@ -51,7 +51,7 @@ ri.ArchiveRecord(ri.COMMENT, "Creation Date: " +time.ctime(time.time()))
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
-ri.Display("Cube.exr", "framebuffer", "rgba")
+ri.Display("Cube.exr", "it", "rgba")
 # Specify PAL resolution 1:1 pixel Aspect ratio
 ri.Format(720,576,1)
 # now set the projection to perspective

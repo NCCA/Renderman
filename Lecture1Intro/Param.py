@@ -12,7 +12,7 @@ ri.Option("rib", {"string asciistyle": "indented"})
 filename = "Param.rib"
 # this is the begining of the rib archive generation we can only
 # make RI calls after this function else we get a core dump
-ri.Begin(filename)
+ri.Begin('__render')
 # ArchiveRecord is used to add elements to the rib stream in this case comments
 # note the function is overloaded so we can concatinate output
 ri.ArchiveRecord(ri.COMMENT, 'File ' +filename)
@@ -21,7 +21,7 @@ ri.ArchiveRecord(ri.COMMENT, "Creation Date: " +time.ctime(time.time()))
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
-ri.Display("Param.exr", "framebuffer", "rgba")
+ri.Display("Param.exr", "it", "rgba")
 # Specify PAL resolution 1:1 pixel Aspect ratio
 ri.Format(720,575,1)
 # now set the projection to perspective

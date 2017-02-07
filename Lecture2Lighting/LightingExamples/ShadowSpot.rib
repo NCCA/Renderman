@@ -3,7 +3,7 @@ version 3.04
 Clipping 1 10
 #File ShadowSpot.rib
 #Created by jmacey
-#Creation Date: Tue Sep 30 15:04:21 2008
+#Creation Date: Thu Mar 10 16:18:46 2016
 Declare "Spot1" "string"
 Declare "Ambient" "string"
 Display "ShadowSpot.exr" "framebuffer" "rgba" 

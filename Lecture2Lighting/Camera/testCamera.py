@@ -44,19 +44,19 @@ def Scene(ri) :
 
 	
 ri = prman.Ri() # create an instance of the RenderMan interface
-cam=Camera(Vector(4,0.2,4,1),Vector(0,0,0,1),Vector(0,1,0,0))
+cam=Camera(Vector(0,5,0,1),Vector(0,0,0,1),Vector(0,0,1,0))
 cam.fov=40
 
 filename = "Camera.rib" 
 
-ri.Begin(filename)
+ri.Begin('__render')
 
 ri.Declare("Light1" ,"string")
 ri.Declare("Light2" ,"string")
 ri.Declare("Light3" ,"string")
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
-ri.Display("Camera.exr", "framebuffer", "rgba")
+ri.Display("Camera.exr", "it", "rgba")
 
 cam.Format(ri)
 

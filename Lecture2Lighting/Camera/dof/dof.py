@@ -92,7 +92,7 @@ for frame in range(1,30) :
 	ri.Declare("Ambient" ,"string")
 	# now we add the display element using the usual elements
 	# FILENAME DISPLAY Type Output format
-	ri.Display("dof.%03d.exr" %(frame), "file", "rgba")
+	ri.Display("dof.%03d.png" %(frame), "file", "rgba")
 	# Specify PAL resolution 1:1 pixel Aspect ratio
 	cam.Format(ri)
 

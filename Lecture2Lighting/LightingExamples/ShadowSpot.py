@@ -134,7 +134,7 @@ ShadowPass(ri,Spot2Name,Spot2From,Spot2To,coneAngle2,Scene)
 filename = "ShadowSpot.rib"
 # this is the begining of the rib archive generation we can only
 # make RI calls after this function else we get a core dump
-ri.Begin(filename)
+ri.Begin("__render")
 ri.Clipping(1,10)
 
 # ArchiveRecord is used to add elements to the rib stream in this case comments
@@ -148,7 +148,7 @@ ri.Declare("Ambient" ,"string")
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
-ri.Display("ShadowSpot.exr", "framebuffer", "rgba")
+ri.Display("ShadowSpot.exr", "it", "rgba")
 # Specify PAL resolution 1:1 pixel Aspect ratio
 ri.Format(720,575,1)
 # now set the projection to perspective

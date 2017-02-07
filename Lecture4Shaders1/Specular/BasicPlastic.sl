@@ -4,7 +4,9 @@ surface BasicPlastic
  float Kd=0.5;
  float Ks=0.5;
  float roughness = 0.1;
- color specularcolor = 1; string SpecType="phong"; float size=0.05;
+ color specularcolor = 1;
+ string SpecType="phong";
+ float size=0.05;
 )
 {
 /* init the shader values */

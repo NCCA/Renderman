@@ -1,4 +1,4 @@
-##RenderMan RIB
+#RenderMan RIB
 version 3.04
 Quantize "rgba" 0 0 0 0
 Option "searchpath" "string shader" ["/mapublic/shaders"]

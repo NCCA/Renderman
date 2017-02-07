@@ -18,8 +18,8 @@ def Scene(ri) :
 	while (plank <=5.0) :
 		ri.TransformBegin()
 		fuzz=random.uniform(0.0,0.3);
-		LineSize=random.uniform(0.0,0.2);
-		Offset=random.uniform(00.,1.0);
+		LineSize=0.1 #random.uniform(0.0,0.2);
+		Offset=0.5 #random.uniform(00.,1.0);
 		ri.Surface(  "Lines" ,{ "color LineColor": [1.000 ,0.000, 0.000],  "color MixColor": [1.000 ,1.000, 1.000], "float fuzz": [fuzz],"float LineSize": [LineSize],"float Ka": [1.000],"float Kd": [0.500],"float Ks": [0.500],"float roughness": [0.100], "color specularcolor": [1.000 ,1.000, 1.000], "float Orient": [1],"float offset": [Offset], })
 		face=[-0.1,-1,-3, 0.1,-1,-3,-0.1,-1,3, 0.1,-1,3]
 		Orient^=1		
@@ -58,7 +58,7 @@ ri.Declare("Light3" ,"string")
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
-ri.Display("ShaderTest.exr", "framebuffer", "rgba")
+ri.Display("ShaderTest.exr", "it", "rgba")
 # Specify PAL resolution 1:1 pixel Aspect ratio
 ri.Format(720,575,1)
 # now set the projection to perspective

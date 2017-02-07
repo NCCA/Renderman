@@ -59,7 +59,7 @@ ri.Declare("Light3" ,"string")
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
-ri.Display("ShaderTest.exr", "framebuffer", "rgba")
+ri.Display("ShaderTest.exr", "it", "rgba")
 # Specify PAL resolution 1:1 pixel Aspect ratio
 ri.Format(720,575,1)
 # now set the projection to perspective

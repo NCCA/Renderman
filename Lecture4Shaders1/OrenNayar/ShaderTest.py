@@ -19,7 +19,7 @@ def Scene(ri) :
 		ri.Color([random.uniform(0.35,0.4),random.uniform(0.1,0.025),0])
 		c0=[random.uniform(-10,10),random.uniform(-10,10),random.uniform(-10,10)]
 		c1=[random.uniform(-10,10),random.uniform(-10,10),random.uniform(-10,10)]
-		ri.Surface(  "OrenNayar" ,{"float Ka": [0.500],"float Kd": [1.000],"float roughness": [0.2], })
+		ri.Surface(  "OrenNayar" ,{"float Ka": [0.500],"float Kd": [1.000],"float roughness": [3.2], })
 		ri.Translate(plank,0,0)
 		ri.Patch("bilinear",{'P':face})
 		ri.TransformEnd()
@@ -32,7 +32,7 @@ def Scene(ri) :
 	ri.Rotate(-90,1,0,0)
 	ri.Rotate(36,0,0,1)
 	ri.Scale(0.4,0.4,0.4)
-	ri.Surface(  "OrenNayar" ,{"float Ka": [0.500],"float Kd": [1.000],"float roughness": [0.2], })
+	ri.Surface(  "OrenNayar" ,{"float Ka": [0.500],"float Kd": [1.000],"float roughness": [3.2], })
 	ri.Geometry("teapot")
 	ri.AttributeEnd()
 	ri.TransformEnd()
@@ -55,9 +55,10 @@ ri.Declare("Light3" ,"string")
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
-ri.Display("ShaderTest.exr", "framebuffer", "rgba")
+ri.Display("ShaderTest.exr", "it", "rgba")
 # Specify PAL resolution 1:1 pixel Aspect ratio
-ri.Format(720,575,1)
+ri.Format(1024,720,1)
+ri.ShadingRate(0.001)
 # now set the projection to perspective
 ri.Projection(ri.PERSPECTIVE,{ri.FOV:50}) 
 
@@ -67,7 +68,13 @@ ri.Projection(ri.PERSPECTIVE,{ri.FOV:50})
 ri.WorldBegin()
 
 
-ri.LightSource( "pointlight", {ri.HANDLEID:"Light1", "point to":[0,0,-5], "float intensity": [8]})ri.LightSource( "spotlight", {ri.HANDLEID:"Light2", "point from":[-2,3,-5],"point to":[0,0,0], "float intensity": [5]})ri.LightSource("ambientlight",{ri.HANDLEID: "Light3","float intensity": [0.05]})ri.Illuminate("Light1",1)ri.Illuminate("Light2",1)ri.Illuminate("Light3",1)
+ri.LightSource( "pointlight", {ri.HANDLEID:"Light1", "point to":[0,0,-5], "float intensity": [8]})
+ri.LightSource( "spotlight", {ri.HANDLEID:"Light2", "point from":[-2,3,-5],"point to":[0,0,0], "float intensity": [5]})
+ri.LightSource("ambientlight",{ri.HANDLEID: "Light3","float intensity": [0.05]})
+ri.Illuminate("Light1",1)
+ri.Illuminate("Light2",1)
+ri.Illuminate("Light3",1)
+
 ri.Translate(0,0,4)
 Scene(ri)
 

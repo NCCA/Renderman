@@ -1,9 +1,9 @@
 ##RenderMan RIB
 #File Param.rib
 #Created by jmacey
-#Creation Date: Mon Feb 23 10:18:36 2009
+#Creation Date: Thu Mar 10 15:33:46 2016
 version 3.04
-Display "Param.exr" "framebuffer" "rgba" 
+Display "Param.exr" "it" "rgba" 
 Format 720 575 1
 Projection "perspective" "uniform float fov" [50]
 WorldBegin 

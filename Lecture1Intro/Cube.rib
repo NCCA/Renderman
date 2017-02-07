@@ -3,7 +3,7 @@
 #Created by jmacey
 #Creation Date: Sat Dec 13 10:21:18 2008
 version 3.04
-Display "Cube.exr" "framebuffer" "rgba" 
+Display "Cube.exr" "file" "rgba" 
 Format 720 575 1
 Projection "perspective" "uniform float fov" [50]
 WorldBegin 

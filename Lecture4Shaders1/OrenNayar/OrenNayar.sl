@@ -20,7 +20,7 @@ LocIllumOrenNayar (normal N;  vector V;  float roughness;)
     /* Accumulate incoming radiance from lights in C */
     color  C = 0;
     extern point P;
-    illuminance (P, N, PI/2) 
+  illuminance (P, N, PI/2) 
 	{
 	/* Must declare extern L & Cl because we're in a function */
 		vector LN = normalize(L);

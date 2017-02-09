@@ -10,3 +10,4 @@ def drawTeapot(ri,x=0,y=0,z=0) :
   ri.Scale( 0.2, 0.2, 0.2) 
   ri.Geometry( "teapot")
   ri.TransformEnd()  
+

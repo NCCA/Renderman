@@ -1,5 +1,9 @@
 import math
 
+""" simple 4x4 matrix class some code modified from here
+http://code.activestate.com/recipes/578131-a-simple-matrix-class/
+    
+"""
 class Mat4 :
   def __init__(self):
     self.m=[[1.0,0.0,0.0,0.0],[0.0,1.0,0.0,0.0],[0.0,0.0,1.0,0.0],[0.0,0.0,0.0,1.0]]

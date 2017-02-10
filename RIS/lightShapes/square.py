@@ -7,7 +7,7 @@ from functions import drawTeapot
 import Obj
 from Camera import Camera
 from Vec4 import Vec4
-
+from Transformation import *
 
 
 
@@ -79,9 +79,16 @@ ri.Bxdf( "PxrDisney","bxdf", {
                         "float metallic" : [ 0.6 ]
                         })
 
-ri.Rotate(180,0,1,0)
-ri.Scale(0.7,0.7,0.7)
-ri.Translate(0,0.6,0)                        
+#ri.Rotate(180,0,1,0)
+#ri.Scale(0.7,0.7,0.7)
+#ri.Translate(0,0.6,0)  
+tx=Transformation()
+tx.setPosition(0,0.4,0.5)
+tx.setScale(0.7,0.7,0.7)
+tx.setRotation(0,160,0)
+ri.ConcatTransform(tx.getMatrix())
+
+
 troll=Obj.Obj("troll.obj")
 troll.SubDivisionMesh(ri)
 ri.TransformEnd()

@@ -16,6 +16,7 @@ a.identity()
 a.scale(2,2,2)
 a.translate(3,4,5)
 print a
-b=a.transpose()
+a.transpose()
 print a
-print b
+print a.getTranspose()
+print a*a.getTranspose()

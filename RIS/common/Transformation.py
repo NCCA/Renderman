@@ -17,16 +17,19 @@ class Transformation :
     #return self.matrix
 
   def setPosition(self,x,y,z) :
+    self.isComputed=False
     self.position.x=x
     self.position.y=y   
     self.position.z=z
 
   def setScale(self,x,y,z) :
+    self.isComputed=False
     self.scale.x=x
     self.scale.y=y   
     self.scale.z=z
 
   def setRotation(self,x,y,z) :
+    self.isComputed=False
     self.rotation.x=x
     self.rotation.y=y   
     self.rotation.z=z

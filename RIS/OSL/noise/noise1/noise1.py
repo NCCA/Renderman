@@ -1,12 +1,26 @@
 #!/usr/bin/python
 import prman
 # import the python functions
-import sys
+import sys,os.path,subprocess
 sys.path.append('../../../common')
 from functions import drawTeapot
 from Camera import *
 
+"""
+function to check if shader exists and compile it, we assume that the shader
+is .osl and the compiled shader is .oso If the shader source is newer than the
+compiled shader we will compile it. It also assumes that oslc is in the path.
+"""
+def checkAndCompileShader(shader) :
+	if os.path.isfile(shader+'.oso') != True  or os.stat(shader+'.osl').st_mtime - os.stat(shader+'.oso').st_mtime > 0 :
+		print "compiling shader %s" %(shader)
+		try :
+			subprocess.check_call(["oslc", "noise.osl"])
+		except subprocess.CalledProcessError :
+			sys.exit("shader compilation failed")
+		 
 
+checkAndCompileShader('noise')
 ri = prman.Ri() # create an instance of the RenderMan interface
 
 filename = "__render" 
@@ -24,9 +38,7 @@ ri.Hider("raytrace" ,{"int incremental" :[1]})
 ri.PixelVariance (0.02)
 ri.ShadingRate(20)
 
-#ri.Integrator ("PxrDefault" , "integrator")
-#ri.Integrator ("PxrVCM" ,"integrator")
-#ri.Integrator ("PxrDirectlighting" ,"integrator")
+
 ri.Integrator ("PxrPathTracer" ,"integrator")
 
 # now set the projection to perspective
@@ -67,18 +79,26 @@ ri.Geometry("rectlight")
 ri.TransformEnd()
 
 
-
-
 ri.AttributeEnd()
 
+# set the pattern generation to be from our osl noise shader 
 ri.Pattern("PxrOSL","noiseShader", { "string shader"  : "noise" , 
-                                 "color Cin"  : [0.9 ,0.1,0.1]
+                                 "color Cin"  : [1.0 ,0.2,0.0]
                                 })
+# now we are going to make a new pattern that changes the colour
+# from the noise shader to a single float and extract the green channel
+# mode==1
+ri.Pattern ("PxrToFloat","noiseToFloat",{
+		"reference color input" : ["noiseShader:Cout"],
+                "int mode" : [1]
+    })
 
 # first teapot
 ri.AttributeBegin()
+# the colour from the shader is driven by noise, metallic by the noise green channel via the noiseToFloat 
 ri.Bxdf( "PxrDisney","bxdf", { 
-                                "reference color baseColor" : ["noiseShader:Cout"]
+                                "reference color baseColor" : ["noiseShader:Cout"],
+                                "reference float metallic" : ["noiseToFloat:resultF"]
                         })
 drawTeapot(ri,x=-1,ry=-45)
 ri.AttributeEnd()
@@ -94,8 +114,8 @@ ri.Bxdf( "PxrDisney","bxdf", {
 drawTeapot(ri,ry=-45)
 ri.Pattern("PxrOSL","noiseShader", { "string shader"  : "noise" , 
                                  "color Cin"  : [0.0 ,0.0,1.0],
-                                  "float scaleU" : [4],
-                                 "float scaleV" : [4]
+                                  "float scaleU" : [14],
+                                 "float scaleV" : [14]
                                 })
 # third teapot
 ri.Bxdf( "PxrDisney","bxdf", { 

@@ -7,3 +7,4 @@
 *.slo
 # exclude the .ride files for my IDE (may re-write one day)
 *.ride
+*.oso

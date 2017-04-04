@@ -82,13 +82,21 @@ ri.Bxdf( "PxrDisney","bxdf", {
                         })
 drawTeapot(ri,x=-1,ry=-45)
 ri.AttributeEnd()
-
+ri.Pattern("PxrOSL","noiseShader", { "string shader"  : "noise" , 
+                                 "color Cin"  : [0.0 ,1.0,0.1],
+                                 "float scaleU" : [20],
+                                 "float scaleV" : [30]
+                                })
 # second teapot
 ri.Bxdf( "PxrDisney","bxdf", { 
                                 "reference color baseColor" : ["noiseShader:Cout"]
                         })
 drawTeapot(ri,ry=-45)
-
+ri.Pattern("PxrOSL","noiseShader", { "string shader"  : "noise" , 
+                                 "color Cin"  : [0.0 ,0.0,1.0],
+                                  "float scaleU" : [4],
+                                 "float scaleV" : [4]
+                                })
 # third teapot
 ri.Bxdf( "PxrDisney","bxdf", { 
                                 "reference color baseColor" : ["noiseShader:Cout"]

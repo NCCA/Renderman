@@ -1,5 +1,5 @@
-surface noise (color Cin=1, output color Cout=1)
+surface noise (color Cin=1, output color Cout=1, float scaleU=10, float scaleV=10)
 {
-    Cout=(float)noise("uperlin",u*10,v*10)*Cin;
+    Cout=(float)noise("uperlin",u*scaleU,v*scaleV)*Cin;
 }
 

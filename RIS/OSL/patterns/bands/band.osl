@@ -1,0 +1,21 @@
+shader band ( color C1 = 1, color C2=0, output	color Cout=0, float repeat=1,
+			  string direction="vertical")
+{
+	float ss;
+	if(direction=="vertical")
+	{
+  	ss=mod(u*repeat,1);
+	}
+	else
+	{
+		ss=mod(v*repeat,1);
+	}
+    if(ss<0.5)
+	{
+		Cout=C1;
+	}
+	else
+	{
+		Cout=C2;
+	}
+}

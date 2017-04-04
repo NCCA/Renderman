@@ -1,6 +1,19 @@
-shader band ( color C1 = 1, color C2=0, output	color Cout=0, float repeat=1,
-			  string direction="vertical")
+/* Simple un-aliased band shader
+input C1 the first band colour
+input C2 the second band colour
+input repeat number of repeats for the bands
+input direction horizontal or vertical (as string)
+output Cout the output colour of the shader
+*/
+
+shader band ( color C1 = 1, color C2=0, 
+							float repeat=1,
+			  			string direction="vertical",
+							output	color Cout=0 
+						)
 {
+	// multiply the U or V by a repeat value then mod to get the remainder
+	// this will give us repeated UV values
 	float ss;
 	if(direction=="vertical")
 	{
@@ -10,7 +23,8 @@ shader band ( color C1 = 1, color C2=0, output	color Cout=0, float repeat=1,
 	{
 		ss=mod(v*repeat,1);
 	}
-    if(ss<0.5)
+  // now if we are less than half the value of the sample use Colour 1
+	if(ss<0.5)
 	{
 		Cout=C1;
 	}

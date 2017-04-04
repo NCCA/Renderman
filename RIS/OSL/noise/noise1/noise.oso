@@ -1,0 +1,20 @@
+OpenShadingLanguage 1.00
+# Compiled by oslc 1.6.2dev
+surface noise
+param	color	Cin	1 1 1		%read{3,3} %write{2147483647,-1}
+oparam	color	Cout	1 1 1		%read{2147483647,-1} %write{3,3}
+global	float	u	%read{0,0} %write{2147483647,-1}
+global	float	v	%read{1,1} %write{2147483647,-1}
+temp	float	$tmp1	%read{3,3} %write{2,2}
+const	string	$const1	"uperlin"		%read{2,2} %write{2147483647,-1}
+temp	float	$tmp2	%read{2,2} %write{0,0}
+const	float	$const3	10		%read{0,1} %write{2147483647,-1}
+temp	float	$tmp3	%read{2,2} %write{1,1}
+code ___main___
+# noise.osl:3
+#     Cout=(float)noise("uperlin",u*10,v*10)*Cin;
+	mul		$tmp2 u $const3 	%filename{"noise.osl"} %line{3} %argrw{"wrr"}
+	mul		$tmp3 v $const3 	%argrw{"wrr"}
+	noise		$tmp1 $const1 $tmp2 $tmp3 	%argrw{"wrrr"}
+	mul		Cout $tmp1 Cin 	%argrw{"wrr"}
+	end

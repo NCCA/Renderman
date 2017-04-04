@@ -2,7 +2,7 @@
 import prman
 # import the python functions
 import sys
-sys.path.append('../common')
+sys.path.append('../../../common')
 from functions import drawTeapot
 from Camera import *
 
@@ -71,24 +71,27 @@ ri.TransformEnd()
 
 ri.AttributeEnd()
 
+ri.Pattern("PxrOSL","noiseShader", { "string shader"  : "noise" , 
+                                 "color Cin"  : [0.9 ,0.1,0.1]
+                                })
 
 # first teapot
 ri.AttributeBegin()
 ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 1.0, 0.0, 0.0], 
+                                "reference color baseColor" : ["noiseShader:Cout"]
                         })
 drawTeapot(ri,x=-1,ry=-45)
 ri.AttributeEnd()
 
 # second teapot
 ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 0.0, 1.0, 0.0], 
+                                "reference color baseColor" : ["noiseShader:Cout"]
                         })
 drawTeapot(ri,ry=-45)
 
 # third teapot
 ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 0.0, 0.0, 1.0], 
+                                "reference color baseColor" : ["noiseShader:Cout"]
                         })
 drawTeapot(ri,x=1,ry=-45)
 # floor

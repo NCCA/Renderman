@@ -1,0 +1,5 @@
+surface noise (color Cin=1, output color Cout=1)
+{
+    Cout=(float)noise("uperlin",u*10,v*10)*Cin;
+}
+

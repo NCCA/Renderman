@@ -1,0 +1,23 @@
+surface distance (
+	                color baseColour=1,
+                    color spotColour=0,
+                    float fuzz=0.025,
+                    float repeatU=1,
+                    float repeatV=1,
+                    output color Cout=0)
+{
+   
+    float dist;
+    float inDisk;
+    point centre=point (0.5,0.5,0);
+    float uu=mod(u*repeatU,1);
+    float vv=mod(v*repeatV,1);
+    point here=point(uu,vv,0);
+
+    Cout=baseColour;
+
+    dist=distance(centre,here);
+    inDisk=1-smoothstep(0.3-fuzz,0.3+fuzz,dist);
+    Cout=mix(Cout,spotColour,inDisk);
+}
+

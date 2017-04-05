@@ -8,11 +8,11 @@ surface disk (color baseColour=1,
    
     float dist;
     float inDisk;
-    float ss=mod(u*repeatU,1);
-    float tt=mod(v*repeatV,1);
+    float uu=mod(u*repeatU,1);
+    float vv=mod(v*repeatV,1);
     Cout=baseColour;
 
-    dist=sqrt((ss-0.5)*(ss-0.5)+(tt-0.5)*(tt-0.5));
+    dist=sqrt((uu-0.5)*(uu-0.5)+(vv-0.5)*(vv-0.5));
     inDisk=1-smoothstep(0.3-fuzz,0.3+fuzz,dist);
     Cout=mix(Cout,spotColour,inDisk);
 }

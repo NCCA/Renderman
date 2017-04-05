@@ -1,0 +1,29 @@
+surface layer (color baseColour=1,
+              color  lineColour1=0,
+              color  lineColour2=0,
+              float fuzz=0.025,
+              float repeatU=1,
+              float repeatV=1,
+              float thicknessU=0.5,
+              float thicknessV=0.1,
+              output	color Cout=0)
+{
+
+    float inTop;
+    float inLine;
+    float dist;
+    float uu=mod(u*repeatU,1);
+    float vv=mod(v*repeatV,1);
+
+    Cout=baseColour;
+   
+
+
+    inTop=smoothstep(thicknessU-fuzz,thicknessU+fuzz,vv);
+    Cout=mix(Cout,lineColour1,inTop);
+
+    dist=abs(uu-thicknessU);
+    inLine=1-smoothstep(thicknessV-fuzz,thicknessV+fuzz,dist);
+    Cout=mix(Cout,lineColour2,inLine);
+}
+

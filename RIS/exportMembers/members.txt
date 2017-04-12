@@ -1,0 +1,4628 @@
+Data from dir(prman.RI()
+----------------------------------------------------------------------------------------
+ri.A() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ABORT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ADD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ADDCOVERAGE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.AI() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ALGORITHM() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.AMBIENTLIGHT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.AMPLITUDE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.APERTURE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ARCHIVE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ATMOSPHERES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ATRIBUTECOMBINING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.AUTOBIAS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.AZ() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.AZI() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ArchiveBegin() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.ArchiveEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.ArchiveRecord() 
+Help Text if any :- 
+RtToken type,char* format,...
+----------------------------------------------------------------------------------------
+ri.AreaLightSource() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.Atmosphere() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.Attribute() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.AttributeBegin() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.AttributeEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.BACKFACETOLERANCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BACKFACING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BACKGROUND() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BEAMDISTRIBUTION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BESSEL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BEZIER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BEZIERSTEP() 
+Help Text if any :- 
+int(x=0) -> int or long
+int(x, base=10) -> int or long
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given.  If x is floating point, the conversion truncates towards zero.
+If x is outside the integer range, the function returns a long instead.
+
+If x is not a number or if base is given, then x must be a string or
+Unicode object representing an integer literal in the given base.  The
+literal can be preceded by '+' or '-' and be surrounded by whitespace.
+The base defaults to 10.  Valid bases are 0 and 2-36.  Base 0 means to
+interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+----------------------------------------------------------------------------------------
+ri.BIAS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BIAS0() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BIAS1() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BICUBIC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BILINEAR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BINARY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BINARYFORCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BLACK() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BLACKMANHARRIS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BLP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BOUND() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BOUND0() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BOUND1() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BOX() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BRICKMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BSPLINE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BSPLINESTEP() 
+Help Text if any :- 
+int(x=0) -> int or long
+int(x, base=10) -> int or long
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given.  If x is floating point, the conversion truncates towards zero.
+If x is outside the integer range, the function returns a long instead.
+
+If x is not a number or if base is given, then x must be a string or
+Unicode object representing an integer literal in the given base.  The
+literal can be preceded by '+' or '-' and be surrounded by whitespace.
+The base defaults to 10.  Valid bases are 0 and 2-36.  Base 0 means to
+interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+----------------------------------------------------------------------------------------
+ri.BSplineBasis() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BUCKET() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BUCKETSIZE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BUCKETSTRIDE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BUMPY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Basis() 
+Help Text if any :- 
+RtBasis u,RtInt ustep,RtBasis v,RtInt vstep
+----------------------------------------------------------------------------------------
+ri.Begin() 
+Help Text if any :- 
+RtToken name
+----------------------------------------------------------------------------------------
+ri.BesselFilter() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BezierBasis() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.BlackmanHarrisFilter() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Blobby() 
+Help Text if any :- 
+RtInt nleaf,RtInt ninst,RtInt* inst,RtInt nflt,RtFloat* flt,RtInt nstr,RtToken* str,_plist_
+----------------------------------------------------------------------------------------
+ri.Bound() 
+Help Text if any :- 
+RtBound bound
+----------------------------------------------------------------------------------------
+ri.BoxFilter() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Bxdf() 
+Help Text if any :- 
+RtToken name,RtToken handle,_plist_
+----------------------------------------------------------------------------------------
+ri.CACHEDIFFUSECOLORS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CACHEMODE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CAMERA() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CAMERAHITMODE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CATMARK() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CATMULLROMSTEP() 
+Help Text if any :- 
+int(x=0) -> int or long
+int(x, base=10) -> int or long
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given.  If x is floating point, the conversion truncates towards zero.
+If x is outside the integer range, the function returns a long instead.
+
+If x is not a number or if base is given, then x must be a string or
+Unicode object representing an integer literal in the given base.  The
+literal can be preceded by '+' or '-' and be surrounded by whitespace.
+The base defaults to 10.  Valid bases are 0 and 2-36.  Base 0 means to
+interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+----------------------------------------------------------------------------------------
+ri.CATROM() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CAUSTICMAP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CENTERED() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CENTERFILTER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CHANLIST() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CHECKNANS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CI() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CLAMP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CLAMPCOLOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CLAMPED() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CLAMPINGENABLE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CLAMPMOTION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CLAMPWIDTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CLEARLOCALS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CLIPPING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CLIPPINGPLANE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.COLOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.COLORCLAMP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.COMBINED() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.COMMENT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.COMPRESSION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.COMPRESSIONQ() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CONDABORT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CONEANGLE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CONEDELTAANGLE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CONSTANT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CONSTANTWIDTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CONTINUATIONBYDEFAULT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.COORDINATESYSTEM() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CORNER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CPUTIME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CREASE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CROPWINDOW() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CUBIC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CULL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CURRENT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Camera() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.CatmullRomBasis() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.CatmullRomFilter() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Clipping() 
+Help Text if any :- 
+RtFloat nearplane,RtFloat farplane
+----------------------------------------------------------------------------------------
+ri.ClippingPlane() 
+Help Text if any :- 
+RtFloat Nx,RtFloat Ny,RtFloat Nz,RtFloat Px,RtFloat Py,RtFloat Pz
+----------------------------------------------------------------------------------------
+ri.Color() 
+Help Text if any :- 
+RtFloat* color
+----------------------------------------------------------------------------------------
+ri.ColorSamples() 
+Help Text if any :- 
+RtInt n,RtFloat* nRGB,RtFloat* RGBn
+----------------------------------------------------------------------------------------
+ri.ConcatTransform() 
+Help Text if any :- 
+RtMatrix m
+----------------------------------------------------------------------------------------
+ri.Cone() 
+Help Text if any :- 
+RtFloat height,RtFloat radius,RtFloat tmax,_plist_
+----------------------------------------------------------------------------------------
+ri.Context() 
+Help Text if any :- 
+RtContextHandle ctx
+----------------------------------------------------------------------------------------
+ri.CoordSysTransform() 
+Help Text if any :- 
+RtToken fromspace
+----------------------------------------------------------------------------------------
+ri.CoordinateSystem() 
+Help Text if any :- 
+char * name
+----------------------------------------------------------------------------------------
+ri.CropWindow() 
+Help Text if any :- 
+RtFloat left,RtFloat right,RtFloat bottom,RtFloat top
+----------------------------------------------------------------------------------------
+ri.Curves() 
+Help Text if any :- 
+RtToken type,RtInt ncurves,RtInt* nvertices,RtToken wrap,_plist_
+----------------------------------------------------------------------------------------
+ri.Cylinder() 
+Help Text if any :- 
+RtFloat radius,RtFloat zmin,RtFloat zmax,RtFloat tmax,_plist_
+----------------------------------------------------------------------------------------
+ri.DEBUG() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DECIMATIONRATE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DEEPSHADOWERROR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DEEPSHADOWMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DEEPSHADOWSIMPLIFYERROR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DEEPSHADOWTILES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DEFCACHE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DEFINITION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DELETELIGHTS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DEPTHBIAS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DEPTHCUE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DEPTHFILTER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DEPTHMODE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DEPTHOFFIELD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DERIVATIVES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DETAIL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DETAILRANGE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DFAMODE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DICE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DICEMETHOD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DIFFERENCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DIFFUSE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DIFFUSEHITMODE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISABLE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISABLELIGHTS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISK() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISPLACEMENT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISPLACEMENTBOUND() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISPLACEMENTS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISPLACE_RATIOS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISPLAY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISPLAYEXPOSURE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISPLAYONLYEDITLIGHTS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISPLAYOPACITYCHAN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISPLAYQUANTIZE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISTANCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DISTANTLIGHT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DITHER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DOF() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DOFASPECT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DOUBLECOMP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DOUBLESHADED() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DPDTIME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DPDU() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DPDV() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DSOBound() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DSOFILE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DSOFLOAT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DSONAME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DSOPARAM() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DSOSTRING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.DYNAMIC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Declare() 
+----------------------------------------------------------------------------------------
+ri.Deformation() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.DepthOfField() 
+Help Text if any :- 
+RtFloat fstop,RtFloat length,RtFloat distance
+----------------------------------------------------------------------------------------
+ri.Detail() 
+Help Text if any :- 
+RtBound bound
+----------------------------------------------------------------------------------------
+ri.DetailRange() 
+Help Text if any :- 
+RtFloat minvis,RtFloat lotrans,RtFloat hitrans,RtFloat maxvis
+----------------------------------------------------------------------------------------
+ri.Disk() 
+Help Text if any :- 
+RtFloat height,RtFloat radius,RtFloat tmax,_plist_
+----------------------------------------------------------------------------------------
+ri.DiskFilter() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Displacement() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.Display() 
+Help Text if any :- 
+char * name,RtToken type,RtToken mode,_plist_
+----------------------------------------------------------------------------------------
+ri.DisplayChannel() 
+Help Text if any :- 
+RtToken channel,_plist_
+----------------------------------------------------------------------------------------
+ri.EDGEEDIT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EDITLIGHTS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EMISSIONBIAS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EMISSIONPOINTCLOUD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EMIT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EMPTY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ENABLE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ENABLEGAUSSIAN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ENABLELERP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ENABLELIGHTS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ENABLEUSERLOBES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ENDOFFRAME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EPSILON() 
+Help Text if any :- 
+float(x) -> floating point number
+
+Convert a string or number to a floating point number, if possible.
+----------------------------------------------------------------------------------------
+ri.EPSILON1() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EPSILON2() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ESTIMATOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EXCLUSIVE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EXITAT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EXPOSURE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EXTRAPOLATE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EXTREMEDISPLACEMENT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EXTREMEMOTIONDOF() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EYESPLITS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.EditAttributeBegin() 
+Help Text if any :- 
+RtToken name
+----------------------------------------------------------------------------------------
+ri.EditAttributeEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.EditBegin() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.EditEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.EditWorldBegin() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.EditWorldEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.Else() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.ElseIf() 
+Help Text if any :- 
+char * expr,_plist_
+----------------------------------------------------------------------------------------
+ri.EnableLightFilter() 
+Help Text if any :- 
+RtLightHandle light,RtToken filter,RtBoolean onoff
+----------------------------------------------------------------------------------------
+ri.End() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.ErrorAbort() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ErrorCleanup() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ErrorCondAbort() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ErrorHandler() 
+Help Text if any :- 
+RtErrorHandler handler
+----------------------------------------------------------------------------------------
+ri.ErrorIgnore() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ErrorPrint() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ErrorPrintOnce() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Exposure() 
+Help Text if any :- 
+RtFloat gain,RtFloat gamma
+----------------------------------------------------------------------------------------
+ri.Exterior() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.FACEEDIT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FACEINDEX() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FACEVARYINGINTERPBOUNDARY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FALLOFFPOWER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FALSE() 
+Help Text if any :- 
+int(x=0) -> int or long
+int(x, base=10) -> int or long
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given.  If x is floating point, the conversion truncates towards zero.
+If x is outside the integer range, the function returns a long instead.
+
+If x is not a number or if base is given, then x must be a string or
+Unicode object representing an integer literal in the given base.  The
+literal can be preceded by '+' or '-' and be surrounded by whitespace.
+The base defaults to 10.  Valid bases are 0 and 2-36.  Base 0 means to
+interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+----------------------------------------------------------------------------------------
+ri.FILE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FILEMODE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FILENAME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FILTER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FILTERING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FILTERWIDTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FINISHRENDERING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FLATNESS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FOCUSFACTOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FOCUSREGION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FOG() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FORCEDSAMPLING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FORMATPIXELASPECTRATIO() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FORMATRESOLUTION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FOV() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FRAME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FRAMEASPECTRATIO() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FRAMEBUFFER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FRAMECAMERA() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FREQUENCYFRAMETIME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FROM() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.FRUSTUM() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Format() 
+Help Text if any :- 
+RtInt xres,RtInt yres,RtFloat pixel_ar
+----------------------------------------------------------------------------------------
+ri.FrameAspectRatio() 
+Help Text if any :- 
+RtFloat ar
+----------------------------------------------------------------------------------------
+ri.FrameBegin() 
+Help Text if any :- 
+RtInt frame
+----------------------------------------------------------------------------------------
+ri.FrameEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.GAUSSIAN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GEOCACHEMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GEOMETRICAPPROXIMATIONFLATNESS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GEOMETRICAPPROXIMATIONFOCUSFACTOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GEOMETRICAPPROXIMATIONMOTIONFACTOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GLOBALMAP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GPRIMLOG() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GPRIMSPLITS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GRIDAREA() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GRIDCACHESIZE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GRIDMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GRIDS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GRIDSIZE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GROUPING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GRP_MEMBERSHIP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GRP_TRACESUBSET() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GaussianFilter() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.GeneralPolygon() 
+Help Text if any :- 
+RtInt nloops,RtInt* nverts,_plist_
+----------------------------------------------------------------------------------------
+ri.GeometricApproximation() 
+Help Text if any :- 
+RtToken type,RtFloat value
+----------------------------------------------------------------------------------------
+ri.Geometry() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.GetContext() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.HAIR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.HANDLE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.HANDLEID() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.HANDLER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.HEMISPHERESAMPLEMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.HERMITE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.HERMITESTEP() 
+Help Text if any :- 
+int(x=0) -> int or long
+int(x, base=10) -> int or long
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given.  If x is floating point, the conversion truncates towards zero.
+If x is outside the integer range, the function returns a long instead.
+
+If x is not a number or if base is given, then x must be a string or
+Unicode object representing an integer literal in the given base.  The
+literal can be preceded by '+' or '-' and be surrounded by whitespace.
+The base defaults to 10.  Valid bases are 0 and 2-36.  Base 0 means to
+interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+----------------------------------------------------------------------------------------
+ri.HIDDEN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.HOLE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.HermiteBasis() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Hider() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.HierarchicalSubdivisionMesh() 
+Help Text if any :- 
+RtToken mask,RtInt nf,RtInt* nverts,RtInt* verts,RtInt nt,RtToken* tags,RtInt* nargs,RtInt* intargs,RtFloat* floatargs,RtToken* stringargs,_plist_
+----------------------------------------------------------------------------------------
+ri.Hyperboloid() 
+Help Text if any :- 
+RtPoint point1,RtPoint point2,RtFloat tmax,_plist_
+----------------------------------------------------------------------------------------
+ri.I() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ID() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.IDENTIFIER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.IGNORE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ILLUMINATEHANDLE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.IMMEDIATESUBDIVIDE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.IMPORTANCETHRESHOLD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.INDEXOFREFRACTION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.INFINITY() 
+Help Text if any :- 
+float(x) -> floating point number
+
+Convert a string or number to a floating point number, if possible.
+----------------------------------------------------------------------------------------
+ri.INSIDE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.INTENSITY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.INTERLEAVE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.INTERPBOUNDARY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.INTERPRETATION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.INTERSECTION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.INTERSECTPRIORITY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.INTERVAL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Identity() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.IfBegin() 
+Help Text if any :- 
+char * expr,_plist_
+----------------------------------------------------------------------------------------
+ri.IfEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.Illuminate() 
+Help Text if any :- 
+RtLightHandle light,RtBoolean onoff
+----------------------------------------------------------------------------------------
+ri.Imager() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.Integrator() 
+Help Text if any :- 
+RtToken name,RtToken handle,_plist_
+----------------------------------------------------------------------------------------
+ri.Interior() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.JITTER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.KA() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.KD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.KEEPFILES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.KR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.KS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LAGRANGIAN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LANCZOS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LEVELSET() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LIGHT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LIGHTCOLOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LIGHTING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LIMITS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LINEAR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LODRANGE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LOOP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LPEGROUP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LanczosFilter() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.LightFilter() 
+Help Text if any :- 
+RtToken name,RtToken handle,_plist_
+----------------------------------------------------------------------------------------
+ri.LightSource() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.MARCH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MATRIXCACHEMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MATTE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MATTEFILE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MAXANGLE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MAXDEPTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MAXDIFFUSEDEPTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MAXDISTANCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MAXERROR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MAXHAIRLENGTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MAXHAIRVOLUME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MAXPATHLENGTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MAXPIXELDIST() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MAXRAYDEPTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MAXSPECULARDEPTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MAXVPDEPTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MERGE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.METAL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MIDPOINT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MINDISTANCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MINMAX() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MINSTOREDEPTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MINWIDTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MITCHELL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MODE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MOTIONFACTOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MPCACHE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MPCACHEDIR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MPCACHESTRIDE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MPMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MULTIGRIDS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MakeBrickMap() 
+Help Text if any :- 
+RtInt nptcs,char ** ptcs,char * bkm,_plist_
+----------------------------------------------------------------------------------------
+ri.MakeBump() 
+Help Text if any :- 
+char * pic,char * text,RtToken swrap,RtToken twrap,RtFilterFunc filt,RtFloat swidth,RtFloat twidth,_plist_
+----------------------------------------------------------------------------------------
+ri.MakeCubeFaceEnvironment() 
+Help Text if any :- 
+char * px,char * nx,char * py,char * ny,char * pz,char * nz,char * text,RtFloat fov,RtFilterFunc filt,RtFloat swidth,RtFloat twidth,_plist_
+----------------------------------------------------------------------------------------
+ri.MakeLatLongEnvironment() 
+Help Text if any :- 
+char * pic,char * text,RtFilterFunc filt,RtFloat swidth,RtFloat twidth,_plist_
+----------------------------------------------------------------------------------------
+ri.MakeShadow() 
+Help Text if any :- 
+char * pic,char * text,_plist_
+----------------------------------------------------------------------------------------
+ri.MakeTexture() 
+Help Text if any :- 
+char * pic,char * text,RtToken swrap,RtToken twrap,RtFilterFunc filt,RtFloat swidth,RtFloat twidth,_plist_
+----------------------------------------------------------------------------------------
+ri.Matte() 
+Help Text if any :- 
+RtBoolean onoff
+----------------------------------------------------------------------------------------
+ri.MitchellFilter() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.MotionBegin() 
+Help Text if any :- 
+RtInt n,...
+----------------------------------------------------------------------------------------
+ri.MotionEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.N() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.NAME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.NDC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.NEARHITHER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.NEWER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.NEWGROUP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.NG() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.NONPERIODIC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.NONUNIFORM() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.NP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.NURBCURVATUREDICEFACTOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.NuPatch() 
+Help Text if any :- 
+RtInt nu,RtInt uorder,RtFloat* uknot,RtFloat umin,RtFloat umax,RtInt nv,RtInt vorder,RtFloat* vknot,RtFloat vmin,RtFloat vmax,_plist_
+----------------------------------------------------------------------------------------
+ri.OBJECT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OBJECTCACHE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OCCLUSIONBOUND() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OCTREEMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OFFSET() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OI() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OLDMOTIONFACTOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OPACITY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OPACITYCACHEMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OPACITYMETHOD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OPACITYMULTIPLIER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OPAQUE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ORDER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ORDERORIGIN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ORIENTATION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ORIGIN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ORTHOGRAPHIC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OTHRESHOLD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OUTPUTALLDECLARES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.OUTSIDE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ObjectBegin() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.ObjectBeginV() 
+Help Text if any :- 
+_explicitplist_
+----------------------------------------------------------------------------------------
+ri.ObjectEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.ObjectInstance() 
+Help Text if any :- 
+RtObjectHandle h
+----------------------------------------------------------------------------------------
+ri.ObjectInstanceV() 
+Help Text if any :- 
+RtObjectHandle h,_explicitplist_
+----------------------------------------------------------------------------------------
+ri.Opacity() 
+Help Text if any :- 
+RtFloat* color
+----------------------------------------------------------------------------------------
+ri.Option() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.Orientation() 
+Help Text if any :- 
+RtToken orient
+----------------------------------------------------------------------------------------
+ri.P() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PAINT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PAINTEDPLASTIC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PATTERN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PDISC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PERIODIC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PERSISTENT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PERSPECTIVE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PHOTON() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PHOTONLIFETIME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PIXELFILTERNAME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PIXELFILTERWIDTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PIXELSAMPLES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PIXELVARIANCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PLANARPROJECTION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PLASTIC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.POINTFALLOFFPOWER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.POINTLIGHT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.POINTMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.POWER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.POWERSTEP() 
+Help Text if any :- 
+int(x=0) -> int or long
+int(x, base=10) -> int or long
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given.  If x is floating point, the conversion truncates towards zero.
+If x is outside the integer range, the function returns a long instead.
+
+If x is not a number or if base is given, then x must be a string or
+Unicode object representing an integer literal in the given base.  The
+literal can be preceded by '+' or '-' and be surrounded by whitespace.
+The base defaults to 10.  Valid bases are 0 and 2-36.  Base 0 means to
+interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+----------------------------------------------------------------------------------------
+ri.PREBIAS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PRECISION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PRESERVECV() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PRIMITIVE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PRINT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PRINTONCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PRMAN_VERSION() 
+Help Text if any :- 
+tuple() -> empty tuple
+tuple(iterable) -> tuple initialized from iterable's items
+
+If the argument is a tuple, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PRMAN_VERSION_STR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PROCEDURAL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PROJECTIONFOV() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PROJECTIONNAME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PTEXTUREMAXFILES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PTEXTUREMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PVN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PW() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PYRAMID() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PYRAMIDENABLE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.PZ() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Paraboloid() 
+Help Text if any :- 
+RtFloat radius,RtFloat zmin,RtFloat zmax,RtFloat tmax,_plist_
+----------------------------------------------------------------------------------------
+ri.Patch() 
+Help Text if any :- 
+RtToken type,_plist_
+----------------------------------------------------------------------------------------
+ri.PatchMesh() 
+Help Text if any :- 
+RtToken type,RtInt nu,RtToken uwrap,RtInt nv,RtToken vwrap,_plist_
+----------------------------------------------------------------------------------------
+ri.Pattern() 
+Help Text if any :- 
+RtToken name,RtToken handle,_plist_
+----------------------------------------------------------------------------------------
+ri.Perspective() 
+Help Text if any :- 
+RtFloat fov
+----------------------------------------------------------------------------------------
+ri.PixelFilter() 
+Help Text if any :- 
+RtFilterFunc func,RtFloat xwidth,RtFloat ywidth
+----------------------------------------------------------------------------------------
+ri.PixelSampleImager() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.PixelSamples() 
+Help Text if any :- 
+RtFloat x,RtFloat y
+----------------------------------------------------------------------------------------
+ri.PixelVariance() 
+Help Text if any :- 
+RtFloat var
+----------------------------------------------------------------------------------------
+ri.Points() 
+Help Text if any :- 
+RtInt nverts,_plist_
+----------------------------------------------------------------------------------------
+ri.PointsGeneralPolygons() 
+Help Text if any :- 
+RtInt npolys,RtInt* nloops,RtInt* nverts,RtInt* verts,_plist_
+----------------------------------------------------------------------------------------
+ri.PointsPolygons() 
+Help Text if any :- 
+RtInt npolys,RtInt* nverts,RtInt* verts,_plist_
+----------------------------------------------------------------------------------------
+ri.Polygon() 
+Help Text if any :- 
+RtInt nverts,_plist_
+----------------------------------------------------------------------------------------
+ri.PowerBasis() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Proc2DelayedReadArchive() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Proc2DynamicLoad() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ProcDelayedReadArchive() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ProcDynamicLoad() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ProcRunProgram() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Procedural() 
+Help Text if any :- 
+RtPointer data,RtBound bound,RtProcSubdivFunc sfunc,RtProcFreeFunc ffunc
+----------------------------------------------------------------------------------------
+ri.Procedural2() 
+Help Text if any :- 
+RtProc2SubdivFunc sfunc,RtProc2BoundFunc bfunc,_plist_
+----------------------------------------------------------------------------------------
+ri.Projection() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.QUANTIZEDITHER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.QUANTIZERANGE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.QUANTIZETYPE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Quantize() 
+Help Text if any :- 
+RtToken type,RtInt one,RtInt min,RtInt max,RtFloat dither
+----------------------------------------------------------------------------------------
+ri.R() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RADIOSITYCACHEMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RADIOSITYCACHEOMITMINUSONE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RADIUS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RASTER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RASTERORIENT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RAYDEPTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RAY_KAYJIYA() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RAY_LIST() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RAY_TREE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.REFLECTION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.REFWARNING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RELATIVEDETAIL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RELATIVEPIXELVARIANCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RELATIVESHADINGRATE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RELIGHTING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.REMAP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RENDER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RENDERMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RENDERNULL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RENDERTIME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.REPELFILE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.REPELPARAMS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RERENDERBAKEDBDIR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RESETRELATIVESHADINGRATE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RESIZE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RESOLUTION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RESOLUTIONUNIT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RESOURCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.REVERSEORIENTATION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.REVERSESIGN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RGB() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RGBA() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RGBAI() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RGBAZ() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RGBAZI() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RGBI() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RGBZ() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RGBZI() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RIB() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RIBPARSE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RIFCONTROL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RIXPLUGIN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ROUGHNESS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ROWSPERSTRIP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.RUNFLAGS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ReadArchive() 
+Help Text if any :- 
+RtToken name,RtArchiveCallback callback,_plist_
+----------------------------------------------------------------------------------------
+ri.RelativeDetail() 
+Help Text if any :- 
+RtFloat rel
+----------------------------------------------------------------------------------------
+ri.Resource() 
+Help Text if any :- 
+RtToken handle,RtToken type,_plist_
+----------------------------------------------------------------------------------------
+ri.ResourceBegin() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.ResourceEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.ReverseOrientation() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.Rotate() 
+Help Text if any :- 
+RtFloat angle,RtFloat dx,RtFloat dy,RtFloat dz
+----------------------------------------------------------------------------------------
+ri.S() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SAMPLEMOTION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SAVEDATTRIBUTES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SAVESHADERSTATE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SCOPEDCOORDINATESYSTEM() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SCOPENAMES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SCREEN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SCREENWINDOW() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SEARCHPATH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SENSE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SEPARATE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SEPCATROM() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADEGROUPS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADEGROUPSIZEFACTOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADEQUEUESIZEFACTOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADERINSTANCEID() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADERPROFILE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADESIZE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADEWCACHE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADINGGROUP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADINGINTERPOLATION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADINGMODEL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADINGRATE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHADOW() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHINYMETAL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHUTTER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SHUTTEROPENING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SIDES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SIGMA() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SIGMABLUR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SINC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SMOOTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SMOOTHTRIANGLES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SOURCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SPATIALGROUPING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SPECULAR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SPECULARCOLOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SPECULARHITMODE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SPECULARTHRESHOLD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SPHERE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SPHERICALPROJECTION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SPOTLIGHT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SRGB() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ST() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.STANDARD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.STATISTICS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.STITCH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.STOCHASTIC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.STRATEGY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.STREAMMARKER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.STRUCTURE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.STYLESHEET() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SUBOCCLUSION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SUBPIXEL() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SUBWINDOW() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SUSPENDRENDERING() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Scale() 
+Help Text if any :- 
+RtFloat sx,RtFloat sy,RtFloat sz
+----------------------------------------------------------------------------------------
+ri.ScopedCoordinateSystem() 
+Help Text if any :- 
+char * name
+----------------------------------------------------------------------------------------
+ri.ScreenWindow() 
+Help Text if any :- 
+RtFloat left,RtFloat right,RtFloat bottom,RtFloat top
+----------------------------------------------------------------------------------------
+ri.SeparableCatmullRomFilter() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Shader() 
+Help Text if any :- 
+RtToken name,RtToken handle,_plist_
+----------------------------------------------------------------------------------------
+ri.ShadingInterpolation() 
+Help Text if any :- 
+RtToken type
+----------------------------------------------------------------------------------------
+ri.ShadingRate() 
+Help Text if any :- 
+RtFloat size
+----------------------------------------------------------------------------------------
+ri.Shutter() 
+Help Text if any :- 
+RtFloat opentime,RtFloat closetime
+----------------------------------------------------------------------------------------
+ri.Sides() 
+Help Text if any :- 
+RtInt n
+----------------------------------------------------------------------------------------
+ri.SimpleBound() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.SincFilter() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Skew() 
+Help Text if any :- 
+RtFloat angle,RtFloat d1x,RtFloat d1y,RtFloat d1z,RtFloat d2x,RtFloat d2y,RtFloat d2z
+----------------------------------------------------------------------------------------
+ri.SolidBegin() 
+Help Text if any :- 
+char * op
+----------------------------------------------------------------------------------------
+ri.SolidEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.Sphere() 
+Help Text if any :- 
+RtFloat radius,RtFloat zmin,RtFloat zmax,RtFloat tmax,_plist_
+----------------------------------------------------------------------------------------
+ri.StandardStructureHints() 
+----------------------------------------------------------------------------------------
+ri.SubdivisionMesh() 
+Help Text if any :- 
+RtToken mask,RtInt nf,RtInt* nverts,RtInt* verts,RtInt nt,RtToken* tags,RtInt* nargs,RtInt* intargs,RtFloat* floatargs,_plist_
+----------------------------------------------------------------------------------------
+ri.Surface() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.System() 
+Help Text if any :- 
+char * name
+----------------------------------------------------------------------------------------
+ri.T() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TEXTURE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TEXTURECOORDINATES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TEXTUREMEMORY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TEXTURENAME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.THREADS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.THRESHOLD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TIMER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TO() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRACE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRACEENABLE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRACEMINWIDTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRANSFORM() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRANSIENT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRANSMISSION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRANSMISSIONHITMODE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRANSPARENT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRIANGLE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRIM() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRIMCURVE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRIMDEVIATION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TRUE() 
+Help Text if any :- 
+int(x=0) -> int or long
+int(x, base=10) -> int or long
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given.  If x is floating point, the conversion truncates towards zero.
+If x is outside the integer range, the function returns a long instead.
+
+If x is not a number or if base is given, then x must be a string or
+Unicode object representing an integer literal in the given base.  The
+literal can be preceded by '+' or '-' and be surrounded by whitespace.
+The base defaults to 10.  Valid bases are 0 and 2-36.  Base 0 means to
+interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+----------------------------------------------------------------------------------------
+ri.TextureCoordinates() 
+Help Text if any :- 
+RtFloat s1,RtFloat t1,RtFloat s2,RtFloat t2,RtFloat s3,RtFloat t3,RtFloat s4,RtFloat t4
+----------------------------------------------------------------------------------------
+ri.Torus() 
+Help Text if any :- 
+RtFloat majrad,RtFloat minrad,RtFloat phimin,RtFloat phimax,RtFloat tmax,_plist_
+----------------------------------------------------------------------------------------
+ri.Transform() 
+Help Text if any :- 
+RtMatrix m
+----------------------------------------------------------------------------------------
+ri.TransformBegin() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.TransformEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.TransformPoints() 
+Help Text if any :- 
+RtToken fromspace,RtToken tospace,RtInt n,RtPoint * points
+----------------------------------------------------------------------------------------
+ri.Translate() 
+Help Text if any :- 
+RtFloat dx,RtFloat dy,RtFloat dz
+----------------------------------------------------------------------------------------
+ri.TriangleFilter() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.TrimCurve() 
+Help Text if any :- 
+RtInt nloops,RtInt* ncurves,RtInt* order,RtFloat* knot,RtFloat* min,RtFloat* max,RtInt* n,RtFloat* u,RtFloat* v,RtFloat* w
+----------------------------------------------------------------------------------------
+ri.U() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.UBASISNAME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.UNIFORM_TRIMRANGE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.UNION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.UNKNOWN() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.USER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.UVW() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.V() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VARSUBST() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VArchiveRecord() 
+Help Text if any :- 
+RtToken type,char* format,va_list vap
+----------------------------------------------------------------------------------------
+ri.VBASISNAME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VDMAG() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VERBATIM() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VERTEXEDIT() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VIEWFRUSTUMDISTANCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VISIBILITY() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VISIBLEPOINTS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VOLUME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VOLUMEBOX() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VOLUMECONE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VOLUMECYLINDER() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VOLUMEELLIPSOID() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VOLUMEINTERPRETATION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VOLUMEPIXELSAMPLES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VPAtmosphere() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.VPDEPTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VPDEPTHSHADINGRATE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VPICOLOR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VPIDEPTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VPIMAGE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VPINTERIORHEURISTIC() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VPIOBJECTID() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VPInterior() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.VPRELATIVESHADINGRATE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VPSurface() 
+Help Text if any :- 
+RtToken name,_plist_
+----------------------------------------------------------------------------------------
+ri.VPVOLUMEINTERSECTIONS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.VPVOLUMES() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Volume() 
+Help Text if any :- 
+RtToken type,RtBound bound,RtInt* dimensions,_plist_
+----------------------------------------------------------------------------------------
+ri.VolumePixelSamples() 
+Help Text if any :- 
+RtFloat x,RtFloat y
+----------------------------------------------------------------------------------------
+ri.W() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.WIDTH() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.WIDTHMINSEGMENTS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.WORLD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.WORLDCAMERA() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.WORLDDISTANCE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.WRITETODISK() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.WorldBegin() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.WorldEnd() 
+Help Text if any :- 
+
+----------------------------------------------------------------------------------------
+ri.XMLFILENAME() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.YSPLITS() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.Z() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ZBLUR() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ZCOMPRESSION() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ZFILE() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ZI() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ZLERP() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.ZTHRESHOLD() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.__class__() 
+----------------------------------------------------------------------------------------
+ri.__delattr__() 
+Help Text if any :- 
+x.__delattr__('name') <==> del x.name
+----------------------------------------------------------------------------------------
+ri.__dict__() 
+Help Text if any :- 
+dict() -> new empty dictionary
+dict(mapping) -> new dictionary initialized from a mapping object's
+    (key, value) pairs
+dict(iterable) -> new dictionary initialized as if via:
+    d = {}
+    for k, v in iterable:
+        d[k] = v
+dict(**kwargs) -> new dictionary initialized with the name=value pairs
+    in the keyword argument list.  For example:  dict(one=1, two=2)
+----------------------------------------------------------------------------------------
+ri.__doc__() 
+----------------------------------------------------------------------------------------
+ri.__format__() 
+Help Text if any :- 
+default object formatter
+----------------------------------------------------------------------------------------
+ri.__getattribute__() 
+Help Text if any :- 
+x.__getattribute__('name') <==> x.name
+----------------------------------------------------------------------------------------
+ri.__hash__() 
+Help Text if any :- 
+x.__hash__() <==> hash(x)
+----------------------------------------------------------------------------------------
+ri.__init__() 
+----------------------------------------------------------------------------------------
+ri.__module__() 
+Help Text if any :- 
+str(object='') -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+----------------------------------------------------------------------------------------
+ri.__new__() 
+Help Text if any :- 
+T.__new__(S, ...) -> a new object with type S, a subtype of T
+----------------------------------------------------------------------------------------
+ri.__reduce__() 
+Help Text if any :- 
+helper for pickle
+----------------------------------------------------------------------------------------
+ri.__reduce_ex__() 
+Help Text if any :- 
+helper for pickle
+----------------------------------------------------------------------------------------
+ri.__repr__() 
+Help Text if any :- 
+x.__repr__() <==> repr(x)
+----------------------------------------------------------------------------------------
+ri.__setattr__() 
+Help Text if any :- 
+x.__setattr__('name', value) <==> x.name = value
+----------------------------------------------------------------------------------------
+ri.__sizeof__() 
+Help Text if any :- 
+__sizeof__() -> int
+size of object in memory, in bytes
+----------------------------------------------------------------------------------------
+ri.__str__() 
+Help Text if any :- 
+x.__str__() <==> str(x)
+----------------------------------------------------------------------------------------
+ri.__subclasshook__() 
+Help Text if any :- 
+Abstract classes can override this to customize issubclass().
+
+This is invoked early on by abc.ABCMeta.__subclasscheck__().
+It should return True, False or NotImplemented.  If it returns
+NotImplemented, the normal algorithm is used.  Otherwise, it
+overrides the normal algorithm (and the outcome is cached).
+----------------------------------------------------------------------------------------
+ri.__weakref__() 
+----------------------------------------------------------------------------------------

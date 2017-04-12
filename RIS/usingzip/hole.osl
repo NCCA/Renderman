@@ -1,0 +1,19 @@
+surface hole(float radius = 0.2,
+     float blur = 0.01,
+     float s = 0 [[int lockgeom = 0]],
+     float t = 0 [[int lockgeom = 0]],
+     float repeatU=20,
+    float repeatV=20,
+     output float resultF = 0)
+{
+    float uu=mod(s*repeatU,1);
+    float vv=mod(t*repeatV,1);
+    point here=point(uu,vv,0);
+//    point p = transform("object", P);
+    point origin = point(0,0,0);
+    point centre=point (0.5,0.5,0);
+
+    float dist=distance(centre,here);
+
+resultF = smoothstep(radius - blur, radius + blur, dist);
+}

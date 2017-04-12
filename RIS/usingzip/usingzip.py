@@ -111,7 +111,46 @@ ri.TransformBegin()
 
 ri.AttributeBegin()
 #ri.Bxdf( "PxrDisney","bxdf", { "color baseColor" : [ .35, 0.49, 0.86] })
-ri.Bxdf( "PxrLMPlastic","bxdf", { "color diffuseColor" : [ .35, 0.49, 0.86] })
+#ri.Bxdf( "PxrLMPlastic","bxdf", { "color diffuseColor" : [ .35, 0.49, 0.86] })
+
+# set the pattern generation to be from our osl noise shader 
+ri.Pattern("PxrOSL","noiseShader", { "string shader"  : "noise" , 
+                                 "color Cin"  : [1.0 ,0.2,0.0],
+                                "float scaleU" : [20],
+                                 "float scaleV" : [30]
+
+                                })
+"""
+# now we are going to make a new pattern that changes the colour
+# from the noise shader to a single float and extract the green channel
+# mode==1
+ri.Pattern ("PxrToFloat","noiseToFloat",{
+		"reference color input" : ["noiseShader:Cout"],
+                "int mode" : [1]
+    })
+ri.Bxdf( "PxrDisney","bxdf", { 
+                                "reference color baseColor" : ["noiseShader:Cout"],
+                                "reference float metallic" : ["noiseToFloat:resultF"]
+                        })
+"""
+"""
+#Spots!
+ri.Pattern("PxrOSL","distance", { "string shader"  : "distance" , 
+                                     "float repeatU" : [25],  
+                                     "float repeatV" : [25],  
+                                     "color baseColour" : [1,1,1],
+                                     "color spotColour" : [1,0,0],
+                                     "float fuzz" : [0.08]                             
+                                })
+ri.Bxdf( "PxrDisney","bxdf", { "reference color baseColor" : ["distance:Cout"] })
+"""
+
+#Spots!
+ri.Pattern("PxrOSL","hole", { "string shader"  : "hole"   })
+ri.Bxdf( "PxrDisney","bxdf", { "reference float presence" : ["hole:resultF"] })
+
+
+
 
 ri.Procedural2( ri.Proc2DelayedReadArchive, ri.SimpleBound  , {"string filename" : ["shaderBall.zip!shaderBall.rib"] , "float[6] __bound" : [-2 ,2, 0 ,2, -2 ,2] })
 ri.Procedural2( ri.Proc2DelayedReadArchive, ri.SimpleBound  , {"string filename" : ["shaderBall.zip!cones.rib"] , "float[6] __bound" : [-2 ,2, 0 ,2, -2 ,2] })
@@ -138,7 +177,7 @@ ri.Bxdf( "PxrDisney","bxdf", {
                          "float roughness" : [0.7],
                           "float specular" : [0.1]
                         })
-ri.Procedural2( ri.Proc2DelayedReadArchive, ri.SimpleBound  , {"string filename" : ["shaderBall.zip!innerBall.rib"] , "float[6] __bound" : [-2 ,2, 0 ,2, -2 ,2] })
+#ri.Procedural2( ri.Proc2DelayedReadArchive, ri.SimpleBound  , {"string filename" : ["shaderBall.zip!innerBall.rib"] , "float[6] __bound" : [-2 ,2, 0 ,2, -2 ,2] })
 
 ri.AttributeEnd()
 

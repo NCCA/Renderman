@@ -1,0 +1,6 @@
+surface noise (color Cin=1, output color Cout=1, float scaleU=10, float scaleV=10,float s = 0 [[int lockgeom = 0]],
+                    float t = 0 [[int lockgeom = 0]])
+{
+    Cout=(float)noise("uperlin",s*scaleU,t*scaleV)*Cin;
+}
+

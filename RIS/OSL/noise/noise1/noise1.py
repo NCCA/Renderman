@@ -114,8 +114,8 @@ ri.Bxdf( "PxrDisney","bxdf", {
 drawTeapot(ri,ry=-45)
 ri.Pattern("PxrOSL","noiseShader", { "string shader"  : "noise" , 
                                  "color Cin"  : [0.0 ,0.0,1.0],
-                                  "float scaleU" : [14],
-                                 "float scaleV" : [14]
+                                  "float scaleU" : [54],
+                                 "float scaleV" : [54]
                                 })
 # third teapot
 ri.Bxdf( "PxrDisney","bxdf", { 

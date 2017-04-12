@@ -1,0 +1,29 @@
+shader simplecheck  (color baseColour=1, color checkColour=0,
+float repeatCount=10,
+output	color Cout=1
+)
+
+{
+    float ss=u*repeatCount+v;
+    float tt=v*repeatCount-u;
+    float filterWidthSS=5*filterwidth(ss);
+    float filterWidthTT=5*filterwidth(tt);
+
+    ss=mod(ss,2);
+    tt=mod(tt,2);
+    float uvSize=0.25;
+    float smag;
+    smag =smoothstep(uvSize-filterWidthSS,uvSize+filterWidthSS,ss);
+    smag-=smoothstep(1+uvSize-filterWidthSS,1+uvSize+filterWidthSS,ss);
+    smag=smag*2-1;
+    
+    float tmag;
+    tmag =smoothstep(uvSize-filterWidthTT,uvSize+filterWidthTT,tt);
+    tmag-=smoothstep(1+uvSize-filterWidthTT,1+uvSize+filterWidthTT,tt);
+    tmag=tmag*2-1;
+    
+    
+     Cout=(smag*tmag)/1+0.5;
+
+}
+

@@ -113,6 +113,8 @@ ri.AttributeBegin()
 #ri.Bxdf( "PxrDisney","bxdf", { "color baseColor" : [ .35, 0.49, 0.86] })
 #ri.Bxdf( "PxrLMPlastic","bxdf", { "color diffuseColor" : [ .35, 0.49, 0.86] })
 
+
+
 # set the pattern generation to be from our osl noise shader 
 ri.Pattern("PxrOSL","noiseShader", { "string shader"  : "noise" , 
                                  "color Cin"  : [1.0 ,0.2,0.0],
@@ -120,7 +122,6 @@ ri.Pattern("PxrOSL","noiseShader", { "string shader"  : "noise" ,
                                  "float scaleV" : [30]
 
                                 })
-"""
 # now we are going to make a new pattern that changes the colour
 # from the noise shader to a single float and extract the green channel
 # mode==1
@@ -132,7 +133,7 @@ ri.Bxdf( "PxrDisney","bxdf", {
                                 "reference color baseColor" : ["noiseShader:Cout"],
                                 "reference float metallic" : ["noiseToFloat:resultF"]
                         })
-"""
+
 """
 #Spots!
 ri.Pattern("PxrOSL","distance", { "string shader"  : "distance" , 
@@ -146,9 +147,10 @@ ri.Bxdf( "PxrDisney","bxdf", { "reference color baseColor" : ["distance:Cout"] }
 """
 
 #Spots!
+"""
 ri.Pattern("PxrOSL","hole", { "string shader"  : "hole"   })
 ri.Bxdf( "PxrDisney","bxdf", { "reference float presence" : ["hole:resultF"] })
-
+"""
 
 
 
@@ -172,12 +174,21 @@ ri.AttributeEnd()
 
 # Inner Ball
 ri.AttributeBegin()
+"""
+# Black
 ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 0.0, 0.0, 0.0],
-                         "float roughness" : [0.7],
+                        "color baseColor" : [ 0.1, 0.1, 0.1],
+                         "float roughness" : [0.2],
                           "float specular" : [0.1]
                         })
-#ri.Procedural2( ri.Proc2DelayedReadArchive, ri.SimpleBound  , {"string filename" : ["shaderBall.zip!innerBall.rib"] , "float[6] __bound" : [-2 ,2, 0 ,2, -2 ,2] })
+"""
+# glowing red!
+ri.Bxdf( "PxrDisney","bxdf", { 
+                        "color baseColor" : [ 0.9, 0.0, 0.0], 
+                        "color emitColor" : [1.0 , 0.0 , 0.0]
+                        })
+
+ri.Procedural2( ri.Proc2DelayedReadArchive, ri.SimpleBound  , {"string filename" : ["shaderBall.zip!innerBall.rib"] , "float[6] __bound" : [-2 ,2, 0 ,2, -2 ,2] })
 
 ri.AttributeEnd()
 
@@ -219,16 +230,15 @@ ri.Scale(2,2,2)
 ri.Procedural2( ri.Proc2DelayedReadArchive, ri.SimpleBound  , {"string filename" : ["shaderBall.zip!signature.rib"] , "float[6] __bound" : [-2 ,2, 0 ,2, -2 ,2] })
 
 # floor
-# set the pattern generation to be from our osl band shader 
-"""
-ri.Pattern("PxrOSL","checkShader", { "string shader"  : "simplecheck" , 
-                                 "color Cin"  : [1.0 ,0.2,0.0],
-                                 "float repeatCount" : [4]
-                                })
-ri.Bxdf( "PxrDisney","bxdf", {"reference color baseColor" : ["checkShader:Cout"] })
-"""
+# set the pattern generation to be from our osl check shader 
 
- 
+ri.Pattern("PxrOSL","checkShader", { "string shader"  : "simplecheck" ,  "float repeatCount" : [80],
+"color Cin" : [0.5,0.5,0.5],
+"color tileColour" : [0.4,0.4,0.4]})
+ri.Bxdf( "PxrDisney","bxdf", {"reference color baseColor" : ["checkShader:Cout"]})
+
+
+"""
 # Image Texture
 ri.Pattern("PxrTexture", "colourChecker",{ "string filename" : "ratGrid.tx"})
 
@@ -236,6 +246,7 @@ ri.Bxdf( "PxrDisney","bxdf", {
                         "reference color baseColor" : ["colourChecker:resultRGB"], 
                         })
 
+"""
 """
 # Solid colour
 ri.Bxdf( "PxrDisney","bxdf", {   "color baseColor" : [ 1.0,1.0,1.0] })

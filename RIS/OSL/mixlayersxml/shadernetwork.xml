@@ -1,0 +1,120 @@
+<RenderManOSLNetwork Version="1">
+  <Label>band-dot-mix</Label>
+  <NodeList>
+      <Node>
+        <NodeId>band</Id>
+        <NodeLayer>A</NodeLayer>
+        <Label>band shader</Label>
+        <Properties>
+            <C1>
+              <Visibility>external</Visibility>
+              <Type>color</Type>
+            </C1>
+            <C2>
+              <Visibility>external</Visibility>
+              <Type>color</Type>
+            </C2>
+            <repeat>
+              <Visibility>external</Visibility>
+              <Type>float</Type>
+            </repeat>
+            <direction>
+              <Visibility>external</Visibility>
+              <Type>string</Type>
+            </direction>
+            <Cout>
+              <Access>output</Access>
+              <Type>color</Type>
+            </Cout>
+          </Properties>
+      </Node>
+
+
+    <Node>
+        <NodeId>dots</Id>
+        <NodeLayer>B</NodeLayer>
+        <Label>dot shader</Label>
+        <Properties>
+            <baseColour>
+              <Visibility>external</Visibility>
+              <Type>color</Type>
+            </baseColour>
+            <spotColour>
+              <Visibility>external</Visibility>
+              <Type>color</Type>
+            </spotColour>
+            <fuzz>
+              <Visibility>external</Visibility>
+              <Type>float</Type>
+            </fuzz>
+            <repeatU>
+              <Visibility>external</Visibility>
+              <Type>float</Type>
+            </repeatU>
+            <repeatV>
+              <Visibility>external</Visibility>
+              <Type>float</Type>
+            </repeatV>
+            
+            <Cout>
+              <Access>output</Access>
+              <Type>color</Type>
+            </Cout>
+          </Properties>
+      </Node>
+
+
+      <Node>
+        <NodeId>mixColours</Id>
+        <NodeLayer>C</Layer>
+        <Label>merge it</Label>
+        <Properties>
+            <inC1>
+              <Visibility>internal</Visibility>
+              <Type>color</Type>
+            </inC1>
+            <inC2>
+              <Visibility>internal</Visibility>
+              <Type>color</Type>
+            </inC2>
+            <mixAmmount>
+              <Visibility>external</Visibility>
+              <Type>float</Type>
+            </mixAmmount>
+            
+            <Cout>
+              <Access>output</Access>
+              <Type>color</Type>
+            </Cout>
+
+
+          </Properties>
+      </Node>
+  </NodeList>
+  <ConnectionList>
+    <Connection>
+       <Source>
+        <NodeId>dots</Id>
+        <NodeLayer>A</NodeLayer>
+        <ParameterName>Cout</ParameterName>
+       </Source>
+       <Destination>
+        <NodeId>mixColours</Id>
+        <NodeLayer>C</NodeLayer>
+        <ParameterName>inC1</ParameterName>
+       </Destination>
+    </Connection>
+    <Connection>
+       <Source>
+        <NodeId>bands</Id>
+        <NodeLayer>B</NodeLayer>
+        <ParameterName>Cout</ParameterName>
+       </Source>
+       <Destination>
+        <NodeId>mixColours</Id>
+        <NodeLayer>C</NodeLayer>
+        <ParameterName>inC2</ParameterName>
+       </Destination>
+    </Connection>
+  </ConnectionList>
+</RenderManOSLNetwork>

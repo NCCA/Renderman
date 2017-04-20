@@ -1,29 +1,75 @@
-shader simplecheck  (color baseColour=1, color checkColour=0,
-float repeatCount=10,
-output	color Cout=1
+shader simplecheck  
+(
+    color Cin=1,
+    color tileColour=color("rgb",1,0,0),
+    float repeatCount=10,
+    float s = 0 [[int lockgeom = 0]],
+    float t = 0 [[int lockgeom = 0]],
+    output	color Cout=1
 )
 
 {
-    float ss=u*repeatCount+v;
-    float tt=v*repeatCount-u;
-    float filterWidthSS=5*filterwidth(ss);
-    float filterWidthTT=5*filterwidth(tt);
+    float ss=(s*repeatCount+t);
+    float tt=(t*repeatCount-s);
 
-    ss=mod(ss,2);
-    tt=mod(tt,2);
-    float uvSize=0.25;
-    float smag;
-    smag =smoothstep(uvSize-filterWidthSS,uvSize+filterWidthSS,ss);
-    smag-=smoothstep(1+uvSize-filterWidthSS,1+uvSize+filterWidthSS,ss);
-    smag=smag*2-1;
-    
-    float tmag;
-    tmag =smoothstep(uvSize-filterWidthTT,uvSize+filterWidthTT,tt);
-    tmag-=smoothstep(1+uvSize-filterWidthTT,1+uvSize+filterWidthTT,tt);
-    tmag=tmag*2-1;
-    
-    
-     Cout=(smag*tmag)/1+0.5;
+    int sTile=(int)floor(ss);
+    int tTile=(int)floor(tt);
+    //Cout=(sTile+tTile)%2;
+    float m=(sTile+tTile)%2;
+    Cout=mix(Cin,tileColour,m);
 
+    // float ss=u*repeatCount+v;
+    // float tt=v*repeatCount-u;
+    // float filterWidthSS=5*filterwidth(ss);
+    // float filterWidthTT=5*filterwidth(tt);
+
+    // ss=mod(ss,2);
+    // tt=mod(tt,2);
+
+    // float smag;
+    // smag =smoothstep(0.5-filterWidthSS,0.5+filterWidthSS,ss);
+    // smag-=smoothstep(1.5-filterWidthSS,1.5+filterWidthSS,ss);
+    // smag=smag*2-1;
+    
+    // float tmag;
+    // tmag =smoothstep(0.5-filterWidthTT,0.5+filterWidthTT,tt);
+    // tmag-=smoothstep(1.5-filterWidthTT,1.5+filterWidthTT,tt);
+    // tmag=tmag*2-1;
+    
+    
+    // Cout=(smag*tmag)/2+0.5;
 }
+
+
+
+// shader simplecheck  (color baseColour=1, color checkColour=0,
+// float repeatCount=10,
+// float s = 0 [[int lockgeom = 0]],
+// float t = 0 [[int lockgeom = 0]],
+// output	color Cout=1
+// )
+
+// {
+//     float ss=s*repeatCount+t;
+//     float tt=t*repeatCount-s;
+//     float filterWidthSS=5*filterwidth(ss);
+//     float filterWidthTT=5*filterwidth(tt);
+
+//     ss=mod(ss,2);
+//     tt=mod(tt,2);
+
+//     float smag;
+//     smag =smoothstep(0.5-filterWidthSS,0.5+filterWidthSS,ss);
+//     smag-=smoothstep(1.5-filterWidthSS,1.5+filterWidthSS,ss);
+//     smag=smag*2-1;
+    
+//     float tmag;
+//     tmag =smoothstep(0.5-filterWidthTT,0.5+filterWidthTT,tt);
+//     tmag-=smoothstep(1.5-filterWidthTT,1.5+filterWidthTT,tt);
+//     tmag=tmag*2-1;
+    
+    
+//     Cout=(smag*tmag)/2+0.5;
+
+// }
 

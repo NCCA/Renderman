@@ -1,0 +1,8 @@
+shader mixColours (color inC1 = 0,
+                  color inC2 = 1,
+                  output color Cout = 0,
+                  float mixAmmount = 0.5
+                )
+{
+    Cout = mix (inC1, inC2, mixAmmount);
+}

@@ -9,7 +9,7 @@ output Cout the output colour of the shader
 shader band ( color C1 = 1, color C2=0, 
 							float repeat=1,
 			  			string direction="vertical",
-							output	color Cout=0 
+							output	color Cout=0
 						)
 {
 	// multiply the U or V by a repeat value then mod to get the remainder

@@ -1,5 +1,4 @@
-surface dots (
-	                color baseColour=1,
+surface dots (      color baseColour=1,
                     color spotColour=0,
                     float fuzz=0.025,
                     float repeatU=1,

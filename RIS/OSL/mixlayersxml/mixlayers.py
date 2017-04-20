@@ -116,16 +116,16 @@ ri.Bxdf( "PxrDisney","bxdf", {
 drawTeapot(ri,ry=-45)
 
 ri.Pattern("PxrOSL", "mixColours", { "string network" : "shadernetwork",
-                                     "color A.C1"  : [1.0 ,1.0,1.0],
+                                     "color A.C1"  : [0.0 ,0.0,0.0],
                                      "color A.C2"  : [1.0 ,0.0,0.0],
                                      "float A.repeat" : [5],
-                                     "string A.direction" : ["horizontal"] ,
+                                     "string A.direction" : ["vertical"] ,
                                      "color B.baseColour"  : [1.0 ,1.0,1.0],
-                                     "float B.repeatU" : [2],  
-                                     "float B.repeatV" : [2],  
+                                     "float B.repeatU" : [12],  
+                                     "float B.repeatV" : [12],  
                                      "color B.spotColour" : [0,0,1],
-                                     "float B.fuzz" : [0.2]   ,
-                                     "float C.mixAmmount" : [0.9]
+                                     "float B.fuzz" : [0.5]   ,
+                                     "float C.mixAmmount" : [0.5]
                                           } ) 
 # third teapot
 ri.Bxdf( "PxrDisney","bxdf", { 

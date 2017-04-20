@@ -5,4 +5,5 @@ shader mixColours (color inC1 = 0,
                 )
 {
     Cout = mix (inC1, inC2, mixAmmount);
+
 }

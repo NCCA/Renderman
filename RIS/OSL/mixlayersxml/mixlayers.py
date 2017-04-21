@@ -47,7 +47,7 @@ ri.Integrator ("PxrPathTracer" ,"integrator")
 # now set the projection to perspective
 ri.Projection(ri.PERSPECTIVE,{ri.FOV:30}) 
 # Simple translate for our camera
-cam=Camera(Vec4(-2,2.2,3),Vec4(0,0,0),Vec4(0,1,0))
+cam=Camera(Vec4(-1.2,1.2,3.9),Vec4(0,0,0),Vec4(0,1,0))
 cam.place(ri)
 
 

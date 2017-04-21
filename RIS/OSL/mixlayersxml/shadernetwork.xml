@@ -2,7 +2,7 @@
   <Label>band-dot-mix</Label>
   <NodeList>
       <Node>
-        <NodeId>band</Id>
+        <NodeId>band</NodeId>
         <NodeLayer>A</NodeLayer>
         <Label>band shader</Label>
         <Properties>
@@ -31,7 +31,7 @@
 
 
     <Node>
-        <NodeId>dots</Id>
+        <NodeId>dots</NodeId>
         <NodeLayer>B</NodeLayer>
         <Label>dot shader</Label>
         <Properties>
@@ -65,7 +65,7 @@
 
 
       <Node>
-        <NodeId>mixColours</Id>
+        <NodeId>mixColours</NodeId>
         <NodeLayer>C</Layer>
         <Label>merge it</Label>
         <Properties>
@@ -94,24 +94,24 @@
   <ConnectionList>
     <Connection>
        <Source>
-        <NodeId>dots</Id>
+        <NodeId>dots</NodeId>
         <NodeLayer>A</NodeLayer>
         <ParameterName>Cout</ParameterName>
        </Source>
        <Destination>
-        <NodeId>mixColours</Id>
+        <NodeId>mixColours</NodeId>
         <NodeLayer>C</NodeLayer>
         <ParameterName>inC1</ParameterName>
        </Destination>
     </Connection>
     <Connection>
        <Source>
-        <NodeId>bands</Id>
+        <NodeId>bands</NodeId>
         <NodeLayer>B</NodeLayer>
         <ParameterName>Cout</ParameterName>
        </Source>
        <Destination>
-        <NodeId>mixColours</Id>
+        <NodeId>mixColours</NodeId>
         <NodeLayer>C</NodeLayer>
         <ParameterName>inC2</ParameterName>
        </Destination>

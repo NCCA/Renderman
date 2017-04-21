@@ -48,6 +48,8 @@ ri.Declare("areaLight" ,"string")
 ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", 
                                         "float exposure" : [4]
                                        })
+
+
 #ri.Scale(2,2,2)
 ri.Bxdf( "PxrDisney","bxdf", { 
                         "color emitColor" : [ 1,1,1]

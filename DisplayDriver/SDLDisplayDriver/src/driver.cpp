@@ -15,7 +15,7 @@ static std::unique_ptr<SDLOpenGL> window;
 static std::chrono::time_point<std::chrono::system_clock> g_start, g_end;
 static float g_xPos=0.0f;
 static float g_yPos=0.0f;
-
+PtDspyError processEvents();
 typedef struct
 {
    int channels;
@@ -161,7 +161,6 @@ PRMANEXPORT PtDspyError DspyImageData(PtDspyImageHandle pvimage,int xmin,int xma
 {
   MyImageType image = (MyImageType )pvimage;
 
-  PtDspyError ret=PkDspyErrorNone;
   int oldx;
   oldx = xmin;
 
@@ -190,62 +189,9 @@ PRMANEXPORT PtDspyError DspyImageData(PtDspyImageHandle pvimage,int xmin,int xma
   }
 
   window->updateImage(&g_pixels[0]);
+
   window->draw();
-
- SDL_Event event;
- window->pollEvent(event);
-
- switch (event.type)
- {
-   // this is the window x being clicked.
-
-   // now we look for a keydown event
-   case SDL_KEYDOWN:
-   {
-     switch( event.key.keysym.sym )
-     {
-       // if it's the escape key quit
-       case SDLK_ESCAPE : ret=PkDspyErrorCancel;  break;
-       case SDLK_EQUALS :
-       case SDLK_PLUS :
-        window->changeScale( window->scale()+0.1f);
-
-       break;
-       case SDLK_MINUS :
-         window->changeScale( window->scale()-0.1f);
-        break;
-
-     case SDLK_UP :
-       g_yPos+=0.1;
-       window->setPosition(g_xPos,g_yPos);
-      break;
-     case SDLK_DOWN :
-       g_yPos-=0.1;
-       window->setPosition(g_xPos,g_yPos);
-      break;
-
-     case SDLK_LEFT :
-       g_xPos-=0.1;
-       window->setPosition(g_xPos,g_yPos);
-      break;
-     case SDLK_RIGHT :
-       g_xPos+=0.1;
-       window->setPosition(g_xPos,g_yPos);
-      break;
-
-   case SDLK_SPACE :
-       g_xPos=0.0f;
-       g_yPos=0.0f;
-       window->reset();
-      break;
-
-
-       default : break;
-     } // end of key process
-   } // end of keydown
-
- } // end of event switch
- return ret;
+  return processEvents();
 }
 
 PRMANEXPORT PtDspyError DspyImageClose(PtDspyImageHandle pvImage)
@@ -260,10 +206,26 @@ PRMANEXPORT PtDspyError DspyImageClose(PtDspyImageHandle pvImage)
  std::cout << "finished computation at " << std::ctime(&end_time)
            << "elapsed time: " << elapsed_seconds.count() << "s\n";
 // sdl event processing data structure
-  SDL_Event event;
-  bool quit=false;
-  while(quit !=true)
+  PtDspyError quit=PkDspyErrorNone;
+  while(quit !=PkDspyErrorCancel)
   {
+    quit=processEvents();
+    window->draw();
+  }// end of quit
+
+
+  MyImageType image = (MyImageType )pvImage;
+  free(image);
+  ret = PkDspyErrorNone;
+  return ret;
+}
+
+
+PtDspyError processEvents()
+{
+  SDL_Event event;
+  PtDspyError ret = PkDspyErrorNone;
+
   window->pollEvent(event);
 
     switch (event.type)
@@ -276,7 +238,7 @@ PRMANEXPORT PtDspyError DspyImageClose(PtDspyImageHandle pvImage)
         switch( event.key.keysym.sym )
         {
           // if it's the escape key quit
-          case SDLK_ESCAPE : quit=true;  break;
+        case SDLK_ESCAPE : ret=PkDspyErrorCancel;  break;
         case SDLK_EQUALS :
         case SDLK_PLUS :
          window->changeScale( window->scale()+0.1f);
@@ -308,21 +270,13 @@ PRMANEXPORT PtDspyError DspyImageClose(PtDspyImageHandle pvImage)
           g_yPos=0.0f;
         window->reset();
        break;
-          default : break;
+       default : break;
         } // end of key process
       } // end of keydown
-
-      default : break;
     } // end of event switch
-    window->draw();
-  }// end of quit
-
-
-  MyImageType image = (MyImageType )pvImage;
-  free(image);
-  ret = PkDspyErrorNone;
   return ret;
 }
+
 
 #ifdef __cplusplus
 }

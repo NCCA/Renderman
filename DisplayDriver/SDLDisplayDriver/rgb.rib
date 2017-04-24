@@ -1,10 +1,11 @@
 ##RenderMan RIB
 version 3.04
-Display "rgb.exr" "sdldisplaydriver" "rgba"
+Display "rgb.exr" "sdldisplaydriver" "rgb"
+#Display "rgb.exr" "it" "rgb"
 Format 640 480 1
 Hider "raytrace" "int incremental" [1]
-PixelVariance 10
-ShadingRate 10
+PixelVariance 1
+ShadingRate 0.1
 Integrator "PxrPathTracer" "integrator" 
 Projection "perspective" "uniform float fov" [30]
 Identity 

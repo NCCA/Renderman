@@ -1,7 +1,7 @@
 #include "SDLOpenGL.h"
 #include <iostream>
 
-SDLOpenGL::SDLOpenGL(const std::string &_name, int _x, int _y,int _width, int _height)
+SDLOpenGL::SDLOpenGL(const std::string &_name, int _x, int _y,int _width, int _height, int _ppp)
 {
   m_name=_name;
   m_x=_x;
@@ -9,6 +9,10 @@ SDLOpenGL::SDLOpenGL(const std::string &_name, int _x, int _y,int _width, int _h
   m_width=_width;
   m_height=_height;
   init();
+  if(_ppp ==3)
+    m_pixelFormat=GL_RGB;
+  else if(_ppp ==4)
+    m_pixelFormat=GL_RGBA;
 }
 
 void SDLOpenGL::init()
@@ -27,17 +31,19 @@ void SDLOpenGL::init()
   }
 
   createGLContext();
-  makeCurrent();
- createSurface();
+  createSurface();
+  glEnable(GL_FRAMEBUFFER_SRGB);
 
 }
 
 void SDLOpenGL::updateImage(const float *_image)
 {
-  makeCurrent();
-  glBindTexture(GL_TEXTURE_2D, m_texture);
+//  makeCurrent();
+//  glBindTexture(GL_TEXTURE_2D, m_texture);
 
-  glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_width, m_height, GL_RGBA, GL_FLOAT, _image);
+//  glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_width, m_height, m_pixelFormat, GL_FLOAT, _image);
+
+  glTexImage2D(GL_TEXTURE_2D, 0, m_pixelFormat, m_width, m_height, 0, m_pixelFormat, GL_FLOAT, _image);
   //glfwSwapBuffers(m_window);
 /*
   if(m_update)
@@ -47,7 +53,7 @@ void SDLOpenGL::updateImage(const float *_image)
     glUniform1f(m_scale_uniform, m_scale);
   }*/
  // swapWindow();
-  draw();
+ // draw();
 }
 
 void NGLCheckGLError( const std::string  &_file, const int _line ) noexcept
@@ -103,15 +109,8 @@ void printInfoLog(const GLuint &_obj , GLenum _mode=GL_COMPILE_STATUS  )
 }
 void SDLOpenGL::draw()
 {
-  makeCurrent();
-  glUseProgram(m_shader_program);
-  glBindVertexArray(m_vao);
-
-  glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-  glBindTexture(GL_TEXTURE_2D, m_texture);
-  glEnable(GL_FRAMEBUFFER_SRGB);
-  glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
-  glClear(GL_COLOR_BUFFER_BIT);
+//  glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
+//  glClear(GL_COLOR_BUFFER_BIT);
   glDrawArrays(GL_TRIANGLES, 0, 6);
   swapWindow();
 }
@@ -196,7 +195,7 @@ void SDLOpenGL::createSurface()
 
   glGenTextures(1, &m_texture);
   glBindTexture(GL_TEXTURE_2D, m_texture);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_FLOAT, NULL);
+  glTexImage2D(GL_TEXTURE_2D, 0, m_pixelFormat, m_width, m_height, 0, m_pixelFormat, GL_FLOAT, NULL);
 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

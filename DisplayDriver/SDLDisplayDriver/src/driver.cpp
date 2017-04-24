@@ -52,8 +52,8 @@ PRMANEXPORT PtDspyError DspyImageOpen(
     std::cerr<<"width "<<width<<' '<<"height "<<height<<'\n';
    /* We want to receive the pixels one after the other */
 
-  // flagstuff->flags |= PkDspyBucketOrderHorizontal;//   PkDspyFlagsWantsScanLineOrder;
-   flagstuff->flags |= PkDspyBucketOrderRandom;
+   flagstuff->flags |= PkDspyBucketOrderSpaceFill;
+  // flagstuff->flags |= PkDspyBucketOrderZigZagX;
    /* Do stupidity checking */
 
    if (0 == width) width = 640;
@@ -64,9 +64,6 @@ PRMANEXPORT PtDspyError DspyImageOpen(
 
    image = (MyImageType) malloc(sizeof(*image));
 
-//   startSDL(width,height);
-   g_pixels.resize(width*height*4,0);
-   window.reset( new SDLOpenGL("SDL Prman",0,0,width,height));
   // window->createSurface();
    if (NULL != image)
    {
@@ -78,18 +75,21 @@ PRMANEXPORT PtDspyError DspyImageOpen(
 
    }
    *pvImage = image;
+
+   g_pixels.resize(width*height*image->channels,0.4f);
+   window.reset( new SDLOpenGL("SDL Prman",0,0,width,height,image->channels));
+    g_width=width;
+    g_height=height;
    return ret;
 }
 
 PRMANEXPORT PtDspyError DspyImageQuery(PtDspyImageHandle pvImage,
-     PtDspyQueryType querytype,
-     int datalen,
-     void *data)
+     PtDspyQueryType querytype, int datalen,void *data)
 {
 
 
   PtDspyError ret;
-    MyImageType image = (MyImageType )pvImage;
+  MyImageType image = (MyImageType )pvImage;
 
     ret = PkDspyErrorNone;
 
@@ -168,63 +168,66 @@ PRMANEXPORT PtDspyError DspyImageQuery(PtDspyImageHandle pvImage,
     return ret;
 }
 
-PRMANEXPORT PtDspyError DspyImageData(PtDspyImageHandle pvimage,
-    int xmin,
-    int xmax,
-    int ymin,
-    int ymax,
-    int entrysize,
-    const unsigned char *data
-   )
+PRMANEXPORT PtDspyError DspyImageData(PtDspyImageHandle pvimage,int xmin,int xmax,int ymin,int ymax,int entrysize,const unsigned char *data)
 {
+  MyImageType image = (MyImageType )pvimage;
 
   PtDspyError ret=PkDspyErrorNone;
   int oldx;
   oldx = xmin;
-    std::cerr<<"entry size" << entrysize<<'\n';
-    for (;ymin < ymax; ++ymin)
-    {      
-       for (xmin = oldx; xmin < xmax; ++xmin)
-       {
-        const float *ptr = reinterpret_cast<const float*> (data);
-        size_t offset = ( g_width * 4 * ymin ) + xmin * 4;
-        std::cerr<<"offset "<<offset<<' '<<ptr[3]<<' '<<ptr[2]<<' '<<ptr[1]<<' '<<ptr[0]<<'\n';
-        g_pixels[ offset + 0 ]=ptr[3];
-        g_pixels[ offset + 1 ]=ptr[2];
-        g_pixels[ offset + 2 ]=ptr[1];
-        g_pixels[ offset + 3 ] = ptr[0];
-        data += entrysize;
+//  std::cerr<<"entry size" << entrysize<<'\n';
+//  std::cerr<<"channels " << image->channels<<'\n';
 
-       }
-       window->updateImage(&g_pixels[0]);
-       window->draw();
-    }
+  for (;ymin < ymax; ++ymin)
+  {
+     for (xmin = oldx; xmin < xmax; ++xmin)
+     {
+      const float *ptr = reinterpret_cast<const float*> (data);
+      size_t offset =  g_width * image->channels * ymin  + xmin * image->channels;
+      if(image->channels == 4)
+      {
+      //  std::cerr<<"offset "<<offset<<' '<<ptr[3]<<' '<<ptr[2]<<' '<<ptr[1]<<' '<<ptr[0]<<'\n';
+        g_pixels[ offset + 0 ]=ptr[0];
+        g_pixels[ offset + 1 ]=ptr[1];
+        g_pixels[ offset + 2 ]=ptr[2];
+        g_pixels[ offset + 3 ]=ptr[3];
+      }
+      else
+      {
+       // std::cerr<<"offset "<<offset<<' '<<ptr[2]<<' '<<ptr[1]<<' '<<ptr[0]<<'\n';
+        g_pixels[ offset + 0 ]=ptr[0];
+        g_pixels[ offset + 1 ]=ptr[1];
+        g_pixels[ offset + 2 ]=ptr[2];
+        //std::cerr<<g_pixels[ offset + 0 ]<<' '<<g_pixels[ offset + 1 ]<<' '<<g_pixels[ offset + 2 ]<<'\n';
+      }
+      data += entrysize;
 
-//    SDL_UpdateTexture (texture, 0,&pixels[0],  g_width * 4 );
+     }
+  }
 
-//    SDL_RenderCopy( renderer, texture, NULL, NULL );
-//    SDL_RenderPresent( renderer );
-     SDL_Event event;
-     window->pollEvent(event);
+  window->updateImage(&g_pixels[0]);
+  window->draw();
 
-       switch (event.type)
-       {
-         // this is the window x being clicked.
+ SDL_Event event;
+ window->pollEvent(event);
 
-         // now we look for a keydown event
-         case SDL_KEYDOWN:
-         {
-           switch( event.key.keysym.sym )
-           {
-             // if it's the escape key quit
-             case SDLK_ESCAPE : ret=PkDspyErrorCancel;  break;
+ switch (event.type)
+ {
+   // this is the window x being clicked.
 
-             default : break;
-           } // end of key process
-         } // end of keydown
+   // now we look for a keydown event
+   case SDL_KEYDOWN:
+   {
+     switch( event.key.keysym.sym )
+     {
+       // if it's the escape key quit
+       case SDLK_ESCAPE : ret=PkDspyErrorCancel;  break;
+       default : break;
+     } // end of key process
+   } // end of keydown
 
-       } // end of event switch
-    return ret;
+ } // end of event switch
+ return ret;
 }
 
 PRMANEXPORT PtDspyError DspyImageClose(PtDspyImageHandle pvImage)

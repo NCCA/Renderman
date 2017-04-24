@@ -14,7 +14,7 @@
 class SDLOpenGL
 {
   public :
-    SDLOpenGL(const std::string &_name, int _x, int _y, int _width, int _height);
+    SDLOpenGL(const std::string &_name, int _x, int _y, int _width, int _height, int _ppp);
 
     void makeCurrent() { SDL_GL_MakeCurrent(m_window,m_glContext);}
     void swapWindow() { SDL_GL_SwapWindow(m_window); }
@@ -52,6 +52,7 @@ class SDLOpenGL
     void ErrorExit(const std::string &_msg) const;
 
     SDL_Window *m_window;
+    GLenum m_pixelFormat;
 
 };
 

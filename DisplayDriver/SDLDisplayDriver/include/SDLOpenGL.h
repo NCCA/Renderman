@@ -23,6 +23,10 @@ class SDLOpenGL
     void createSurface();
     void updateImage(const float* _image);
     void draw();
+    void changeScale(float _f);
+    float scale() const {return m_scale;}
+    void reset();
+    void setPosition(float _x, float _y);
   private :
     /// @brief width of screen
     int m_width;
@@ -53,6 +57,9 @@ class SDLOpenGL
 
     SDL_Window *m_window;
     GLenum m_pixelFormat;
+    float m_scale=1.0f;
+    float m_xPos=0.0f;
+    float m_yPos=0.0f;
 
 };
 

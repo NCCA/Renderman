@@ -109,10 +109,10 @@ void printInfoLog(const GLuint &_obj , GLenum _mode=GL_COMPILE_STATUS  )
 }
 void SDLOpenGL::draw()
 {
-//  glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
-//  glClear(GL_COLOR_BUFFER_BIT);
-  glDrawArrays(GL_TRIANGLES, 0, 6);
-  swapWindow();
+ glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
+ glClear(GL_COLOR_BUFFER_BIT);
+ glDrawArrays(GL_TRIANGLES, 0, 6);
+ swapWindow();
 }
 
 void SDLOpenGL::createSurface()
@@ -145,7 +145,7 @@ void SDLOpenGL::createSurface()
     "void main()"
     "{"
     "   Coordinate = coordinate;"
-    "   gl_Position = vec4(position, 0.0, 1.0);"
+    "   gl_Position = vec4((position + translation) * scale, 0.0, 1.0);"
     "}";
 
   const GLchar* fragment_source =
@@ -186,11 +186,11 @@ void SDLOpenGL::createSurface()
   std::cerr<<"tex "<<m_tex_attrib<<'\n';
 
   m_trans_uniform = glGetUniformLocation(m_shader_program, "translation");
-  glUniform2f(m_trans_uniform, 0.0f, 0.0f);
+  glUniform2f(m_trans_uniform, m_xPos,m_yPos);
   std::cerr<<"trans "<<m_trans_uniform<<'\n';
 
   m_scale_uniform = glGetUniformLocation(m_shader_program, "scale");
-  glUniform1f(m_scale_uniform, 1.0f);
+  glUniform1f(m_scale_uniform, m_scale);
   std::cerr<<"scale "<<m_scale_uniform<<'\n';
 
   glGenTextures(1, &m_texture);
@@ -227,9 +227,30 @@ void SDLOpenGL::pollEvent(SDL_Event &_event)
   SDL_PollEvent(&_event);
 }
 
+void SDLOpenGL::changeScale(float _f)
+{
+  m_scale=_f;
+  glUniform1f(m_scale_uniform, m_scale);
+  draw();
+}
 
+void SDLOpenGL::reset()
+{
+  m_scale=1.0f;
+  m_xPos=0.0f;
+  m_yPos=0.0f;
+  glUniform1f(m_scale_uniform, m_scale);
+  glUniform2f( m_trans_uniform,m_xPos,m_yPos );
+  draw();
+}
 
-
+void SDLOpenGL::setPosition(float _x, float _y)
+{
+  m_xPos=_x;
+  m_yPos=_y;
+  glUniform2f( m_trans_uniform,m_xPos,m_yPos );
+  draw();
+}
 
 void SDLOpenGL::ErrorExit(const std::string &_msg) const
 {

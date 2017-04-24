@@ -2,10 +2,13 @@
 version 3.04
 Display "rgb.exr" "sdldisplaydriver" "rgb"
 #Display "rgb.exr" "it" "rgb"
-Format 640 480 1
+Format 1024 720 1
 Hider "raytrace" "int incremental" [1]
-PixelVariance 1
-ShadingRate 0.1
+PixelVariance 0.02
+ShadingRate 2
+
+#PixelVariance 40
+#ShadingRate 40
 Integrator "PxrPathTracer" "integrator" 
 Projection "perspective" "uniform float fov" [30]
 Identity 

@@ -3,26 +3,36 @@
 #Created by jmacey
 #Creation Date: Thu Sep 25 15:47:27 2008
 version 3.04
-Declare "Spheres" "string"
-ObjectBegin "dfb3c978-8b10-11dd-a094-001b639ea4ff"
+
+
+Display "Colour.exr" "it" "rgba" 
+Format 720 575 1
+Projection "perspective" "uniform float fov" [30]
+	WorldBegin 
+
+	Declare "Spheres" "string"
+ObjectBegin "Spheres"
 	Sphere 1 -1 1 360 
 	Translate 0 0 2
 	Scale 0.5 0.5 0.5
 	Sphere 1 -1 1 360 
 ObjectEnd 
-Display "Colour.exr" "framebuffer" "rgba" 
-Format 720 575 1
-Projection "perspective" "uniform float fov" [30]
-WorldBegin 
-	WorldBegin 
+
+
 		Translate 0 0 14
 		Rotate 90 1 0 0
 		Color [1 0 0]
 		Attribute "identifier" "name" ["Spheres1"]
+		ObjectInstance "Spheres"
 		Color [0 1 0]
 		Translate 3.2 0 0
 		Attribute "identifier" "name" ["Spheres2"]
+		
+				ObjectInstance "Spheres"
+
 		Color [0 0 1]
 		Translate -6.2 0 0
 		Attribute "identifier" "name" ["Spheres3"]
+				ObjectInstance "Spheres"
+
 	WorldEnd 

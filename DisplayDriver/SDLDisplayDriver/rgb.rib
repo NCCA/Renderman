@@ -1,6 +1,6 @@
 ##RenderMan RIB
 version 3.04
-Display "rgb.exr" "sdldisplaydriver" "rgb"
+Display "rgb.exr" "sdldisplaydriver" "rgba"
 #Display "rgb.exr" "it" "rgb"
 Format 1024 720 1
 Hider "raytrace" "int incremental" [1]

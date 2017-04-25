@@ -67,8 +67,6 @@ PRMANEXPORT PtDspyError DspyImageOpen(PtDspyImageHandle *pvImage,
 PRMANEXPORT PtDspyError DspyImageQuery(PtDspyImageHandle pvImage,
      PtDspyQueryType querytype, int datalen,void *data)
 {
-
-
   PtDspyError ret;
   MyImageType image = (MyImageType )pvImage;
 
@@ -105,6 +103,7 @@ PRMANEXPORT PtDspyError DspyImageQuery(PtDspyImageHandle pvImage,
               sizeInfo.width = image->width;
               sizeInfo.height = image->height;
               sizeInfo.aspectRatio = 1.0f;
+
             }
             else
             {
@@ -172,10 +171,10 @@ PRMANEXPORT PtDspyError DspyImageData(PtDspyImageHandle pvimage,int xmin,int xma
       size_t offset =  g_width * image->channels * ymin  + xmin * image->channels;
       if(image->channels == 4)
       {
-        g_pixels[ offset + 0 ]=ptr[0];
-        g_pixels[ offset + 1 ]=ptr[1];
-        g_pixels[ offset + 2 ]=ptr[2];
-        g_pixels[ offset + 3 ]=ptr[3];
+        g_pixels[ offset + 0 ]=ptr[1];
+        g_pixels[ offset + 1 ]=ptr[2];
+        g_pixels[ offset + 2 ]=ptr[3];
+        g_pixels[ offset + 3 ]=ptr[0];
       }
       else
       {
@@ -269,8 +268,19 @@ PtDspyError processEvents()
           g_xPos=0.0f;
           g_yPos=0.0f;
         window->reset();
+
        break;
-       default : break;
+
+        case SDLK_1 : window->setRenderMode(SDLOpenGL::RenderMode::ALL); break;
+        case SDLK_2 : window->setRenderMode(SDLOpenGL::RenderMode::RED); break;
+        case SDLK_3 : window->setRenderMode(SDLOpenGL::RenderMode::GREEN); break;
+        case SDLK_4 : window->setRenderMode(SDLOpenGL::RenderMode::BLUE); break;
+        case SDLK_5 : window->setRenderMode(SDLOpenGL::RenderMode::ALPHA); break;
+        case SDLK_6 : window->setRenderMode(SDLOpenGL::RenderMode::GREY); break;
+        case SDLK_LEFTBRACKET : window->setGamma(window->gamma()-0.1f); break;
+        case SDLK_RIGHTBRACKET : window->setGamma(window->gamma()+0.1f); break;
+
+        default : break;
         } // end of key process
       } // end of keydown
     } // end of event switch

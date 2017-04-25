@@ -135,63 +135,86 @@ void SDLOpenGL::createSurface()
   glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-  const GLchar* vertex_source =
-    "#version 330\n"
-    "in vec2 position;"
-    "in vec2 coordinate;"
-    "uniform vec2 translation;"
-    "uniform float scale;"
-    "out vec2 Coordinate;"
-    "void main()"
-    "{"
-    "   Coordinate = coordinate;"
-    "   gl_Position = vec4((position + translation) * scale, 0.0, 1.0);"
-    "}";
+  const std::string vertSource =R"(
+    #version 330
+    layout(location=0) in vec2 position;
+    layout(location=1) in vec2 coordinate;
+    uniform vec2 translation;
+    uniform float scale;
+    out vec2 Coordinate;
+    void main()
+    {
+       Coordinate = coordinate;
+       gl_Position = vec4((position + translation) * scale, 0.0, 1.0);
+    }
+    )";
 
-  const GLchar* fragment_source =
-    "#version 330\n"
-    "in vec2 Coordinate;"
-    "uniform sampler2D tex;"
-    "out vec4 outColor;"
-    "void main()"
-    "{"
-    "   outColor = texture(tex, Coordinate);"
-    "}";
 
-  m_vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-  glShaderSource(m_vertex_shader, 1, &vertex_source, NULL);
-  glCompileShader(m_vertex_shader);
-  printInfoLog(m_vertex_shader);
+  const std::string fragSource =R"(
+    #version 330
+    in vec2 Coordinate;
+    uniform sampler2D tex;
+    uniform float gamma;
+    layout(location=0) out vec4 outColour;
+    uniform int displayMode;
+    void main()
+    {
+      vec4 baseColour=texture(tex,Coordinate);
+      switch(displayMode)
+      {
+        case 0 : outColour=baseColour; break;
+        case 1 : outColour=vec4(baseColour.r,0,0,baseColour.a); break; // red
+        case 2 : outColour=vec4(0,baseColour.g,0,baseColour.a); break; // green
+        case 3 : outColour=vec4(0,0,baseColour.b,baseColour.a); break; // blue
+        case 4 : outColour=vec4(baseColour.a,baseColour.a,baseColour.a,1); // alpha are greyscale
+        case 5 :
+          outColour.rgb = vec3(dot(baseColour.rgb, vec3(0.299, 0.587, 0.114)));
+        break;
+        }
+        outColour.rgb = pow(outColour.rgb, vec3(1.0/gamma));
+     }
+    )";
 
-  m_fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-  glShaderSource(m_fragment_shader, 1, &fragment_source, NULL);
-  glCompileShader(m_fragment_shader);
-  printInfoLog(m_fragment_shader);
+  const GLchar* shaderSource=vertSource.c_str();
 
-  m_shader_program = glCreateProgram();
-  glAttachShader(m_shader_program, m_vertex_shader);
-  glAttachShader(m_shader_program, m_fragment_shader);
-  glLinkProgram(m_shader_program);
-  printInfoLog(m_vertex_shader,GL_LINK_STATUS);
 
-  glUseProgram(m_shader_program);
+  auto vertexShader = glCreateShader(GL_VERTEX_SHADER);
+  glShaderSource(vertexShader, 1, &shaderSource, NULL);
+  glCompileShader(vertexShader);
+  printInfoLog(vertexShader);
 
-  m_pos_attrib = glGetAttribLocation(m_shader_program, "position");
-  glVertexAttribPointer(m_pos_attrib, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
-  glEnableVertexAttribArray(m_pos_attrib);
-  std::cerr<<"Pos "<<m_pos_attrib<<'\n';
-  m_tex_attrib = glGetAttribLocation(m_shader_program, "coordinate");
-  glVertexAttribPointer(m_tex_attrib, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
-  glEnableVertexAttribArray(m_tex_attrib);
-  std::cerr<<"tex "<<m_tex_attrib<<'\n';
+  shaderSource=fragSource.c_str();
+  auto fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+  glShaderSource(fragmentShader, 1, &shaderSource, NULL);
+  glCompileShader(fragmentShader);
+  printInfoLog(fragmentShader);
 
-  m_trans_uniform = glGetUniformLocation(m_shader_program, "translation");
-  glUniform2f(m_trans_uniform, m_xPos,m_yPos);
-  std::cerr<<"trans "<<m_trans_uniform<<'\n';
+  m_shaderProgram = glCreateProgram();
+  glAttachShader(m_shaderProgram, vertexShader);
+  glAttachShader(m_shaderProgram, fragmentShader);
+  glLinkProgram(m_shaderProgram);
+  printInfoLog(vertexShader,GL_LINK_STATUS);
 
-  m_scale_uniform = glGetUniformLocation(m_shader_program, "scale");
-  glUniform1f(m_scale_uniform, m_scale);
-  std::cerr<<"scale "<<m_scale_uniform<<'\n';
+  glUseProgram(m_shaderProgram);
+
+  auto attrib = glGetAttribLocation(m_shaderProgram, "position");
+  glVertexAttribPointer(attrib, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
+  glEnableVertexAttribArray(attrib);
+  attrib = glGetAttribLocation(m_shaderProgram, "coordinate");
+  glVertexAttribPointer(attrib, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
+  glEnableVertexAttribArray(attrib);
+
+  m_translateUniform = glGetUniformLocation(m_shaderProgram, "translation");
+  glUniform2f(m_translateUniform, m_xPos,m_yPos);
+
+  m_scaleUniform = glGetUniformLocation(m_shaderProgram, "scale");
+  glUniform1f(m_scaleUniform, m_scale);
+  m_modeUniform = glGetUniformLocation(m_shaderProgram, "displayMode");
+  glUniform1i(m_modeUniform, 0);
+
+  m_gammaUniform = glGetUniformLocation(m_shaderProgram, "gamma");
+  glUniform1f(m_gammaUniform, m_gamma);
+
 
   glGenTextures(1, &m_texture);
   glBindTexture(GL_TEXTURE_2D, m_texture);
@@ -230,7 +253,7 @@ void SDLOpenGL::pollEvent(SDL_Event &_event)
 void SDLOpenGL::changeScale(float _f)
 {
   m_scale=_f;
-  glUniform1f(m_scale_uniform, m_scale);
+  glUniform1f(m_scaleUniform, m_scale);
   draw();
 }
 
@@ -239,8 +262,8 @@ void SDLOpenGL::reset()
   m_scale=1.0f;
   m_xPos=0.0f;
   m_yPos=0.0f;
-  glUniform1f(m_scale_uniform, m_scale);
-  glUniform2f( m_trans_uniform,m_xPos,m_yPos );
+  glUniform1f(m_scaleUniform, m_scale);
+  glUniform2f( m_translateUniform,m_xPos,m_yPos );
   draw();
 }
 
@@ -248,7 +271,7 @@ void SDLOpenGL::setPosition(float _x, float _y)
 {
   m_xPos=_x;
   m_yPos=_y;
-  glUniform2f( m_trans_uniform,m_xPos,m_yPos );
+  glUniform2f( m_translateUniform,m_xPos,m_yPos );
   draw();
 }
 
@@ -258,4 +281,24 @@ void SDLOpenGL::ErrorExit(const std::string &_msg) const
   std::cerr<<SDL_GetError()<<'\n';
   SDL_Quit();
   exit(EXIT_FAILURE);
+}
+
+void SDLOpenGL::setRenderMode(RenderMode _m)
+{
+  switch(static_cast<int>(_m))
+  {
+    case 0 : glUniform1i(m_modeUniform,0); break;
+    case 1 : glUniform1i(m_modeUniform,1); break;
+    case 2 : glUniform1i(m_modeUniform,2); break;
+    case 3 : glUniform1i(m_modeUniform,3); break;
+    case 4 : glUniform1i(m_modeUniform,4); break;
+    case 5 : glUniform1i(m_modeUniform,5); break;
+  }
+}
+
+void SDLOpenGL::setGamma(float _g)
+{
+  m_gamma=_g;
+  glUniform1f(m_gammaUniform,m_gamma);
+  draw();
 }

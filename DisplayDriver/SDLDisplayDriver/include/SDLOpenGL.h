@@ -25,8 +25,12 @@ class SDLOpenGL
     void draw();
     void changeScale(float _f);
     float scale() const {return m_scale;}
+    float gamma() const {return m_gamma;}
+    void setGamma(float _g);
     void reset();
     void setPosition(float _x, float _y);
+    enum class RenderMode : int {ALL=0,RED,GREEN,BLUE,ALPHA,GREY};
+    void setRenderMode(RenderMode _m);
   private :
     /// @brief width of screen
     int m_width;
@@ -39,15 +43,14 @@ class SDLOpenGL
     // name of window
     std::string m_name;
     GLuint m_texture;
-    GLuint m_shader_program;
-    GLuint m_vertex_shader;
-    GLuint m_fragment_shader;
+    GLuint m_shaderProgram;
     GLuint m_vbo;
     GLuint m_vao;
-    GLint m_pos_attrib;
-    GLint m_tex_attrib;
-    GLint m_trans_uniform;
-    GLint m_scale_uniform;
+    GLint m_translateUniform;
+    GLint m_scaleUniform;
+    GLint m_modeUniform;
+    GLint m_gammaUniform;
+
     void init();
 
     SDL_GLContext m_glContext;
@@ -60,6 +63,7 @@ class SDLOpenGL
     float m_scale=1.0f;
     float m_xPos=0.0f;
     float m_yPos=0.0f;
+    float m_gamma=1.0f;
 
 };
 

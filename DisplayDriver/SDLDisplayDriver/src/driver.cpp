@@ -4,7 +4,7 @@
 #include "SDLOpenGL.h"
 #include <memory>
 #include <chrono>
-
+#include <array>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -15,60 +15,59 @@ static std::unique_ptr<SDLOpenGL> window;
 static std::chrono::time_point<std::chrono::system_clock> g_start, g_end;
 static float g_xPos=0.0f;
 static float g_yPos=0.0f;
+static int g_channels;
 PtDspyError processEvents();
-typedef struct
+/*typedef struct
 {
    int channels;
    int width, height;
 } *MyImageType;
-
-PRMANEXPORT PtDspyError DspyImageOpen(PtDspyImageHandle *pvImage,
+*/
+PRMANEXPORT PtDspyError DspyImageOpen(PtDspyImageHandle *,
               const char *,const char *filename,
               int width,int height,
               int ,const UserParameter *,
-              int formatCount,PtDspyDevFormat *, PtFlagStuff *flagstuff)
+              int formatCount,PtDspyDevFormat *format, PtFlagStuff *flagstuff)
 {
   PtDspyError ret;
-  MyImageType image;
+ // MyImageType image;
   std::cerr<<"started driver\n";
   std::cerr<<"width "<<width<<' '<<"height "<<height<<'\n';
   flagstuff->flags |= PkDspyBucketOrderSpaceFill;
   flagstuff->flags |= PkDspyFlagsWantsNullEmptyBuckets;
   /* Do stupidity checking */
 
-  if (0 == width) width = 640;
-  if (0 == height) height = 480;
+  if (0 == width) g_width = 640;
+  if (0 == height) g_height = 480;
 
-  image = NULL;
   ret = PkDspyErrorNone;
 
-  image = (MyImageType) malloc(sizeof(*image));
-
-  if (NULL != image)
-  {
-    image->channels = formatCount;
-    image->width = width;
-    image->height = height;
-
-  }
-  *pvImage = image;
-
-  g_pixels.resize(width*height*image->channels,0.4f);
-  std::string name="SDL PRMDisplay ";
-  name+=filename;
-  window.reset( new SDLOpenGL(name.c_str(),0,0,width,height,image->channels));
   g_width=width;
   g_height=height;
+  g_channels=formatCount;
+  g_pixels.resize(width*height*g_channels,0.4f);
+
+  // shuffle format so we always write out RGB[A]
+  std::array<std::string,4> chan = { {"r", "g", "b", "a"} };
+  for ( auto i=0; i<formatCount; i++ )
+    for( unsigned int j=0; j<4; ++j )
+        if( std::string(format[i].name)==chan[j] && i!=j )
+        {
+          std::swap(format[j],format[i]);
+        }
+
+  std::string name="SDL PRMDisplay ";
+  name+=filename;
+  window.reset( new SDLOpenGL(name.c_str(),0,0,width,height,g_channels));
   g_start = std::chrono::system_clock::now();
 
   return ret;
 }
 
-PRMANEXPORT PtDspyError DspyImageQuery(PtDspyImageHandle pvImage,
+PRMANEXPORT PtDspyError DspyImageQuery(PtDspyImageHandle ,
      PtDspyQueryType querytype, int datalen,void *data)
 {
   PtDspyError ret;
-  MyImageType image = (MyImageType )pvImage;
 
     ret = PkDspyErrorNone;
 
@@ -76,7 +75,8 @@ PRMANEXPORT PtDspyError DspyImageQuery(PtDspyImageHandle pvImage,
     {
       switch (querytype)
       {
-          case PkOverwriteQuery:
+
+        case PkOverwriteQuery:
           {
             PtDspyOverwriteInfo overwriteInfo;
             if (datalen > sizeof(overwriteInfo))
@@ -85,37 +85,22 @@ PRMANEXPORT PtDspyError DspyImageQuery(PtDspyImageHandle pvImage,
             overwriteInfo.interactive = 0;
             memcpy(data, &overwriteInfo, datalen);
             break;
-          }
-          case PkSizeQuery :
-          {
-            PtDspySizeInfo sizeInfo;
-            std::cerr<<"size query "<<image->width<<' '<<image->height<<'\n';
-            if (datalen > sizeof(sizeInfo)) {
-                datalen = sizeof(sizeInfo);
-            }
-            if (image)
-            {
-              if (0 == image->width || 0 == image->height)
-              {
-                image->width = 640;
-                image->height = 480;
-              }
-              sizeInfo.width = image->width;
-              sizeInfo.height = image->height;
-              sizeInfo.aspectRatio = 1.0f;
+           }
+           case PkSizeQuery :
+           {
+              PtDspySizeInfo overwriteInfo;
+              if (datalen > sizeof(overwriteInfo))
+                  datalen = sizeof(overwriteInfo);
+              overwriteInfo.width = g_width;
+              overwriteInfo.height = g_height;
+              overwriteInfo.aspectRatio=1.0f;
+              memcpy(data, &overwriteInfo, datalen);
 
-            }
-            else
-            {
-              sizeInfo.width = 640;
-              sizeInfo.height = 480;
-              sizeInfo.aspectRatio = 1.0f;
-            }
-            memcpy(data, &sizeInfo, datalen);
-            break;
-          }
+           }
+           break;
 
           case PkRedrawQuery :
+           {
             PtDspyRedrawInfo overwriteInfo;
 
             if (datalen > sizeof(overwriteInfo))
@@ -124,30 +109,23 @@ PRMANEXPORT PtDspyError DspyImageQuery(PtDspyImageHandle pvImage,
 
             memcpy(data, &overwriteInfo, datalen);
 
+           break;
+           }
+          case PkRenderingStartQuery :
+              std::cerr<<"Start rendering\n";
           break;
 
-          case PkRenderingStartQuery :
-          {
-              PtDspyRenderingStartQuery startLocation;
-              std::cerr<<"Start rendering\n";
-              if (datalen > sizeof(startLocation))
-                  datalen = sizeof(startLocation);
-
-              if (image)
-              {
-                  memcpy(data, &startLocation, datalen);
-              }
-              else
-              {
-                  ret = PkDspyErrorUndefined;
-              }
-              break;
+          case PkSupportsCheckpointing:
+          case PkNextDataQuery:
+          case PkGridQuery:
+          case PkMultiResolutionQuery:
+          case PkQuantizationQuery :
+          case PkMemoryUsageQuery :
+          case PkElapsedTimeQuery :
+          case PkPointCloudQuery :
+            ret = PkDspyErrorUnsupported;
+          break;
           }
-
-          default :
-              ret = PkDspyErrorUnsupported;
-              break;
-      }
     }
     else
     {
@@ -156,9 +134,9 @@ PRMANEXPORT PtDspyError DspyImageQuery(PtDspyImageHandle pvImage,
     return ret;
 }
 
-PRMANEXPORT PtDspyError DspyImageData(PtDspyImageHandle pvimage,int xmin,int xmax,int ymin,int ymax,int entrysize,const unsigned char *data)
+PRMANEXPORT PtDspyError DspyImageData(PtDspyImageHandle ,int xmin,int xmax,int ymin,int ymax,int entrysize,const unsigned char *data)
 {
-  MyImageType image = (MyImageType )pvimage;
+  //MyImageType image = (MyImageType )pvimage;
 
   int oldx;
   oldx = xmin;
@@ -168,13 +146,13 @@ PRMANEXPORT PtDspyError DspyImageData(PtDspyImageHandle pvimage,int xmin,int xma
      for (xmin = oldx; xmin < xmax; ++xmin)
      {
       const float *ptr = reinterpret_cast<const float*> (data);
-      size_t offset =  g_width * image->channels * ymin  + xmin * image->channels;
-      if(image->channels == 4)
+      size_t offset =  g_width * g_channels * ymin  + xmin * g_channels;
+      if(g_channels == 4)
       {
-        g_pixels[ offset + 0 ]=ptr[1];
-        g_pixels[ offset + 1 ]=ptr[2];
-        g_pixels[ offset + 2 ]=ptr[3];
-        g_pixels[ offset + 3 ]=ptr[0];
+        g_pixels[ offset + 0 ]=ptr[0];
+        g_pixels[ offset + 1 ]=ptr[1];
+        g_pixels[ offset + 2 ]=ptr[2];
+        g_pixels[ offset + 3 ]=ptr[3];
       }
       else
       {
@@ -193,7 +171,7 @@ PRMANEXPORT PtDspyError DspyImageData(PtDspyImageHandle pvimage,int xmin,int xma
   return processEvents();
 }
 
-PRMANEXPORT PtDspyError DspyImageClose(PtDspyImageHandle pvImage)
+PRMANEXPORT PtDspyError DspyImageClose(PtDspyImageHandle )
 {
   std::cerr<<"close\n";
   PtDspyError ret;
@@ -213,8 +191,8 @@ PRMANEXPORT PtDspyError DspyImageClose(PtDspyImageHandle pvImage)
   }// end of quit
 
 
-  MyImageType image = (MyImageType )pvImage;
-  free(image);
+ // MyImageType image = (MyImageType )pvImage;
+ // free(image);
   ret = PkDspyErrorNone;
   return ret;
 }

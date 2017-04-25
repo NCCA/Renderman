@@ -155,8 +155,13 @@ void SDLOpenGL::createSurface()
     in vec2 Coordinate;
     uniform sampler2D tex;
     uniform float gamma;
+    uniform float exposureLevel;
     layout(location=0) out vec4 outColour;
     uniform int displayMode;
+    vec3 exposure(vec3 colour, float relative_fstop)
+    {
+       return colour * pow(2.0,relative_fstop);
+    }
     void main()
     {
       vec4 baseColour=texture(tex,Coordinate);
@@ -172,7 +177,8 @@ void SDLOpenGL::createSurface()
         break;
         }
         outColour.rgb = pow(outColour.rgb, vec3(1.0/gamma));
-     }
+        outColour.rgb=exposure(outColour.rgb,exposureLevel);
+      }
     )";
 
   const GLchar* shaderSource=vertSource.c_str();
@@ -215,6 +221,8 @@ void SDLOpenGL::createSurface()
   m_gammaUniform = glGetUniformLocation(m_shaderProgram, "gamma");
   glUniform1f(m_gammaUniform, m_gamma);
 
+  m_exposureUniform = glGetUniformLocation(m_shaderProgram, "exposureLevel");
+  glUniform1f(m_exposureUniform, m_exposure);
 
   glGenTextures(1, &m_texture);
   glBindTexture(GL_TEXTURE_2D, m_texture);
@@ -244,15 +252,16 @@ void SDLOpenGL::createGLContext()
 
 
 
-void SDLOpenGL::pollEvent(SDL_Event &_event)
+int SDLOpenGL::pollEvent(SDL_Event &_event)
 {
   makeCurrent();
-  SDL_PollEvent(&_event);
+  return SDL_PollEvent(&_event);
 }
 
-void SDLOpenGL::changeScale(float _f)
+void SDLOpenGL::setScale(float _f)
 {
   m_scale=_f;
+  m_scale=std::min(10.0f, std::max(0.01f, m_scale));
   glUniform1f(m_scaleUniform, m_scale);
   draw();
 }
@@ -299,6 +308,17 @@ void SDLOpenGL::setRenderMode(RenderMode _m)
 void SDLOpenGL::setGamma(float _g)
 {
   m_gamma=_g;
+  m_gamma=std::min(10.0f, std::max(0.0f, m_gamma));
+
   glUniform1f(m_gammaUniform,m_gamma);
+  draw();
+}
+
+void SDLOpenGL::setExposure(float _e)
+{
+  m_exposure=_e;
+  m_exposure=std::min(10.0f, std::max(-10.0f, m_exposure));
+
+  glUniform1f(m_exposureUniform,m_exposure);
   draw();
 }

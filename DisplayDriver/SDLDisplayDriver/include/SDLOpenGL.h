@@ -19,14 +19,16 @@ class SDLOpenGL
     void makeCurrent() { SDL_GL_MakeCurrent(m_window,m_glContext);}
     void swapWindow() { SDL_GL_SwapWindow(m_window); }
 
-    void pollEvent(SDL_Event &_event);
+    int pollEvent(SDL_Event &_event);
     void createSurface();
     void updateImage(const float* _image);
     void draw();
-    void changeScale(float _f);
+    void setScale(float _f);
     float scale() const {return m_scale;}
     float gamma() const {return m_gamma;}
+    float exposure() const {return m_exposure;}
     void setGamma(float _g);
+    void setExposure(float _e);
     void reset();
     void setPosition(float _x, float _y);
     enum class RenderMode : int {ALL=0,RED,GREEN,BLUE,ALPHA,GREY};
@@ -50,6 +52,7 @@ class SDLOpenGL
     GLint m_scaleUniform;
     GLint m_modeUniform;
     GLint m_gammaUniform;
+    GLint m_exposureUniform;
 
     void init();
 
@@ -64,6 +67,7 @@ class SDLOpenGL
     float m_xPos=0.0f;
     float m_yPos=0.0f;
     float m_gamma=1.0f;
+    float m_exposure=0.0f;
 
 };
 

@@ -10,20 +10,17 @@ extern "C" {
 #endif
 
 static std::vector< float > g_pixels;
-static size_t g_width,g_height;
 static std::unique_ptr<SDLOpenGL> window;
 static std::chrono::time_point<std::chrono::system_clock> g_start, g_end;
-static float g_xPos=0.0f;
-static float g_yPos=0.0f;
+
 static int g_channels;
+static PtDspyUnsigned32 g_width;
+static PtDspyUnsigned32 g_height;
+
+
 PtDspyError processEvents();
-/*typedef struct
-{
-   int channels;
-   int width, height;
-} *MyImageType;
-*/
-PRMANEXPORT PtDspyError DspyImageOpen(PtDspyImageHandle *,
+
+PtDspyError DspyImageOpen(PtDspyImageHandle *,
               const char *,const char *filename,
               int width,int height,
               int ,const UserParameter *,
@@ -49,9 +46,9 @@ PRMANEXPORT PtDspyError DspyImageOpen(PtDspyImageHandle *,
 
   // shuffle format so we always write out RGB[A]
   std::array<std::string,4> chan = { {"r", "g", "b", "a"} };
-  for ( auto i=0; i<formatCount; i++ )
-    for( unsigned int j=0; j<4; ++j )
-        if( std::string(format[i].name)==chan[j] && i!=j )
+  for ( int i=0; i<formatCount; i++ )
+    for( int j=0; j<4; ++j )
+        if( std::string(format[i].name)==chan[size_t(j)] && i!=j )
         {
           std::swap(format[j],format[i]);
         }
@@ -64,87 +61,79 @@ PRMANEXPORT PtDspyError DspyImageOpen(PtDspyImageHandle *,
   return ret;
 }
 
-PRMANEXPORT PtDspyError DspyImageQuery(PtDspyImageHandle ,
-     PtDspyQueryType querytype, int datalen,void *data)
+PtDspyError DspyImageQuery(PtDspyImageHandle,PtDspyQueryType querytype, int datalen,void *data)
 {
   PtDspyError ret;
 
-    ret = PkDspyErrorNone;
+  ret = PkDspyErrorNone;
 
-    if (datalen > 0 && NULL != data)
+  if (datalen > 0 &&  data!=nullptr)
+  {
+    switch (querytype)
     {
-      switch (querytype)
-      {
 
-        case PkOverwriteQuery:
-          {
-            PtDspyOverwriteInfo overwriteInfo;
-            if (datalen > sizeof(overwriteInfo))
-                datalen = sizeof(overwriteInfo);
-            overwriteInfo.overwrite = 1;
-            overwriteInfo.interactive = 0;
-            memcpy(data, &overwriteInfo, datalen);
-            break;
-           }
-           case PkSizeQuery :
-           {
-              PtDspySizeInfo overwriteInfo;
-              if (datalen > sizeof(overwriteInfo))
-                  datalen = sizeof(overwriteInfo);
-              overwriteInfo.width = g_width;
-              overwriteInfo.height = g_height;
-              overwriteInfo.aspectRatio=1.0f;
-              memcpy(data, &overwriteInfo, datalen);
-
-           }
-           break;
-
-          case PkRedrawQuery :
-           {
-            PtDspyRedrawInfo overwriteInfo;
-
-            if (datalen > sizeof(overwriteInfo))
-                datalen = sizeof(overwriteInfo);
-            overwriteInfo.redraw = 0;
-
-            memcpy(data, &overwriteInfo, datalen);
-
-           break;
-           }
-          case PkRenderingStartQuery :
-              std::cerr<<"Start rendering\n";
-          break;
-
-          case PkSupportsCheckpointing:
-          case PkNextDataQuery:
-          case PkGridQuery:
-          case PkMultiResolutionQuery:
-          case PkQuantizationQuery :
-          case PkMemoryUsageQuery :
-          case PkElapsedTimeQuery :
-          case PkPointCloudQuery :
-            ret = PkDspyErrorUnsupported;
-          break;
-          }
-    }
-    else
+    case PkOverwriteQuery:
     {
-      ret = PkDspyErrorBadParams;
+      PtDspyOverwriteInfo overwriteInfo;
+      size_t size = sizeof(overwriteInfo);
+      overwriteInfo.overwrite = 1;
+      overwriteInfo.interactive = 0;
+      memcpy(data, &overwriteInfo, size);
+      break;
     }
-    return ret;
+    case PkSizeQuery :
+    {
+      PtDspySizeInfo overwriteInfo;
+      size_t size = sizeof(overwriteInfo);
+      overwriteInfo.width = g_width;
+      overwriteInfo.height = g_height;
+      overwriteInfo.aspectRatio=1.0f;
+      memcpy(data, &overwriteInfo, size);
+    break;
+    }
+
+    case PkRedrawQuery :
+    {
+      PtDspyRedrawInfo overwriteInfo;
+
+      size_t size = sizeof(overwriteInfo);
+      overwriteInfo.redraw = 0;
+      memcpy(data, &overwriteInfo, size);
+
+    break;
+    }
+    case PkRenderingStartQuery :
+     std::cerr<<"Start rendering\n";
+    break;
+
+    case PkSupportsCheckpointing:
+    case PkNextDataQuery:
+    case PkGridQuery:
+    case PkMultiResolutionQuery:
+    case PkQuantizationQuery :
+    case PkMemoryUsageQuery :
+    case PkElapsedTimeQuery :
+    case PkPointCloudQuery :
+     ret = PkDspyErrorUnsupported;
+    break;
+    }
+  }
+  else
+  {
+   ret = PkDspyErrorBadParams;
+  }
+  return ret;
 }
 
-PRMANEXPORT PtDspyError DspyImageData(PtDspyImageHandle ,int xmin,int xmax,int ymin,int ymax,int entrysize,const unsigned char *data)
+PtDspyError DspyImageData(PtDspyImageHandle ,int xmin,int xmax,int ymin,int ymax,int entrysize,const unsigned char *data)
 {
-  //MyImageType image = (MyImageType )pvimage;
-
   int oldx;
   oldx = xmin;
 
   for (;ymin < ymax; ++ymin)
   {
-     for (xmin = oldx; xmin < xmax; ++xmin)
-     {
+    for (xmin = oldx; xmin < xmax; ++xmin)
+    {
       const float *ptr = reinterpret_cast<const float*> (data);
       size_t offset =  g_width * g_channels * ymin  + xmin * g_channels;
       if(g_channels == 4)
@@ -160,94 +149,88 @@ PRMANEXPORT PtDspyError DspyImageData(PtDspyImageHandle ,int xmin,int xmax,int y
         g_pixels[ offset + 1 ]=ptr[1];
         g_pixels[ offset + 2 ]=ptr[2];
       }
-      data += entrysize;
-
-     }
+    data += entrysize;
+    }
   }
-
+  // copy data to image and draw
   window->updateImage(&g_pixels[0]);
-
   window->draw();
+  // see if we had a key event
   return processEvents();
 }
 
-PRMANEXPORT PtDspyError DspyImageClose(PtDspyImageHandle )
+PtDspyError DspyImageClose(PtDspyImageHandle )
 {
-  std::cerr<<"close\n";
-  PtDspyError ret;
+  std::cerr<<"Rendering Complete ESC to Quit\n";
   g_end = std::chrono::system_clock::now();
 
- std::chrono::duration<double> elapsed_seconds = g_end-g_start;
- std::time_t end_time = std::chrono::system_clock::to_time_t(g_end);
+  std::chrono::duration<double> elapsed_seconds = g_end-g_start;
+  std::time_t end_time = std::chrono::system_clock::to_time_t(g_end);
 
- std::cout << "finished computation at " << std::ctime(&end_time)
-           << "elapsed time: " << elapsed_seconds.count() << "s\n";
-// sdl event processing data structure
+  std::cout << "finished rendering at " << std::ctime(&end_time)
+            << "elapsed time: " << elapsed_seconds.count() << "s\n";
+  // go into window process loop until quit
   PtDspyError quit=PkDspyErrorNone;
   while(quit !=PkDspyErrorCancel)
   {
     quit=processEvents();
     window->draw();
   }// end of quit
-
-
- // MyImageType image = (MyImageType )pvImage;
- // free(image);
-  ret = PkDspyErrorNone;
-  return ret;
+  return quit;
 }
 
 
 PtDspyError processEvents()
 {
+  static float s_xPos=0.0f;
+  static float s_yPos=0.0f;
+  static bool s_mousePressed=false;
+  constexpr float scaleStep=0.05f;
   SDL_Event event;
   PtDspyError ret = PkDspyErrorNone;
 
-  window->pollEvent(event);
-
-    switch (event.type)
-    {
-      // this is the window x being clicked.
-
-      // now we look for a keydown event
-      case SDL_KEYDOWN:
+  while (window->pollEvent(event))
+  {
+  switch (event.type)
+  {
+    case SDL_QUIT :
+      ret=PkDspyErrorCancel;
+    break;
+    // now we look for a keydown event
+    case SDL_KEYDOWN:
+      switch( event.key.keysym.sym )
       {
-        switch( event.key.keysym.sym )
-        {
-          // if it's the escape key quit
         case SDLK_ESCAPE : ret=PkDspyErrorCancel;  break;
         case SDLK_EQUALS :
         case SDLK_PLUS :
-         window->changeScale( window->scale()+0.1f);
-
+          window->setScale(window->scale()+scaleStep);
         break;
         case SDLK_MINUS :
-          window->changeScale( window->scale()-0.1f);
-         break;
+          window->setScale( window->scale()-scaleStep);
+        break;
         case SDLK_UP :
-          g_yPos+=0.1;
-          window->setPosition(g_xPos,g_yPos);
-         break;
+          s_yPos+=0.1;
+          window->setPosition(s_xPos,s_yPos);
+        break;
         case SDLK_DOWN :
-          g_yPos-=0.1;
-          window->setPosition(g_xPos,g_yPos);
-         break;
+          s_yPos-=0.1;
+          window->setPosition(s_xPos,s_yPos);
+        break;
 
         case SDLK_LEFT :
-          g_xPos-=0.1;
-          window->setPosition(g_xPos,g_yPos);
-         break;
+          s_xPos-=0.1;
+          window->setPosition(s_xPos,s_yPos);
+        break;
         case SDLK_RIGHT :
-          g_xPos+=0.1;
-          window->setPosition(g_xPos,g_yPos);
-         break;
+          s_xPos+=0.1;
+          window->setPosition(s_xPos,s_yPos);
+        break;
 
-      case SDLK_SPACE :
-          g_xPos=0.0f;
-          g_yPos=0.0f;
-        window->reset();
-
-       break;
+        case SDLK_SPACE :
+          s_xPos=0.0f;
+          s_yPos=0.0f;
+          window->reset();
+        break;
 
         case SDLK_1 : window->setRenderMode(SDLOpenGL::RenderMode::ALL); break;
         case SDLK_2 : window->setRenderMode(SDLOpenGL::RenderMode::RED); break;
@@ -257,12 +240,64 @@ PtDspyError processEvents()
         case SDLK_6 : window->setRenderMode(SDLOpenGL::RenderMode::GREY); break;
         case SDLK_LEFTBRACKET : window->setGamma(window->gamma()-0.1f); break;
         case SDLK_RIGHTBRACKET : window->setGamma(window->gamma()+0.1f); break;
-
+        case SDLK_0 : window->setExposure(window->exposure()+0.1f); break;
+        case SDLK_9 : window->setExposure(window->exposure()-0.1f); break;
+        case SDLK_r :
+          window->setGamma(1.0f);
+          window->setExposure(0.0f);
+        break;
         default : break;
-        } // end of key process
-      } // end of keydown
-    } // end of event switch
-  return ret;
+      } // end of key process
+    break;
+
+    case SDL_MOUSEBUTTONDOWN :
+      if(event.button.button == SDL_BUTTON_RIGHT)
+      {
+        s_mousePressed=true;
+      }
+    break;
+    case SDL_MOUSEBUTTONUP :
+    if(event.button.button == SDL_BUTTON_RIGHT)
+    {
+      s_mousePressed=false;
+    }
+    break;
+    case SDL_MOUSEMOTION :
+    std::cerr<<"mouse pressed "<<s_mousePressed<<'\n';
+      if(s_mousePressed==true)
+      {
+        float diffx=0.0f;
+        float diffy=0.0f;
+        if(event.motion.xrel >0)
+          diffx=0.01f;
+        else if(event.motion.xrel <0)
+          diffx=-0.01f;
+        if(event.motion.yrel >0)
+          diffy=-0.01f;
+        else if(event.motion.yrel <0)
+          diffy=+0.01f;
+
+        s_xPos+=diffx;
+        s_yPos+=diffy;
+        window->setPosition(s_xPos,s_yPos);
+      }
+    break;
+    case SDL_MOUSEWHEEL :
+    {
+      auto delta=event.motion.x;
+      if(delta>1)
+        window->setScale(window->scale()+scaleStep);
+      else if(delta<1)
+        window->setScale(window->scale()-scaleStep);
+
+    break;
+    }
+
+    default : break;
+
+  } // end of event switch
+  } // end while poll event
+ return ret;
 }
 
 

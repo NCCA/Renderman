@@ -1,0 +1,190 @@
+##RenderMan RIB
+#Created by RenderMan for Maya 20.7 (@1571626 Jan 26 2016)
+#Wed Apr 26 16:35:39 BST 2017
+version 3.04
+Option "ribparse" "string varsubst" [""]
+Option "ribparse" "string varsubst" ["$"]
+IfBegin "!defined(RMSPROJ_FROM_ENV)" 
+Option "user" "string RMSPROJ" ["/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/"]
+IfEnd 
+IfBegin "!defined(RMSTREE)" 
+Option "user" "string RMSTREE" ["/Applications/Pixar/RenderManStudio-20.7-maya2016/"]
+IfEnd 
+Option "searchpath" "string resource" ["${RMSPROJ}:@"]
+Option "searchpath" "string archive" ["${RMSPROJ}:."]
+Option "searchpath" "string display" ["${RMSTREE}/bin:@"]
+Option "searchpath" "string shader" ["${RMSPROJ}:${RMSTREE}/lib/shaders/:@"]
+Option "searchpath" "string texture" ["${RMSPROJ}:${RMSTREE}/lib/textures/:@"]
+Option "searchpath" "string rixplugin" ["${RMSTREE}/lib/shaders/:@"]
+Option "searchpath" "string dirmap" [""]
+Option "searchpath" "string rifilter" ["${RMSTREE}/lib/rif/:${RMANTREE}/etc:@"]
+Option "searchpath" "string procedural" ["${RMSTREE}/lib/plugins/:${RMSTREE}/lib/plugins:${RMANTREE}/etc:@"]
+##rifcontrol insert begin -rif RLFInjector -rifend
+FrameBegin 1
+Identity 
+Option "user" "string pass_id" ["perspShape_Final"] "string pass_phase" ["/Job/Frames/Images"] "string pass_class" ["Final"] "string pass_flavor" [""] "string pass_crew" [""] "string pass_camera_name" ["perspShape"] "string pass_camera_flavor" [""] "string pass_layer" ["defaultRenderLayer"] "string renderer" ["RIS"] "int pass_features_trace" [1] "int input_color_profile" [0]
+Option "trace" "int maxdepth" [10]
+PixelVariance 0.005
+Option "bucket" "string order" ["horizontal"]
+Option "limits" "int[2] bucketsize" [16 16]
+Option "limits" "int gridsize" [256]
+Option "trace" "float decimationrate" [1]
+Option "hair" "float minwidth" [0.5]
+Option "statistics" "int level" [1]
+Option "statistics" "string filename" ["stdout"]
+Option "statistics" "string xmlfilename" ["renderman/simpleShader/rib/0001/perspShape_Final.0001.xml"]
+Option "limits" "color zthreshold" [0.996 0.996 0.996]
+Option "limits" "color othreshold" [0.996 0.996 0.996]
+Option "limits" "int texturememory" [2097152]
+Option "limits" "int geocachememory" [2097152]
+Option "limits" "int proceduralmemory" [0]
+Option "limits" "int deepshadowtiles" [1000]
+Option "limits" "int deepshadowmemory" [102400]
+Option "limits" "int radiositycachememory" [102400]
+Option "limits" "int brickmemory" [10240]
+Option "shading" "int directlightinglocalizedsampling" [0]
+Option "limits" "int opacitycachememory" [1024000]
+CropWindow 0 1 0 1
+Option "photon" "string lifetime" ["transient"]
+Option "photon" "int emit" [0]
+Hider "raytrace" "int adaptall" [0] "string integrationmode" ["path"] "int incremental" [1] "string pixelfiltermode" ["weighted"] "int minsamples" [0] "int maxsamples" [512]
+Integrator "PxrPathTracer" "PxrPathTracer" "int maxPathLength" [10] "string sampleMode" ["bxdf"] "int numLightSamples" [8] "int numBxdfSamples" [8] "int numIndirectSamples" [1] "int numDiffuseSamples" [1] "int numSpecularSamples" [1] "int numSubsurfaceSamples" [1] "int numRefractionSamples" [1] "int rouletteDepth" [4] "float rouletteThreshold" [0.2] "string imagePlaneSubset" ["rman__imageplane"] "int clampDepth" [2] "float clampLuminance" [10] "int allowCaustics" [0]
+Format 1280 720 1
+Option "user" "string[1] lightgroups" ["environment"]
+Display "renderman/simpleShader/images/simpleShader" "it" "rgba" "string filter" ["gaussian"] "float[2] filterwidth" [2 2] "int[4] quantize" [0 0 0 0] "float dither" [0] "float[2] exposure" [1 1] "float[3] remap" [0 0 0] "int merge" [0] "string connection" ["-launchURI /Applications/Pixar/RenderManStudio-20.7-maya2016/bin/it.app/Contents/MacOS/it"] "string dspyParams" [" itOpenHandler {::ice::startTimer;};;; itCloseHandler {::ice::endTimer %arglist; };;; dspyRender -renderer preview -time 1 -crop 0 1 0 1 -port 61476 -context \"renderman/simpleShader/images/simpleShader\" -notes \"(Wed Apr 26 16:35:39 BST 2017)\nPxrPathTracer  MaxSamples 512  Mode bxdf  Light 8  Bsdf 8  Indir 1\""]
+#Camera perspShape
+Clipping 0.1 10000
+Projection "perspective" "fov" [54.4322]
+ScreenWindow -1 1 -0.5625 0.5625
+Shutter 0 0
+ConcatTransform [ 0.867765 -0.180836 -0.462905 -2.16136e-09  -1.07787e-08 0.931448 -0.363875 -1.66555e-09  -0.496974 -0.315758 -0.808278 -4.45209e-09  6.81706e-07 -2.35684 23.0136 1 ]
+Camera "world" "float[2] shutteropening" [0 1]
+Option "user" "color camera_bg" [0 0 0] "float camera_bga" [0]
+Imager "background" "color color" [0 0 0] "float alpha" [0]
+ResourceBegin 
+WorldBegin 
+##RLF ScopeBegin -name perspShape_Final -localbinding 1 -rlffilename renderman/simpleShader/rib/0001/perspShape_Final.0001.rlf -namespace 
+ScopedCoordinateSystem "world_ref"
+Attribute "visibility" "int transmission" [1] "int indirect" [1]
+Bxdf "PxrDiffuse" "default" 
+Attribute "user" "int shader_bindingstrength" [0]
+Attribute "trace" "int maxdiffusedepth" [1] "int maxspeculardepth" [2] "int samplemotion" [1] "float autobias" [1] "float bias" [0.001] "int displacements" [1]
+Attribute "dice" "string referencecamera" ["worldcamera"]
+ShadingRate 1
+Attribute "displacementbound" "string coordinatesystem" ["shader"] "float sphere" [0]
+Attribute "photon" "string causticmap" [""] "string globalmap" [""]
+Attribute "user" "string irRenderCam" ["false,10.2269,10.5693,17.8572"]
+Attribute "user" "string irRenderCamFOV" ["54.4322"]
+Attribute "user" "string irRenderCamXform" ["0.867765,0,-0.496974,0,-0.180836,0.931448,-0.315758,0,0.462905,0.363875,0.808278,0,10.2269,10.5693,17.8572,1"]
+Attribute "user" "string irRenderCamRatio" ["1"]
+AttributeBegin 
+Attribute "identifier" "string name" ["PxrStdEnvMapLightShape1"]
+Attribute "grouping" "string membership" ["+rman__imageplane"]
+Transform [ -1 0 -1.22465e-16 0  0 1 0 0  -1.22465e-16 -0 1 0  0 0 0 1 ]
+Rotate -90 1 0 0
+Bxdf "PxrLightEmission" "visualizer" "string __instanceid" ["PxrStdEnvMapLightShape1_visualizer"]
+IfBegin "!defined(user:shader_bindingstrength) || $user:shader_bindingstrength <= 0" 
+ShadingRate 10
+Surface "renderman/simpleShader/shaders/PxrStdEnvMapLightShape1_rfm" "float rman__LightPrimaryVisibility" [0] "float exposure" [0] "string rman__EnvMap" ["/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/images/studio2.tx"] "color envTint" [1 1 1] "float enableProcedural" [1] "float[2] rman__ProceduralResolution" [2048 1024] "color proceduralColor" [1 1 1] "float enableTemperature" [0] 
+"float temperature" [6500] "color specAmount" [1 1 1] "color diffAmount" [1 1 1] "float fixedSampleCount" [-1] "float importance" [1] "float enableShadows" [1] "color shadowColor" [0 0 0] 
+"float adaptiveShadows" [1] "float shadowMaxDist" [-1] "float shadowTraceBias" [-1] "string shadowSubset" [""] "string shadowExcludeSubset" [""] "string __group" ["environment"] "float intensity" [1] "string coordSys" ["shader"] "__instanceid" ["renderman/simpleShader/shaders/PxrStdEnvMapLightShape1_rfm_0"]
+ShadingRate 10
+AreaLightSource "renderman/simpleShader/shaders/PxrStdEnvMapLightShape1_rfm" "PxrStdEnvMapLightShape1" "float rman__LightPrimaryVisibility" [0] "float exposure" [0] "string rman__EnvMap" ["/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/images/studio2.tx"] "color envTint" [1 1 1] "float enableProcedural" [1] "float[2] rman__ProceduralResolution" [2048 1024] "color proceduralColor" [1 1 1] "float enableTemperature" [0] 
+"float temperature" [6500] "color specAmount" [1 1 1] "color diffAmount" [1 1 1] "float fixedSampleCount" [-1] "float importance" [1] "float enableShadows" [1] "color shadowColor" [0 0 0] 
+"float adaptiveShadows" [1] "float shadowMaxDist" [-1] "float shadowTraceBias" [-1] "string shadowSubset" [""] "string shadowExcludeSubset" [""] "string __group" ["environment"] "float intensity" [1] "string coordSys" ["shader"] "__instanceid" ["renderman/simpleShader/shaders/PxrStdEnvMapLightShape1_rfm_0"]
+Attribute "user" "int shader_bindingstrength" [0]
+IfEnd 
+Attribute "visibility" "int camera" [0]
+Attribute "visibility" "int indirect" [0] "int transmission" [0]
+ShadingRate 10
+Sides 1
+Attribute "dice" "string offscreenstrategy" ["sphericalprojection"]
+ReverseOrientation 
+Opacity [1 1 1]
+Sides 1
+Geometry "envsphere" "constant float[2] resolution" [2048 1024]
+AttributeEnd 
+Illuminate "PxrStdEnvMapLightShape1" 1
+AttributeBegin 
+AttributeEnd 
+AttributeBegin 
+AttributeEnd 
+AttributeBegin 
+AttributeEnd 
+AttributeBegin 
+AttributeEnd 
+AttributeBegin 
+Attribute "identifier" "string name" ["pPlane1"]
+Attribute "identifier" "float id" [5]
+ConcatTransform [ 2.36828 0 0 0  0 2.36828 0 0  0 0 2.36828 0  0 0 0 1 ]
+AttributeBegin 
+AttributeBegin 
+Attribute "identifier" "string name" ["pPlaneShape1"]
+Attribute "identifier" "float id" [12]
+Sides 2
+ShadingInterpolation "smooth"
+Attribute "user" "int receivesShadows" [1]
+Attribute "visibility" "int camera" [1] "int indirect" [1] "int transmission" [1]
+Attribute "shade" "string transmissionhitmode" ["shader"]
+Attribute "grouping" "string membership" ["+reflection,refraction,shadow"]
+##RLF Inject SurfaceShading -attribute sets@,PxrDisney3SG,
+TransformBegin 
+Procedural2 "DelayedReadArchive2" "SimpleBound" "string filename" ["renderman/simpleShader/rib/job/staticGeoCache.job.zip!renderman/simpleShader/rib/job/pPlaneShape1.job.rib"] "float[6] bound" [-5 5 -1.11022e-15 1.11022e-15 -5 5] "int __immediatesubdivide" [0]
+TransformEnd 
+AttributeEnd 
+AttributeEnd 
+AttributeEnd 
+AttributeBegin 
+Attribute "identifier" "string name" ["TeapotMoved:Mesh"]
+Attribute "identifier" "float id" [2]
+ConcatTransform [ 2.00635 0 1.00301 0  -0 2.24309 0 0  -1.00301 -0 2.00635 0  0 5.29437 0 1 ]
+AttributeBegin 
+AttributeBegin 
+Attribute "identifier" "string name" ["TeapotMoved:MeshShape"]
+Attribute "identifier" "float id" [10]
+Sides 2
+ShadingInterpolation "smooth"
+Attribute "user" "int receivesShadows" [1]
+Attribute "visibility" "int camera" [1] "int indirect" [1] "int transmission" [1]
+Attribute "shade" "string transmissionhitmode" ["shader"]
+Attribute "grouping" "string membership" ["+reflection,refraction,shadow"]
+##RLF Inject SurfaceShading -attribute sets@,PxrDisney1SG,
+TransformBegin 
+Procedural2 "DelayedReadArchive2" "SimpleBound" "string filename" ["renderman/simpleShader/rib/job/staticGeoCache.job.zip!renderman/simpleShader/rib/job/TeapotMoved_MeshShape.job.rib"] "float[6] bound" [-0.915817 1.04796 -0.457885 0.457885 -0.610514 0.610514] "int __immediatesubdivide" [0]
+TransformEnd 
+AttributeEnd 
+AttributeEnd 
+AttributeEnd 
+AttributeBegin 
+Attribute "identifier" "string name" ["pCube1"]
+Attribute "identifier" "float id" [4]
+ConcatTransform [ 1.5 0 0 0  0 1.5442 0 0  0 0 1.5 0  0 1.95627 0 1 ]
+AttributeBegin 
+AttributeBegin 
+Attribute "identifier" "string name" ["pCubeShape1"]
+Attribute "identifier" "float id" [11]
+Sides 2
+ShadingInterpolation "smooth"
+Attribute "user" "int receivesShadows" [1]
+Attribute "visibility" "int camera" [1] "int indirect" [1] "int transmission" [1]
+Attribute "shade" "string transmissionhitmode" ["shader"]
+Attribute "grouping" "string membership" ["+reflection,refraction,shadow"]
+##RLF Inject SurfaceShading -attribute sets@,PxrDisney2SG,
+TransformBegin 
+Procedural2 "DelayedReadArchive2" "SimpleBound" "string filename" ["renderman/simpleShader/rib/job/staticGeoCache.job.zip!renderman/simpleShader/rib/job/pCubeShape1.job.rib"] "float[6] bound" [-1.5 1.5 -1.5 1.5 -1.5 1.5] "int __immediatesubdivide" [0]
+TransformEnd 
+AttributeEnd 
+AttributeEnd 
+AttributeEnd 
+AttributeBegin 
+Attribute "identifier" "string name" ["PxrStdEnvMapLight1"]
+Attribute "identifier" "float id" [1]
+ConcatTransform [ -230.321 -0 -0 0  0 230.321 0 0  0 0 230.321 0  0 0 0 1 ]
+AttributeBegin 
+AttributeEnd 
+AttributeEnd 
+##RLF ScopeEnd -name perspShape_Final
+WorldEnd 
+ResourceEnd 
+##streammarker 1
+FrameEnd 

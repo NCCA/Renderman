@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<RenderManLookFile Version="1" Format="RenderMan Look Data" AssemblyName="perspShape_Final">
+    <InjectablePayloads>
+        <Payload Id="PxrDisney2SG" Label="" Source="1" Content="1"><![CDATA[##RenderMan RIB
+version 3.04
+IfBegin "!defined(user:shader_bindingstrength) || $user:shader_bindingstrength <= 0" 
+	Displacement "null" 
+	Bxdf "PxrDisney" "PlinthMat" "color baseColor" [0.0137826 0.0137826 0.0137826] "color emitColor" [0 0 0] "float subsurface" [0] "color subsurfaceColor" [0 0 0] "float metallic" [0] "float specular" [0.5] 
+		"float specularTint" [0] "float roughness" [0.25] "float anisotropic" [0] "float sheen" [0] "float sheenTint" [0.5] "float clearcoat" [0] "float clearcoatGloss" [1] "normal bumpNormal" [0 0 0] "float presence" [1] "int inputAOV" [0] "__instanceid" ["PlinthMat_0"]
+	VPInterior "null" 
+	Interior "null" 
+	Attribute "user" "int shader_bindingstrength" [0]
+IfEnd 
+]]></Payload>
+        <Payload Id="PxrDisney3SG" Label="" Source="1" Content="1"><![CDATA[##RenderMan RIB
+version 3.04
+IfBegin "!defined(user:shader_bindingstrength) || $user:shader_bindingstrength <= 0" 
+	Displacement "null" 
+	Bxdf "PxrDisney" "FloorMat" "color baseColor" [1 1 1] "color emitColor" [0 0 0] "float subsurface" [0] "color subsurfaceColor" [0 0 0] "float metallic" [0] "float specular" [0.5] 
+		"float specularTint" [0] "float roughness" [0.25] "float anisotropic" [0] "float sheen" [0] "float sheenTint" [0.5] "float clearcoat" [0] "float clearcoatGloss" [1] "normal bumpNormal" [0 0 0] "float presence" [1] "int inputAOV" [0] "__instanceid" ["FloorMat_0"]
+	VPInterior "null" 
+	Interior "null" 
+	Attribute "user" "int shader_bindingstrength" [0]
+IfEnd 
+]]></Payload>
+        <Payload Id="PxrDisney4SG" Label="" Source="1" Content="1"><![CDATA[##RenderMan RIB
+version 3.04
+IfBegin "!defined(user:shader_bindingstrength) || $user:shader_bindingstrength <= 0" 
+	Displacement "null" 
+	Pattern "PxrOSL" "PxrOSL3" "string shader" ["/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/dots"] "__instanceid" ["PxrOSL3_0"]
+	Bxdf "PxrDisney" "Spots" "reference color baseColor" ["PxrOSL3:result"] "color emitColor" [0 0 0] "float subsurface" [0] "color subsurfaceColor" [0 0 0] "float metallic" [0] "float specular" [0.5] "float specularTint" [0] "float roughness" [0.25] "float anisotropic" [0] 
+		"float sheen" [0] "float sheenTint" [0.5] "float clearcoat" [0] "float clearcoatGloss" [1] "normal bumpNormal" [0 0 0] "float presence" [1] "int inputAOV" [0] "__instanceid" ["Spots_0"]
+	VPInterior "null" 
+	Interior "null" 
+	Attribute "user" "int shader_bindingstrength" [0]
+IfEnd 
+]]></Payload>
+    </InjectablePayloads>
+    <TightBindings>
+        <Binding Key="pPlane1/pPlaneShape1" PayloadId="PxrDisney3SG"/>
+        <Binding Key="TeapotMoved:Mesh/TeapotMoved:MeshShape" PayloadId="PxrDisney4SG"/>
+        <Binding Key="pCube1/pCubeShape1" PayloadId="PxrDisney2SG"/>
+    </TightBindings>
+</RenderManLookFile>

@@ -25,8 +25,9 @@ ri.Format(1024,720,1)
 
 # setup the raytrace / integrators
 ri.Hider("raytrace" ,{"int incremental" :[1]})
-ri.PixelVariance (10)
-ri.ShadingRate(10)
+
+ri.PixelVariance (0.02)
+ri.ShadingRate(0.5)
 ri.Integrator ("PxrPathTracer" ,"integrator")
 
 
@@ -96,30 +97,37 @@ ri.Geometry('envsphere')
 ri.TransformEnd()
 ri.AttributeEnd()
 
+
+
 # load mesh
 troll=Obj.Obj("../../meshes/troll.obj")
-
+ri.AttributeBegin()
 tx=Transformation()
 
+ri.Attribute ("trace" ,{"int displacements" : [ 1 ]})
+ri.Attribute ("displacementbound", {"float sphere" : [20], "string coordinatesystem" : ["shader"]})
 
 ri.Pattern("PxrTexture", "TrollColour",{ "string filename" : "../../meshes/TrollColour.tx"})
 ri.Pattern("PxrTexture", "TrollSpecular",{ "string filename" : "../../meshes/TrollSpec.tx"})
 ri.Pattern("PxrTexture", "TrollNMap",{ "string filename" : "../../meshes/TrollNormal.tx"})
-ri.Pattern("PxrNormalMap", "TrollBump",{ "string filename" : "../../meshes/TrollNormal.tx", "float bumpScale" :[2]})
+ri.Pattern("PxrNormalMap", "TrollBump",{ "string filename" : "../../meshes/TrollNormal.tx"})
 
-ri.Attribute ("trace" ,{"int displacements" : [ 1 ]})
-ri.Attribute ("displacementbound", {"float sphere" : [10], "string coordinatesystem" : ["shader"]})
+#ri.Displacement("RMSDisplacement", {"reference vector displacementVector" : ["TrollBump:resultN"] })
 
-ri.Displacement("RMSDisplacement", {"reference vector displacementVector" : ["TrollBump:resultN"],
-"float displacementAmount" : [0.5]})
+ri.Pattern( "PxrOSL", "diskTx", {"string shader" : [ "randomDisk"]})
+#ri.Displacement( "doDisplace", {"reference float disp" : [ "diskTx:resultF" ], "float atten"  :[0.05]})
+ri.Displacement(  "ZBrushDisplacement" ,{"float Km": [0.05],"string displace_map" : "CaveTrollDisp.tx", "float swidth": [0.0001],"float twidth": [0.0001],"float samples": [800.000], })
+
+
 
 ri.Bxdf( "PxrDisney","bxdf", {  "reference color baseColor" : ["TrollColour:resultRGB"] ,  "reference color subsurfaceColor" : ["TrollSpecular:resultRGB"], "float subsurface" : [0.4] , 
 "float metallic" : [0.1],
 "float specular" : [0.1],
 "float roughness" : [0.3]
-
 })
-
+"""
+ri.Bxdf( "PxrDisney","bxdf", {  "color baseColor" : [0.8,0.8,0.8] })
+"""
 ypos=0.55
 ri.TransformBegin()
 tx.setPosition(-1,ypos,0)
@@ -129,16 +137,12 @@ ri.ConcatTransform(tx.getMatrix())
 troll.Polygon(ri)
 ri.TransformEnd();
 
-
-
 ri.TransformBegin()
 tx.setPosition(0,ypos,0)
 tx.setRotation(0,45,0)
 ri.ConcatTransform(tx.getMatrix())
 troll.Polygon(ri)
 ri.TransformEnd();
-
-
 ri.TransformBegin()
 tx.setPosition(1,ypos,0)
 tx.setRotation(0,200,0)
@@ -146,9 +150,12 @@ ri.ConcatTransform(tx.getMatrix())
 troll.Polygon(ri)
 ri.TransformEnd()
 
+ri.AttributeEnd()
+
+
 # floor
 ri.TransformBegin()
-
+ri.AttributeBegin()
 ri.Bxdf( "PxrDisney","bxdf", { 
                         "color baseColor" : [ 1,1,1],
                         "float roughness" : [ 0.2 ],
@@ -159,6 +166,7 @@ ri.Bxdf( "PxrDisney","bxdf", {
 s=12.0
 face=[-s,0,-s, s,0,-s,-s,0,s, s,0,s]
 ri.Patch("bilinear",{'P':face})
+ri.AttributeEnd()
 
 ri.TransformEnd()
 

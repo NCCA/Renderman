@@ -1,0 +1,58 @@
+##RenderMan RIB
+version 3.04
+EditBegin "attribute" 
+EditEnd 
+Option "rerender" "int[2] lodrange" [0 0]
+##streammarker8
+EditBegin "attribute" "string scopename" ["pSphereShape1|shaderBallGeomShape1"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/band" "PxrOSL1" "color C1" [1 1 1] "color C2" [1 0 0] "float repeat" [2] "string direction" ["vertical"] "__instanceid" ["PxrOSL1_1"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/dots" "PxrOSL2" "color baseColour" [1 1 1] "color spotColour" [0 0 1] "float fuzz" [0.025] "float repeatU" [2] "float repeatV" [2] "__instanceid" ["PxrOSL2_1"]
+Pattern "PxrMix" "PxrMix1" "reference color color1" ["PxrOSL1:Cout"] "reference color color2" ["PxrOSL2:result"] "float mix" [0.507042] "__instanceid" ["PxrMix1_1"]
+Bxdf "PxrDisney" "PxrDisney1" "reference color baseColor" ["PxrMix1:resultRGB"] "color emitColor" [0 0 0] "float subsurface" [0] "reference color subsurfaceColor" ["PxrOSL2:result"] "float metallic" [0] "float specular" [0.5] "float specularTint" [0] "float roughness" [0.25] "float anisotropic" [0] "float sheen" [0] "float sheenTint" [0.5] 
+"float clearcoat" [0] "float clearcoatGloss" [1] "reference normal bumpNormal" ["PxrOSL1:Cout"] "float presence" [1] "int inputAOV" [0] "__instanceid" ["PxrDisney1_1"]
+EditEnd 
+##streammarker9
+EditBegin "attribute" "string scopename" ["pSphereShape1|shaderBallGeomShape1"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/band" "PxrOSL1" "color C1" [1 1 1] "color C2" [1 0 0] "float repeat" [2] "string direction" ["vertical"] "__instanceid" ["PxrOSL1_2"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/dots" "PxrOSL2" "color baseColour" [1 1 1] "color spotColour" [0 0 1] "float fuzz" [0.025] "float repeatU" [2] "float repeatV" [2] "__instanceid" ["PxrOSL2_2"]
+Pattern "PxrMix" "PxrMix1" "reference color color1" ["PxrOSL1:Cout"] "reference color color2" ["PxrOSL2:result"] "float mix" [0.507042] "__instanceid" ["PxrMix1_2"]
+Bxdf "PxrDisney" "PxrDisney1" "reference color baseColor" ["PxrMix1:resultRGB"] "color emitColor" [0 0 0] "float subsurface" [0] "reference color subsurfaceColor" ["PxrOSL2:result"] "float metallic" [0] "float specular" [0.5] "float specularTint" [0] "float roughness" [0.25] "float anisotropic" [0] "float sheen" [0] "float sheenTint" [0.5] 
+"float clearcoat" [0] "float clearcoatGloss" [1] "reference normal bumpNormal" ["PxrOSL1:Cout"] "float presence" [1] "int inputAOV" [0] "__instanceid" ["PxrDisney1_2"]
+EditEnd 
+##streammarker10
+EditBegin "attribute" "string scopename" ["pSphereShape1|shaderBallGeomShape1"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/band" "PxrOSL1" "color C1" [1 1 1] "color C2" [1 0 0] "float repeat" [2] "string direction" ["vertical"] "__instanceid" ["PxrOSL1_3"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/dots" "PxrOSL2" "color baseColour" [1 1 1] "color spotColour" [0 0 1] "float fuzz" [0.025] "float repeatU" [2] "float repeatV" [2] "__instanceid" ["PxrOSL2_3"]
+Pattern "PxrMix" "PxrMix1" "reference color color1" ["PxrOSL1:Cout"] "reference color color2" ["PxrOSL2:result"] "float mix" [0.507042] "__instanceid" ["PxrMix1_3"]
+Bxdf "PxrDisney" "PxrDisney1" "reference color baseColor" ["PxrMix1:resultRGB"] "color emitColor" [0 0 0] "float subsurface" [0] "reference color subsurfaceColor" ["PxrOSL2:result"] "float metallic" [0] "float specular" [0.5] "float specularTint" [0] "float roughness" [0.25] "float anisotropic" [0] "float sheen" [0] "float sheenTint" [0.5] 
+"float clearcoat" [0] "float clearcoatGloss" [1] "normal bumpNormal" [0 0 0] "float presence" [1] "int inputAOV" [0] "__instanceid" ["PxrDisney1_3"]
+EditEnd 
+##streammarker11
+EditBegin "attribute" "string scopename" ["pSphereShape1|shaderBallGeomShape1"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/band" "PxrOSL1" "color C1" [1 1 1] "color C2" [1 0 0] "float repeat" [2] "string direction" ["vertical"] "__instanceid" ["PxrOSL1_4"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/dots" "PxrOSL2" "color baseColour" [1 1 1] "color spotColour" [0 0 1] "float fuzz" [0.025] "float repeatU" [2] "float repeatV" [2] "__instanceid" ["PxrOSL2_4"]
+Pattern "PxrMix" "PxrMix1" "reference color color1" ["PxrOSL1:Cout"] "reference color color2" ["PxrOSL2:result"] "float mix" [0.507042] "__instanceid" ["PxrMix1_4"]
+Bxdf "PxrDisney" "PxrDisney1" "reference color baseColor" ["PxrMix1:resultRGB"] "color emitColor" [0 0 0] "float subsurface" [0] "reference color subsurfaceColor" ["PxrOSL2:result"] "float metallic" [0] "float specular" [0.5] "float specularTint" [0] "float roughness" [0.25] "float anisotropic" [0] "float sheen" [0] "float sheenTint" [0.5] 
+"float clearcoat" [0] "float clearcoatGloss" [1] "normal bumpNormal" [0 0 0] "float presence" [1] "int inputAOV" [0] "__instanceid" ["PxrDisney1_4"]
+EditEnd 
+##streammarker12
+EditBegin "attribute" "string scopename" ["pSphereShape1|shaderBallGeomShape1"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/band" "PxrOSL1" "color C1" [1 1 1] "color C2" [1 0 0] "float repeat" [2] "string direction" ["vertical"] "__instanceid" ["PxrOSL1_5"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/dots" "PxrOSL2" "color baseColour" [1 1 1] "color spotColour" [0 0 1] "float fuzz" [0.025] "float repeatU" [2] "float repeatV" [2] "__instanceid" ["PxrOSL2_5"]
+Pattern "PxrMix" "PxrMix1" "reference color color1" ["PxrOSL1:Cout"] "reference color color2" ["PxrOSL2:result"] "float mix" [0.507042] "__instanceid" ["PxrMix1_5"]
+Bxdf "PxrDisney" "PxrDisney1" "reference color baseColor" ["PxrMix1:resultRGB"] "reference color emitColor" ["PxrMix1:resultRGB"] "float subsurface" [0] "reference color subsurfaceColor" ["PxrOSL2:result"] "float metallic" [0] "float specular" [0.5] "float specularTint" [0] "float roughness" [0.25] "float anisotropic" [0] "float sheen" [0] "float sheenTint" [0.5] "float clearcoat" [0] "float clearcoatGloss" [1] "normal bumpNormal" [0 0 0] 
+"float presence" [1] "int inputAOV" [0] "__instanceid" ["PxrDisney1_5"]
+EditEnd 
+##streammarker13
+EditBegin "attribute" "string scopename" ["pSphereShape1|shaderBallGeomShape1"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/band" "PxrOSL1" "color C1" [1 1 1] "color C2" [1 0 0] "float repeat" [2] "string direction" ["vertical"] "__instanceid" ["PxrOSL1_6"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/dots" "PxrOSL2" "color baseColour" [1 1 1] "color spotColour" [0 0 1] "float fuzz" [0.025] "float repeatU" [2] "float repeatV" [2] "__instanceid" ["PxrOSL2_6"]
+Pattern "PxrMix" "PxrMix1" "reference color color1" ["PxrOSL1:Cout"] "reference color color2" ["PxrOSL2:result"] "float mix" [0.507042] "__instanceid" ["PxrMix1_6"]
+Bxdf "PxrDisney" "PxrDisney1" "reference color baseColor" ["PxrMix1:resultRGB"] "reference color emitColor" ["PxrMix1:resultRGB"] "float subsurface" [0] "reference color subsurfaceColor" ["PxrOSL2:result"] "float metallic" [0] "float specular" [0.5] "float specularTint" [0] "float roughness" [0.25] "float anisotropic" [0] "float sheen" [0] "float sheenTint" [0.5] "float clearcoat" [0] "float clearcoatGloss" [1] "normal bumpNormal" [0 0 0] 
+"float presence" [1] "int inputAOV" [0] "__instanceid" ["PxrDisney1_6"]
+EditEnd 
+##streammarker14
+EditBegin "attribute" "string scopename" ["pSphereShape1|shaderBallGeomShape1"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/band" "PxrOSL1" "color C1" [1 1 1] "color C2" [1 0 0] "float repeat" [2] "string direction" ["vertical"] "__instanceid" ["PxrOSL1_7"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/dots" "PxrOSL2" "color baseColour" [1 1 1] "color spotColour" [0 0 1] "float fuzz" [0.025] "float repeatU" [2] "float repeatV" [2] "__instanceid" ["PxrOSL2_7"]
+Pattern "PxrMix" "PxrMix1" "reference color color1" ["PxrOSL1:Cout"]

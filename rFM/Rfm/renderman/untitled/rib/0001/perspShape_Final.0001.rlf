@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<RenderManLookFile Version="1" Format="RenderMan Look Data" AssemblyName="perspShape_Final">
+    <InjectablePayloads>
+        <Payload Id="PxrDisney1SG" Label="" Source="1" Content="1"><![CDATA[##RenderMan RIB
+version 3.04
+Displacement "null" 
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/band" "PxrOSL1" "color C1" [1 1 1] "color C2" [1 0 0] "float repeat" [1] "string direction" ["vertical"] "__instanceid" ["PxrOSL1_0"]
+Pattern "/Users/jmacey/teaching/Code/Renderman/rFM/Rfm/renderman/simpleShader/shaders/dots" "PxrOSL2" "color baseColour" [1 1 1] "color spotColour" [0 0 1] "float fuzz" [0.025] "float repeatU" [1] "float repeatV" [1] "__instanceid" ["PxrOSL2_0"]
+Pattern "PxrMix" "PxrMix1" "reference color color1" ["PxrOSL1:Cout"] "reference color color2" ["PxrOSL2:result"] "float mix" [0.507042] "__instanceid" ["PxrMix1_0"]
+Bxdf "PxrDisney" "PxrDisney1" "reference color baseColor" ["PxrMix1:resultRGB"] "color emitColor" [0 0 0] "float subsurface" [0] "color subsurfaceColor" [0 0 0] "float metallic" [0] "float specular" [0.5] "float specularTint" [0] "float roughness" [0.25] "float anisotropic" [0] 
+	"float sheen" [0] "float sheenTint" [0.5] "float clearcoat" [0] "float clearcoatGloss" [1] "normal bumpNormal" [0 0 0] "float presence" [1] "int inputAOV" [0] "__instanceid" ["PxrDisney1_0"]
+]]></Payload>
+    </InjectablePayloads>
+    <TightBindings>
+        <Binding Key="pSphere1/pSphereShape1" PayloadId="PxrDisney1SG"/>
+    </TightBindings>
+</RenderManLookFile>

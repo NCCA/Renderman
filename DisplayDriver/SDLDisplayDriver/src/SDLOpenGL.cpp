@@ -30,7 +30,18 @@ void SDLOpenGL::init()
     ErrorExit("Could not create Window");
   }
 
+
+
   createGLContext();
+  // set this first so that new driver features are included.
+   glewExperimental = true;
+   // now init glew
+   GLenum err = glewInit();
+   // error check
+   if (GLEW_OK != err)
+   {
+     std::cerr<<"Error: "<<glewGetErrorString(err)<<"\n";
+   }
   createSurface();
   glEnable(GL_FRAMEBUFFER_SRGB);
 

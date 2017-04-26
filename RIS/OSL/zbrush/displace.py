@@ -16,7 +16,7 @@ ri = prman.Ri() # create an instance of the RenderMan interface
 filename = "__render" 
 # this is the begining of the rib archive generation we can only
 # make RI calls after this function else we get a core dump
-ri.Begin('__render')
+ri.Begin('displace.rib')
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format

@@ -17,7 +17,7 @@ Bxdf "PxrDisney" "teapotMat" "reference color baseColor" ["PxrOSL11:Cout"] "colo
     </InjectablePayloads>
     <TightBindings>
         <Binding Key="pPlane1/pPlaneShape1" PayloadId="PxrDisney4SG"/>
-        <Binding Key="TeapotMoved:Mesh/TeapotMoved:MeshShape" PayloadId="PxrDisney4SG"/>
         <Binding Key="pCube1/pCubeShape1" PayloadId="PxrDisney2SG"/>
+        <Binding Key="teapot:Mesh/teapot:MeshShape" PayloadId="PxrDisney4SG"/>
     </TightBindings>
 </RenderManLookFile>

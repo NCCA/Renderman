@@ -1,6 +1,6 @@
 ##RenderMan RIB
 #Created by RenderMan for Maya 21.3 (@1715407 Feb 15 2017)
-#Wed Apr 26 21:23:12 BST 2017
+#Thu Apr 27 09:08:49 BST 2017
 version 3.04
 Option "ribparse" "string varsubst" [""]
 Option "ribparse" "string varsubst" ["$"]
@@ -57,13 +57,13 @@ FrameBegin 1
 	Hider "raytrace" "int adaptall" [0] "int incremental" [1] "string pixelfiltermode" ["weighted"] "int minsamples" [0] "int minextrasamples" [0] "int maxsamples" [512] "float darkfalloff" [0.025]
 	Integrator "PxrPathTracer" "PxrPathTracer" "int maxPathLength" [10] "string sampleMode" ["bxdf"] "int numLightSamples" [8] "int numBxdfSamples" [8] "int numIndirectSamples" [1] "int numDiffuseSamples" [1] "int numSpecularSamples" [1] "int numSubsurfaceSamples" [1] "int numRefractionSamples" [1] "int rouletteDepth" [4] "float rouletteThreshold" [0.2] "string imagePlaneSubset" ["rman__imageplane"] "int clampDepth" [2] "float clampLuminance" [10] "int allowCaustics" [0]
 	Format 1280 720 1
-	Display "renderman/osl1/images/osl1" "it" "rgba" "string filter" ["gaussian"] "float[2] filterwidth" [2 2] "int[4] quantize" [0 0 0 0] "float dither" [0] "float[2] exposure" [1 1] "float[3] remap" [0 0 0] "int merge" [0] "string connection" ["-launchURI /Applications/Pixar/RenderManProServer-21.3/bin/it.app/Contents/MacOS/it"] "string dspyParams" [" itOpenHandler {::ice::startTimer;};;; itCloseHandler {::ice::endTimer %arglist; };;; dspyRender -renderer preview -time 1 -crop 0 1 0 1 -port 61036 -context \"renderman/osl1/images/osl1\" -notes \"(Wed Apr 26 21:23:12 BST 2017)\nSamples: 0-512@0.005  PxrPathTracer node is missing !\""]
+	Display "renderman/osl1/images/osl1" "it" "rgba" "string filter" ["gaussian"] "float[2] filterwidth" [2 2] "int[4] quantize" [0 0 0 0] "float dither" [0] "float[2] exposure" [1 1] "float[3] remap" [0 0 0] "int merge" [0] "string connection" ["-launchURI /Applications/Pixar/RenderManProServer-21.3/bin/it.app/Contents/MacOS/it"] "string dspyParams" [" itOpenHandler {::ice::startTimer;};;; itCloseHandler {::ice::endTimer %arglist; };;; dspyRender -renderer preview -time 1 -crop 0 1 0 1 -port 52214 -context \"renderman/osl1/images/osl1\" -notes \"(Thu Apr 27 09:08:49 BST 2017)\nSamples: 0-512@0.005  PxrPathTracer node is missing !\""]
 	#Camera perspShape
 	Clipping 0.1 10000
 	Projection "perspective" "fov" [54.4322]
 	ScreenWindow -1 1 -0.5625 0.5625
 	Shutter 0 0
-	ConcatTransform [ 0.93358 -0.346699 -0.0907073 1.82102e-09  5.50694e-09 0.25311 -0.967437 -1.10042e-09  -0.358368 -0.903181 -0.236299 4.74393e-09  -8.08811e-08 -0.640445 15.0139 1 ]
+	ConcatTransform [ 0.838671 -0.21925 -0.498559 1.12743e-11  0 0.915393 -0.402561 0  -0.544639 -0.337616 -0.767714 -7.3216e-12  0 -2.31622 14.1357 1 ]
 	Camera "world" "float[2] shutteropening" [0 1]
 	Option "user" "color camera_bg" [0 0 0] "float camera_bga" [0]
 	DisplayFilter "PxrBackgroundDisplayFilter" "background" "color backgroundColor" [0 0 0]
@@ -78,6 +78,10 @@ FrameBegin 1
 			Attribute "dice" "string referencecamera" ["worldcamera"] "float minlength" [-1] "float micropolygonlength" [1] "int watertight" [0]
 			Attribute "procedural" "int reentrant" [1]
 			Attribute "displacementbound" "string coordinatesystem" ["shader"] "float sphere" [0]
+			Attribute "user" "string irRenderCam" ["false,6.53963,7.81071,10.0701"]
+			Attribute "user" "string irRenderCamFOV" ["54.4322"]
+			Attribute "user" "string irRenderCamXform" ["0.838671,-1.38778e-17,-0.544639,0,-0.21925,0.915393,-0.337616,0,0.498559,0.402561,0.767713,0,6.53963,7.81071,10.0701,1"]
+			Attribute "user" "string irRenderCamRatio" ["1"]
 			AttributeBegin 
 				Attribute "identifier" "string name" ["PxrDomeLightShape1"]
 				Attribute "grouping" "string membership" ["+rman__imageplane"]
@@ -102,12 +106,12 @@ FrameBegin 1
 			AttributeEnd 
 			AttributeBegin 
 				Attribute "identifier" "string name" ["pPlane1"]
-				Attribute "identifier" "float id" [5]
+				Attribute "identifier" "float id" [4]
 				ConcatTransform [ 2.36828 0 0 0  0 2.36828 0 0  0 0 2.36828 0  0 0 0 1 ]
 				AttributeBegin 
 					AttributeBegin 
 						Attribute "identifier" "string name" ["pPlaneShape1"]
-						Attribute "identifier" "float id" [12]
+						Attribute "identifier" "float id" [11]
 						Sides 2
 						Attribute "visibility" "int camera" [1] "int indirect" [1] "int transmission" [1]
 						Attribute "shade" "string transmissionhitmode" ["shader"]
@@ -120,32 +124,13 @@ FrameBegin 1
 				AttributeEnd 
 			AttributeEnd 
 			AttributeBegin 
-				Attribute "identifier" "string name" ["TeapotMoved:Mesh"]
-				Attribute "identifier" "float id" [2]
-				ConcatTransform [ 2.00635 0 1.00301 0  -0 2.24309 0 0  -1.00301 -0 2.00635 0  0 5.29437 0 1 ]
-				AttributeBegin 
-					AttributeBegin 
-						Attribute "identifier" "string name" ["TeapotMoved:MeshShape"]
-						Attribute "identifier" "float id" [10]
-						Sides 2
-						Attribute "visibility" "int camera" [1] "int indirect" [1] "int transmission" [1]
-						Attribute "shade" "string transmissionhitmode" ["shader"]
-						Attribute "grouping" "string membership" ["+reflection,refraction,shadow"]
-						##RLF Inject SurfaceShading -attribute sets@,PxrDisney4SG,
-						TransformBegin 
-							Procedural2 "DelayedReadArchive2" "SimpleBound" "string filename" ["renderman/osl1/rib/job/staticGeoCache.job.zip!renderman/osl1/rib/job/TeapotMoved_MeshShape.job.rib"] "float[6] bound" [-0.915817 1.04796 -0.457885 0.457885 -0.610514 0.610514] "int __immediatesubdivide" [0]
-						TransformEnd 
-					AttributeEnd 
-				AttributeEnd 
-			AttributeEnd 
-			AttributeBegin 
 				Attribute "identifier" "string name" ["pCube1"]
-				Attribute "identifier" "float id" [4]
+				Attribute "identifier" "float id" [3]
 				ConcatTransform [ 1.5 0 0 0  0 1.5442 0 0  0 0 1.5 0  0 1.95627 0 1 ]
 				AttributeBegin 
 					AttributeBegin 
 						Attribute "identifier" "string name" ["pCubeShape1"]
-						Attribute "identifier" "float id" [11]
+						Attribute "identifier" "float id" [10]
 						Sides 2
 						Attribute "visibility" "int camera" [1] "int indirect" [1] "int transmission" [1]
 						Attribute "shade" "string transmissionhitmode" ["shader"]
@@ -164,8 +149,29 @@ FrameBegin 1
 				AttributeBegin 
 				AttributeEnd 
 			AttributeEnd 
+			AttributeBegin 
+				Attribute "identifier" "string name" ["teapot:Mesh"]
+				Attribute "identifier" "float id" [7]
+				ConcatTransform [ 2.02994 0 0 0  0 2.02994 0 0  0 0 2.02994 0  0 5.11509 0 1 ]
+				AttributeBegin 
+					AttributeBegin 
+						Attribute "identifier" "string name" ["teapot:MeshShape"]
+						Attribute "identifier" "float id" [12]
+						Sides 2
+						Attribute "visibility" "int camera" [1] "int indirect" [1] "int transmission" [1]
+						Attribute "shade" "string transmissionhitmode" ["shader"]
+						Attribute "grouping" "string membership" ["+reflection,refraction,shadow"]
+						##RLF Inject SurfaceShading -attribute sets@,PxrDisney4SG,
+						TransformBegin 
+							Procedural2 "DelayedReadArchive2" "SimpleBound" "string filename" ["renderman/osl1/rib/job/staticGeoCache.job.zip!renderman/osl1/rib/job/teapot_MeshShape.job.rib"] "float[6] bound" [-0.9959 0.967877 -0.457885 0.457885 -0.610514 0.610514] "int __immediatesubdivide" [0]
+						TransformEnd 
+					AttributeEnd 
+				AttributeEnd 
+				AttributeBegin 
+				AttributeEnd 
+			AttributeEnd 
 			##RLF ScopeEnd -name perspShape_Final
 		WorldEnd 
 	ResourceEnd 
-	##streammarker 0
+	##streammarker 4
 FrameEnd 

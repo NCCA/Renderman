@@ -16,3 +16,10 @@ sftp> put -r fire
 
 This will now upload all the files to be rendered to tete the renderfarm server. On the server you have a directory called */render/[username]* so for example in the case above the renderfarm will have a directory called */render/jmacey/fire* for my account.
 
+To open the GUI download the python file an execute
+```
+./submitPRMANtoFarmQt4.py
+```
+
+![alt](images/gui.png)
+

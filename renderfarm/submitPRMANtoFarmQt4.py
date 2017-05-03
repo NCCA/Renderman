@@ -137,7 +137,7 @@ class MainWindow(QMainWindow):
 		print 'submitting job'
 		# The first few parameters are the same as the previous examples
 		job = {}
-		job['name'] = self.jobName.text()
+		job['name'] = str(self.jobName.text())
 		job['prototype'] = 'cmdrange'
 		job['cpus'] = 1
 		job['priority'] = 9999
@@ -152,9 +152,9 @@ class MainWindow(QMainWindow):
 			# todo add sanity check for range
 			package['range'] = '%d-%d' %(self.startFrame.value(),self.endFrame.value())
 			renderString='$RMANTREE/bin/render '
-			renderString=renderString+self.cwd.text()+'/'
+			renderString=renderString+str(self.cwd.text())+'/'
 			# todo add sanity check and instructions on file formats
-			file=self.ribFile.text()
+			file=str(self.ribFile.text())
 			# some regex magic!
 			newstring=str(file)
 			fileName=re.sub(r'(\d+)','QB_FRAME_NUMBER',newstring,1)

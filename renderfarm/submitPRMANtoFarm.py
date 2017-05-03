@@ -137,43 +137,54 @@ class MainWindow(QMainWindow):
 		print 'submitting job'
 		# The first few parameters are the same as the previous examples
 		job = {}
-		job['name'] = self.jobName.text()
-		job['prototype'] = 'cmdrange'
+		job['name'] = str(self.jobName.text())
 		job['cpus'] = 1
 		job['priority'] = 9999
-		job['cwd']= self.cwd.text()
+		job['cwd']= str(self.cwd.text())
 
     # Below creates an empty package dictionary
 		package = {}
    	# Below instructs the Qube! GUI which submission UI to use for resubmission
-		package['simpleCmdType'] = 'cmdrange'
 		if self.renderRange.isChecked() == True :
+			package['simpleCmdType'] = 'cmdrange'
+			job['prototype'] = 'cmdrange'
   		# doing a range
 			# todo add sanity check for range
 			package['range'] = '%d-%d' %(self.startFrame.value(),self.endFrame.value())
 			renderString='$RMANTREE/bin/render '
 			renderString=renderString+self.cwd.text()+'/'
 			# todo add sanity check and instructions on file formats
-			file=self.ribFile.text()
+			file=str(self.ribFile.text())
 			# some regex magic!
 			fileName=re.sub(r'(\d+)','QB_FRAME_NUMBER',file,1)
 			renderString=renderString+fileName
 
-			package['cmdline'] = renderString
+			package['cmdline'] = str(renderString)
 			package['padding']=self.padding.value()
-		else :
-  		# single file
-			print "single"
+			job['package'] = package
+			# Using the given range, we will create an agenda list using qb.genframes
+			agenda = qb.genframes(package['range'])
+			# Now that we have a properly formatted agenda, assign it to the job
+			job['agenda'] = agenda 
 
+		else :
+			# single file
+			print "single"
+			package['simpleCmdType'] = 'cmdline'
+			job['prototype'] = 'cmdline'
+			renderString='$RMANTREE/bin/render '
+			renderString=renderString+self.cwd.text()+'/'
+			# todo add sanity check and instructions on file formats
+			file=str(self.ribFile.text())
+			# some regex magic!
+			renderString=renderString+file
+			package['rangeExecution']='individual'
+			package['cmdline'] = str(renderString)
+			job['package'] = package
+			
 
 		# Below sets the job's package to the package dictionary we just created
-		job['package'] = package
 		job['env']={'RMANTREE' : '/opt/software/pixar/RenderManProServer-20.10/'}
-		# Using the given range, we will create an agenda list using qb.genframes
-		agenda = qb.genframes(package['range'])
-
-		# Now that we have a properly formatted agenda, assign it to the job
-		job['agenda'] = agenda 
 			
 
 		listOfJobsToSubmit = []
@@ -191,61 +202,7 @@ class MainWindow(QMainWindow):
 
 		print job,package
 
-# Below is the main function to run in this script
-def Qubemain():
 
-    # The first few parameters are the same as the previous examples
-    job = {}
-    job['name'] = 'jon prman'
-    job['prototype'] = 'cmdrange'
- 
-    job['cpus'] = 1
-    job['priority'] = 9999
-    job['cwd']='/render/jmacey'
-     
-     
-    # Below creates an empty package dictionary
-    package = {}
-     
-    # Below instructs the Qube! GUI which submission UI to use for resubmission
-    package['simpleCmdType'] = 'cmdrange'
-     
-    # Below defines the camera used for the render
-     
-     
-     
-     
-    # Below defines the command to be run.  This is necessary for our API submission,
-    # but will be re-generate based on user defined parameters upon resubmission.
-    package['cmdline'] = '$RMANTREE/bin/render /render/jmacey/fireQB_FRAME_NUMBER.vdb.rib '
-    package['padding']=3
-     
-    # Below defines the maya executable location
-     
-    # below defines the range of the job to be rendered
-    package['range'] = '1-80'
-    # Below defines the scenefile location
-     
-    # Below sets the job's package to the package dictionary we just created
-    job['package'] = package
-    job['env']={'RMANTREE' : '/opt/software/pixar/RenderManProServer-20.10/'}
-    # Using the given range, we will create an agenda list using qb.genframes
-    agenda = qb.genframes(package['range'])
-  
-    # Now that we have a properly formatted agenda, assign it to the job
-    job['agenda'] = agenda 
-     
- 
-    listOfJobsToSubmit = []
-    listOfJobsToSubmit.append(job)
-    
-    # As before, we create a list of 1 job, then submit the list.  Again, we
-    # could submit just the single job w/o the list, but submitting a list is
-    # good form.
-    listOfSubmittedJobs = qb.submit(listOfJobsToSubmit)
-    for job in listOfSubmittedJobs:
-        print job['id']
- 
 # Below runs the "main" function
 if __name__ == "__main__":
 	app = QApplication(sys.argv)

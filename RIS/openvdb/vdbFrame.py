@@ -18,7 +18,7 @@ for f in files :
   print "rendering %s to %s" %(f,filename)
   # this is the begining of the rib archive generation we can only
   # make RI calls after this function else we get a core dump
-  ri.Begin('__render')
+  ri.Begin(f+'.rib')
 
   ri.Option( "ribparse", { "string varsubst" : [""] })
   ri.Option("ribparse" , {"string varsubst" : ["$"]})

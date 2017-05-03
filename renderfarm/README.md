@@ -21,5 +21,5 @@ To open the GUI download the python file an execute
 ./submitPRMANtoFarmQt4.py
 ```
 
-![alt](images/gui.png | width=100)
+![](images/gui.png  width=100)
 

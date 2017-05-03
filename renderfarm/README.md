@@ -1,6 +1,6 @@
 # NCCA Renderfarm submission GUI
 
-This tool can be used to submit rib files to the renderfarm for rendering.
+This tool can be used to submit rib files to the renderfarm for rendering. There are two version and for the NCCA linux labs the version [submitPRMANtoFarmQt4.py](https://github.com/NCCA/Renderman/blob/master/renderfarm/submitPRMANtoFarmQt4.py) must be used, however there is a PyQT5 version as well.
 
 ## Pipeline
 

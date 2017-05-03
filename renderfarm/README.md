@@ -20,6 +20,6 @@ To open the GUI download the python file an execute
 ```
 ./submitPRMANtoFarmQt4.py
 ```
+<img src="images/gui.png" alt="alt text" width="100">
 
-![]('images/gui.png'  width=100)
 

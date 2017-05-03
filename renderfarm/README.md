@@ -22,4 +22,13 @@ To open the GUI download the python file an execute
 ```
 <img src="images/gui.png" alt="alt text" width="300">
 
+The image above shows the completed form, the user needs to fill in the working directory changed to /render/jmacey/fire (it will default to /render/[username]) which reflects the directory on the farm.
+
+The rib file name shown is  *fire001.vdb.rib* the qube render system will replace the 001 value with the correct frame numbers based on the start / end frame dialogs.
+
+It is important that the name is formatted for all the frame in the same way as a regular expression is used to replace this string. 
+
+The frame padding is also very important, as this specifies the leading zeros to be replaced when the worker looks up the file name to render. In the above case padding is set to 3 if the filename was fire0001.vdb.rib the padding would be set to 4.
+
+Once the elements are filled in the submit button can be used to submit to the farm.
 

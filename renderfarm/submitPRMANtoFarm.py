@@ -1,11 +1,6 @@
 #!/usr/bin/env python
-## As in the last example, we will need the os, sys, and qb modules:
-import os, sys,re
-# for mac 
-#sys.path.insert(0,'/Applications/pfx/qube/api/python/')
-#import qb
+import os, sys,re,getopt,getpass
  
-import os, sys,getpass
 # load Qube's python module
 if 'QBDIR' in os.environ:
 	sys.path.append('%s/api/python' % os.environ['QBDIR']) 
@@ -15,10 +10,21 @@ else:
 	sys.path.append('/usr/local/pfx/qube/api/python') 
 
 import qb
-# now Qt
-from PyQt5.QtCore import (QFile, QFileInfo, QPoint, QRect, QSettings, QSize,Qt, QTextStream)
-from PyQt5.QtGui import QIcon, QKeySequence, QClipboard
-from PyQt5.QtWidgets import (QLabel,QLineEdit,QAction, QApplication,QFileDialog, QMainWindow,QMessageBox, QTextEdit,QGroupBox,QGridLayout,QPushButton,QFrame,QCheckBox,QSpinBox)
+# now Qt in the Uni I need PyQt4 at home 5
+if '--PyQt5' in sys.argv :
+	from PyQt5.QtCore import (QFile, QFileInfo, QPoint, QRect, QSettings, QSize,Qt, QTextStream)
+	from PyQt5.QtGui import QIcon, QKeySequence, QClipboard
+	from PyQt5.QtWidgets import (QLabel,QLineEdit,QAction, QApplication,QFileDialog, QMainWindow,QMessageBox, QTextEdit,QGroupBox,QGridLayout,QPushButton,QFrame,QCheckBox,QSpinBox)
+
+else:
+	from PyQt4.QtCore import (QFile, QFileInfo, QPoint, QRect, QSettings, QSize,Qt, QTextStream)
+	from PyQt4.QtGui import QIcon, QKeySequence, QClipboard
+	from PyQt4.QtGui import (QLabel,QLineEdit,QAction, QApplication,QFileDialog, QMainWindow,QMessageBox, QTextEdit,QGroupBox,QGridLayout,QPushButton,QFrame,QCheckBox,QSpinBox)
+
+
+
+
+
 ##############################################################################
 # Tool tip text 
 ##############################################################################
@@ -205,6 +211,7 @@ class MainWindow(QMainWindow):
 
 # Below runs the "main" function
 if __name__ == "__main__":
+
 	app = QApplication(sys.argv)
 	mainWin = MainWindow()
 	mainWin.resize(400,800)

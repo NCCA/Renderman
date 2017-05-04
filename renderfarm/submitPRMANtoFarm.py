@@ -142,12 +142,10 @@ class MainWindow(QMainWindow):
 	def submitJob(self) :
 		print 'submitting job'
 		if self.startFrame.value() >= self.endFrame.value() :
-			print "submit error"
 			msg=QMessageBox()
 			msg.setIcon(QMessageBox.Information)
 			msg.setText("Range Error")
 			msg.setInformativeText("Start frame must be less than end frame")
-			
 			return msg.exec_()
 
 		# The first few parameters are the same as the previous examples

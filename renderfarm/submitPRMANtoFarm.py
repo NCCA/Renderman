@@ -151,7 +151,7 @@ class MainWindow(QMainWindow):
 		# The first few parameters are the same as the previous examples
 		job = {}
 		job['name'] = str(self.jobName.text())
-		job['cpus'] = 1
+		job['cpus'] = min(self.endFrame.value()-self.startFrame.value(),40)
 		job['priority'] = 9999
 		job['cwd']= str(self.cwd.text())
 

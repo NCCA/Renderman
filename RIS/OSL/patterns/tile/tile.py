@@ -36,7 +36,7 @@ ri.Format(1024,720,1)
 # setup the raytrace / integrators
 ri.Hider("raytrace" ,{"int incremental" :[1]})
 ri.PixelVariance (0.02)
-ri.ShadingRate(20)
+ri.ShadingRate(0.1)
 
 
 ri.Integrator ("PxrPathTracer" ,"integrator")
@@ -86,13 +86,18 @@ ri.Pattern("PxrOSL","tileShader", { "string shader"  : "tile" ,
                                  "color Cin"  : [1.0 ,0.2,0.0]
                                 })
 
+ri.Attribute ("trace" ,{"int displacements" : [ 1 ]})
+ri.Attribute ("displacementbound", {"float sphere" : [30], "string coordinatesystem" : ["shader"]})
+
 
 # first teapot
 ri.AttributeBegin()
 # the colour from the shader is driven by noise, metallic by the noise green channel via the noiseToFloat 
-ri.Bxdf( "PxrDisney","bxdf", { 
-                                "reference color baseColor" : ["tileShader:resultRGB"],
-                        })
+ri.Bxdf( "PxrDisney","bxdf", {"reference color baseColor" : ["tileShader:resultRGB"]  })
+
+ri.Displacement("RMSDisplacement", {"uniform float displacementAmount" : [0.05], "reference float displacementScalar" : ["tileShader:resultF"]})
+
+
 drawCube(ri,x=-1,y=0.5,ry=-45,sx=0.5,sy=0.5,sz=0.5)
 ri.AttributeEnd()
 ri.Pattern("PxrOSL","tileShader", { "string shader"  : "tile" , 
@@ -105,12 +110,16 @@ ri.Pattern("PxrOSL","tileShader", { "string shader"  : "tile" ,
 ri.Bxdf( "PxrDisney","bxdf", { 
                                 "reference color baseColor" : ["tileShader:resultRGB"]
                         })
+ri.Displacement("RMSDisplacement", {"uniform float displacementAmount" : [0.05], "reference float displacementScalar" : ["tileShader:resultF"]})
+
 drawCube(ri,y=0.5,ry=-45,sx=0.5,sy=0.5,sz=0.5)
 
 # third teapot
 ri.Bxdf( "PxrDisney","bxdf", { 
                                 "reference color baseColor" : ["tileShader:resultRGB"]                    
 })
+ri.Displacement("RMSDisplacement", {"uniform float displacementAmount" : [0.05], "reference float displacementScalar" : ["tileShader:resultF"]})
+
 drawTeapot(ri,x=1,ry=-45)
 # floor
 ri.TransformBegin()
@@ -120,9 +129,12 @@ ri.Pattern("PxrOSL","tileShader", { "string shader"  : "tile" ,
                                  "float edgeSize" : [0.01],
                                  "float fuzz" : [0.01]
                                 })
+ri.Displacement("RMSDisplacement", {"uniform float displacementAmount" : [0.05], "reference float displacementScalar" : ["tileShader:resultF"]})
+
 ri.Bxdf( "PxrDisney","bxdf", { 
                         "reference color baseColor" : ["tileShader:resultRGB"]
                         })
+                
 s=2.0
 face=[-s,0,-s, s,0,-s,-s,0,s, s,0,s]
 ri.Patch("bilinear",{'P':face})

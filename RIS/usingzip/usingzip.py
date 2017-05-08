@@ -20,8 +20,8 @@ ri.Format(1024,720,1)
 #ri.Format(3840,2160,1)
 # setup the raytrace / integrators
 ri.Hider("raytrace" ,{"int incremental" :[1]})
-ri.PixelVariance (0.02)
-ri.ShadingRate(0.1)
+ri.PixelVariance (20)
+ri.ShadingRate(20)
 
 #ri.Integrator ("PxrDefault" , "integrator")
 #ri.Integrator ("PxrVCM" ,"integrator")

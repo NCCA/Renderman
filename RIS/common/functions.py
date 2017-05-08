@@ -25,19 +25,19 @@ def drawCube(ri,x=0,y=0,z=0,rx=-90.0,ry=45.0,rz=0.0,sx=0.2,sy=0.2,sz=0.2) :
   face=[-w,-h,d,-w,h,d,w,-h,d,w,h,d]								
   ri.Patch("bilinear",{'P':face})
   #front
-  face=[-w,-h,-d,-w,h,-d,w,-h,-d,w,h,-d]								
+  face=[w,-h,-d,w,h,-d,-w,-h,-d,-w,h,-d]								
   ri.Patch("bilinear",{'P':face})
   #left
   face=[-w,-h,-d,-w,h,-d,-w,-h,d,-w,h,d]									
   ri.Patch("bilinear",{'P':face})
   #right
-  face=[w,-h,-d,w,h,-d,w,-h,d,w,h,d]								
+  face=[w,-h,d,w,h,d,w,-h,-d,w,h,-d]								
   ri.Patch("bilinear",{'P':face})
   #bottom
   face=[w,-h,d,w,-h,-d,-w,-h,d,-w,-h,-d]								
   ri.Patch("bilinear",{'P':face})
   #top
-  face=[w,h,d,w,h,-d,-w,h,d,-w,h,-d]								
+  face=[-w,h,d,-w,h,-d,w,h,d,w,h,-d]								
   ri.Patch("bilinear",{'P':face})
   ri.ArchiveRecord(ri.COMMENT, '--End of Cube Function--')
 

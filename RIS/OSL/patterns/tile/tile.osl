@@ -1,16 +1,11 @@
-/* Simple un-aliased band shader
-input C1 the first band colour
-input C2 the second band colour
-input repeat number of repeats for the bands
-input direction horizontal or vertical (as string)
-output Cout the output colour of the shader
-*/
+
 
 shader tile ( color C1 = 1, color C2=0, 
 							float repeat=1,
 							float fuzz=0.2,
 							float edgeSize=0.1,
-							output	color resultRGB=0 
+							output	color resultRGB=0,
+							output float resultF=0
 						)
 {
  float uu=fmod(u*repeat,1.0);
@@ -22,11 +17,10 @@ shader tile ( color C1 = 1, color C2=0,
  
  float trx=step(edgeSize,1-uu);
  float try=step(edgeSize,1-vv);
- 
- 
  float edge=blx * bly * trx * try;
  float fuzzEdge=smoothstep(edgeSize-fuzz,edgeSize+fuzz,edge);
-
+ 
+ resultF=length(N*fuzzEdge);
  resultRGB=mix(C1,C2,fuzzEdge);
 
 

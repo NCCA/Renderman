@@ -82,7 +82,7 @@ ri.Bxdf( "PxrDisney","bxdf", {
 ri.TransformBegin()
 
 # param width height depth Case Height Rotation Angle
-program='Procedural "RunProgram" ["spiral.py" "1 0.2 0.35 8 5"] [-5 5 -5 5 -35 35]\n'
+program='Procedural "RunProgram" ["spiral" "1 0.2 0.35 8 5"] [-5 5 -5 5 -35 35]\n'
 ri.ArchiveRecord(ri.VERBATIM,program)
 
 
@@ -94,7 +94,7 @@ ri.Bxdf( "PxrDisney","bxdf", {
                         "color baseColor" : [ 1.0, 1.0, 1.0], 
                         })
 # param width height depth Case Height Rotation Angle
-program='Procedural "RunProgram" ["spiral.py" "5 0.5 1.5 8 15"] [-5 5 -5 5 -35 35]\n'
+program='Procedural "RunProgram" ["spiral" "5 0.5 1.5 8 15"] [-5 5 -5 5 -35 35]\n'
 ri.ArchiveRecord(ri.VERBATIM,program)
 
 ri.TransformEnd()
@@ -105,7 +105,7 @@ ri.Bxdf( "PxrDisney","bxdf", {
                         "color baseColor" : [ 0.0,0.0, 1.0], 
                         })
 # param width height depth Case Height Rotation Angle
-program='Procedural "RunProgram" ["spiral.py" "2 0.3 0.3 8 12"] [-5 5 -5 5 -35 35]\n'
+program='Procedural "RunProgram" ["spiral" "2 0.3 0.3 8 12"] [-5 5 -5 5 -35 35]\n'
 ri.ArchiveRecord(ri.VERBATIM,program)
 ri.TransformEnd()
 

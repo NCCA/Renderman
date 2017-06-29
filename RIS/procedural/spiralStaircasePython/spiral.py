@@ -26,7 +26,7 @@ def Block(width,hight,depth) :
 	h=hight/2.0
 	d=depth/2.0
 	#rear face
-	Write('Translate %f 0 0' %w)
+	Write('Translate %f %f 0' %(w,h))
 	Write('	Patch \'bilinear\' \'P\' [%f %f %f %f %f %f %f %f %f %f %f %f   ]'
 									%(-w,-h,d,-w,h,d,w,-h,d,w,h,d))									
 	#front face

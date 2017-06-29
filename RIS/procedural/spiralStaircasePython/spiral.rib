@@ -1,0 +1,41 @@
+##RenderMan RIB
+version 3.04
+Display "spiral.exr" "it" "rgba" 
+Format 1024 720 1
+Hider "raytrace" "int incremental" [1]
+PixelVariance 0.02
+ShadingRate 20
+Integrator "PxrPathTracer" "integrator" 
+Projection "perspective" "uniform float fov" [30]
+Identity 
+Scale 1 1 -1
+ConcatTransform [ 1 0 0 0  0 0.976187 0.21693 0  0 -0.21693 0.976187 0  -0 -0 -46.0977 1 ]
+WorldBegin 
+AttributeBegin 
+Declare "areaLight" "string"
+AreaLightSource "PxrStdAreaLight" "areaLight" "float exposure" [0.1]
+TransformBegin 
+Scale 2 2 2
+Geometry "envsphere" 
+TransformEnd 
+AttributeEnd 
+AttributeBegin 
+Bxdf "PxrDisney" "bxdf" "color baseColor" [1 0 0]
+TransformBegin 
+Procedural "RunProgram" ["spiral.py" "1 0.2 0.35 8 5"] [-5 5 -5 5 -35 35]
+TransformEnd 
+TransformBegin 
+Translate -6 -1 0
+Bxdf "PxrDisney" "bxdf" "color baseColor" [1 1 1]
+Procedural "RunProgram" ["spiral.py" "5 0.5 1.5 8 15"] [-5 5 -5 5 -35 35]
+TransformEnd 
+TransformBegin 
+Translate 6 -1 0
+Bxdf "PxrDisney" "bxdf" "color baseColor" [0 0 1]
+Procedural "RunProgram" ["spiral.py" "2 0.3 0.3 8 12"] [-5 5 -5 5 -35 35]
+TransformEnd 
+AttributeEnd 
+TransformBegin 
+Bxdf "PxrDisney" "bxdf" "color baseColor" [1 1 1]
+TransformEnd 
+WorldEnd 

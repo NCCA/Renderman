@@ -39,37 +39,21 @@ cam.place(ri)
 # now we start our world
 ri.WorldBegin()
 
-#Lighting We need geo to emit light
-ri.AttributeBegin()
+############################################################
+# Lighting
+############################################################
 
-#ri.Rotate(45,0,1,0)
-ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", 
-                                        "float exposure" : [2]
-                                       })
-#ri.Scale(2,2,2)
-ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color emitColor" : [ 1,1,1]
-                        })
-
-"""
 ri.TransformBegin()
-ri.Translate(1.8,0.9,2.3)
-ri.Sphere(0.3, -0.3, 0.3 ,360)
-ri.TransformEnd()
-"""
-ri.TransformBegin()
-ri.Translate(0.8,1.3,2)
+# Position
+ri.Translate(0.8,0.3,2)
+ri.Scale(2,2,2)
 ri.Rotate(180,1,0,0)
-ri.Scale(.1,.1,.1)
-ri.Geometry("rectlight")
+# name the light
+ri.Declare('areaLight' ,'string')
+#  A simple Area Light
+ri.Light( 'PxrRectLight', 'areaLight',{                               'float exposure' : [4] })
 ri.TransformEnd()
-
-
-
-
-ri.AttributeEnd()
-
+############################################################
 
 # first teapot
 ri.AttributeBegin()

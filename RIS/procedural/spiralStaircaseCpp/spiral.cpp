@@ -110,7 +110,7 @@ int main()
     std::cout<<"\tTranslate 0 -1 0\n";
     std::cout<<"\tRotate -90 1 0 0\n";
     //			size=StairHeight+(3*height)
-    std::cout<<"\tCylinder 0.2 "<< float(stairHeight+(3.0*height))<< " 1 360\n" ;
+    std::cout<<"\tCylinder 0.2 "<< stairHeight<< " 1 360\n" ;
     std::cout<<"TransformEnd\n";
 
 
@@ -118,7 +118,7 @@ int main()
     float i=0.0f;
     std::cout<<"TransformBegin\n";
     // # loop and build the blocks
-    while (i <=stairHeight)
+    while (i <stairHeight)
     {
       block(width,height,depth);
       std::cout<<"\tTranslate 0 "<<height<<" 0\n";

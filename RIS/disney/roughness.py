@@ -27,9 +27,6 @@ for frame in range(0,360,10) :
   ri.Hider("raytrace" ,{"int incremental" :[1]})
   ri.PixelVariance (0.01)
 
-  ri.Integrator ("PxrDefault" , "integrator")
-  ri.Integrator ("PxrVCM" ,"integrator")
-  ri.Integrator ("PxrDirectlighting" ,"integrator")
   ri.Integrator ("PxrPathTracer" ,"integrator")
 
   # now set the projection to perspective
@@ -44,37 +41,31 @@ for frame in range(0,360,10) :
   ri.WorldBegin()
 
   #Lighting We need geo to emit light
+  ri.TransformBegin()
   ri.AttributeBegin()
 
-  #ri.Rotate(45,0,1,0)
-  ri.Declare("areaLight" ,"string")
-
-
-  ri.AreaLightSource( "PxrStdEnvMapLight", {ri.HANDLEID:"areaLight", 
-                                          "float exposure" : [0.1],
-                                          "string rman__EnvMap" : ["studio2.tx"]
-                                        })
-
-
-  ri.Bxdf( "PxrDisney","bxdf", { 
-                          "color emitColor" : [ 1,1,1]
-                          })
-
-  ri.TransformBegin()
+  ri.Declare("domeLight" ,"string")
   lightTx=Transformation()
   lightTx.setPosition(0,1,0)
   lightTx.setRotation(90,frame,180)
   lightTx.setScale(1,1,1)
   ri.ConcatTransform(lightTx.getMatrix())
+  #ri.Bxdf( "PxrDisney","bxdf", { "color emitColor" : [ 1,1,1] })
+  #ri.Geometry('envsphere')
 
-  ri.Geometry('envsphere')
+  ri.Light( 'PxrDomeLight', 'domeLight' ,{ 
+                                          "float exposure" : [1.0],
+                                          "string lightColorMap" : ["studio2.tx"]
+                                        })
+
+
+  ri.AttributeEnd()
   ri.TransformEnd()
 
 
 
 
 
-  ri.AttributeEnd()
 
 
   # first teapot

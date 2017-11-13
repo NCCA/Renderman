@@ -47,87 +47,61 @@ ri.Projection(ri.PERSPECTIVE,{ri.FOV:30})
 cam=Camera(Vec4(-2,2.2,3),Vec4(0,0,0),Vec4(0,1,0))
 cam.place(ri)
 
-
-
 # now we start our world
 ri.WorldBegin()
 
+#######################################################################
 #Lighting We need geo to emit light
+#######################################################################
+ri.TransformBegin()
 ri.AttributeBegin()
-
-#ri.Rotate(45,0,1,0)
 ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", 
-                                        "float exposure" : [4]
-                                       })
-#ri.Scale(2,2,2)
-ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color emitColor" : [ 1,1,1]
-                        })
-
-"""
-ri.TransformBegin()
-ri.Translate(1.8,0.9,2.3)
-ri.Sphere(0.3, -0.3, 0.3 ,360)
-ri.TransformEnd()
-"""
-ri.TransformBegin()
-ri.Translate(0.8,1.3,2)
+# position light
+ri.Translate(0.0,1.5,3)
 ri.Rotate(180,1,0,0)
-ri.Scale(.1,.1,.1)
+ri.Rotate(-30,1,0,0)
+# add geometry for debug (off screen here)
+ri.Bxdf( "PxrDisney","bxdf", {"color emitColor" : [ 1,1,1] })
 ri.Geometry("rectlight")
-ri.TransformEnd()
-
-
+# enable light
+ri.Light( 'PxrRectLight', 'areaLight',{'float exposure' : [3] })
 ri.AttributeEnd()
+ri.TransformEnd()
+#######################################################################
+# end lighting
+#######################################################################
+
 
 # set the pattern generation to be from our osl band shader 
-ri.Pattern("PxrOSL","bandShader", { "string shader"  : "band" , 
-                                 "color Cin"  : [1.0 ,0.2,0.0]
-                                })
+ri.Pattern("band","bandShader", { "color Cin"  : [1.0 ,0.2,0.0] })
 
 
 # first teapot
 ri.AttributeBegin()
 # the colour from the shader is driven by noise, metallic by the noise green channel via the noiseToFloat 
-ri.Bxdf( "PxrDisney","bxdf", { 
-                                "reference color baseColor" : ["bandShader:Cout"],
-                        })
+ri.Bxdf( "PxrDisney","bxdf", {  "reference color baseColor" : ["bandShader:Cout"] })
 drawTeapot(ri,x=-1,ry=-45)
 ri.AttributeEnd()
-ri.Pattern("PxrOSL","bandShader", { "string shader"  : "band" , 
-                                 "color C1"  : [0.0 ,1.0,0.0],
+ri.Pattern("band","bandShader", {"color C1"  : [0.0 ,1.0,0.0],
                                  "color C2"  : [1.0 ,0.0,0.0],
                                 "float repeat" : [5],
                                 "string direction" : ["horizontal"]  
-                             
                                 })
 # second teapot
-ri.Bxdf( "PxrDisney","bxdf", { 
-                                "reference color baseColor" : ["bandShader:Cout"]
-                        })
+ri.Bxdf( "PxrDisney","bxdf", {"reference color baseColor" : ["bandShader:Cout"] })
 drawTeapot(ri,ry=-45)
-ri.Pattern("PxrOSL","noiseShader", { "string shader"  : "band" , 
-                                     "float repeat" : [20],  
-                                     "color C2" : [0,0,1]                             
-                                })
+ri.Pattern("band","noiseShader", {"float repeat" : [20],"color C2" : [0,0,1]})
 # third teapot
-ri.Bxdf( "PxrDisney","bxdf", { 
-                                "reference color baseColor" : ["noiseShader:Cout"]
-                        })
+ri.Bxdf( "PxrDisney","bxdf", { "reference color baseColor" : ["noiseShader:Cout"] })
 drawTeapot(ri,x=1,ry=-45)
 # floor
 ri.TransformBegin()
-ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 1.0,1.0,1.0]
-                        })
+ri.Bxdf( "PxrDisney","bxdf", { "color baseColor" : [ 1.0,1.0,1.0] })
 s=5.0
 face=[-s,0,-s, s,0,-s,-s,0,s, s,0,s]
 ri.Patch("bilinear",{'P':face})
 
 ri.TransformEnd()
-
-
 
 # end our world
 ri.WorldEnd()

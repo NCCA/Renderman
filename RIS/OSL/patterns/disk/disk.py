@@ -52,82 +52,59 @@ cam.place(ri)
 # now we start our world
 ri.WorldBegin()
 
+#######################################################################
 #Lighting We need geo to emit light
+#######################################################################
+ri.TransformBegin()
 ri.AttributeBegin()
-
-#ri.Rotate(45,0,1,0)
 ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", 
-                                        "float exposure" : [4]
-                                       })
-#ri.Scale(2,2,2)
-ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color emitColor" : [ 1,1,1]
-                        })
-
-"""
-ri.TransformBegin()
-ri.Translate(1.8,0.9,2.3)
-ri.Sphere(0.3, -0.3, 0.3 ,360)
-ri.TransformEnd()
-"""
-ri.TransformBegin()
-ri.Translate(0.8,1.3,2)
+# position light
+ri.Translate(0.0,1.5,3)
 ri.Rotate(180,1,0,0)
-ri.Scale(.1,.1,.1)
+ri.Rotate(-30,1,0,0)
+# add geometry for debug (off screen here)
+ri.Bxdf( "PxrDisney","bxdf", {"color emitColor" : [ 1,1,1] })
 ri.Geometry("rectlight")
-ri.TransformEnd()
-
-
+# enable light
+ri.Light( 'PxrRectLight', 'areaLight',{'float exposure' : [3] })
 ri.AttributeEnd()
+ri.TransformEnd()
+#######################################################################
+# end lighting
+#######################################################################
 
 # set the pattern generation to be from our osl band shader 
-ri.Pattern("PxrOSL",shaderName, { "string shader"  : shaderName , 
-                                 "color Cin"  : [1.0 ,0.2,0.0]
-                                })
+ri.Pattern("disk",shaderName, {"color Cin"  : [1.0 ,0.2,0.0] })
 
 
 # first teapot
 ri.AttributeBegin()
 # the colour from the shader is driven by noise, metallic by the noise green channel via the noiseToFloat 
-ri.Bxdf( "PxrDisney","bxdf", { 
-                                "reference color baseColor" : ["%s:Cout"%shaderName],
-                        })
+ri.Bxdf( "PxrDisney","bxdf", { "reference color baseColor" : ["%s:Cout"%shaderName] })
 drawTeapot(ri,x=-1,ry=-45)
 ri.AttributeEnd()
-ri.Pattern("PxrOSL",shaderName, { "string shader"  : shaderName , 
-                                    "color baseColour"  : [1.0 ,0.2,0.0],
-                                    "float repeatU" :[4],
-                                    "float repeatV" : [2]
-                                })
+ri.Pattern("disk",shaderName, { "color baseColour"  : [1.0 ,0.2,0.0],
+                                "float repeatU" :[4],
+                                "float repeatV" : [2] })
 # second teapot
-ri.Bxdf( "PxrDisney","bxdf", { 
-                                "reference color baseColor" : ["%s:Cout"%shaderName],
-                        })
+ri.Bxdf( "PxrDisney","bxdf", { "reference color baseColor" : ["%s:Cout"%shaderName] })
 drawTeapot(ri,ry=-45)
-ri.Pattern("PxrOSL",shaderName, { "string shader"  : shaderName , 
-                                     "float repeatU" : [8],  
-                                     "float repeatV" : [8],  
-                                     "color spotColour" : [0,0,1],
-                                     "float fuzz" : [0.8]                             
-                                })
+ri.Pattern("disk",shaderName, { 
+                                "float repeatU" : [8],  
+                                "float repeatV" : [8],  
+                                "color spotColour" : [0,0,1],
+                                "float fuzz" : [0.8] })
 # third teapot
-ri.Bxdf( "PxrDisney","bxdf", { 
-                                "reference color baseColor" : ["%s:Cout"%shaderName],
-                        })
+ri.Bxdf( "PxrDisney","bxdf", { "reference color baseColor" : ["%s:Cout"%shaderName]  })
 drawTeapot(ri,x=1,ry=-45)
 # floor
 ri.TransformBegin()
-ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 1.0,1.0,1.0]
-                        })
+ri.Bxdf( "PxrDisney","bxdf", { "color baseColor" : [ 1.0,1.0,1.0] })
 s=5.0
 face=[-s,0,-s, s,0,-s,-s,0,s, s,0,s]
 ri.Patch("bilinear",{'P':face})
 
 ri.TransformEnd()
-
-
 
 # end our world
 ri.WorldEnd()

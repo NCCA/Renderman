@@ -40,7 +40,7 @@ ri.Format(1024,720,1)
 ri.Hider("raytrace" ,{"int incremental" :[1]})
 ri.PixelVariance (0.02)
 ri.ShadingRate(20)
-
+ri.Option("searchpath" , {"string shader" : ["./:@"]})
 
 ri.Integrator ("PxrPathTracer" ,"integrator")
 
@@ -55,49 +55,39 @@ cam.place(ri)
 # now we start our world
 ri.WorldBegin()
 
+#######################################################################
 #Lighting We need geo to emit light
+#######################################################################
+ri.TransformBegin()
 ri.AttributeBegin()
-
-#ri.Rotate(45,0,1,0)
 ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", 
-                                        "float exposure" : [4]
-                                       })
-#ri.Scale(2,2,2)
-ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color emitColor" : [ 1,1,1]
-                        })
-
-"""
-ri.TransformBegin()
-ri.Translate(1.8,0.9,2.3)
-ri.Sphere(0.3, -0.3, 0.3 ,360)
-ri.TransformEnd()
-"""
-ri.TransformBegin()
-ri.Translate(0.8,1.3,2)
+# position light
+ri.Translate(0.0,1.5,3)
 ri.Rotate(180,1,0,0)
-ri.Scale(.1,.1,.1)
+ri.Rotate(-30,1,0,0)
+# add geometry for debug (off screen here)
+ri.Bxdf( "PxrDisney","bxdf", {"color emitColor" : [ 1,1,1] })
 ri.Geometry("rectlight")
-ri.TransformEnd()
-
-
+# enable light
+ri.Light( 'PxrRectLight', 'areaLight',{'float exposure' : [3] })
 ri.AttributeEnd()
-
-
-
-
-
-# first teapot
+ri.TransformEnd()
+#######################################################################
+# end lighting
+######################################################################## first teapot
 ri.AttributeBegin()
+
+
+# set the pattern generation to be from our osl band shader 
+ri.Pattern("PxrPattern","mixer", { "string network" : "shadernetwork" })
 # the colour from the shader is driven by noise, metallic by the noise green channel via the noiseToFloat 
-ri.Pattern("PxrOSL", "mixColours", { "string network" : "shadernetwork" } ) 
-ri.Bxdf( "PxrDisney","bxdf", {  "reference color baseColor" : ["mixColours:C.Cout"] })
+ri.Bxdf( "PxrDisney","bxdf", {  "reference color baseColor" : ["mixer:C.Cout"] })
+
 
 drawTeapot(ri,x=-1,ry=-45)
 ri.AttributeEnd()
-
-ri.Pattern("PxrOSL", "mixColours", { "string network" : "shadernetwork",
+"""
+ri.Pattern("mixColours", "mixer", { "string network" : "shadernetwork",
                                      "color A.C1"  : [1.0 ,1.0,1.0],
                                      "color A.C2"  : [1.0 ,0.0,0.0],
                                      "float A.repeat" : [5],
@@ -110,12 +100,10 @@ ri.Pattern("PxrOSL", "mixColours", { "string network" : "shadernetwork",
 
 
 # second teapot
-ri.Bxdf( "PxrDisney","bxdf", { 
-                                "reference color baseColor" : ["mixColours:C.Cout"]
-                        })
+ri.Bxdf( "PxrDisney","bxdf", { "reference color baseColor" : ["mixer:C.Cout"] })
 drawTeapot(ri,ry=-45)
 
-ri.Pattern("PxrOSL", "mixColours", { "string network" : "shadernetwork",
+ri.Pattern("mixColours", "mixer", { "string network" : "shadernetwork",
                                      "color A.C1"  : [0.0 ,0.0,0.0],
                                      "color A.C2"  : [1.0 ,0.0,0.0],
                                      "float A.repeat" : [5],
@@ -126,24 +114,19 @@ ri.Pattern("PxrOSL", "mixColours", { "string network" : "shadernetwork",
                                      "color B.spotColour" : [0,0,1],
                                      "float B.fuzz" : [0.5]   ,
                                      "float C.mixAmmount" : [0.5]
-                                          } ) 
+                                     } ) 
 # third teapot
-ri.Bxdf( "PxrDisney","bxdf", { 
-                                "reference color baseColor" : ["mixColours:C.Cout"]
-                        })
+ri.Bxdf( "PxrDisney","bxdf", { "reference color baseColor" : ["mixer:C.Cout"]  })
 drawTeapot(ri,x=1,ry=-45)
+"""
 # floor
 ri.TransformBegin()
-ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 1.0,1.0,1.0]
-                        })
+ri.Bxdf( "PxrDisney","bxdf", {  "color baseColor" : [ 1.0,1.0,1.0] })
 s=5.0
 face=[-s,0,-s, s,0,-s,-s,0,s, s,0,s]
 ri.Patch("bilinear",{'P':face})
 
 ri.TransformEnd()
-
-
 
 # end our world
 ri.WorldEnd()

@@ -86,8 +86,6 @@
               <Access>output</Access>
               <Type>color</Type>
             </Cout>
-
-
           </Properties>
       </Node>
   </NodeList>

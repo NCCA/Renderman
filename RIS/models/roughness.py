@@ -23,9 +23,6 @@ ri.Format(1024,720,1)
 ri.Hider("raytrace" ,{"int incremental" :[1]})
 ri.PixelVariance (0.01)
 
-ri.Integrator ("PxrDefault" , "integrator")
-ri.Integrator ("PxrVCM" ,"integrator")
-ri.Integrator ("PxrDirectlighting" ,"integrator")
 ri.Integrator ("PxrPathTracer" ,"integrator")
 
 # now set the projection to perspective
@@ -37,13 +34,25 @@ ri.Rotate(-20,1,0,0)
 
 # now we start our world
 ri.WorldBegin()
+#######################################################################
 #Lighting We need geo to emit light
+#######################################################################
+ri.TransformBegin()
 ri.AttributeBegin()
-ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", "float exposure"  : [5]})
-ri.Translate( -2, 2 , 0)
-ri.Sphere( 0.3, -0.3, 0.3, 360)
+ri.Declare('areaLight' ,'string')
+# position light
+ri.Translate(0.0,1.5,1)
+ri.Rotate(90,1,0,0)
+# add geometry for debug (off screen here)
+ri.Bxdf( 'PxrDisney','bxdf', {'color emitColor' : [ 1,1,1] })
+ri.Geometry('rectlight')
+# enable light
+ri.Light( 'PxrRectLight', 'areaLight',{'float exposure' : [3] })
 ri.AttributeEnd()
+ri.TransformEnd()
+#######################################################################
+# end lighting
+#######################################################################
 
 # first teapot
 ri.Bxdf( "PxrDisney","bxdf", { 

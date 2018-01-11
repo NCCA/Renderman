@@ -27,10 +27,7 @@ ri.Format(1024,720,1)
 ri.Hider("raytrace" ,{"int incremental" :[1]})
 ri.PixelVariance (0.01)
 
-ri.Integrator ("PxrVCM" ,"integrator")
-#ri.Integrator ("PxrDirectlighting" ,"integrator")
 ri.Integrator ("PxrPathTracer" ,"integrator")
-#ri.Integrator ("PxrVisualizer" ,"integrator", {"string style" : "bxdf"})
 
 
 # now set the projection to perspective
@@ -48,8 +45,8 @@ ri.AttributeBegin()
 
 ri.Translate(0,1,0)
 ri.Rotate(-45,1,0,0)
-ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", "float exposure"  : [2],
+ri.Declare('areaLight' ,'string')
+ri.Light( 'PxrRectLight', 'arealight', { "float exposure"  : [2],
                                        })
 ri.Scale(.1,.2,.1)
 ri.Bxdf( "PxrDisney","bxdf", { 

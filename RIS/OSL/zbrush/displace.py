@@ -16,7 +16,7 @@ ri = prman.Ri() # create an instance of the RenderMan interface
 filename = "__render" 
 # this is the begining of the rib archive generation we can only
 # make RI calls after this function else we get a core dump
-ri.Begin('displace.rib')
+ri.Begin('__render')
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
@@ -40,64 +40,25 @@ cam.place(ri)
 
 # now we start our world
 ri.WorldBegin()
+
 #Lighting We need geo to emit light
-
-"""
 ri.TransformBegin()
 ri.AttributeBegin()
 
+ri.Declare("domeLight" ,"string")
 lightTx=Transformation()
-lightTx.setPosition(0,6,0)
+lightTx.setPosition(0,1,0)
 lightTx.setRotation(90,0,0)
-lightTx.setScale(10,10,10)
+lightTx.setScale(1,1,1)
 ri.ConcatTransform(lightTx.getMatrix())
-ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", "float exposure"  : [6],
-                                       })
-ri.Bxdf( "PxrDisney","bxdf", {  "color emitColor" : [ 1,1,1] })
 
-ri.Geometry("rectlight")
+ri.Light( 'PxrDomeLight', 'domeLight' ,{ 
+                                        "float exposure" : [1.0],
+                                        "string lightColorMap" : ["../../disney/studio2.tx"]
+                                      })
+
 ri.AttributeEnd()
 ri.TransformEnd()
-"""
-ri.AttributeBegin()
-
-ri.Declare("areaLight" ,"string")
-
-"""
-# Temple Light Source
-ri.AreaLightSource( "PxrStdEnvMapLight", {ri.HANDLEID:"areaLight", 
-                                        "float exposure" : [0.4],
-                                        "string rman__EnvMap" : ["temple.tx"]
-                                      })
-"""
-
-"""
-# Studio light source
-ri.AreaLightSource( "PxrStdEnvMapLight", {ri.HANDLEID:"areaLight", 
-                                        "float exposure" : [1.0],
-                                        "string rman__EnvMap" : ["studio2.tx"]
-                                      })
-"""
-# Outside light source
-ri.AreaLightSource( "PxrStdEnvMapLight", {ri.HANDLEID:"areaLight", 
-                                        "float exposure" : [1.0],
-                                        "string rman__EnvMap" : ["../../meshes/Exterior1_Color.tx"]
-                                      })
-
-#ri.Bxdf( "PxrDisney","bxdf", {  "color emitColor" : [ 1,1,1] })
-
-ri.TransformBegin()
-lightTx=Transformation()
-#lightTx.setPosition(10,10,10)
-lightTx.setRotation(-90,0,0)
-lightTx.setScale(12.5,12.5,12.5)
-ri.ConcatTransform(lightTx.getMatrix())
-ri.Geometry('envsphere')
-ri.TransformEnd()
-ri.AttributeEnd()
-
-
 
 # load mesh
 troll=Obj.Obj("../../meshes/troll.obj")
@@ -112,10 +73,6 @@ ri.Pattern("PxrTexture", "TrollSpecular",{ "string filename" : "../../meshes/Tro
 ri.Pattern("PxrTexture", "TrollNMap",{ "string filename" : "../../meshes/TrollNormal.tx"})
 ri.Pattern("PxrNormalMap", "TrollBump",{ "string filename" : "../../meshes/TrollNormal.tx"})
 
-#ri.Displacement("RMSDisplacement", {"reference vector displacementVector" : ["TrollBump:resultN"] })
-
-ri.Pattern( "PxrOSL", "diskTx", {"string shader" : [ "randomDisk"]})
-#ri.Displacement( "doDisplace", {"reference float disp" : [ "diskTx:resultF" ], "float atten"  :[0.05]})
 ri.Displacement(  "ZBrushDisplacement" ,{"float Km": [0.05],"string displace_map" : "CaveTrollDisp.tx", "float swidth": [0.0001],"float twidth": [0.0001],"float samples": [800.000], })
 
 

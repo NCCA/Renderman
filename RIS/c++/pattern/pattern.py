@@ -5,6 +5,7 @@ import prman
 import sys
 sys.path.append('../../common')
 from functions import drawTeapot
+from Camera import *
 
 
 
@@ -21,27 +22,38 @@ ri.Format(1024,720,1)
 ri.Hider("raytrace" ,{"int incremental" :[1]})
 ri.PixelVariance (0.01)
 
-ri.Integrator ("PxrDefault" , "integrator")
-ri.Integrator ("PxrVCM" ,"integrator")
-ri.Integrator ("PxrDirectlighting" ,"integrator")
 ri.Integrator ("PxrPathTracer" ,"integrator")
 
 # now set the projection to perspective
 ri.Projection(ri.PERSPECTIVE,{ri.FOV:30}) 
 # Simple translate for our camera
-ri.Translate(0,0,5)
-ri.Rotate(-20,1,0,0)
+cam=Camera(Vec4(-2,2.2,3),Vec4(0,0,0),Vec4(0,1,0))
+cam.place(ri)
 
 
 # now we start our world
 ri.WorldBegin()
+#######################################################################
 #Lighting We need geo to emit light
+#######################################################################
+ri.TransformBegin()
 ri.AttributeBegin()
 ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", "float exposure"  : [5]})
-ri.Translate( -2, 2 , 0)
-ri.Sphere( 0.3, -0.3, 0.3, 360)
+# position light
+ri.Translate(0.0,1.5,5)
+ri.Rotate(180,1,0,0)
+ri.Rotate(30,1,0,0)
+# add geometry for debug (off screen here)
+ri.Bxdf( "PxrDisney","bxdf", {"color emitColor" : [ 1,1,1] })
+ri.Geometry("rectlight")
+# enable light
+ri.Light( 'PxrRectLight', 'areaLight',{'float exposure' : [4] })
 ri.AttributeEnd()
+ri.TransformEnd()
+#######################################################################
+# end lighting
+#######################################################################
+
 
 # first teapot
 ri.Pattern ("PxrMyFractal", "noiseTexture",{

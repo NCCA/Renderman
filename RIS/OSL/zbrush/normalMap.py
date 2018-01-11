@@ -40,73 +40,33 @@ cam.place(ri)
 # now we start our world
 ri.WorldBegin()
 #Lighting We need geo to emit light
-
-"""
 ri.TransformBegin()
 ri.AttributeBegin()
 
+ri.Declare("domeLight" ,"string")
 lightTx=Transformation()
-lightTx.setPosition(0,6,0)
+lightTx.setPosition(0,1,0)
 lightTx.setRotation(90,0,0)
-lightTx.setScale(10,10,10)
+lightTx.setScale(1,1,1)
 ri.ConcatTransform(lightTx.getMatrix())
-ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", "float exposure"  : [6],
-                                       })
-ri.Bxdf( "PxrDisney","bxdf", {  "color emitColor" : [ 1,1,1] })
 
-ri.Geometry("rectlight")
+ri.Light( 'PxrDomeLight', 'domeLight' ,{ 
+                                        "float exposure" : [1.0],
+                                        "string lightColorMap" : ["../../disney/studio2.tx"]
+                                      })
+
 ri.AttributeEnd()
 ri.TransformEnd()
-"""
-ri.AttributeBegin()
-
-ri.Declare("areaLight" ,"string")
-
-"""
-# Temple Light Source
-ri.AreaLightSource( "PxrStdEnvMapLight", {ri.HANDLEID:"areaLight", 
-                                        "float exposure" : [0.4],
-                                        "string rman__EnvMap" : ["temple.tx"]
-                                      })
-"""
-
-"""
-# Studio light source
-ri.AreaLightSource( "PxrStdEnvMapLight", {ri.HANDLEID:"areaLight", 
-                                        "float exposure" : [1.0],
-                                        "string rman__EnvMap" : ["studio2.tx"]
-                                      })
-"""
-# Outside light source
-ri.AreaLightSource( "PxrStdEnvMapLight", {ri.HANDLEID:"areaLight", 
-                                        "float exposure" : [1.0],
-                                        "string rman__EnvMap" : ["../../meshes/Exterior1_Color.tx"]
-                                      })
-
-#ri.Bxdf( "PxrDisney","bxdf", {  "color emitColor" : [ 1,1,1] })
-
-ri.TransformBegin()
-lightTx=Transformation()
-#lightTx.setPosition(10,10,10)
-lightTx.setRotation(-90,0,0)
-lightTx.setScale(12.5,12.5,12.5)
-ri.ConcatTransform(lightTx.getMatrix())
-ri.Geometry('envsphere')
-ri.TransformEnd()
-ri.AttributeEnd()
 
 # load mesh
 troll=Obj.Obj("../../meshes/troll.obj")
 
 tx=Transformation()
 
-
 ri.Pattern("PxrTexture", "TrollColour",{ "string filename" : "../../meshes/TrollColour.tx"})
 ri.Pattern("PxrTexture", "TrollSpecular",{ "string filename" : "../../meshes/TrollSpec.tx"})
 ri.Pattern("PxrTexture", "TrollNMap",{ "string filename" : "../../meshes/TrollNormal.tx"})
 ri.Pattern("PxrNormalMap", "TrollBump",{ "string filename" : "../../meshes/TrollNormal.tx", "float bumpScale" :[2]})
-
 
 
 ri.Bxdf( "PxrDisney","bxdf", {  "reference color baseColor" : ["TrollColour:resultRGB"] ,  "reference color subsurfaceColor" : ["TrollSpecular:resultRGB"], "float subsurface" : [0.4] , "reference normal bumpNormal" : ["TrollBump:resultN"],

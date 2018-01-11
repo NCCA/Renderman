@@ -21,7 +21,11 @@ ri.DisplayChannel( 'float a')
 ri.DisplayChannel( 'color mse' , {'string source' : 'color Ci', 'string statistics' : 'mse' })
 
 # Shading...
-ri.DisplayChannel( 'color albedo',{ 'string source' : 'color lpe:nothruput;noinfinitecheck;noclamp;unoccluded;overwrite;C(U2L)|O'})
+ri.DisplayChannel( 'color albedo',{ 'string source' : "color lpe:nothruput;noinfinitecheck;noclamp;unoccluded;overwrite;C<.S'passthru'>*((U2L)|O)"})
+
+ri.DisplayChannel( 'color albedo_var',{ 'string source' : "color lpe:nothruput;noinfinitecheck;noclamp;unoccluded;overwrite;C<.S'passthru'>*((U2L)|O)" , 'string statistics' : 'variance' } )
+
+
 ri.DisplayChannel( 'color diffuse',{ 'string source' : 'color lpe:C(D[DS]*[LO])|O' })
 ri.DisplayChannel( 'color diffuse_mse',{ 'string source' : 'color lpe:C(D[DS]*[LO])|O', 'string statistics' : 'mse'})
 ri.DisplayChannel( 'color specular',{ 'string source' : 'color lpe:CS[DS]*[LO]'})
@@ -35,7 +39,7 @@ ri.DisplayChannel( 'normal normal_var',{ 'string source' : 'normal Nn' ,'string 
 ri.DisplayChannel( 'vector forward',{ 'string source'  : 'vector motionFore' })
 ri.DisplayChannel( 'vector backward',{ 'string source' : 'vector motionBack' })
 
-ri.Display( 'denoise.exr', 'openexr' ,'Ci,a,mse,albedo,diffuse,diffuse_mse,specular,specular_mse,z,z_var,normal,normal_var,forward,backward', { 'int asrgba' : [1]})
+ri.Display( 'denoise.exr', 'openexr' ,'Ci,a,mse,albedo,albedo_var,diffuse,diffuse_mse,specular,specular_mse,z,z_var,normal,normal_var,forward,backward', { 'int asrgba' : [1]})
 #Hider 'raytrace' 'string pixelfiltermode' 'importance' # ...
 
 
@@ -46,9 +50,6 @@ ri.Format(1024,720,1)
 ri.Hider('raytrace' ,{'int incremental' :[1], 'string pixelfiltermode' : 'importance'} )
 ri.PixelVariance (0.01)
 
-ri.Integrator ('PxrDefault' , 'integrator')
-ri.Integrator ('PxrVCM' ,'integrator')
-ri.Integrator ('PxrDirectlighting' ,'integrator')
 ri.Integrator ('PxrPathTracer' ,'integrator')
 
 # now set the projection to perspective
@@ -63,17 +64,12 @@ ri.WorldBegin()
 #Lighting We need geo to emit light
 ri.AttributeBegin()
 ri.Declare('areaLight' ,'string')
-"""
-ri.AreaLightSource( 'PxrStdAreaLight', {ri.HANDLEID:'areaLight', 
-                    'float exposure'  : [5],
-                    'float temperature' : [2500],
-                    'float enableTemperature' : [1]})
-"""
-ri.AreaLightSource('PxrStdEnvDayLight', {ri.HANDLEID:'areaLight',
-  'float month' : [6],
+
+ri.Light('PxrEnvDayLight','areaLight',{
+  'int month' : [6],
   'float hour' : [8],
   'float zone' : [0],
-  'float exposure' : [8]
+  'float exposure' : [2]
 })
 ri.Translate(0,2,0)
 ri.Scale(2,2,2)

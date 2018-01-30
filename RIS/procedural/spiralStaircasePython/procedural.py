@@ -4,7 +4,7 @@ import prman
 import sys
 sys.path.append('../../common')
 from Camera import *
-
+from Transformation import *
 
 def foo() :
   print "foo"
@@ -40,39 +40,22 @@ cam.place(ri)
 ri.WorldBegin()
 
 #Lighting We need geo to emit light
+ri.TransformBegin()
 ri.AttributeBegin()
 
-#ri.Rotate(45,0,1,0)
-ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", 
-                                        "float exposure" : [.1]
-                                       })
+ri.Declare("domeLight" ,"string")
+lightTx=Transformation()
+#lightTx.setPosition(0,1,0)
+lightTx.setRotation(90,0,0)
+ri.ConcatTransform(lightTx.getMatrix())
 
-
-#ri.Scale(2,2,2)
-#ri.Bxdf( "PxrDisney","bxdf", { 
-#                        "color emitColor" : [ 1,1,1]
-#                        })
-
-"""
-ri.TransformBegin()
-ri.Translate(1.8,0.9,2.3)
-ri.Sphere(0.3, -0.3, 0.3 ,360)
-ri.TransformEnd()
-"""
-ri.TransformBegin()
-#ri.Translate(0.8,1.3,2)
-#ri.Rotate(180,1,0,0)
-ri.Scale(2,2,2)
-ri.Geometry('envsphere')
-#ri.Geometry('rectlight')
-ri.TransformEnd()
-
-
-
+ri.Light( 'PxrDomeLight', 'domeLight' ,{ 
+                                      'float exposure' : [0.1],
+                                      'string lightColorMap' : ['../../disney/studio2.tx']
+                                      })
 
 ri.AttributeEnd()
-
+ri.TransformEnd()
 
 ri.AttributeBegin()
 ri.Bxdf( "PxrDisney","bxdf", { 

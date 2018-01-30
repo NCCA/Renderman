@@ -11,14 +11,13 @@ Identity
 Scale 1 1 -1
 ConcatTransform [ 1 0 0 0  0 0.976187 0.21693 0  0 -0.21693 0.976187 0  -0 -0 -46.0977 1 ]
 WorldBegin 
-AttributeBegin 
-Declare "areaLight" "string"
-AreaLightSource "PxrStdAreaLight" "areaLight" "float exposure" [0.1]
 TransformBegin 
-Scale 2 2 2
-Geometry "envsphere" 
-TransformEnd 
+AttributeBegin 
+Declare "domeLight" "string"
+ConcatTransform [ 1 0 0 0  0 6.12323e-17 1 0  0 -1 6.12323e-17 0  0 0 0 1 ]
+Light "PxrDomeLight" "domeLight" "float exposure" [0.1] "string lightColorMap" ["../../disney/studio2.tx"]
 AttributeEnd 
+TransformEnd 
 AttributeBegin 
 Bxdf "PxrDisney" "bxdf" "color baseColor" [1 0 0]
 TransformBegin 

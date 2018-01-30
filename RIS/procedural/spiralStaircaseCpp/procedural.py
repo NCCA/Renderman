@@ -50,7 +50,7 @@ lightTx.setRotation(90,0,0)
 ri.ConcatTransform(lightTx.getMatrix())
 
 ri.Light( 'PxrDomeLight', 'domeLight' ,{ 
-                                      'float exposure' : [0.2],
+                                      'float exposure' : [0.1],
                                       'string lightColorMap' : ['../../disney/studio2.tx']
                                       })
 

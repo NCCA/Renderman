@@ -33,4 +33,4 @@
 
 ## Renderman Pipeline
 
-![alt](images/pipeline.png)
+![alt](image=images/pipeline.png)

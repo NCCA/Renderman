@@ -1,7 +1,6 @@
-# Introduction to Renderman
+## Introduction to Renderman
 
-- Doest this work?
 
 ---
 
-# Renderman Python
+## Renderman Python

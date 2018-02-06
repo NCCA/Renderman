@@ -35,9 +35,7 @@
 
 <img src="slides/lecture1/images/pipeline.png" width="50%">
 
----
 
-## Hello Renderman
----?code=Lecture1Intro/HelloWorld.rib&lang=C
+---?code=Lecture1Intro/HelloWorld.rib&lang=C&title=Hello World
 -  A rib file is a simple text file, using an editor, type in the following
 

@@ -40,6 +40,12 @@
 @[1-13](A rib file is a simple text file, using an editor, type in the following)
 @[1-2](# used for comments)
 @[3](specify the version of the RI specification used)
+@[4](Specify the display driver, in this case the simple framebuffer one with an RGBA output)
+@[5](What size image and pixel ratio to produce)
+@[6](What type of projection to use)
+@[7,13](Everything within the world will be rendered)
+@[8,9](Translate back 2 in the Z)
+@[10,11](Draw a Sphere)
 
 
 

@@ -37,6 +37,6 @@
 
 
 ---?code=Lecture1Intro/HelloWorld.rib&lang=C
-
+## Hello Renderman
 -  A rib file is a simple text file, using an editor, type in the following
 

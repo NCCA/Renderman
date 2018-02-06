@@ -69,6 +69,12 @@ Display "Diffuse.exr" "file" "rgba"
 ```
 
 - Output file name will be inferred from the filename
+- Extra files / channels can be added using the + prefix
+
+```
+Display "+Normal.exr" "file" "N"
+```
+
 
 
 +++?code=Lecture1Intro/helloworld.py&lang=python&title=helloworld.py

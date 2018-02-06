@@ -50,5 +50,7 @@
 
 
 +++?code=Lecture1Intro/helloworld.py&lang=python&title=helloworld.py
-
-
+@[1-37](ensure the correct python path is set)
+@[6-13](We create an instance of the RI interface to use)
+@[14-15](This allows us to write to the rib stream)
+@[20-37](Python functions are analogous to the basic RIB commands)

@@ -47,6 +47,19 @@
 @[8,9](Translate back 2 in the Z)
 @[10,11](Draw a Sphere)
 
++++
+
+## Rendering the file
+- To render the file use the following command line
+
+```
+render -t:2 HelloWorld.rib
+```
+
+- In the example we use the default ```"framebuffer"``` display driver which will use the ```sho``` program.
+- If we wish to use the more powerful Image Tool (it) we can change the drive, however it must be running first.
+
+
 
 +++?code=Lecture1Intro/helloworld.py&lang=python&title=helloworld.py
 @[1-37](ensure the correct python path is set)

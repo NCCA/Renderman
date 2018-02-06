@@ -1,8 +1,5 @@
-##RenderMan RIB
-#Comments start with a #
-#File HelloWorld.rib #
-#Created by jmacey
-#Creation Date: Mon Feb 23 09:34:32 2009
+# RenderMan RIB
+# Comments start with a #
 version 3.04
 Display "HelloWorld.exr" "framebuffer" "rgba"
 Format 720 576 1

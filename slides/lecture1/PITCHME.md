@@ -10,6 +10,6 @@
 - The description file produced is usually called a RIB (Renderman Interface Byte stream) file and this is then passed to the renderer
 - The description of how the surface is to be textured and shaded is determined by a number of files called shaders
 
---
++++
 
 ## Modern Renderman (RIS)

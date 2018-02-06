@@ -6,8 +6,8 @@
 #
 #theme-override : assets/css/PITCHME.css
 # theme-override : assets/css/PITCHME.codemax.css
-highlight : github-gist
-background-opacity : 10
-transition : none
-published : true
-footnote : "jmacey@bournemouth.ac.uk"
+#highlight : github-gist
+#background-opacity : 10
+#transition : none
+#published : true
+#footnote : "jmacey@bournemouth.ac.uk"

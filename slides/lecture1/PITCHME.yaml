@@ -5,9 +5,9 @@
 # https://github.com/gitpitch/gitpitch/wiki/Slideshow-Settings
 #
 #theme-override : assets/css/PITCHME.css
-# theme-override : assets/css/PITCHME.codemax.css
+theme-override : assets/css/PITCHME.codemax.css
 #highlight : github-gist
-#background-opacity : 10
+background-opacity : 10
 #transition : none
 #published : true
 footnote : "jmacey@bournemouth.ac.uk"

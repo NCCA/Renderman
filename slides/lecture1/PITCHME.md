@@ -36,7 +36,7 @@
 <img src="slides/lecture1/images/pipeline.png" width="50%">
 
 
----?code=Lecture1Intro/HelloWorld.rib&lang=golang&title=Source: Golang File
+---?code=Lecture1Intro/HelloWorld.rib&lang=C&title=HelloWorld.rib
 
 @[1-13](A rib file is a simple text file, using an editor, type in the following)
 @[1-2](# used for comments)
@@ -48,5 +48,7 @@
 @[8,9](Translate back 2 in the Z)
 @[10,11](Draw a Sphere)
 
+
+---?code=Lecture1Intro/helloworld.py&lang=python&title=helloworld.py
 
 

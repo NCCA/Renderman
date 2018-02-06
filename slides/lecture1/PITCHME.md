@@ -33,4 +33,4 @@
 
 ## Renderman Pipeline
 
-![alt](slides/lecture1/images/pipeline.png){: width="50%"}
+![alt](slides/lecture1/images/pipeline.png){: height="36px" width="36px"}

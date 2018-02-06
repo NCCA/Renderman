@@ -36,7 +36,7 @@
 <img src="slides/lecture1/images/pipeline.png" width="50%">
 
 
----?code=Lecture1Intro/HelloWorld.rib&title=Hello World
+---?code=Lecture1Intro/HelloWorld.rib&title="Hello World"
 @[1-13](A rib file is a simple text file, using an editor, type in the following)
 @[1-2](# used for comments)
 @[3](specify the version of the RI specification used)

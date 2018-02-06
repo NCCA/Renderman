@@ -5,7 +5,7 @@
 # https://github.com/gitpitch/gitpitch/wiki/Slideshow-Settings
 #
 theme-override : assets/css/PITCHME.css
-highlight : github-gist
+#highlight : github-gist
 mathjax : TeX-AMS_HTML-full
 charts : true
 background-opacity : 10

@@ -59,6 +59,8 @@ render -t:2 HelloWorld.rib
 - In the example we use the default ```"framebuffer"``` display driver which will use the ```sho``` program.
 - If we wish to use the more powerful Image Tool (it) we can change the drive, however it must be running first.
 
++++
+
 ## Render to file
 - Typically we will render to a file on disk to do this we can specify the ```file``` driver
 

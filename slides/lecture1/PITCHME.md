@@ -97,3 +97,11 @@ Display "+Normal.exr" "file" "N"
 - the keyword ```'__render'``` passed to the ```ri.Begin()``` function will cause the rib file to be passed to the renderer
 - in most cases this is a very quick way of rendering a scene to either file or framebuffer
 - however in some cases this will not work properly (especially with procedurals)
+
+---
+
+## Moving Things Around
+- In the first example the command Translate is used to move the object 2 in the Z.
+- Renderman treats +ve Z as going into the screen (opposite to OpenGL)
+- Renderman (and ribs) work with a Fixed Camera and the world must be moved to be in the correct position for the fixed camera
+- This can be counter intuitive at first but you soon get used to it.

@@ -89,3 +89,11 @@ Display "+Normal.exr" "file" "N"
 @[6-13](We create an instance of the RI interface to use)
 @[14-15](This allows us to write to the rib stream)
 @[20-37](Python functions are analogous to the basic RIB commands)
+
++++
+
+## ```'__render'```
+
+- the keyword ```'__render'``` passed to the ```ri.Begin()``` function will cause the rib file to be passed to the renderer
+- in most cases this is a very quick way of rendering a scene to either file or framebuffer
+- however in some cases this will not work properly (especially with procedurals)

@@ -29,6 +29,8 @@
 - Alternatively we can render directly from within the python script
 - All of the notes presented will use the Python API to generate the rib files so we have the dual advantage of learning Python and prman at the same time.
 
-+++?image=slides/lecture1/images/pipeline.png
++++
 
 ## Renderman Pipeline
+
+<img src="slides/lecture1/images/pipeline.png" width="40%">

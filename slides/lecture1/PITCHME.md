@@ -33,4 +33,4 @@
 
 ## Renderman Pipeline
 
-![alt](slides/lecture1/images/pipeline.png)
+![alt](slides/lecture1/images/pipeline.png 40%)

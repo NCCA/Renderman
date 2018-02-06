@@ -8,9 +8,7 @@ theme : beige
 theme-override : assets/css/PITCHME.css
 # theme-override : assets/css/PITCHME.codemax.css
 highlight : github-gist
-logo : assets/image/logo.png
-background : assets/image/binary-strings-white.jpg
 background-opacity : 10
 transition : none
 published : true
-footnote : "GitPitch [ White Binary ] Presentation Template"
+footnote : "jmacey@bournemouth.ac.uk"

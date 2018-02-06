@@ -13,3 +13,10 @@
 +++
 
 ## Modern Renderman (RIS)
+
+- From Version 20 renderman introduced RIS
+
+> RenderMan's RIS is a new rendering mode that is designed to be fast and easy to use while generating production-quality renders.
+
+- There are a number of ["sub-systems"](https://renderman.pixar.com/resources/RenderMan_20/risOverview.html) which will be described in other lectures.
+  - Renderer, Camera, Integrator, Geometry, Materials, Patterns, Lights

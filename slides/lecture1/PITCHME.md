@@ -52,13 +52,21 @@
 ## Rendering the file
 - To render the file use the following command line
 
-```
+```bash
 render -t:2 HelloWorld.rib
 ```
 
 - In the example we use the default ```"framebuffer"``` display driver which will use the ```sho``` program.
 - If we wish to use the more powerful Image Tool (it) we can change the drive, however it must be running first.
 
+## Render to file
+- Typically we will render to a file on disk to do this we can specify the ```file``` driver
+
+```
+Display "Diffuse.exr" "file" "rgba"
+```
+
+- Output file name will be inferred from the filename
 
 
 +++?code=Lecture1Intro/helloworld.py&lang=python&title=helloworld.py

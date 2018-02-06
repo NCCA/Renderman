@@ -75,7 +75,14 @@ Display "Diffuse.exr" "file" "rgba"
 Display "+Normal.exr" "file" "N"
 ```
 
+---
 
+## Python Version
+
+- The python script to generate the rib file is a lot larger as we need to do some initial setup for the interface
+- All rib commands belong to the namespace ri and are prefixed with ri
+- Apart from that the function names are the same as the raw rib commands
+- The following file was used to create the HelloWorld rib file
 
 +++?code=Lecture1Intro/helloworld.py&lang=python&title=helloworld.py
 @[1-37](ensure the correct python path is set)

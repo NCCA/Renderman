@@ -34,3 +34,9 @@
 ## Renderman Pipeline
 
 <img src="slides/lecture1/images/pipeline.png" width="50%">
+
+
+---?code=Lecture1Intro/HelloWorld.rib&lang=C
+
+-  A rib file is a simple text file, using an editor, type in the following
+

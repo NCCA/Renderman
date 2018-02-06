@@ -18,7 +18,7 @@
 
 > RenderMan's RIS is a new rendering mode that is designed to be fast and easy to use while generating production-quality renders.
 
-- There are a number of ["sub-systems"](https://renderman.pixar.com/resources/RenderMan_20/risOverview.html) 
+- There are a number of [sub-systems](https://renderman.pixar.com/resources/RenderMan_20/risOverview.html) 
   - Renderer, Camera, Integrator, Geometry, Materials, Patterns, Lights
 
 +++
@@ -28,3 +28,9 @@
 - It is similar to the C API and running a python script will output a rib file 
 - Alternatively we can render directly from within the python script
 - All of the notes presented will use the Python API to generate the rib files so we have the dual advantage of learning Python and prman at the same time.
+
++++
+
+## Renderman Pipeline
+
+![alt](images/pipeline.png)

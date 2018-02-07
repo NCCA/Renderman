@@ -250,9 +250,19 @@ Torus majorrad minorrad phimin phimax sweepangle
 
 ---
 
+## What No Cube?
+
+- Renderman uses patches and we can combine them to make a cube.
+```
+Patch “type” [parameterlist]
+```
+
+- Define a single patch. type can be either "bilinear" or "bicubic". parameterlist is a list of token-array pairs where each token is one of the standard geometric primitive variables 
+
++++
+
 ## Parameter Lists
 
-- Each of the primitives have the ability to pass parameters to them
 
 | Name	| Declared Type	| Description |
 |-------|---------------|-------------|
@@ -266,6 +276,30 @@ Torus majorrad minorrad phimin phimax sweepangle
 
 | Name	| Declared Type	| Description |
 |-------|---------------|-------------|
-|```"Cs"```	| ```varying colour```	| Surface Colour (overrides rib colour) | 
-|```"Os"```	| ```varying colour```	| Surface opacity (overrides rib opacity) | 
+|```"Cs"```	| ```varying colour```	| Surface Colour (access in Shader?) | 
+|```"Os"```	| ```varying colour```	| Surface opacity (access in Shader?) | 
 |```"st"```	| ```varying float[2]```	| Texture Co-ordinates | 
+
++++
+
+## Patches
+
+- Four points define a bilinear patch, and 16 define a bicubic patch. - The order of vertices for a bilinear patch is (0,0),(1,0),(0,1),(1,1). 
+- Note that the order of points defining a quadrilateral is different depending on whether it is a bilinear patch or a polygon. 
+- The vertices of a polygon would normally be in clockwise (0,0),(0,1),(1,1),(1,0) order.
+
++++
+
+## Instance Objects
+
+<img src="slides/lecture1/images/InstanceCube.png" width="40%">
+
+- the following example shows the use of Patches and Object instancing in RIB
+
++++?code=Lecture1Intro/InstanceCube.rib&lang=python&title=[InstanceCube.rib](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/InstanceCube.rib)
+[7](Declare and identifier for our object)
+[8-15](The following elements will form our instance)
+[24,29,35](Instance the Cube Objects)
+
+
+

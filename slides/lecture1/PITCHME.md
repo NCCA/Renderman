@@ -252,8 +252,6 @@ Torus majorrad minorrad phimin phimax sweepangle
 
 ## Parameter Lists
 
-- Each of the primitives have the ability to pass parameters to them
-
 | Name	| Declared Type	| Description |
 |-------|---------------|-------------|
 |```"P"```	| ```vertex point```	| Position | 

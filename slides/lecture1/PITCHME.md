@@ -225,3 +225,17 @@ Hyperboloid point1 point2 sweepangle
 Disk height radius sweepangle
 Torus majorrad minorrad phimin phimax sweepangle
 ```
+
++++
+
+## Quadrics
+
+<img src="slides/lecture1/images/quad1.png" width="50%">
+
+
++++
+
+## Quadrics
+
+<img src="slides/lecture1/images/quad2.png" width="50%">
+

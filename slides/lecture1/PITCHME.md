@@ -100,6 +100,46 @@ Display "+Normal.exr" "file" "N"
 
 ---
 
+## Cameras and Transformations
+- by default the current transformation matrix contains the identity matrix as the screen transformation. 
+- Usually the first transformation command is an RiProjection, which appends the projection matrix onto the screen transformation, saves it, and reinitializes the current transformation matrix as the identity camera transformation. 
+
++++
+
+## Cameras and Transformations
+
+- After the camera coordinate system is established, future transformations move the world coordinate system relative to the camera coordinate system. 
+- When an RiWorldBegin is executed, the current transformation matrix is saved as the camera transformation, and thus the world coordinate system is established. 
+- Subsequent transformations inside of an RiWorldBegin- RiWorldEnd establish different object coordinate systems.
+
++++
+
+## Camera to Raster projection geometry
+<img src="slides/lecture1/images/camera1.png" width="50%">
+
+--
+
+## Camera Positioning
+
+```C
+RiBegin ();
+  RiFormat ( xres, yres, 1.0 );  // Raster coordinate system 
+  RiFrameAspectRatio ( 4.0/3.0 );  // Screen coordinate system
+  RiFrameBegin (0);
+    RiProjection ("perspective,"...); // Camera coordinate system
+    RiRotate (... );
+    RiWorldBegin (); // World coordinate system
+      ...
+      RiTransform (...);  // Object coordinate system
+    RiWorldEnd ();
+  RiFrameEnd (); 
+RiEnd ();
+```
+
+
+---
+
+
 ## Transformations
 
 - Transformations are used to transform points between coordinate systems. 
@@ -115,9 +155,9 @@ Display "+Normal.exr" "file" "N"
 - Issuing transform commands will concatenate that transformation onto the current transformation. 
 - These include the basic linear transformations 
   - translation, rotation, skew, scale and perspective. 
+- This is done using a 4x4 Transform Matrix 
 
--  Concatenating transformations implies that the current transformation is updated in such a way that the new transformation is applied to points before the old current transformation. 
-
++++
 
 ## Moving Things Around
 - In the first example the command Translate is used to move the object 2 in the Z.

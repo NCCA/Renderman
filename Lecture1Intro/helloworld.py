@@ -12,7 +12,7 @@ filename = "__render" #"HelloWorld.rib"
 # make RI calls after this function else we get a core dump
 ri.Begin('__render')
 # ArchiveRecord is used to add elements to the rib stream in this case comments
-# note the function is overloaded so we can concatinate output
+# note the function is overloaded so we can concatenate output
 ri.ArchiveRecord(ri.COMMENT, 'Comments start with a #')
 
 # now we add the display element using the usual elements

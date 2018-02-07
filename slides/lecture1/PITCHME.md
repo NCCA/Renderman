@@ -313,4 +313,31 @@ Patch “type” [parameterlist]
 @[6-17](Define the cube function with default unit size arguments)
 @[58-63](Call the cube function notice the use of Skew here)
 
+---
+
+## Adding Colour
+- Before the introduction of RIS colour changes were controlled by the RiColor command
+- For example to create a red object we use ```Color 1 0 0```
+- Colour is an attribute and as such will remain the currently active colour until changed.
+- To group colours (or any other attributes) we use the AttributeBegin and AttributeEnd block
+
++++
+
+## RIS
+- Since the introduction of RIS the Color command no longer 
+- As of Renderman 21 
+
+> The default hider is "raytrace", default bxdf is PxrDiffuse, and the default integrator is PxrDefault.
+
++++
+
+## PxrDefault
+
+- The default integrator places a virtual light at the camera (the "headlamp integrator"). 
+- No shadows or indirect lighting are evaluated. 
+  - A good option when all is black - this integrator can help narrow down where a problem is occurring 
+- Like PxrDirectLighting, it is not designed to produce "final-quality" images.
+
+
+
 

@@ -175,7 +175,7 @@ RiEnd ();
 
 +++
 
-## transform1.py
+### [transform1.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/transform1.py)
 
 <img src="slides/lecture1/images/transform1.png" width="50%">
 

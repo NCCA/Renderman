@@ -63,6 +63,12 @@ html:-moz-full-screen-ancestor {
     width: 55%;
 }
 
+.reveal section img {
+  border: 0;
+  box-shadow: none;
+}
+
+
 .reveal a.pro-link {
     font-size: 0.5em;
 }

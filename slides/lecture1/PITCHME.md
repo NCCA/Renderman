@@ -239,3 +239,12 @@ Torus majorrad minorrad phimin phimax sweepangle
 
 <img src="slides/lecture1/images/quad2.png" width="50%">
 
++++?code=Lecture1Intro/Primitives.py&lang=python&title=[Primitives.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/Primitives.py)
+
++++
+
+## [Primitives.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/Primitives.py)
+
+<img src="slides/lecture1/images/Primitives.png" width="50%">
+
+

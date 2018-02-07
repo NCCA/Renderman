@@ -190,3 +190,21 @@ RiEnd ();
 
 - ```TransformBegin / End``` block resets the transform
 
++++
+
+## Other Affine Transforms
+
+- Scale x y z : scales the current active elements in x y and z
+- Rotate [angle] x y z : rotate around the axis by [angle] degrees
+- Identity : restores the transformation matrix to what is was before world begin
+
+```
+# scale around the origin x,y,z
+ri.Scale(1,2,1)
+
+#rotate -90 degrees around the vector [1 0 0] (x)
+ri.Rotate(-90,1,0,0)
+
+# set the transform to the idenity matrix
+ri.Identity()
+```

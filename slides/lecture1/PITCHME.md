@@ -176,6 +176,7 @@ RiEnd ();
 +++
 
 # transform1.py
+
 <img src="slides/lecture1/images/transform1.png" width="50%">
 - Note how the cumulative transforms work in this example
 

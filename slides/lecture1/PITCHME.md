@@ -248,3 +248,16 @@ Torus majorrad minorrad phimin phimax sweepangle
 <img src="slides/lecture1/images/Primitives.png" width="50%">
 
 
+---
+
+## Parameter Lists
+
+- Each of the primitives have the ability to pass parameters to them
+| Name	| Declared Type	| Description |
+|-------|---------------|-------------|
+|"P"	| vertex point	| Position | 
+|"Pw"	| vertex hpoint	| Position in homogeneous cords | 
+|"N"	| varying Normal	| Phong shading normals | 
+|"Cs"	| varying colour	| Surface Colour (overrides rib colour) | 
+|"Os"	| varying colour	| Surface opacity (overrides rib opacity) | 
+|"st"	| varying float[2]	| Texture Co-ordinates | 

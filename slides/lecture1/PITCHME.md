@@ -171,3 +171,11 @@ RiEnd ();
 - These are similar to the OpenGL ```glPushMatrix()``` and ```glPopMatrix()``` and preserve the current transformation state
 
 
++++?code=Lecture1Intro/transform1.py&lang=python&title=[transform1.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/transform1.py)
+
++++
+
+# transform1.py
+<img src="slides/lecture1/images/transform1.png" width="50%">
+- Note how the cumulative transforms work in this example
+

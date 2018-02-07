@@ -117,7 +117,7 @@ Display "+Normal.exr" "file" "N"
 ## Camera to Raster projection geometry
 <img src="slides/lecture1/images/camera1.png" width="50%">
 
---
+---
 
 ## Camera Positioning
 
@@ -135,7 +135,6 @@ RiBegin ();
   RiFrameEnd (); 
 RiEnd ();
 ```
-
 
 ---
 

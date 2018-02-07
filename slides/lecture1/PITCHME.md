@@ -100,13 +100,13 @@ Display "+Normal.exr" "file" "N"
 
 ---
 
-## Cameras and Transformations
+### Cameras and Transformations
 - by default the current transformation matrix contains the identity matrix as the screen transformation. 
 - Usually the first transformation command is an RiProjection, which appends the projection matrix onto the screen transformation, saves it, and reinitializes the current transformation matrix as the identity camera transformation. 
 
 +++
 
-## Cameras and Transformations
+### Cameras and Transformations
 
 - After the camera coordinate system is established, future transformations move the world coordinate system relative to the camera coordinate system. 
 - When an RiWorldBegin is executed, the current transformation matrix is saved as the camera transformation, and thus the world coordinate system is established. 
@@ -114,12 +114,12 @@ Display "+Normal.exr" "file" "N"
 
 +++
 
-## Camera to Raster projection geometry
+### Camera to Raster projection geometry
 <img src="slides/lecture1/images/camera1.png" width="50%">
 
 ---
 
-## Camera Positioning
+### Camera Positioning
 
 ```C
 RiBegin ();

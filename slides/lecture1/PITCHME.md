@@ -205,6 +205,23 @@ ri.Scale(1,2,1)
 #rotate -90 degrees around the vector [1 0 0] (x)
 ri.Rotate(-90,1,0,0)
 
-# set the transform to the idenity matrix
+# set the transform to the identity matrix
 ri.Identity()
+```
+
+---
+
+## Quadrics
+- Many common shapes can be modelled with quadrics.
+- All the following quadrics are rotationally symmetric about the z axis. 
+- In all the quadrics u and v are assumed to run from 0 to 1. 
+
+```
+Sphere radius zmin zmax sweepangle
+Cylinder radius zmin zmax sweepangle
+Cone height radius sweepangle
+Paraboloid topradius zmin zmax sweepangle
+Hyperboloid point1 point2 sweepangle
+Disk height radius sweepangle
+Torus majorrad minorrad phimin phimax sweepangle
 ```

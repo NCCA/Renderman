@@ -2,7 +2,7 @@
 The following lines need to be added to your .bashrc in the NCCA linux labs to get renderman to work
 
 ```
-export RMANTREE=/opt/pixar/RenderManProServer-20.2/
+export RMANTREE=/opt/pixar/RenderManProServer-21.4/
 export RMAN_SHADERPATH=$HOME/Shaders:$RMANTREE/lib/shaders
 export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$RMANTREE/lib:
@@ -12,7 +12,7 @@ export PATH=$PATH:$RMANTREE/bin
 
 The following folders contain examples for my Renderman lectures.
 
-### Lecture 1 [Intro to Renderman using the Python API](https://nccastaff.bournemouth.ac.uk/jmacey/Renderman/slides/IntroToRenderman.pdf) [code](https://github.com/NCCA/Renderman/tree/master/Lecture1Intro)
+### Lecture 1 [Intro to Renderman using the Python API](https://gitpitch.com/NCCA/Renderman/master?grs=github&t=white&p=slides%2Flecture1%2F#/) [code](https://github.com/NCCA/Renderman/tree/master/Lecture1Intro)
 
 ### Lecture 2 [Using Lights and Cameras](https://nccastaff.bournemouth.ac.uk/jmacey/Renderman/slides/LightingInRenderman.pdf) [code](https://github.com/NCCA/Renderman/tree/master/Lecture2Lighting)
 

@@ -297,9 +297,9 @@ Patch “type” [parameterlist]
 - the following example shows the use of Patches and Object instancing in RIB
 
 +++?code=Lecture1Intro/InstanceCube.rib&lang=python&title=[InstanceCube.rib](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/InstanceCube.rib)
-[7](Declare and identifier for our object)
-[8-15](The following elements will form our instance)
-[24,29,35](Instance the Cube Objects)
+@[7](Declare and identifier for our object)
+@[8-15](The following elements will form our instance)
+@[24,29,35](Instance the Cube Objects)
 
 
 

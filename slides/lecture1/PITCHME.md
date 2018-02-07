@@ -310,7 +310,7 @@ Patch “type” [parameterlist]
 - with python this can be replaced with a python function instead
 
 +++?code=Lecture1Intro/Cube.py&lang=python&title=[Cube.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/Cube.py)
-@[6-29](Define the cube function with default unit size arguments)
+@[6-17](Define the cube function with default unit size arguments)
 @[58-63](Call the cube function notice the use of Skew here)
 
 

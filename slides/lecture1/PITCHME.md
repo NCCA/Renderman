@@ -181,8 +181,9 @@ RiEnd ();
 
 - Note how the cumulative transforms work in this example
 
-+++
++++?code=Lecture1Intro/transform2.py&lang=python&title=[transform2.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/transform2.py)
 
++++
 ### [transform2.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/transform2.py)
 
 <img src="slides/lecture1/images/transform2.png" width="50%">

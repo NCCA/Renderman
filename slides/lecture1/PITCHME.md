@@ -304,12 +304,10 @@ Patch “type” [parameterlist]
 +++
 
 ## Python Cube Function
-<img src="slides/lecture1/images/Cube2.png" width="40%">
-
+<img src="slides/lecture1/images/Cube2.png" width="30%">
 - The previous example used the Object instance rib command
 - This allowed us to repeat a series of rib commands.
 - with python this can be replaced with a python function instead
-
 
 +++?code=Lecture1Intro/Cube.py&lang=python&title=[Cube.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/Cube.py)
 @[6-29](Define the cube function with default unit size arguments)

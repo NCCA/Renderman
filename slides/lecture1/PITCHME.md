@@ -100,8 +100,35 @@ Display "+Normal.exr" "file" "N"
 
 ---
 
+## Transformations
+
+- Transformations are used to transform points between coordinate systems. 
+- At various points when defining a scene the current transformation is used to define a particular coordinate system. 
+  - RiProjection establishes the camera coordinate system
+  - RiWorldBegin establishes the world coordinate system.
+
++++
+
+## Current Transformation
+
+- The current transformation is maintained as part of the graphics state. 
+- Issuing transform commands will concatenate that transformation onto the current transformation. 
+- These include the basic linear transformations 
+  - translation, rotation, skew, scale and perspective. 
+
+-  Concatenating transformations implies that the current transformation is updated in such a way that the new transformation is applied to points before the old current transformation. 
+
+
 ## Moving Things Around
 - In the first example the command Translate is used to move the object 2 in the Z.
 - Renderman treats +ve Z as going into the screen (opposite to OpenGL)
 - Renderman (and ribs) work with a Fixed Camera and the world must be moved to be in the correct position for the fixed camera
 - This can be counter intuitive at first but you soon get used to it.
+
++++
+
+## Grouping Transforms
+- To group transforms we use the ```TransformBegin``` and ```TransformEnd``` commands
+- These are similar to the OpenGL ```glPushMatrix()``` and ```glPopMatrix()``` and preserve the current transformation state
+
+

@@ -1,13 +1,9 @@
 #!/usr/bin/python
-# for bash we need to add the following to our .bashrc
-# export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin   
-import getpass
-import time
 # import the python renderman library
 import prman
 
 
-def Cube(width,height,depth) :	
+def Cube(width=1.0,height=1.0,depth=1.0) :	
 	w=width/2.0
 	h=height/2.0
 	d=depth/2.0
@@ -34,8 +30,6 @@ def Cube(width,height,depth) :
 
 
 
-
-
 ri = prman.Ri() # create an instance of the RenderMan interface
 ri.Option("rib", {"string asciistyle": "indented"})
 
@@ -44,11 +38,6 @@ filename = "Cube.rib"
 # make RI calls after this function else we get a core dump
 ri.Begin("__render") #filename)
 # ArchiveRecord is used to add elements to the rib stream in this case comments
-# note the function is overloaded so we can concatinate output
-ri.ArchiveRecord(ri.COMMENT, 'File ' +filename)
-ri.ArchiveRecord(ri.COMMENT, "Created by " + getpass.getuser())
-ri.ArchiveRecord(ri.COMMENT, "Creation Date: " +time.ctime(time.time()))
-
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
 ri.Display("Cube.exr", "it", "rgba")
@@ -64,12 +53,13 @@ ri.Translate(0,0,5)
 ri.TransformBegin() 
 ri.Translate(-2,0,0)
 ri.Rotate(25,0,1,0)
-Cube(1,1,1)
+Cube()
 ri.TransformEnd()
 ri.TransformBegin() 
 ri.Translate( 0,0,0)
 ri.Rotate( 25,1,1,0)
-Cube(1,1,1)
+ri.Skew(45.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0)
+Cube(0.8,0.8,0.8)
 ri.TransformEnd()
 ri.TransformBegin() 
 ri.Translate(2,0,0)

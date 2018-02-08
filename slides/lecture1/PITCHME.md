@@ -324,10 +324,10 @@ Patch “type” [parameterlist]
 +++
 
 ## RIS
-- Since the introduction of RIS the Color command no longer 
+- Since the introduction of RIS the Color command no longer works
 - As of Renderman 21 
 
-> The default hider is "raytrace", default bxdf is PxrDiffuse, and the default integrator is PxrDefault.
+> The default hider is "raytrace", default bxdf is [PxrDiffuse](https://renderman.pixar.com/resources/RenderMan_20/devExamples.html#pxrdiffuse), and the default integrator is [PxrDefault](https://renderman.pixar.com/resources/RenderMan_20/PxrDefault.html).
 
 +++
 

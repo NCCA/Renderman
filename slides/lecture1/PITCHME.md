@@ -366,9 +366,9 @@ ri.Bxdf( 'PxrDiffuse','diffuse',
 
 ## Using Patterns for Colour
 
-- A call to '''PxrDiffuse''' can set the colour for the whole primitive
+- A call to ```PxrDiffuse``` can set the colour for the whole primitive
 - If we wish to pass Colour as a parameter list we need some other way of reading the information
-- We can do this using a combination of '''ri.Pattern''' and an OSL shader or a SeExpr expression.
+- We can do this using a combination of ```ri.Pattern``` and an OSL shader or a SeExpr expression.
 
 +++?code=Lecture1Intro/Param.py&lang=python&title=[Param.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/Param.py)
 @[23-27](Here we define the Pattern and the BxDF)
@@ -376,3 +376,16 @@ ri.Bxdf( 'PxrDiffuse','diffuse',
 @[33](Pass this to the Sphere command using the Variable Cs)
 
 +++?code=Lecture1Intro/colour.osl&lang=python&title=[colour.osl](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/colour.osl)
+
++++
+
+## [Using SeExpr](https://www.disneyanimation.com/technology/seexpr.html)
+
+- SeExpr is a simple expression language which allows "Arithmetic expression of scalar/vector types"
+- We can embed these within an ri.Pattern and read any of the built in parameter list variables such as ```Cs``` .
+
++++?code=Lecture1Intro/ParamSeExpr.py&lang=python&title=[ParamSeExpr.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/ParamSeExpr.py)
+@[24-27](Define the expression in this case Cs is the output)
+@[28-31](Use the output of the expression as the input to the diffuse resultRGB is the default)
+@[36-37] (Pass Cs to the renderer)
+

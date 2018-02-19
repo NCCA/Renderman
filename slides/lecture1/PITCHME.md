@@ -442,6 +442,11 @@ more frame blocks
 
 - Within an attribute block, the structure is simple. All attribute settings should follow immediately after the AttributeBegin request.
 - Geometric transformations are considered attributes in the RenderMan Interface and should also precede any geometry. 
+
++++
+
+## Attributes
+
 - Depending on the internal architecture of the modeling software, user entities may be described around a local origin. In this case, a modeling transformation commonly transforms the entity from object space to world space. 
 - If this is not the case, the modeler will probably be working entirely in world space and no modeling transform will be present.
 - After setting all of the attributes for the entity, the geometry should immediately follow

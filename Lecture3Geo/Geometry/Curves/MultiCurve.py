@@ -1,26 +1,84 @@
-surface hair (float Ka = 1, Kd = .6, Ks = .35, roughness = .15;
-	      color rootcolor = color (.109, .037, .007);
-	      color tipcolor = color (.519, .325, .125);
-	      color specularcolor = (color(1) + tipcolor) / 2;
-	     )
-{
-    vector T = normalize (dPdv); /* tangent along length of hair */
-    vector V = -normalize(I);    /* V is the view vector */
-    color Cspec = 0, Cdiff = 0;  /* collect specular & diffuse light */
-    float cosang;
+#!/usr/bin/python
+# for bash we need to add the following to our .bashrc
+# export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin   
+import time,random
+# import the python renderman library
+import prman
 
-    /* Loop over lights, catch highlights as if this was a thin cylinder */
-    illuminance (P) {
-	cosang = cos (abs (acos (T.normalize(L)) - acos (-T.V)));
-	Cspec += Cl * v * pow (cosang, 1/roughness);
-	Cdiff += Cl * v;
-	/* We multipled by v to make it darker at the roots.  This
-	 * assumes v=0 at the root, v=1 at the tip.
-	 */
-    }
+from random import uniform as ru
 
-    Oi = Os;
-    Ci = Oi * (mix(rootcolor, tipcolor, v) * (Ka*ambient() + Kd*Cdiff)
-                 + (Ks * Cspec * specularcolor));
-}
 
+def buildField(wi,depth,inc,points,width,npoints) :
+	xmin=-wi/2.0
+	xmax=wi/2.0
+	zmin=-depth/2.0
+	zmax=depth/2.0
+	pappend=points.append
+	wappend=width.append
+	npappend=npoints.append
+	random.seed(1)
+	ru=random.uniform
+	zpos=zmin
+	plus=0.1
+	minus=-0.1
+	while(zpos < zmax ) :
+		xpos=xmin
+		while (xpos < xmax) :
+			pappend(xpos+ru(minus,plus))
+			pappend(0) # z pos 1
+			pappend(zpos+ru(minus,plus))
+			
+			pappend(xpos+ru(minus,plus))
+			pappend(0.2) # z pos 2
+			pappend(zpos+ru(minus,plus))
+			
+			pappend(xpos+ru(minus,plus))
+			pappend(0.4) # z pos 3
+			pappend(zpos+ru(minus,plus))
+		
+			pappend(xpos+ru(minus,plus))
+			pappend(0.8+ru(-0.1,0.1)) # final z pos with random
+			pappend(zpos+ru(minus,plus))
+		
+			wappend(0.006)
+			wappend(0.003)
+			npappend(4)
+			xpos+=inc
+		zpos+=inc
+	
+
+
+ri = prman.Ri() # create an instance of the RenderMan interface
+ri.Option("rib", {"string asciistyle": "indented"})
+
+points=[]
+width=[]
+npoints=[]
+dir=0
+dircount=0
+#BuildField(1.5,0.1,0.01,points,width,npoints)
+buildField(14,14,0.2,points,width,npoints)
+
+filename = "__render" #"corn.%03d.rib" %(frame)
+# this is the begining of the rib archive generation we can only
+# make RI calls after this function else we get a core dump
+ri.Begin(filename)
+ri.ShadingRate(0.2)
+# now we add the display element using the usual elements
+# FILENAME DISPLAY Type Output format
+ri.Display("MultiCurce" , "it", "rgba")
+# Specify PAL resolution 1:1 pixel Aspect ratio
+ri.Format(1024,720,1)
+# now set the projection to perspective
+ri.Projection(ri.PERSPECTIVE,{ri.FOV:40}) 
+# now we start our world
+ri.WorldBegin()
+ri.Translate(0,0,10)
+ri.Rotate(-20,1,0,0)
+
+ri.TransformBegin()
+ri.Curves( "cubic",npoints,"nonperiodic",{ri.P:points, ri.WIDTH : width})
+ri.TransformEnd()
+ri.WorldEnd()
+# and finally end the rib file
+ri.End()

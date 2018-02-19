@@ -540,6 +540,11 @@ ri.Quantize("z",0,0,0,0)
 -  This display driver also supports the output of image channels other than rgba using the Arbitrary Output Variable mechanisms.
 - This driver maps Renderman's output variables to image channels as follows: 
 
++++
+
+## OpenEXR Driver
+
+
 |output variable name  |	image channel name | 	type|
 |----------------------|---------------------|------|
 |"r"	| "R"	| preferred type |

@@ -359,7 +359,5 @@ ri.Bxdf( 'PxrDiffuse','diffuse',
 ```
 @[3]( Notice the python dictionary for parameters)
 
-+++
-
 +++?code=Lecture1Intro/Cube.py&lang=python&title=[Colour.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/Colour.py)
 @[26-29](Here we use the simple PxrDiffuse surface model)

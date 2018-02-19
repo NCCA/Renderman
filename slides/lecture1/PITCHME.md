@@ -349,11 +349,13 @@ Bxdf "Material Name" "label" "parameters"
 
 ```
 
+- in python we use 
+
 ```python
 ri.Bxdf( 'PxrDiffuse','diffuse', 
 {
 'color diffuseColor' : [ 1.0, 0.0, 1.0]
 })
-```
+```@[3] Notice the python dictionary for paramaters
 
 

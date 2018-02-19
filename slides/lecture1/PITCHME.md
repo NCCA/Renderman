@@ -591,13 +591,22 @@ ri.Option('searchpath', {'string shader':'/mapublic/shaders'})
 
 +++
 
-## Search Paths
+### Search Paths
 
 - The valid search paths are:
-  - shader :- Used by the renderer to find all shader .slo files. 
-  - texture :- Used by the renderer to find all texture files. 
-  - archive :- Used by the renderer to find RIB archives. 
-  - procedural :- Used by the renderer to find procedural primitive DSOS. 
-  - display :- Used by the renderer to find display drivers. 
+  - shader :- Used by the renderer to find all shader files 
+  - texture :- Used by the renderer to find all texture files 
+  - archive :- Used by the renderer to find RIB archives 
+  - procedural :- Used by the renderer to find procedural primitive DSO's 
+  - display :- Used by the renderer to find display drivers
 
-  
++++
+
+### ReadArchive
+
+- The ReadArchive command allows us to read another rib file into the current position of the RIB stream
+- This can include zipped archives containing multiple archives
+
++++?code=Lecture1Intro/ReadArchive.py&lang=python&title=[ReadArchive.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/ReadArchive.py)
+@[22](tell renderman where to search for the archive (relative path in this case))
+@[49-50](Read the archive which will put the contents in the stream )

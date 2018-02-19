@@ -545,7 +545,7 @@ ri.Quantize("z",0,0,0,0)
 ## OpenEXR Driver
 
 
-|output variable name  |	image channel name | 	type|
+|<sub><sup>output variable name </sup></sub>  |	image channel name | 	type|
 |----------------------|---------------------|------|
 |"r"	| "R"	| preferred type |
 |"g"	| "G" | preferred type |

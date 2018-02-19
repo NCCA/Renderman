@@ -496,7 +496,7 @@ ri.Attribute ("identifier",{"name": "Wave1"})
 - All of an object's attributes are inherited at the time it is instanced, not at the time at which it is created. 
 - So, for example, shader assignments or other attributes are not allowed within an Object block. 
 
-+++?code=Lecture1Intro/ObjectBegin.py&lang=python&title=[ObjectBegin.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/ObjectBegin.py)
++++?code=Lecture1Intro/ObjBegin.py&lang=python&title=[ObjBegin.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/ObjBegin.py)
 @[7-12](Simple Colour function)
 @[41-49](Declare an Object and save the handle )
 @[55-56] (Instance the Object)

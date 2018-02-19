@@ -27,11 +27,8 @@ ri.Format(1024,720,1)
 ri.Hider('raytrace' ,{'int incremental' :[1]})
 ri.PixelVariance (0.01)
 
-ri.Integrator ('PxrVCM' ,'integrator')
-#ri.Integrator ('PxrDirectlighting' ,'integrator')
 ri.Integrator ('PxrPathTracer' ,'integrator')
-#ri.Integrator ('PxrVisualizer' ,'integrator', {'string style' : 'bxdf'})
-
+ri.Option( 'statistics', {'filename'  : [ 'stats.txt' ] } )
 
 # now set the projection to perspective
 ri.Projection(ri.PERSPECTIVE,{ri.FOV:30}) 

@@ -452,3 +452,5 @@ more frame blocks
 - After setting all of the attributes for the entity, the geometry should immediately follow
 
 +++
+
+## Shading Rate

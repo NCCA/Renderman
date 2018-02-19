@@ -32,8 +32,8 @@ ri.Bxdf( 'PxrDiffuse','bxdf',
 
 ri.Translate(0,0,3)
 ri.TransformBegin()
-colours=[1,1,1,1,0,0,1,0,0,0,1,0]
 ri.Rotate(90,0,1,1)
+colours=[1,1,1,1,0,0,1,0,0,0,1,0]
 ri.Sphere(1,-1,1,360,{'Cs':colours})
 ri.TransformEnd()
 ri.WorldEnd()

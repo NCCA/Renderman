@@ -9,7 +9,7 @@ ri.Option('rib', {'string asciistyle': 'indented'})
 filename = '__render' #'Colour.rib'
 # this is the begining of the rib archive generation we can only
 # make RI calls after this function else we get a core dump
-ri.Begin('Colour.rib')
+ri.Begin(filename)
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
 ri.Display('Colour.exr', 'it', 'rgba')
@@ -17,10 +17,8 @@ ri.Display('Colour.exr', 'it', 'rgba')
 ri.Format(720,575,1)
 # now set the projection to perspective
 ri.Projection(ri.PERSPECTIVE,{ri.FOV:50}) 
-
 # now we start our world
 ri.WorldBegin()
-
 
 ri.Translate(0,0,5)
 ri.Bxdf( 'PxrDiffuse','diffuse', 

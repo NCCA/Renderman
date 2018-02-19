@@ -9,25 +9,24 @@ from Camera import *
 
 ri = prman.Ri() # create an instance of the RenderMan interface
 
-filename = "__render" 
+filename = '__render' 
 # this is the begining of the rib archive generation we can only
 # make RI calls after this function else we get a core dump
-ri.Begin('__render')
+ri.Begin('rgb.rib')
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
-ri.Display("rgb.exr", "it", "rgba")
+ri.Display('rgb.exr', 'it', 'rgba')
 ri.Format(1024,720,1)
 
 # setup the raytrace / integrators
-ri.Hider("raytrace" ,{"int incremental" :[1]})
+ri.Hider('raytrace' ,{'int incremental' :[1]})
 ri.PixelVariance (0.02)
 ri.ShadingRate(20)
 
-#ri.Integrator ("PxrDefault" , "integrator")
-#ri.Integrator ("PxrVCM" ,"integrator")
-#ri.Integrator ("PxrDirectlighting" ,"integrator")
-ri.Integrator ("PxrPathTracer" ,"integrator")
+ri.Integrator ('PxrPathTracer' ,'integrator')
+ri.Option( 'statistics', {'filename'  : [ 'stats.txt' ] } )
+ri.Option( 'statistics', {'endofframe' : [ 1 ] })
 
 # now set the projection to perspective
 ri.Projection(ri.PERSPECTIVE,{ri.FOV:30}) 
@@ -44,14 +43,14 @@ ri.WorldBegin()
 #######################################################################
 ri.TransformBegin()
 ri.AttributeBegin()
-ri.Declare("areaLight" ,"string")
+ri.Declare('areaLight' ,'string')
 # position light
 ri.Translate(0.0,1.5,3)
 ri.Rotate(180,1,0,0)
 ri.Rotate(-30,1,0,0)
 # add geometry for debug (off screen here)
-ri.Bxdf( "PxrDisney","bxdf", {"color emitColor" : [ 1,1,1] })
-ri.Geometry("rectlight")
+ri.Bxdf( 'PxrDisney','bxdf', {'color emitColor' : [ 1,1,1] })
+ri.Geometry('rectlight')
 # enable light
 ri.Light( 'PxrRectLight', 'areaLight',{'float exposure' : [3] })
 ri.AttributeEnd()
@@ -61,31 +60,31 @@ ri.TransformEnd()
 #######################################################################
 # first teapot
 ri.AttributeBegin()
-ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 1.0, 0.0, 0.0], 
+ri.Bxdf( 'PxrDisney','bxdf', { 
+                        'color baseColor' : [ 1.0, 0.0, 0.0], 
                         })
 drawTeapot(ri,x=-1,ry=-45)
 ri.AttributeEnd()
 
 # second teapot
-ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 0.0, 1.0, 0.0], 
+ri.Bxdf( 'PxrDisney','bxdf', { 
+                        'color baseColor' : [ 0.0, 1.0, 0.0], 
                         })
 drawTeapot(ri,ry=-45)
 
 # third teapot
-ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 0.0, 0.0, 1.0], 
+ri.Bxdf( 'PxrDisney','bxdf', { 
+                        'color baseColor' : [ 0.0, 0.0, 1.0], 
                         })
 drawTeapot(ri,x=1,ry=-45)
 # floor
 ri.TransformBegin()
-ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 1.0,1.0,1.0]
+ri.Bxdf( 'PxrDisney','bxdf', { 
+                        'color baseColor' : [ 1.0,1.0,1.0]
                         })
 s=5.0
 face=[-s,0,-s, s,0,-s,-s,0,s, s,0,s]
-ri.Patch("bilinear",{'P':face})
+ri.Patch('bilinear',{'P':face})
 
 ri.TransformEnd()
 

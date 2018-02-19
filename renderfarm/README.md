@@ -1,6 +1,6 @@
 # NCCA Renderfarm submission GUI
 
-This tool can be used to submit rib files to the renderfarm for rendering. There are two version and for the NCCA linux labs the version [submitPRMANtoFarmQt4.py](https://github.com/NCCA/Renderman/blob/master/renderfarm/submitPRMANtoFarmQt4.py) must be used, however there is a PyQT5 version as well.
+This tool can be used to submit rib files to the renderfarm for rendering. There are two version One for Qt4 and one for Qt5. In the NCCA labs it can be found in /public/devel/bin/submitPRMANtoFarm.py
 
 ## Pipeline
 
@@ -16,9 +16,9 @@ sftp> put -r fire
 
 This will now upload all the files to be rendered to tete the renderfarm server. On the server you have a directory called */render/[username]* so for example in the case above the renderfarm will have a directory called */render/jmacey/fire* for my account.
 
-To open the GUI download the python file an execute
+To open the GUI either download the python file an execute or use the installed lab version below
 ```
-./submitPRMANtoFarmQt4.py
+ /public/devel/bin/submitPRMANtoFarm.py 
 ```
 <img src="images/gui.png" alt="alt text" width="300">
 

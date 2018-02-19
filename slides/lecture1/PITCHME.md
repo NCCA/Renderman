@@ -348,7 +348,7 @@ Patch “type” [parameterlist]
 Bxdf "Material Name" "label" "parameters"
 
 ```
-
+- python version
 ```python
 ri.Bxdf( 'PxrDiffuse','diffuse', 
 {

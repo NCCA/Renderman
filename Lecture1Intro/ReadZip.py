@@ -20,8 +20,6 @@ filename = 'ReadZip.rib'
 # make RI calls after this function else we get a core dump
 ri.Begin('__render')
 ri.Option('searchpath', {'string archive':'./Archive/'})
-#Option "searchpath" "archive" "testzip:@:testzip/archive.spheres.zip"
-
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format

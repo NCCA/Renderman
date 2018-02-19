@@ -609,4 +609,9 @@ ri.Option('searchpath', {'string shader':'/mapublic/shaders'})
 
 +++?code=Lecture1Intro/ReadArchive.py&lang=python&title=[ReadArchive.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/ReadArchive.py)
 @[22](tell renderman where to search for the archive (relative path in this case))
-@[49-50](Read the archive which will put the contents in the stream )
+@[51-52](Read the archive which will put the contents in the stream )
+
+
++++?code=Lecture1Intro/ReadZip.py&lang=python&title=[ReadZip.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/ReadZip.py)
+@[22](tell renderman where to search for the archive we have created a zip file with the contents of this dir)
+@[48-49](Read the archive using ! to specify the file within the zip )

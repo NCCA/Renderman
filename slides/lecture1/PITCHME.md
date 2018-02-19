@@ -480,14 +480,19 @@ ri.Attribute ("identifier",{"name": "Wave1"})
 ## Objects
 
 - A single geometric primitive or a list of geometric primitives may be retained by enclosing them with ObjectBegin and ObjectEnd. 
-- The RenderMan Interface allocates and re-turns an ObjectHandle for each retained object defined in this way. 
+- The RenderMan Interface allocates and returns an ObjectHandle for each retained object defined in this way. 
 - This handle can subsequently be used to reference the object when creating instances with ObjectInstance. 
-- Objects are not rendered when they are defined within an ObjectBegin-ObjectEnd block; only an internal definition is created. 
 
 +++
 
 ## Objects 
+- Objects are not rendered when they are defined within an ObjectBegin-ObjectEnd block; only an internal definition is created. 
 - Transformations, and even Motion blocks, may be used inside an Object block, though they obviously imply a relative transformation to the coordinate system active when the Object is instanced. 
+
++++
+
+## Objects 
+
 - All of an object's attributes are inherited at the time it is instanced, not at the time at which it is created. 
 - So, for example, shader assignments or other attributes are not allowed within an Object block. 
 

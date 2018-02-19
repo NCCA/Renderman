@@ -451,6 +451,26 @@ more frame blocks
 - If this is not the case, the modeler will probably be working entirely in world space and no modeling transform will be present.
 - After setting all of the attributes for the entity, the geometry should immediately follow
 
+---
+
+## Named Primitives
+
+- It is occasionally useful to give names to individual primitives. For example, when a primitive won't split at the eye plane (see Section 4.8 prman docs) it can be desirable to know which primitive is causing the problem.This can be done using the attribute identifier with the parameter name, as in:
+
+```
+RtString name[1] = {"Gigi"};
+RiAttribute("identifier","name",(RtPointer)name,RI_NULL);
+or
+Attribute "identifier" "name" ["Spheres3"]
+```
+
 +++
 
-## Shading Rate
+## Named Primitives
+
+- All defined primitives will have this name until the graphics stack is popped (with RiAttributeEnd) or another such RiAttribute call is made. 
+- The error message would then contain a reference to a specific primitive name instead of the mysterious <unnamed>.  
+
+```python
+ri.Attribute ("identifier",{"name": "Wave1"})
+```

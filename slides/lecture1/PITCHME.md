@@ -338,6 +338,22 @@ Patch “type” [parameterlist]
   - A good option when all is black - this integrator can help narrow down where a problem is occurring 
 - Like PxrDirectLighting, it is not designed to produce "final-quality" images.
 
++++
 
+## ri.BxDF 
+
+- To specify a surface material we use the BxDF rib statement
+
+```
+Bxdf "Material Name" "label" "parameters"
+
+```
+
+```python
+ri.Bxdf( 'PxrDiffuse','diffuse', 
+{
+'color diffuseColor' : [ 1.0, 0.0, 1.0]
+})
+```
 
 

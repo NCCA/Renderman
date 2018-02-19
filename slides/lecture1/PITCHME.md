@@ -510,3 +510,41 @@ ri.Attribute ("identifier",{"name": "Wave1"})
 - Note that some of the defaults listed can be overridden by configuration files.
 
 +++
+
+## Frame Buffer Control
+- There are several options which can be enabled through the parameter list of the RiDisplay call. 
+- Output Compression
+  - The TIFF driver also accepts an option to set the compression type, which may be "lzw", "packbits", "zip" (the default), "pixarlog", or "none":
+
+```
+Display "min.tiff" "TIFF" "rgba" "compression" "lzw"
+```
+
++++
+
+## OpenEXR Display Driver
+-  This driver supports OpenEXR.
+- When using this display driver for rgba or Z output, you should turn rgba and Z quantization off by using a floating point Quantize statement, ie:
+
+```
+Quantize "rgba" 0 0 0 0
+Quantize "z"    0 0 0 0
+
+ri.Quantize("rgba",0,0,0,0)
+ri.Quantize("z",0,0,0,0)
+```
+
++++
+
+## OpenEXR Driver
+-  This display driver also supports the output of image channels other than rgba using the Arbitrary Output Variable mechanisms.
+- This driver maps Renderman's output variables to image channels as follows: 
+
+|output variable name  |	image channel name | 	type|
+|----------------------|---------------------|------|
+|"r"	| "R"	| preferred type |
+|"g"	| "G" | preferred type |
+|"b"	| "B"	| preferred type |
+|"a"	| "A"	| preferred type |
+|"z"	| "Z"	| FLOAT |
+| other	| same as output variable name	| preferred type |

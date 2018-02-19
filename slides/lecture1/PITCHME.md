@@ -349,8 +349,6 @@ Bxdf "Material Name" "label" "parameters"
 
 ```
 
-- in python we use 
-
 ```python
 ri.Bxdf( 'PxrDiffuse','diffuse', 
 {

@@ -552,3 +552,52 @@ ri.Quantize("z",0,0,0,0)
 |<small/>"a"	| <small/>"A"	| <small/>preferred type |
 |<small/>"z"	| <small/>"Z"	| <small/>FLOAT |
 | <small/>other	| <small/>same as output variable name	| <small/>preferred type |
+
++++
+
+## Setting Display Parameters
+- By default, the "preferred" channel type is the value  float (32-bit). 
+- The preferred type can be changed by adding an ```"exrpixeltype"``` or ```"type"``` argument to the Display command in the RIB file.
+
+``` python
+# Store point positions in HALF format
+Display "Points.exr" "openexr" "P" "string exrpixeltype" "half" 
+ri.Display('Points.exr', 'openexr', 'P' ,{'string exrpixeltype' : 'half'})
+```
+
++++
+
+## Setting Display Parameters
+ 
+- Compression defaults to "zip"
+- You can select a different compression method by adding an "exrcompression" argument or simply the "compression" argument to the Display command. 
+
+``` python
+# Store RGBA using run-length encoding
+Display "rle.rgba.exr" "openexr" "rgba" "string exrcompression" "rle" 
+ri.Display('rle.rgba.exr', 'openexr', 'rgba' ,{'string exrcompression' :'rle'})
+```
+
+---
+
+## Search Paths
+- RenderMan searches specific paths for shader definitions, texture map files and other resources 
+- The search path is a colon separated list of directories that are used in searching for files.
+
+```
+Option "searchpath" "string shader" ["/mapublic/shaders"]
+ri.Option('searchpath', {'string shader':'/mapublic/shaders'})
+```
+
++++
+
+## Search Paths
+
+- The valid search paths are:
+  - shader :- Used by the renderer to find all shader .slo files. 
+  - texture :- Used by the renderer to find all texture files. 
+  - archive :- Used by the renderer to find RIB archives. 
+  - procedural :- Used by the renderer to find procedural primitive DSOS. 
+  - display :- Used by the renderer to find display drivers. 
+
+  

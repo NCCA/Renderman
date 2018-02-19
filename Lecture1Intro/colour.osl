@@ -1,0 +1,13 @@
+/* simple osl shader to read in attribute and output colour
+ compile oslc colour.osl
+ Worth reading this https://rmanwiki.pixar.com/display/REN/OSL+Patterns
+ "Binding primvars on geometry in PRMan is fairly simple:
+ just mark the parameters in the shader with metadata [[int lockgeom = 0]].
+ This will tell the shading system to consider this variable as varying input and
+ it will bind the variable in the shader if it is present on the geometry. "
+*/
+
+shader colour ( color Cs = 1 [[int lockgeom=0]] ,output	color Cout=0 )
+{
+		Cout=Cs;
+}

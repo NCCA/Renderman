@@ -389,3 +389,56 @@ ri.Bxdf( 'PxrDiffuse','diffuse',
 @[28-31](Use the output of the expression as the input to the diffuse resultRGB is the default)
 @[36-37] (Pass Cs to the renderer)
 
+---
+
+## Rib file Structure Conventions
+
+- Following is a structured list of components for a conforming RIB file that diagrams the "proper" use of RIB. 
+- Some of the components are optional and will depend greatly on the resource requirements of a given scene. 
+- Indentation indicates the scope of the following command.
+
++++
+
+```
+Preamble and global variable declarations (RIB requests:version,declare)
+Static options and default attributes (image and display options,camera options) Static camera transformations (camera location and orientation)
+Frame block (if more than one frame)
+Frame-specific variable declarations Variable options and default attributes Variable camera transforms
+World block
+      (scene description)
+      User Entity (enclosed within AttributeBegin/AttributeEnd)
+      User Entity (enclosed within AttributeBegin/AttributeEnd)
+      User Entity
+more frame blocks
+```
+
++++
+
+## Rib file Structure
+
+- This structure results from the vigorous application of the following Scoping Conventions:
+- No attribute inheritance should be assumed unless implicit in the definition of the User Entity (i.e., within a hierarchy). 
+- No attribute should be exported except to establish either global or local defaults. 
+- The RenderMan Specification provides block structuring to organize the components of a RIB file. 
+- Although the use of blocks is only required for frame and world constructs by the Specification, the liberal use of attribute and transform blocks is encouraged. 
+
++++
+
+## Attributes
+
+- Attributes are flags and values that are part of the graphics state, and are therefore associated with individual primitives. 
+- The values of these attributes are pushed and popped with the graphics state.
+- This is done with the ```AttributeBegin``` and ```AttributeEnd``` commands
+- The attribute block is the fundamental block for encapsulating user entities. 
+
++++
+
+## Attributes
+
+- Within an attribute block, the structure is simple. All attribute settings should follow immediately after the AttributeBegin request.
+- Geometric transformations are considered attributes in the RenderMan Interface and should also precede any geometry. 
+- Depending on the internal architecture of the modeling software, user entities may be described around a local origin. In this case, a modeling transformation commonly transforms the entity from object space to world space. 
+- If this is not the case, the modeler will probably be working entirely in world space and no modeling transform will be present.
+- After setting all of the attributes for the entity, the geometry should immediately follow
+
++++

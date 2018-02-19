@@ -391,7 +391,7 @@ ri.Bxdf( 'PxrDiffuse','diffuse',
 
 ---
 
-## Rib file Structure Conventions
+### Rib file Structure Conventions
 
 - Following is a structured list of components for a conforming RIB file that diagrams the "proper" use of RIB. 
 - Some of the components are optional and will depend greatly on the resource requirements of a given scene. 
@@ -419,6 +419,11 @@ more frame blocks
 - This structure results from the vigorous application of the following Scoping Conventions:
 - No attribute inheritance should be assumed unless implicit in the definition of the User Entity (i.e., within a hierarchy). 
 - No attribute should be exported except to establish either global or local defaults. 
+
++++
+
+## Rib file Structure
+
 - The RenderMan Specification provides block structuring to organize the components of a RIB file. 
 - Although the use of blocks is only required for frame and world constructs by the Specification, the liberal use of attribute and transform blocks is encouraged. 
 

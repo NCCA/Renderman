@@ -1,0 +1,2 @@
+Bxdf "PxrDiffuse" "diffuse" "color diffuseColor" [0 1 1]
+Sphere 1 -1 1 360

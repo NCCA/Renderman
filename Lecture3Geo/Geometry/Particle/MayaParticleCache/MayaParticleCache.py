@@ -1,17 +1,14 @@
 #!/usr/bin/python
 # for bash we need to add the following to our .bashrc
 # export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin   
-import getpass,os,sys
-import time,random
+import os,sys,time,random
 # import the python renderman library
 import prman
-import os
 
 
 def OpenCacheFile(ri,FileName) :
 	print "reading ",FileName
 	ip=open(FileName,'r')
-	ip = open(FileName,'r')
 	#grab the data as lines
 	data=ip.readlines()
 	# for each line check for one of our tokens
@@ -58,9 +55,6 @@ for Files in FileNames :
 		# this is the begining of the rib archive generation we can only
 		# make RI calls after this function else we get a core dump
 		ri.Begin(filename)
-		ri.Declare("Light1" ,"string")
-		ri.Declare("Light2" ,"string")
-		ri.Declare("Light3" ,"string")
 
 		# now we add the display element using the usual elements
 		# FILENAME DISPLAY Type Output format
@@ -69,18 +63,15 @@ for Files in FileNames :
 		ri.Format(720,575,1)
 		# now set the projection to perspective
 		ri.Projection(ri.PERSPECTIVE,{ri.FOV:50}) 
-		ri.LightSource("ambientlight",{ri.HANDLEID:"ambient","float intensity":[0.5]})
-		ri.LightSource( "distantlight", {ri.HANDLEID:"Light1", "point to":[0,0,0], "float intensity": [200]})
-		
-		ri.Illuminate("Light1",1)
 		# now we start our world
 		ri.WorldBegin()
 		
 		ri.Translate(0,-2,20)
 		ri.Rotate(35,0,1,0)
-		ri.Surface("plastic")
-		ri.Color([0,0,0.8])
-		
+		ri.Bxdf( 'PxrDiffuse','bxdf', 
+		{
+			'color diffuseColor' : [0,0,0.8]
+		})		
 		OpenCacheFile(ri,PDAdir+Files)
 
 		ri.WorldEnd()

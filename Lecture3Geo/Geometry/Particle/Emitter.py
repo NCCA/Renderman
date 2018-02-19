@@ -53,7 +53,6 @@ class Emitter :
 			ca(pl[i].Colour[2])	
 				
 		ri.AttributeBegin()
-		print points
 		ri.Points({ri.P:points,"varying float width":width,"varying color Cs":colour})
 		ri.AttributeEnd()
 		

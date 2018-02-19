@@ -546,9 +546,9 @@ ri.Quantize("z",0,0,0,0)
 
 |<small/>output variable name  |	<small/>image channel name | 	<small/>type|
 |----------------------|---------------------|------|
-|"r"	| "R"	| preferred type |
-|"g"	| "G" | preferred type |
-|"b"	| "B"	| preferred type |
-|"a"	| "A"	| preferred type |
-|"z"	| "Z"	| FLOAT |
-| other	| same as output variable name	| preferred type |
+|<small/>"r"	| <small/>"R"	| <small/>preferred type |
+|<small/>"g"	| <small/>"G" | <small/>preferred type |
+|<small/>"b"	| <small/>"B"	| <small/>preferred type |
+|<small/>"a"	| <small/>"A"	| <small/>preferred type |
+|<small/>"z"	| <small/>"Z"	| <small/>FLOAT |
+| <small/>other	| <small/>same as output variable name	| <small/>preferred type |

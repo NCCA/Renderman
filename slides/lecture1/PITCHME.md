@@ -361,3 +361,18 @@ ri.Bxdf( 'PxrDiffuse','diffuse',
 
 +++?code=Lecture1Intro/Colour.py&lang=python&title=[Colour.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/Colour.py)
 @[26-29](Here we use the simple PxrDiffuse surface model)
+
++++
+
+## Using Patterns for Colour
+
+- A call to '''PxrDiffuse''' can set the colour for the whole primitive
+- If we wish to pass Colour as a parameter list we need some other way of reading the information
+- We can do this using a combination of '''ri.Pattern''' and an OSL shader or a SeExpr expression.
+
++++?code=Lecture1Intro/Param.py&lang=python&title=[Param.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/Param.py)
+@[23-27](Here we define the Pattern and the BxDF)
+@[32](define a list of Colours (RGB Tuples))
+@[33](Pass this to the Sphere command using the Variable Cs)
+
++++?code=Lecture1Intro/colour.osl&lang=python&title=[colour.osl](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/colour.osl)

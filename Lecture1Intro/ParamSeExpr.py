@@ -12,7 +12,7 @@ ri.Begin('__render')
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
-ri.Display('Param.exr', 'it', 'rgba')
+ri.Display('ParamSeExpr.exr', 'it', 'rgba')
 # Specify PAL resolution 1:1 pixel Aspect ratio
 ri.Format(720,575,1)
 # now set the projection to perspective
@@ -20,16 +20,20 @@ ri.Projection(ri.PERSPECTIVE,{ri.FOV:50})
 
 # now we start our world
 ri.WorldBegin()
-ri.Pattern( 'colour', 'colourShader')
+
+ri.Pattern( 'PxrSeExpr' ,'seTexture',
+{
+	'string expression' : [ '$Cs ']
+})
 ri.Bxdf( 'PxrDiffuse','bxdf', 
 {
-  'reference color diffuseColor' : ['colourShader:Cout']
+  'reference color diffuseColor' : ['seTexture:resultRGB']
 })
 
 ri.Translate(0,0,3)
 ri.TransformBegin()
-ri.Rotate(90,1,1,1)
-colours=[1,0,0,0,0,1,1,0,0,0,1,0]
+colours=[1,1,1,1,0,0,1,0,0,0,1,0]
+ri.Rotate(90,0s,1,1)
 ri.Sphere(1,-1,1,360,{'Cs':colours})
 ri.TransformEnd()
 ri.WorldEnd()

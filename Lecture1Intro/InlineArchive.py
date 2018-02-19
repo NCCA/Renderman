@@ -13,7 +13,6 @@ def Colour(colour) :
 		})
 
 
-
 ri = prman.Ri() # create an instance of the RenderMan interface
 ri.Option('rib', {'string asciistyle': 'indented'})
 

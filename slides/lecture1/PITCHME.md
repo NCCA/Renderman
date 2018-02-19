@@ -474,3 +474,34 @@ Attribute "identifier" "name" ["Spheres3"]
 ```python
 ri.Attribute ("identifier",{"name": "Wave1"})
 ```
+
+---
+
+## Objects
+
+- A single geometric primitive or a list of geometric primitives may be retained by enclosing them with ObjectBegin and ObjectEnd. 
+- The RenderMan Interface allocates and re-turns an ObjectHandle for each retained object defined in this way. 
+- This handle can subsequently be used to reference the object when creating instances with ObjectInstance. 
+- Objects are not rendered when they are defined within an ObjectBegin-ObjectEnd block; only an internal definition is created. 
+
++++
+
+## Objects 
+- Transformations, and even Motion blocks, may be used inside an Object block, though they obviously imply a relative transformation to the coordinate system active when the Object is instanced. 
+- All of an object's attributes are inherited at the time it is instanced, not at the time at which it is created. 
+- So, for example, shader assignments or other attributes are not allowed within an Object block. 
+
++++?code=Lecture1Intro/ObjectBegin.py&lang=python&title=[ObjectBegin.py](https://github.com/NCCA/Renderman/blob/master/Lecture1Intro/ObjectBegin.py)
+@[7-12](Simple Colour function)
+@[41-49](Declare an Object and save the handle )
+@[55-56] (Instance the Object)
+
+---
+
+## Options
+- Options are parameters that affect the rendering of an entire image. 
+- They must be set before calling WorldBegin, since at that point options for a specific frame are frozen.
+- The PRMan Quick Reference includes a table that summarizes summarizes the options available in PhotoRealistic RenderMan. 
+- Note that some of the defaults listed can be overridden by configuration files.
+
++++

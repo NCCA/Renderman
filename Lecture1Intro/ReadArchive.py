@@ -28,7 +28,7 @@ ri.Display('ReadArchive.exr', 'it', 'rgba')
 # Specify PAL resolution 1:1 pixel Aspect ratio
 ri.Format(720,575,1)
 # now set the projection to perspective
-ri.Projection(ri.PERSPECTIVE,{ri.FOV:30}) 
+ri.Projection(ri.PERSPECTIVE,{ri.FOV:40}) 
 
 
 # now we start our world
@@ -51,19 +51,25 @@ Colour(colours['red'])
 ri.Attribute ('identifier',{'name': 'Wave1'})
 ri.ReadArchive('Archive.rib')
 ri.TransformEnd()
+
 ri.TransformBegin()
 ri.Rotate(30,1,0,0)
 Colour(colours['green']) 
-ri.Translate(2.2,0,0)
-ri.Attribute( 'identifier',{ 'name' :'Wave2'})
-ri.ReadArchive('Archive.rib')
+ri.Rotate(-90,1,0,0)
+ri.Translate(1,-1.5,0)
+ri.Scale(0.1,0.1,0.1)
+
+ri.Attribute( 'identifier',{ 'name' :'gumbo'})
+ri.ReadArchive('gumbo.rib')
 ri.TransformEnd()
 ri.TransformBegin()
 ri.Rotate(30,1,0,0)
 Colour(colours['blue'])
+ri.Rotate(-90,1,0,0)
 ri.Translate(-2.2,0,0)
-ri.Attribute('identifier',{ 'name' : 'Wave3'})
-ri.ReadArchive('Archive.rib')
+ri.Scale(0.1,0.1,0.1)
+ri.Attribute('identifier',{ 'name' : 'vase'})
+ri.ReadArchive('vase.rib')
 ri.TransformEnd()
 #end our world
 

@@ -15,8 +15,7 @@ The following folders contain examples for my Renderman lectures. Note I'm in th
 ### Lecture 1 [Intro to Renderman using the Python API](https://gitpitch.com/NCCA/Renderman/master?grs=github&t=white&p=slides%2Flecture1%2F#/) [code](https://github.com/NCCA/Renderman/tree/master/Lecture1Intro)
 
 
-### Lecture 2 [Advanced Geometry :- Polygons, Subdivision surfaces, Points and Curves]
-(https://gitpitch.com/NCCA/Renderman/master?grs=github&t=white&p=slides%2Flecture2%2F#/) [code](https://github.com/NCCA/Renderman/tree/master/Lecture2Geo)
+### Lecture 2 [Advanced Geometry :- Polygons, Subdivision surfaces, Points and Curves](https://gitpitch.com/NCCA/Renderman/master?grs=github&t=white&p=slides%2Flecture2%2F#/) [code](https://github.com/NCCA/Renderman/tree/master/Lecture2Geo)
 
 ### Old lectures PDF
 

@@ -1,0 +1,55 @@
+##RenderMan RIB
+version 3.04
+Option "searchpath" "string archive" ["./assets/:@"]
+Display "rgb.exr" "it" "rgba" 
+Format 1024 720 1
+Hider "raytrace" "int incremental" [1]
+ShadingRate 100
+PixelVariance 10
+Integrator "PxrPathTracer" "integrator" 
+Option "statistics" "filename" ["stats.txt"]
+Option "statistics" "endofframe" [1]
+Projection "perspective" "uniform float fov" [50]
+Rotate 15 1 0 0
+Translate 0 0.8 2.1
+WorldBegin 
+TransformBegin 
+AttributeBegin 
+Declare "meshLight" "string"
+Light "PxrMeshLight" "meshLight" "float intensity" [30]
+ShadingRate 1
+Sides 1
+Patch "bilinear" "P" [-0.25 0.99 -0.25 0.25 0.99 -0.25 -0.25 0.99 0.25 0.25 0.99 0.25]
+AttributeEnd 
+TransformEnd 
+AttributeBegin 
+Attribute "identifier" "name" ["cornell"]
+ReadArchive "cornell.rib" 
+AttributeEnd 
+AttributeBegin 
+Attribute "identifier" "name" ["buddha"]
+TransformBegin 
+Translate -0.5 -1 0
+Rotate 180 0 1 0
+Scale 0.1 0.1 0.1
+ReadArchive "buddha.zip!buddha.rib" 
+TransformEnd 
+AttributeEnd 
+AttributeBegin 
+Attribute "identifier" "name" ["sphere"]
+TransformBegin 
+Translate 0.3 -0.7 0.3
+Sphere 0.3 -0.3 0.3 360 
+TransformEnd 
+AttributeEnd 
+AttributeBegin 
+Attribute "identifier" "name" ["teapot"]
+TransformBegin 
+Translate 0 -1 -0.8
+Rotate 45 0 1 0
+Rotate -90 1 0 0
+Scale 0.1 0.1 0.1
+Geometry "teapot" 
+TransformEnd 
+AttributeEnd 
+WorldEnd 

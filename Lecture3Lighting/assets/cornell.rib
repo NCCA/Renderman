@@ -1,0 +1,13 @@
+# simple rib file for the walls of the cornell box
+  AttributeBegin
+    Bxdf "PxrDiffuse" "left" "color diffuseColor" [0.8 0.2 0.2]
+    Polygon "P" [-1 1 -5  -1 1 1  -1 -1 1  -1 -1 -5]
+    Bxdf "PxrDiffuse" "right" "color diffuseColor" [0.2 0.2 0.8]
+    Polygon "P" [1 -1 -5  1 -1 1  1 1 1  1 1 -5]
+    Bxdf "PxrDiffuse" "floor" "color diffuseColor" [0.8 0.8 0.8]
+    Polygon "P" [-1 -1 1  1 -1 1  1 -1 -5  -1 -1 -5]
+    Bxdf "PxrDiffuse" "ceiling" "color diffuseColor" [0.95 0.95 0.95]
+    Polygon "P" [-1 1 -5  1 1 -5  1 1 1  -1 1 1]
+    Bxdf "PxrDiffuse" "back" "color diffuseColor" [0.8 0.8 0.8]
+    Polygon "P" [-1 1 1  1 1 1  1 -1 1  -1 -1 1]
+  AttributeEnd

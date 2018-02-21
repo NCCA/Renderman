@@ -6,7 +6,7 @@ import sys
 import argparse
 
 # Main rendering routine
-def main(filename,shadingrate=10,pixelvar=0.1,integrator='PxrPathTracer',integratorParams={}) :
+def main(filename,shadingrate=10,pixelvar=0.1,fov=45.0,width=1024,height=720,integrator='PxrPathTracer',integratorParams={}) :
   print "shading rate {} pivel variance {} using {} {}".format(shadingrate,pixelvar,integrator,integratorParams)
   ri = prman.Ri() # create an instance of the RenderMan interface
 
@@ -18,7 +18,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,integrator='PxrPathTracer',integra
   # now we add the display element using the usual elements
   # FILENAME DISPLAY Type Output format
   ri.Display('rgb.exr', 'it', 'rgba')
-  ri.Format(1024,720,1)
+  ri.Format(width,height,1)
 
   # setup the raytrace / integrators
   ri.Hider('raytrace' ,{'int incremental' :[1]})
@@ -27,23 +27,23 @@ def main(filename,shadingrate=10,pixelvar=0.1,integrator='PxrPathTracer',integra
   ri.Integrator (integrator ,'integrator',integratorParams)
   ri.Option( 'statistics', {'filename'  : [ 'stats.txt' ] } )
   ri.Option( 'statistics', {'endofframe' : [ 1 ] })
-  '''
+  """
   ri.Projection ('PxrCamera' , 
   { 'fov' : 45,
-  # 'float tilt' : 7.5,
+   #'float tilt' : 7.5,
     'float radial1' : -0.1,
-  #  'color axial' : [-0.02, 0 ,0.02] ,
-  #  'color transverse' : [0.98 ,1 ,1.02],
+    'color axial' : [-0.02, 0 ,0.02] ,
+    'color transverse' : [0.98 ,1 ,1.02],
     'float natural' : 1.0 ,
     'float optical' : 1.0,
-  # 'float shiftY' : 0.5,
-  # 'string sweep' : 'down',
-  # 'float duration' : 0.1
+    #'float shiftY' : 0.5,
+    'string sweep' : 'down',
+    'float duration' : 0.1
     })
-  #ri.DepthOfField( 3 ,1 ,5)
-  '''
-
-  ri.Projection(ri.PERSPECTIVE,{ri.FOV:50})
+#  ri.DepthOfField( 22 ,1 ,4)
+  #'''
+  """
+  ri.Projection(ri.PERSPECTIVE,{ri.FOV:fov})
 
   ri.Rotate(15,1,0,0)
   ri.Translate( 0, 0.8 ,2.1)
@@ -120,6 +120,15 @@ if __name__ == "__main__":
   parser.add_argument('--pixelvar', '-p' ,nargs='?', 
                       const=0.1, default=0.1,type=float,
                       help='modify the pixel variance default  0.1')
+  parser.add_argument('--fov', '-f' ,nargs='?', 
+                      const=45.0, default=45.0,type=float,
+                      help='projection fov default 45.0')
+  parser.add_argument('--width' , '-wd' ,nargs='?', 
+                      const=1024, default=1024,type=int,
+                      help='width of image default 1024')
+  parser.add_argument('--height', '-ht' ,nargs='?', 
+                      const=720, default=720,type=int,
+                      help='height of image default 720')
   
   parser.add_argument('--rib', '-r' , action='count',help='render to rib not framebuffer')
   parser.add_argument('--default', '-d' , action='count',help='use PxrDefault')
@@ -154,5 +163,5 @@ if __name__ == "__main__":
     integratorParams={'int wireframe' : [1], 'string style' : ['st']}
 
 
-  main(filename,args.shadingrate,args.pixelvar,integrator,integratorParams)
+  main(filename,args.shadingrate,args.pixelvar,args.fov,args.width,args.height,integrator,integratorParams)
 

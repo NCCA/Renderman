@@ -68,8 +68,7 @@ f -4 -3 -2 -1
 
 - The python obj class is passed a file name and loads the obj file data into a number of lists
 - These are then made available to a number of methods which produced renderman output for rendering
-- The Round parameter specifies a rounding for the floating point values
 
-+++
 
-## Python Obj Loader
++++?code=PythonClasses/Obj.py&lang=python&title=Obj.py
+

@@ -60,3 +60,17 @@ v -0.500000 1.000000 0.400000
 f -4 -3 -2 -1
 
 ```
+
+---
+
+## Python Obj Loader
+
+<img src="slides/lecture2/images/Obj.png" width="50%">
+
+- The python obj class is passed a file name and loads the obj file data into a number of lists
+- These are then made available to a number of methods which produced renderman output for rendering
+- The Round parameter specifies a rounding for the floating point values
+
++++
+
+## Python Obj Loader

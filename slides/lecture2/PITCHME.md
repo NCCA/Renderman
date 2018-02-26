@@ -64,7 +64,7 @@ f -4 -3 -2 -1
 
 ## Python Obj Loader
 
-<img src="slides/lecture2/images/Obj.png" width="50%">
+<img src="slides/lecture2/images/Obj.png" width="30%">
 
 - The python obj class is passed a file name and loads the obj file data into a number of lists
 - These are then made available to a number of methods which produced renderman output for rendering

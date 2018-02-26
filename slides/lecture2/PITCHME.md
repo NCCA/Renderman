@@ -217,6 +217,11 @@ ri.PointsPolygons(npolys,nvertices,{ri.P:points})
 
 - The generation program reads requests on its standard input stream, and emits RIB streams on its standard output stream. 
 - These RIB streams are read into the renderer as though they were read from a file (as with ReadArchive ), and may include any standard RenderMan attributes and primitives (including procedural primitive calls to itself or other helper programs). 
+
++++
+
+## Procedural Primitives
+
 - As long as any procedural primitives exist in the rendering database which require the identical helper program for processing, the socket connection to the program will remain open. 
 - This means that the program should be written with a loop which accepts any number of requests and generates a RIB "snippet" for each one.
 

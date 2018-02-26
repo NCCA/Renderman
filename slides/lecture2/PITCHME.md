@@ -44,6 +44,8 @@ f v1/vt1/vn1 v2/vt2/vn2 v3/vt3/vn3 ...
 f v1//vn1 v2//vn2 v3//vn3 ...
 ```
 
++++
+
 - It is also possible to reference points using negative indices, where the indices are specified relative to the current maximum vertex position (-1 references the last vertex defined). 
 
 ## Face Format

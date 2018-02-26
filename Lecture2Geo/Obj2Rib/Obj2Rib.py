@@ -117,7 +117,7 @@ def ObjToRib(ri,File,Round) :
 				tind=int(index[1])-1
 				tx.append(round(float(text[tind][0]),Round))
 				tx.append(round(float(text[tind][1]),Round))
-			# checl for normals and check they are there
+			# check for normals and check they are there
 			if(index[2] !="") :
 				nind=int(index[2])-1
 				normals.append(round(float(norm[nind][0]),Round))
@@ -147,47 +147,27 @@ ri.Option("rib", {"string asciistyle": "indented"})
 filename = "Obj2Rib.rib"
 # this is the begining of the rib archive generation we can only
 # make RI calls after this function else we get a core dump
-ri.Begin(filename)
-# ArchiveRecord is used to add elements to the rib stream in this case comments
-# note the function is overloaded so we can concatinate output
-ri.ArchiveRecord(ri.COMMENT, 'File ' +filename)
-ri.ArchiveRecord(ri.COMMENT, "Created by " + getpass.getuser())
-ri.ArchiveRecord(ri.COMMENT, "Creation Date: " +time.ctime(time.time()))
-ri.Declare("Light1" ,"string")
-ri.Declare("Light2" ,"string")
-ri.Declare("Light3" ,"string")
+ri.Begin('__render')
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
-ri.Display("Obj2Rib.exr", "framebuffer", "rgba")
+ri.Display("Obj2Rib.exr", "it", "rgba")
 # Specify PAL resolution 1:1 pixel Aspect ratio
 ri.Format(720,575,1)
 # now set the projection to perspective
 ri.Projection(ri.PERSPECTIVE,{ri.FOV:50}) 
 
-objFile="clubbot.obj"
+objFile="troll.obj"
 
 # now we start our world
 ri.WorldBegin()
 
-ri.LightSource( "distantlight", {ri.HANDLEID:"Light1", "point to":[1,0,0], "float intensity": [1]})
-ri.LightSource( "distantlight", {ri.HANDLEID:"Light2", "point to":[-1,0,0], "float intensity": [1]})
-ri.LightSource( "distantlight", {ri.HANDLEID:"Light3", "point to":[0,0,1], "float intensity": [0.2]})
-
-ri.Illuminate("Light1",1)
-ri.Illuminate("Light2",1)
-ri.Illuminate("Light3",1)
 xmin,xmax,ymin,ymax,zmin,zmax= GetObjExtents(objFile,3)
 
-ri.Translate(0,-8,22)
+ri.Translate(0,0,2)
 #ri.Translate(0,-1,8)
 ri.TransformBegin()
-ri.Rotate(180,0,1,0)
-ri.Surface("texmap",{"string texname":"clubbot.tx","float maptype" :[3]})
-#ri.Surface("tex",{"string filename":"dice.tx"})
+ri.Rotate(90,0,1,0)
 
-ri.Color([1,1,0])
-#ri.Surface("plastic")
-ri.ShadingInterpolation("constant")
 ObjToRib(ri,objFile,4) 
 ri.TransformEnd()
 ri.WorldEnd()

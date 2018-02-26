@@ -142,3 +142,12 @@ nvertices=[0,2,3,1,0,1,5,4,0,4,6,2,1,3,7,5,2,6,7,3,4,5,7,6]
 ri.PointsPolygons(npolys,nvertices,{ri.P:points})
 
 ```
+
++++
+
+## ri.PointsGeneralPolygons
+
+- Define npolys general planar concave polygons, with holes, that share vertices. 
+- The array nloops indicates the number of loops comprising each polygon and has a length npolys. 
+- The array nvertices contains the number of vertices in each loop and has a length equal to the sum of all the values in the array nloops. 
+- The array vertices contains, for each loop vertex, an index into the varying primitive variable arrays.

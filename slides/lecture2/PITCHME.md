@@ -113,3 +113,32 @@ Polygon "varying float[2] st" [0 1 0.5 0 1 1] "vertex point P" [-1 -1 -2 0 1 1 1
 
 - Define a general planar concave polygon with holes. This polygon is specified by giving nloops lists of vertices. 
 - The first loop is the outer boundary of the polygon; all additional loops are holes.
+
++++
+
+## ri.PointsPolygon
+
+- Define npolys planar convex polygons that share vertices. 
+- The array nvertices contains the number of vertices in each polygon and has length npolys. 
+- The array vertices contains, for each polygon vertex, an index into the varying primitive variable arrays. 
+- The varying arrays are 0-based. vertices has length equal to the sum of all of the values in the nvertices array. 
+- Individual vertices in the parameterlist are thus accessed indirectly through the indices in the array vertices. 
+
++++
+
+## ri.PointsPolygon
+
+```
+points=[-0.5,-0.5,-0.5,
+     0.5,-0.5,-0.5,
+    -0.5, 0.5,-0.5,
+     0.5, 0.5,-0.5,
+    -0.5,-0.5, 0.5,
+     0.5,-0.5, 0.5,
+    -0.5, 0.5, 0.5,
+     0.5, 0.5, 0.5]
+npolys=[4,4,4,4,4,4]
+nvertices=[0,2,3,1,0,1,5,4,0,4,6,2,1,3,7,5,2,6,7,3,4,5,7,6]
+ri.PointsPolygons(npolys,nvertices,{ri.P:points})
+
+```

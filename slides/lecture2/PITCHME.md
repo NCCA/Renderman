@@ -151,3 +151,29 @@ ri.PointsPolygons(npolys,nvertices,{ri.P:points})
 - The array nloops indicates the number of loops comprising each polygon and has a length npolys. 
 - The array nvertices contains the number of vertices in each loop and has a length equal to the sum of all the values in the array nloops. 
 - The array vertices contains, for each loop vertex, an index into the varying primitive variable arrays.
+
+---
+
+## ri.Points & ri.Curves
+
+- The RenderMan Interface includes lightweight primitives for specifying point clouds, lines, curves, or ribbons. 
+- These primitives are especially useful for representing many particles, hairs, etc.
+
++++
+
+## ri.Points
+
+- Draws npoints number of point-like particles. 
+- parameterlist is a list of token-array pairs where each token is one of the standard geometric primitive variables, a variable that has been defined with RiDeclare, or is given as an inline declaration. 
+- The parameter list must include at least position ("P") information, one value for each particle. 
+
++++
+
+## ri.Points
+
+<img src="slides/lecture2/images/points.png" width="30%">
+
+
+- If a primitive variable is of class varying or vertex, the array contains npoints data values of the appropriate type, i.e., one per particle. 
+- If the variable is uniform or constant, the array contains a single element. 
+

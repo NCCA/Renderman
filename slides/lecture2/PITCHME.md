@@ -73,3 +73,35 @@ f -4 -3 -2 -1
 +++?code=PythonClasses/Obj.py&lang=python&title=Obj.py
 
 +++?code=Lecture2Geo/Obj2Rib/ObjTest.py&lang=python&title=ObjTest.py
+
+---
+
+## Polygons
+- The RenderMan Interface supports two basic types of polygons: 
+  - a convex polygon and a general concave polygon with holes. 
+- In both cases the polygon must be planar. 
+- Collections of polygons can be passed by giving a list of points and an array that indexes these points. 
+- The geometric normal of the polygon is computed by computing the normal of the plane containing the polygon (unless it is explicitly specified). 
+
++++
+
+## Normals
+
+- If the current orientation is left-handed, then a polygon whose vertices were specified in clockwise order (from the point of view of the camera) will be a front-facing polygon (that is, will have a normal vector which points toward the camera). 
+- If the current orientation is right-handed, then polygons whose vertices were specified in counter clockwise order will be front-facing. - The shading normal is set to the geometric normal unless it is explicitly specified at the vertices.
+
++++
+
+## ri.Polygon
+
+- Polygons are specified with the riPolygon function. 
+- The parameter list must include at least position ("P") information. 
+
+```
+points=[-1,-1,0,0,1,0,1,-1,0]
+normals=[0,0,-1,0,0,-1,0,0,-1]
+tx=[0,1,0.5,0,1,1]
+ri.Polygon({ri.P:points,ri.N:normals,ri.ST:tx})
+
+Polygon "varying float[2] st" [0 1 0.5 0 1 1] "vertex point P" [-1 -1 -2 0 1 1 1 -1 0] "varying normal N" [0 0 -1 0 0 -1 0 0 -1]
+```

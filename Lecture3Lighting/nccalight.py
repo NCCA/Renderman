@@ -34,6 +34,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.ShadingRate(shadingrate)
   ri.PixelVariance (pixelvar)
   ri.Integrator (integrator ,'integrator',integratorParams)
+
   ri.Attribute('visibility' , {
                'int transmission' :[1], 
                'int indirect' : [1]
@@ -59,8 +60,8 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   """
   ri.Projection(ri.PERSPECTIVE,{ri.FOV:fov})
 
-  ri.Rotate(15,1,0,0)
-  ri.Translate( 0, 0.8 ,2.1)
+  ri.Rotate(12,1,0,0)
+  ri.Translate( 0, 0.75 ,2.5)
 
 
   # now we start our world
@@ -73,22 +74,23 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Declare('meshLight' ,'string')
   ri.Attribute( 'identifier',{ 'name' :'ncca'})
 
+  ri.Bxdf ('PxrGlass' , 'glass' ,{ 
+    'color reflectionColor' : [1, 1, 1],
+    'color transmissionColor' : [1,1, 1]
+  })
   
 
-  ri.Light( 'PxrMeshLight', 'meshLight', { 'float intensity' : 10})
-  ri.ShadingRate(500)
-  ri.Sides(1)
-
-  ri.TransformBegin()
-  ri.Translate(0.1, 0.1 , -0.8)
+  ri.Light('PxrMeshLight', 'meshLight', { 
+           'float intensity' : 4.0,
+           'float exposure' : 1,
+           'color lightColor' : [0.8,0.8,0.8]
+           })
+  # ri.ShadingRate(1)
+  ri.Sides(2)
+  ri.Translate(0, 0.1 , 0)
   ri.Rotate(35,0,1,0)
   ri.Rotate(-15,1,0,0)
-  ri.Bxdf ('PxrGlass' , 'glass' ,{ 
-    'color reflectionColor' : [.1, .1, .1],
-    'color transmissionColor' : [.1,.1, .1]
-  })
   ri.ReadArchive('ncca.rib')
-  ri.TransformEnd()
   
   ri.AttributeEnd()
   ri.TransformEnd()
@@ -119,6 +121,14 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.AttributeEnd()
 
   ri.AttributeBegin()
+  ri.Pattern('PxrVariable','du', {'string variable': 'du', 'string type' : 'float'})
+  ri.Pattern('PxrVariable','dv', {'string variable': 'dv', 'string type' : 'float'})
+  ri.Pattern('starBall','starBall', { 
+            'reference float du' : ['du:resultR'], 
+            'reference float dv' : ['dv:resultR']
+            })
+
+  ri.Bxdf( 'PxrDisney','bxdf', { 'reference color baseColor' : ['starBall:Cout'] })
   ri.Attribute( 'identifier',{ 'name' :'sphere'})
   ri.TransformBegin()
   ri.Translate(0.3, -0.7 , 0.3)
@@ -137,8 +147,6 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.TransformEnd()
   ri.AttributeEnd()
 
-
-
   # end our world
   ri.WorldEnd()
   # and finally end the rib file
@@ -156,8 +164,8 @@ if __name__ == "__main__":
                       const=0.1, default=0.1,type=float,
                       help='modify the pixel variance default  0.1')
   parser.add_argument('--fov', '-f' ,nargs='?', 
-                      const=45.0, default=45.0,type=float,
-                      help='projection fov default 45.0')
+                      const=48.0, default=48.0,type=float,
+                      help='projection fov default 48.0')
   parser.add_argument('--width' , '-wd' ,nargs='?', 
                       const=1024, default=1024,type=int,
                       help='width of image default 1024')
@@ -181,6 +189,7 @@ if __name__ == "__main__":
   
   integratorParams={}
   integrator='PxrPathTracer'
+  
   if args.default :
     integrator='PxrDefault'
   if args.vcm :

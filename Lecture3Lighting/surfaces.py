@@ -7,7 +7,7 @@ import argparse
 
 # Main rendering routine
 def main(filename,shadingrate=10,pixelvar=0.1,
-         fov=45.0,width=1024,height=720,
+         fov=48.0,width=1024,height=720,
          integrator='PxrPathTracer',integratorParams={}
         ) :
   print 'shading rate {} pivel variance {} using {} {}'.format(shadingrate,pixelvar,integrator,integratorParams)
@@ -33,8 +33,8 @@ def main(filename,shadingrate=10,pixelvar=0.1,
  
   ri.Projection(ri.PERSPECTIVE,{ri.FOV:fov})
 
-  ri.Rotate(15,1,0,0)
-  ri.Translate( 0, 0.8 ,2.1)
+  ri.Rotate(12,1,0,0)
+  ri.Translate( 0, 0.75 ,2.5)
 
 
   # now we start our world
@@ -81,7 +81,6 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
   ri.AttributeBegin()
   ri.Attribute( 'identifier',{ 'name' :'sphere'})
-  ri.AttributeBegin()
   ri.Pattern('PxrVariable','du', {'string variable': 'du', 'string type' : 'float'})
   ri.Pattern('PxrVariable','dv', {'string variable': 'dv', 'string type' : 'float'})
   ri.Pattern('starBall','starBall', { 
@@ -164,8 +163,8 @@ if __name__ == '__main__':
                       const=0.1, default=0.1,type=float,
                       help='modify the pixel variance default  0.1')
   parser.add_argument('--fov', '-f' ,nargs='?', 
-                      const=45.0, default=45.0,type=float,
-                      help='projection fov default 45.0')
+                      const=48.0, default=48.0,type=float,
+                      help='projection fov default 48.0')
   parser.add_argument('--width' , '-wd' ,nargs='?', 
                       const=1024, default=1024,type=int,
                       help='width of image default 1024')

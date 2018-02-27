@@ -235,7 +235,8 @@ ri.PointsPolygons(npolys,nvertices,{ri.P:points})
 fprintf(socket, "%g %s\n", detail, datablock);
 ```
 - The detail is provided first, as a single floating-point number, followed by a space, followed by the datablock and finally a newline. 
-- The datablock is completely uninterpreted by the renderer or by the socket write, so any newlines or special characters should be preserved (but the quotation marks that make it a string in the RIB file will, of course, be missing).
+
+- The datablock is completely uninterpreted by the renderer or by the socket write, so any newlines or special characters should be preserved 
 
 +++
 
@@ -275,7 +276,6 @@ RiEnd();
 ```
 Procedural "RunProgram" [ "program" "datablock" ] [ bound ]
 ```
-
 - program is the name of the helper program to execute, and may include command line options. 
 - datablock is the generation request data block. It is an ASCII string which is meaningful to program, and adequately describes the children which are to be generated. 
 - The bound is an array of six floating point numbers which is xmin, xmax, ymin, ymax, zmin, zmax in the current object space.

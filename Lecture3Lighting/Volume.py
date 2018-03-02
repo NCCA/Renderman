@@ -152,8 +152,11 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
 # Volume in box
   ri.AttributeBegin() 
-  ri.Bxdf( 'PxrVolume', 'smooth',{ 'float densityFloat' : 0.75})
-  ri.Volume( 'box', [-0.999, 0.999, -0.999, 0.999, -0.999, 0.999], [0, 0, 0])
+  ri.Bxdf('PxrVolume', 'smooth',{ 
+          'float densityFloat' : 0.95,
+          'float anisotropy' : 0.2
+          })
+  ri.Volume('box',[-0.999,0.999,-0.999,0.999,-0.999,0.999], [0, 0, 0])
   ri.AttributeEnd() 
 
 
@@ -162,17 +165,18 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Attribute('identifier' , {'name' : 'stainedglass_rightwall'})
   ri.Pattern('PxrManifold2D' ,'texture_place',{ 
              'float scaleS' : [1], 
-             'float scaleT' : [0.5]})
+             'float scaleT' : [1]})
   ri.Pattern('PxrTexture', 'ctex1', {
              'string filename' : ['stainedGlass.tex'], 
              'int invertT' : [0] , 
              'reference struct manifold' : ['texture_place:result']
              })
-  # build an expression to set the colour based on UV position so the whole area is not the light.
+  # build an expression to set the colour based on UV position so the whole area is not the light. So basically texture is output in uv range .25 - .75 blue if not (for cornell box)
   diffuseExpr='''
-  $u > .25 &&  $u < .75 && $v > .25 &&  $v < .75 ? $inColor: .18
+  $u > .25 &&  $u < .75 && $v > .25 &&  $v < .75 ? $inColor: [0.2 ,0.2, 0.8]
   '''
   ri.Pattern( 'PxrSeExpr', 'diffuse' , {'reference color inColor' : 'ctex1:resultRGB' , 'string expression' : diffuseExpr})
+  # this expression is for the transmission colour, only transmit if in texture range.
   transmitExpr='''
   $u > .25 &&  $u < .75 && $v > .25 &&  $v < .75 ? $inColor: 0
   '''

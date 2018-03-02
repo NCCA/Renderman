@@ -146,6 +146,16 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Geometry('teapot')
   ri.TransformEnd()
   ri.AttributeEnd()
+  """
+# Volume in box
+  ri.AttributeBegin() 
+  ri.Bxdf('PxrVolume', 'smooth',{ 
+          'float densityFloat' : 0.85,
+          'float anisotropy' : 0.0
+          })
+  ri.Volume('box',[-0.999,0.999,-0.999,0.999,-0.999,0.999], [0, 0, 0])
+  ri.AttributeEnd() 
+  """
 
   # end our world
   ri.WorldEnd()

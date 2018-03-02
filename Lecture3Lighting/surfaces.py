@@ -4,6 +4,11 @@ import prman
 import sys
 import sys,os.path,subprocess
 import argparse
+import os,sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import NCCAPrman
+
 
 # Main rendering routine
 def main(filename,shadingrate=10,pixelvar=0.1,
@@ -11,13 +16,19 @@ def main(filename,shadingrate=10,pixelvar=0.1,
          integrator='PxrPathTracer',integratorParams={}
         ) :
   print 'shading rate {} pivel variance {} using {} {}'.format(shadingrate,pixelvar,integrator,integratorParams)
+  
   ri = prman.Ri() # create an instance of the RenderMan interface
-
+  # going to load in an asset 
+  Assets=NCCAPrman.RendermanAssetLib()
+  Assets.loadAsset('Oak','/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/Materials/Wood/Gritz_Oak.rma')
+  Assets.loadAsset('BlueMarble','/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/Materials/Minerals/Blue_Marble.rma')
+  
+  Assets.loadAsset('light','/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/EnvironmentMaps/Indoor/Pixar_Atrium.rma')
   # this is the begining of the rib archive generation we can only
   # make RI calls after this function else we get a core dump
   ri.Begin(filename)
   ri.Option('searchpath', {'string archive':'./assets/:@'})
-
+  Assets.setOptions(ri)
   # now we add the display element using the usual elements
   # FILENAME DISPLAY Type Output format
   ri.Display('rgb.exr', 'it', 'rgba')
@@ -39,6 +50,8 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
   # now we start our world
   ri.WorldBegin()
+  Assets.useAsset(ri,'light')
+  """
   #######################################################################
   #Lighting We need geo to emit light
   #######################################################################
@@ -57,10 +70,10 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   #######################################################################
   # end lighting
   #######################################################################
-
+"""
   ri.AttributeBegin()
   ri.Attribute( 'identifier',{ 'name' :'cornell'})
-  ri.ReadArchive('cornell.rib')
+  #ri.ReadArchive('cornell.rib')
   ri.AttributeEnd()
 
   ri.AttributeBegin()
@@ -69,12 +82,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Translate(-0.5,-1,0)
   ri.Rotate(180,0,1,0)
   ri.Scale(0.1,0.1,0.1)
-  ri.Bxdf('PxrGlass', 'greenglass',{ 
-  'float reflectionGain' : 1,
-  'color absorptionColor'  : [0.0 ,0.2, 0.0],
-  'color reflectionColor' : [0, 1 ,0],
-  'color transmissionColor' : [0, 1 ,0] 
-  })
+  Assets.useAsset(ri,'BlueMarble')
   ri.ReadArchive('buddha.zip!buddha.rib')
   ri.TransformEnd()
   ri.AttributeEnd()
@@ -104,11 +112,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Rotate(45,0,1,0)
   ri.Rotate( -90, 1 ,0 ,0)
   ri.Scale( 0.1, 0.1, 0.1) 
-  ri.Bxdf('PxrSurface', 'plastic',{
-          'color diffuseColor' : [.04, .51, .1],
-          'color clearcoatFaceColor' : [.5, .5, .5], 
-          'color clearcoatEdgeColor' : [.25, .25, .25]
-  })
+  Assets.useAsset(ri,'Oak')
   ri.Geometry('teapot')
   ri.TransformEnd()
   ri.AttributeEnd()

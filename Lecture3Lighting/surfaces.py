@@ -24,6 +24,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   Assets.loadAsset('BlueMarble','/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/Materials/Minerals/Blue_Marble.rma')
   
   Assets.loadAsset('light','/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/EnvironmentMaps/Indoor/Pixar_Atrium.rma')
+  Assets.loadAsset('luxo','/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/EnvironmentMaps/Outdoor/LuxoJr.rma')
   # this is the begining of the rib archive generation we can only
   # make RI calls after this function else we get a core dump
   ri.Begin(filename)
@@ -50,7 +51,10 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
   # now we start our world
   ri.WorldBegin()
-  Assets.useAsset(ri,'light')
+  ri.TransformBegin()
+  ri.Rotate(-90,1,0,0)
+  Assets.useAsset(ri,'luxo')
+  ri.TransformEnd()
   """
   #######################################################################
   #Lighting We need geo to emit light

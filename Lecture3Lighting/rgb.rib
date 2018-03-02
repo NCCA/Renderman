@@ -1,8 +1,8 @@
 ##RenderMan RIB
 version 3.04
 Option "searchpath" "string archive" ["./assets/:@"]
-Option "searchpath" "string texture" [".:@:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/Materials/Wood/Gritz_Oak.rma:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/Materials/Minerals/Blue_Marble.rma:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/EnvironmentMaps/Indoor/Pixar_Atrium.rma"]
-Option "searchpath" "string shader" [".:@:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/Materials/Wood/Gritz_Oak.rma:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/Materials/Minerals/Blue_Marble.rma:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/EnvironmentMaps/Indoor/Pixar_Atrium.rma"]
+Option "searchpath" "string texture" [".:@:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/Materials/Wood/Gritz_Oak.rma:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/Materials/Minerals/Blue_Marble.rma:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/EnvironmentMaps/Indoor/Pixar_Atrium.rma:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/EnvironmentMaps/Outdoor/LuxoJr.rma"]
+Option "searchpath" "string shader" [".:@:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/Materials/Wood/Gritz_Oak.rma:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/Materials/Minerals/Blue_Marble.rma:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/EnvironmentMaps/Indoor/Pixar_Atrium.rma:/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/EnvironmentMaps/Outdoor/LuxoJr.rma"]
 Display "rgb.exr" "it" "rgba" 
 Format 1024 720 1
 Hider "raytrace" "int incremental" [1]
@@ -15,8 +15,12 @@ Projection "perspective" "uniform float fov" [48]
 Rotate 12 1 0 0
 Translate 0 0.75 2.5
 WorldBegin 
-#loaded from Asset file
+TransformBegin 
+Rotate -90 1 0 0
+#loaded from asset file luxo
+Light "PxrDomeLight" "domeLight" "string lightColorMap"   ["Luxo-Jr_4000x2000.tex"] 
 ##############################
+TransformEnd 
 AttributeBegin 
 Attribute "identifier" "name" ["cornell"]
 AttributeEnd 
@@ -26,7 +30,7 @@ TransformBegin
 Translate -0.5 -1 0
 Rotate 180 0 1 0
 Scale 0.1 0.1 0.1
-#loaded from Asset file
+#loaded from asset file BlueMarble
 Pattern "blue_marble" "Pixar_Blue_Marble"
     "point Pos" [0.0 0.0 0.0] 
     "float textureScale" [2.5] 
@@ -178,7 +182,7 @@ Translate 0 -1 -0.8
 Rotate 45 0 1 0
 Rotate -90 1 0 0
 Scale 0.1 0.1 0.1
-#loaded from Asset file
+#loaded from asset file Oak
 Pattern "wood" "PxrOSL1"
     "float ringunevenness" [0.5] 
     "float ringnoise" [0.02] 

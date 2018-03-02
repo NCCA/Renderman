@@ -16,10 +16,10 @@ class Asset :
     filename=filepath+'/asset.json'
     Asset.load(filename, localizeFilePaths=True)
     assetType = Asset.type()
-    if assetType == "nodeGraph":
+    if assetType == "nodeGraph" :
       self.rib=str(Asset.getRIB())
     elif assetType == "envMap" :
-      self.rib='Light "PxrDomeLight" "domeLight" "string lightColorMap"   ["%s"]' %Asset.envMapName() 
+      self.rib='Light "PxrDomeLight" "domeLight" "string lightColorMap"   ["%s"] \n' %str(Asset.envMapName()) 
 
   def getRIB(self) :
       return self.rib
@@ -44,8 +44,10 @@ class RendermanAssetLib :
 
   def useAsset(self,ri,name) :
     asset=self.loadedAssets.get(name)
+    print "using %s " %name
     if asset != None :
-      ri.ArchiveRecord(ri.COMMENT,'loaded from Asset file')
+      text="loaded from asset file %s" %name
+      ri.ArchiveRecord(ri.COMMENT,text)
       ri.ArchiveRecord(ri.VERBATIM,asset.getRIB() )
       ri.ArchiveRecord(ri.COMMENT,'#############################')
       

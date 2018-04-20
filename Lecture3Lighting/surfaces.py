@@ -25,6 +25,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   
   Assets.loadAsset('light','/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/EnvironmentMaps/Indoor/Pixar_Atrium.rma')
   Assets.loadAsset('luxo','/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/EnvironmentMaps/Outdoor/LuxoJr.rma')
+  Assets.loadAsset('griff','/Applications/Pixar/RenderManProServer-21.4/lib/RenderManAssetLibrary/EnvironmentMaps/Outdoor/GriffithObservatory.rma')
   # this is the begining of the rib archive generation we can only
   # make RI calls after this function else we get a core dump
   ri.Begin(filename)
@@ -53,7 +54,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.WorldBegin()
   ri.TransformBegin()
   ri.Rotate(-90,1,0,0)
-  Assets.useAsset(ri,'luxo')
+  Assets.useAsset(ri,'griff')
   ri.TransformEnd()
   """
   #######################################################################

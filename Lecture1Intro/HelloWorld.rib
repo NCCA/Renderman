@@ -6,8 +6,10 @@ Format 720 576 1
 Projection "perspective"
 WorldBegin
 #move our world back 2 in the z so we can see it
-Translate 0 0 2
+Translate 0 -1 4
 #draw a sphere primitive
-Sphere 1 -1 1 360
+#Sphere 1 -1 1 360
+Rotate 45 0.6 0.1 0.3
+Geometry "teapot"
 #end our world
 WorldEnd

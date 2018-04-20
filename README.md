@@ -17,6 +17,9 @@ The following folders contain examples for my Renderman lectures. Note I'm in th
 
 ### Lecture 2 [Advanced Geometry :- Polygons, Subdivision surfaces, Points and Curves](https://gitpitch.com/NCCA/Renderman/master?grs=github&t=white&p=slides%2Flecture2%2F#/) [code](https://github.com/NCCA/Renderman/tree/master/Lecture2Geo)
 
+### Lecture 3 [Lighting in Renderman](https://gitpitch.com/NCCA/Renderman/master?grs=github&t=white&p=slides%2Flecture3%2F#/) [code](https://github.com/NCCA/Renderman/tree/master/Lecture3Lighting)
+
+
 ### Old lectures PDF
 
 ### Lecture 2 [Using Lights and Cameras](https://nccastaff.bournemouth.ac.uk/jmacey/Renderman/slides/LightingInRenderman.pdf) [code](https://github.com/NCCA/Renderman/tree/master/Lecture2Lighting)

@@ -78,30 +78,60 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
   ri.Pattern('PxrTexture', 'TrollColour',{ 'string filename' : 'TrollColour.tx'})
   ri.Pattern('PxrTexture', 'TrollSpecular',{ 'string filename' : 'TrollSpec.tx'})
-  ri.Pattern('PxrTexture', 'TrollNMap',{ 'int invertT' : [0] , 'string filename' : 'TrollNormal.tx'})
 
-  ri.Pattern('PxrDispTransform','DispTransform',
-  {
-    'reference vector dispVector' : ['TrollNMap:resultRGB'],
-    #'uniform float dispDepth' : [0.01],
-    #'uniform float dispHeight' : [0.01],
-    'uniform int dispType' : [4],  # 4 == Z Brush see  https://rmanwiki.pixar.com/display/REN/PxrDispTransform
-    'uniform int vectorSpace' : [3], # tangent
-    'uniform int dispRemapMode' : [2]
+
+  ri.Pattern('PxrManifold2D' ,'texture_place',
+  { 
+    'string primvarS' : ['s'],
+    'string primvarT' : ['t'],
+    
+  })
+  ri.Pattern('PxrTexture', 'TrollNMap',
+  { 
+    'int invertT' : [0] , 
+    'string filename' : '/Users/jmacey/teaching/Rendering/PixarExamples/scenes/displacement/lion_disp_zbrushTangent.tex',
+    
+    #'TrollNormal.tx',
+    #'reference struct manifold' : ['texture_place:result']
+  
   })
 
-  ri.Displace('PxrDisplace','zbrushDisplace' ,
-  {   
-    'reference vector dispVector' : ['DispTransform:resultXYZ'], 
-    'int enabled' : [displace]
-  })
+  # displacement is slow so if not doing it disable
+  if displace == 1 :
+    ## modes see  https://rmanwiki.pixar.com/display/REN/PxrDispTransform
+    vectorSpace={'World' : 1 , 'Object' : 2 , 'Tangent' : 3, 'Current' : 4}
+    displacementType={'Scalar' : 1, 'Vector' : 2 , 'Mudbox' : 3, 'Zbrush' : 4}
+    remapMode={'None' : 1 , 'Centered' : 2 , 'Interpolate' : 3}
+    dispSize=0.5
+    
+    ri.Pattern('PxrDispTransform','DispTransform',
+    {
+      'reference vector dispVector' : ['TrollNMap:resultRGB'],
+      'uniform float dispDepth' : [dispSize],
+      'uniform float dispHeight' : [dispSize],
+      'uniform int dispType' : [displacementType.get('Zbrush')],  
+      'uniform int vectorSpace' : [vectorSpace.get('Tangent')], 
+      'uniform int dispRemapMode' : [remapMode.get('Centered')], 
+      'uniform float dispCenter' : [0]
+    })
 
 
+    ri.Displace('PxrDisplace','zbrushDisplace' ,
+    {   
+      'reference vector dispVector' : ['DispTransform:resultXYZ'], 
+      #'uniform float dispAmount' : [1.0],
+      'int enabled' : [displace]
+    })
 
-  ri.Bxdf( 'PxrDisney','bxdf', {  'reference color baseColor' : ['TrollColour:resultRGB'] ,  'reference color subsurfaceColor' : ['TrollColour:resultRGB'], 'float subsurface' : [0.4] , 
-  'float metallic' : [0.1],
-  'float specular' : [0.1],
-  'float roughness' : [0.3]
+
+  ri.Bxdf( 'PxrDisney','bxdf', 
+  {  
+    'reference color baseColor' : ['TrollColour:resultRGB'] ,  
+    'reference color subsurfaceColor' : ['TrollColour:resultRGB'], 
+    'float subsurface' : [0.4] , 
+    'float metallic' : [0.1],
+    'float specular' : [0.1],
+    'float roughness' : [0.3]
   })
   '''
   ri.Bxdf( 'PxrDisney','bxdf', {  'color baseColor' : [0.8,0.8,0.8] })
@@ -140,7 +170,12 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
                           })
   #ri.Bxdf( 'PxrDiffuse','bxdf', {  'reference color diffuseColor' : ['colourChecker:resultRGB'] })
-
+  ri.Displace('PxrDisplace','zbrushDisplace' ,
+    {   
+      'reference vector dispVector' : ['DispTransform:resultXYZ'], 
+      #'uniform float dispAmount' : [1.0],
+      'int enabled' : [displace]
+    })
   s=12.0
   face=[-s,0,-s, s,0,-s,-s,0,s, s,0,s]
   ri.Patch('bilinear',{'P':face})

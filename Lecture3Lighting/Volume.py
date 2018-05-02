@@ -86,7 +86,8 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Translate(-0.5,-1,0)
   ri.Rotate(180,0,1,0)
   ri.Scale(0.1,0.1,0.1)
-  ri.Bxdf('PxrGlass', 'greenglass',{ 
+  ri.Bxdf('PxrGlass', 'greenglass',
+  { 
   'float reflectionGain' : 1,
   'color absorptionColor'  : [0.0 ,0.2, 0.0],
   'color reflectionColor' : [0, 1 ,0],
@@ -133,7 +134,8 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.AttributeEnd()
 
   ri.AttributeBegin()
-  ri.Bxdf('PxrSurface', 'metal', {
+  ri.Bxdf('PxrSurface', 'metal', 
+  {
           'float diffuseGain' : [0],
           'int specularFresnelMode' : [1],
           'color specularEdgeColor' : [1 ,1 ,1],

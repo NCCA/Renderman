@@ -21,7 +21,7 @@ parameterTypes={
     'k_RixSCVector' : typeparam('vector','0.0,1.0,0.0'),
     'k_RixSCNormal' : typeparam('normal','0.0,1.0,0.0'),
     'k_RixSCMatrix' : typeparam('matrix','0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0'),
-    'k_RixSCString' : typeparam('string','default'),
+    'k_RixSCString' : typeparam('string','"default"'),
     'k_RixSCStructBegin' : typeparam('struct{',''),
     'k_RixSCStructEnd' : typeparam('};','')
 }
@@ -39,7 +39,8 @@ plugTypes={
   'RixVolume' : 'Volume',
   'RixLighting' : 'Lighting',
   'RixProjection' : 'Projection',
-  'RixDeepTexture' : 'DeepTexture' 
+  'RixDeepTexture' : 'DeepTexture', 
+  'unknown' : 'Unknown'
 }
 
 
@@ -57,7 +58,7 @@ class plugin :
   def __str__(self) :
     strings=[]
     for t in self.param :
-     strings.append('%s %s %s' %(t[2],t[1],t[0]))    
+     strings.append('%s %s %s' %(t[2],t[1].datatype,t[0]))    
     return self.name+'\n' + '\n' .join(strings)
   def toPython(self) :
     strings=''

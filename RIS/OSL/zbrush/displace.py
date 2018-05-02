@@ -176,6 +176,22 @@ def main(filename,shadingrate=10,pixelvar=0.1,
       #'uniform float dispAmount' : [1.0],
       'int enabled' : [displace]
     })
+
+  ri.Pattern('PxrFractal','id',
+  {
+    'uniform float resultF' : [0.0],
+    'uniform color resultRGB' : [1.0,1.0,1.0],
+    'uniform int surfacePosition' : [0],
+    'uniform int layers' : [0],
+    'uniform float frequency' : [0.0],
+    'uniform float lacunarity' : [0.0],
+    'uniform float dimension' : [0.0],
+    'uniform float erosion' : [0.0],
+    'uniform float variation' : [0.0],
+    'uniform int turbulent' : [0],
+    'uniform point Q' : [0.0,0.0,0.0],
+    'uniform float Qradius' : [0.0],
+  })
   s=12.0
   face=[-s,0,-s, s,0,-s,-s,0,s, s,0,s]
   ri.Patch('bilinear',{'P':face})

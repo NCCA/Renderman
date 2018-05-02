@@ -1,31 +1,74 @@
 #!/usr/bin/python
-
-import sys,os.path,subprocess
+''' Parse a renderman plugin source file and print useful info! '''
+import sys,os.path
 import argparse
-import string
+import collections
+
+''' 
+these are the types the param can be taken from RixSCType in $RMANTREE/include/RixShading.h we use the dictionary to convert to prman types
+'''
+typeparam = collections.namedtuple('typeparam', 'datatype, default')
 
 parameterTypes={
-    'k_RixSCInvalidType' : 'Invalid Type',
-    'k_RixSCAnyType' : 'any',
-    'k_RixSCInteger' : 'int',
-    'k_RixSCFloat' : 'float',
-    'k_RixSCFloat2' : 'float2',
-    'k_RixSCFloat3' : 'float3',
-    'k_RixSCColor' : 'color',
-    'k_RixSCPoint' : 'point',
-    'k_RixSCVector' : 'vector',
-    'k_RixSCNormal' : 'normal',
-    'k_RixSCMatrix' : 'matrix',
-    'k_RixSCString' : 'string',
-    'k_RixSCStructBegin' : 'struct{',
-    'k_RixSCStructEnd' : '};'
-
+    'k_RixSCInvalidType' : typeparam('Invalid Type','0'),
+    'k_RixSCAnyType' : typeparam('any','0'),
+    'k_RixSCInteger' : typeparam('int','0'),
+    'k_RixSCFloat' : typeparam('float','0.0'),
+    'k_RixSCFloat2' : typeparam('float2','0.0,0.0'),
+    'k_RixSCFloat3' : typeparam('float3','0.0,0.0,0.0'),
+    'k_RixSCColor' : typeparam('color','1.0,1.0,1.0'),
+    'k_RixSCPoint' : typeparam('point','0.0,0.0,0.0'),
+    'k_RixSCVector' : typeparam('vector','0.0,1.0,0.0'),
+    'k_RixSCNormal' : typeparam('normal','0.0,1.0,0.0'),
+    'k_RixSCMatrix' : typeparam('matrix','0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0'),
+    'k_RixSCString' : typeparam('string','default'),
+    'k_RixSCStructBegin' : typeparam('struct{',''),
+    'k_RixSCStructEnd' : typeparam('};','')
 }
 
+
+# parameterTypes={
+#     'k_RixSCInvalidType' : 'Invalid Type',
+#     'k_RixSCAnyType' : 'any',
+#     'k_RixSCInteger' : 'int',
+#     'k_RixSCFloat' : 'float',
+#     'k_RixSCFloat2' : 'float2',
+#     'k_RixSCFloat3' : 'float3',
+#     'k_RixSCColor' : 'color',
+#     'k_RixSCPoint' : 'point',
+#     'k_RixSCVector' : 'vector',
+#     'k_RixSCNormal' : 'normal',
+#     'k_RixSCMatrix' : 'matrix',
+#     'k_RixSCString' : 'string',
+#     'k_RixSCStructBegin' : 'struct{',
+#     'k_RixSCStructEnd' : '};'
+# }
+
+''' plugin major types (i.e. what the class inherits from), we use this when writing out
+in either rib or python to write the actual base string '''
+
+plugTypes={
+  'RixPattern' : 'Pattern',
+  'RixBxdf' : 'Bxdf',
+  'RixDisplacement' : 'Displacement',
+  'RixLight' : 'Light',
+  'RixLightFilter' : 'LightFilter',
+  'RixVolume' : 'Volume',
+  'RixLighting' : 'Lighting',
+  'RixProjection' : 'Projection',
+  'RixDeepTexture' : 'DeepTexture' 
+}
+
+
+'''
+simple structure to hold the plugin data, as we parse in sequence we use a list to hold the params, this is useful as it may contain structs which are declared in order with a begin / end
+'''
 class plugin :
   def __init__(self,name='') :
     self.name=name
     self.param=[]
+    self.plugType=''
+
   def addParam(self,type,name,direction='input') :
     self.param.append([name,type,direction])
   def __str__(self) :
@@ -33,19 +76,33 @@ class plugin :
     for t in self.param :
      strings.append('%s %s %s' %(t[2],t[1],t[0]))    
     return self.name+'\n' + '\n' .join(strings)
-  
+  def toPython(self) :
+    strings=''
+    strings+=( "ri.%s('%s','id',\n" %(plugTypes[self.plugType],self.name))
+    strings+='{\n'
+    for t in self.param :
+      if t[1] is not None :
+        strings+="\t'uniform %s %s' : [%s], \n" %(t[1].datatype,t[0],t[1].default)
+      #print type(t[1])
+    strings+='})\n'
+    return strings
+  def toRib(self) :
+    strings=[]
+    return strings
 
-def processPlugin(path,file) :
+def processPlugin(file,output) :
   plug=plugin() # empty plug to append data to 
-  with open('%s/%s' %(path,file), "r") as inputFile:
+  with open(file, "r") as inputFile:
     for line in inputFile :
       line=line.strip() # remove whitespace
       if line.startswith('class') :
         className=line.split(' ')
         plug.name=className[1]
-        # print '*******************************************************'
-        # print 'pattern :- ',className[1]
-        # print '*******************************************************'
+        try :
+          plug.plugType=className[4]
+        except IndexError :
+          plug.plugType='unknown'
+      # this is the data we need to process it
       elif line.startswith('RixSCParamInfo(')   :
         start=line.find('(')
         # remove string from above and and elements
@@ -69,24 +126,24 @@ def processPlugin(path,file) :
           parameter = tokens[0][1:-1] # remove quotes
           dataType=parameterTypes.get(tokens[1])
           plug.addParam(dataType,parameter,'end struct')
-            
-          
-        # if len(tokens) > 1  and tokens[0][1:-1] !='' :
-        #   parameter = tokens[0][1:-1]
-        #   dataType=parameterTypes.get(tokens[1].strip())
-        #   direction=''
-        #   if len(tokens) == 3 :
-        #     direction=':- output'
-        #   print '%s %s %s' %(dataType,parameter,direction)
-    print plug
-def main(directory) :
+                      
+    if output=='python' :
+      print plug.toPython()
+    elif output=='rib' :
+      print plug.toRib()
+    else :
+      print plug
+def main(directory,output) :
   if os.path.isdir(directory) :
     files=os.listdir(directory)
     for file in files :
       if file.endswith('.cpp') :
-        processPlugin(directory,file)
+        file='%s/%s' %(directory,file)
+        print '*' * 40
+        processPlugin(file,output)
+        print '*' * 40
   elif os.path.isfile(directory) :
-        processPlugin('',directory)
+        processPlugin(directory,output)
     
 
 
@@ -94,10 +151,15 @@ if __name__ == '__main__':
   description=''''Read Renderman .cpp plugin files and report on params, by default it will scan the directory passed for .cpp files and process them one at a time and print out the parameters''' 
   parser = argparse.ArgumentParser(description=description)
   parser.add_argument('directory',help='directory to use can be explicit single file',action='store',default='.')
+  parser.add_argument('--rib', '-r' , action='count',help='render to rib not framebuffer')
+  parser.add_argument('--py', '-p' , action='count',help='render to rib not framebuffer')
 
-
+  output=''
   args = parser.parse_args()
-
-  main(args.directory)
+  if args.rib  :
+    output='rib'
+  if args.py :
+    output='python'
+  main(args.directory,output)
   
 

@@ -27,23 +27,6 @@ parameterTypes={
 }
 
 
-# parameterTypes={
-#     'k_RixSCInvalidType' : 'Invalid Type',
-#     'k_RixSCAnyType' : 'any',
-#     'k_RixSCInteger' : 'int',
-#     'k_RixSCFloat' : 'float',
-#     'k_RixSCFloat2' : 'float2',
-#     'k_RixSCFloat3' : 'float3',
-#     'k_RixSCColor' : 'color',
-#     'k_RixSCPoint' : 'point',
-#     'k_RixSCVector' : 'vector',
-#     'k_RixSCNormal' : 'normal',
-#     'k_RixSCMatrix' : 'matrix',
-#     'k_RixSCString' : 'string',
-#     'k_RixSCStructBegin' : 'struct{',
-#     'k_RixSCStructEnd' : '};'
-# }
-
 ''' plugin major types (i.e. what the class inherits from), we use this when writing out
 in either rib or python to write the actual base string '''
 
@@ -81,13 +64,18 @@ class plugin :
     strings+=( "ri.%s('%s','id',\n" %(plugTypes[self.plugType],self.name))
     strings+='{\n'
     for t in self.param :
-      if t[1] is not None :
+      if t[1] is not None and t[2] =='input' :
         strings+="\t'uniform %s %s' : [%s], \n" %(t[1].datatype,t[0],t[1].default)
       #print type(t[1])
     strings+='})\n'
     return strings
   def toRib(self) :
-    strings=[]
+    strings=''
+    strings+=( '%s "%s" "id" \n' %(plugTypes[self.plugType],self.name))
+    for t in self.param :
+      if t[1] is not None and t[2] =='input' :
+        strings+='\t"uniform %s %s"  [%s] \n' %(t[1].datatype,t[0],t[1].default.replace(',',' '))
+      #print type(t[1])
     return strings
 
 def processPlugin(file,output) :

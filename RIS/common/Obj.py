@@ -120,8 +120,8 @@ class Obj:
 			if tx !=None :
 				PolyData[ri.ST]=tx
 			# check for normals and add them to the dictionary as well
-			# if normals != None :
-			# 	PolyData[ri.N]=normals
+			if normals != None :
+				PolyData[ri.N]=normals
 			# finally we generate the Polygon from the data
 			ri.Polygon(PolyData)  #{ri.P:points,ri.N:normals,ri.ST:tx})
 			

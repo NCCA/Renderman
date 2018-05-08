@@ -19,9 +19,6 @@ ri.Format(1024,720,1)
 ri.Hider("raytrace" ,{"int incremental" :[1]})
 ri.PixelVariance (0.01)
 
-ri.Integrator ("PxrDefault" , "integrator")
-ri.Integrator ("PxrVCM" ,"integrator")
-ri.Integrator ("PxrDirectlighting" ,"integrator")
 ri.Integrator ("PxrPathTracer" ,"integrator")
 
 # now set the projection to perspective
@@ -33,13 +30,22 @@ ri.Rotate(-20,1,0,0)
 
 # now we start our world
 ri.WorldBegin()
+
+#######################################################################
 #Lighting We need geo to emit light
+#######################################################################
+ri.TransformBegin()
 ri.AttributeBegin()
-ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", "float exposure"  : [5]})
-ri.Translate( -2, 2 , 0)
-ri.Sphere( 0.3, -0.3, 0.3, 360)
+ri.Declare('sphereLight' ,'string')
+ri.Translate(0,0.75,0)
+#ri.Rotate(90,1,0,0)
+ri.Scale(0.125, 0.125, 0.125)
+
+ri.Light( 'PxrSphereLight', 'sphereLight', { 
+					'float exposure' : 6.0
+	})
 ri.AttributeEnd()
+ri.TransformEnd()
 
 # first teapot
 ri.Pattern ("PxrVoronoise", "noiseTexture",{

@@ -27,6 +27,8 @@ ri.ShadingRate(20)
 ri.Integrator ('PxrPathTracer' ,'integrator')
 ri.Option( 'statistics', {'filename'  : [ 'stats.txt' ] } )
 ri.Option( 'statistics', {'endofframe' : [ 1 ] })
+ri.Attribute ('trace' ,{'int displacements' : [ 1 ]})
+ri.Attribute ('displacementbound', {'float sphere' : [20], 'string coordinatesystem' : ['shader']})
 
 # now set the projection to perspective
 ri.Projection(ri.PERSPECTIVE,{ri.FOV:30}) 
@@ -67,7 +69,7 @@ ri.Pattern('PxrTexture', 'logo',
 })
 ri.Pattern('PxrMix','mixer',
 {
-	'color color1' : [1.,1.,1.], 
+	'color color1' : [.2, .5 ,.8], 
 	'reference color color2' : ['logo:resultRGB'], 
 	'reference float mix' : ['logo:resultA'] 
 })
@@ -76,6 +78,21 @@ ri.Bxdf( 'PxrDisney','bxdf',
 {                         
   'reference color baseColor' : [ 'mixer:resultRGB']
 })
+
+
+ri.Bxdf( 'PxrDisney','bxdf', 
+{                         
+  'reference color baseColor' : [ 'mixer:resultRGB']
+})
+
+
+ri.Displace('PxrDisplace','displaceTexture' ,
+{   
+  'reference float dispScalar' : ['logo:resultA'], 
+  'uniform float dispAmount' : [0.02],
+  'int enabled' : [1]
+})
+
 ri.AttributeBegin()
       
 
@@ -88,13 +105,55 @@ drawTeapot(ri,ry=-45)
 # third teapot
 drawTeapot(ri,x=1,ry=-45)
 # floor
+ri.AttributeBegin()
+
+
+ri.Pattern('PxrTileManifold','tileManifold',
+{
+	'int numTextures' : [20], 
+	'int textureOrder' : [1], 
+	'float angle' : [45], 
+	'float scaleS' : [20], 
+	'float scaleT' : [20], 
+	'int invertT' : [0], 
+  'int randomOrientation' : [1],
+  'float randomExtraSeed' : [0.12]
+
+})
+
+ri.Pattern('PxrTexture', 'logorepeat',
+{ 
+  'string filename' : 'nccatransp.tx',
+  'int invertT' : [0],
+  'reference struct manifold' : ['tileManifold:result']
+
+
+})
+ri.Pattern('PxrMix','mixerrepeat',
+{
+	'color color1' : [1.0,1.0,1.0], 
+	'reference color color2' : ['logorepeat:resultRGB'], 
+	'reference float mix' : ['logorepeat:resultA'] 
+})
+
+ri.Bxdf( 'PxrDisney','bxdf', 
+{                         
+  'reference color baseColor' : [ 'mixerrepeat:resultRGB']
+})
+ri.Displace('PxrDisplace','displaceTexture' ,
+{   
+  'reference float dispScalar' : ['logorepeat:resultA'], 
+  'uniform float dispAmount' : [0.02],
+  'int enabled' : [1]
+})
+
 ri.TransformBegin()
 s=5.0
 face=[-s,0,-s, s,0,-s,-s,0,s, s,0,s]
 ri.Patch('bilinear',{'P':face})
 
 ri.TransformEnd()
-
+ri.AttributeEnd()
 
 
 # end our world

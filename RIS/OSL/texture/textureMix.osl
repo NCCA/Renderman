@@ -1,0 +1,13 @@
+shader textureMix( color cin=1,
+                   string filename="",
+                  output color resultRGB=1,
+                  output float resultA=0.0
+)
+{
+  texture (filename, u, v, "firstchannel", 1, "alpha",resultA);
+  if(resultA !=0.0)
+    resultRGB= (color) texture (filename, u, v);
+  else
+    resultRGB=cin;
+}
+

@@ -28,6 +28,21 @@ def processArgFile(file,output) :
       elif dataType == 'float' : 
         defaultValue=defaultValue.replace('f','') # seems some floats us 0.0f
       strings+='\t"%s %s"  [%s] \n' %(dataType,name,defaultValue)
+    page=e.findall('page')
+
+    for p in page :
+      for t in p.findall('param'):
+        dataType=t.get('type')
+        name=t.get('name')
+        defaultValue=t.get('default')
+        if defaultValue == None :
+          defaultValue="'No Value'" # sometimes there is no default
+        elif dataType=='string' :
+          defaultValue="'"+defaultValue+"'" # strings need to be quoted
+        elif dataType == 'float' : 
+          defaultValue=defaultValue.replace('f','') # seems some floats us 0.0f
+        strings+='\t"%s %s"  [%s] \n' %(dataType,name,defaultValue)
+
   elif output=='python' :
     strings+=( "ri.%s('%s','id',\n" %(shaderType,pluginName))
     strings+='{\n'
@@ -44,6 +59,24 @@ def processArgFile(file,output) :
         if dataType == 'float' : 
           defaultValue=defaultValue.replace('f','') # seems some floats us 0.0f
       strings+="\t'%s %s' : [%s], \n" %(dataType,name,defaultValue)
+    page=e.findall('page')
+
+    for p in page :
+      for t in p.findall('param'):
+        dataType=t.get('type')
+        name=t.get('name')
+        defaultValue=t.get('default')
+        if defaultValue == None :
+          defaultValue="'No Value'" # sometimes there is no default
+        elif dataType=='string' :
+          defaultValue="'"+defaultValue+"'" # strings need to be quoted
+        else :
+          defaultValue=defaultValue.replace(' ',',') # add , between values
+          if dataType == 'float' : 
+            defaultValue=defaultValue.replace('f','') # seems some floats us 0.0f
+        strings+="\t'%s %s' : [%s], \n" %(dataType,name,defaultValue)
+
+
     strings+='})\n'
   else :
     
@@ -53,6 +86,13 @@ def processArgFile(file,output) :
       name=t.get('name')
       defaultValue=t.get('default')
       strings+=('%s %s %s \n' %(dataType,name,defaultValue))
+    page=e.findall('page')
+    for p in page :
+      for t in p.findall('param'):
+        dataType=t.get('type')
+        name=t.get('name')
+        defaultValue=t.get('default')
+        strings+=('%s %s %s \n' %(dataType,name,defaultValue))
   return strings
 
 def main(directory,output,outputFile) :

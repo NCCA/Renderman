@@ -1,26 +1,27 @@
 #!/usr/bin/python
-import prman,os
+import prman,os,subprocess
 # import the python functions
 import sys
 sys.path.append('../../common')
 from functions import drawTeapot
 from Camera import *
 
-"""
+'''
 function to check if shader exists and compile it, we assume that the shader
 is .osl and the compiled shader is .oso If the shader source is newer than the
 compiled shader we will compile it. It also assumes that oslc is in the path.
-"""
+'''
 def checkAndCompileShader(shader) :
 	if os.path.isfile(shader+'.oso') != True  or os.stat(shader+'.osl').st_mtime - os.stat(shader+'.oso').st_mtime > 0 :
-		print "compiling shader %s" %(shader)
+		print 'compiling shader %s' %(shader)
 		try :
-			subprocess.check_call(["oslc", shader+".osl"])
+			subprocess.check_call(['oslc', shader+'.osl'])
 		except subprocess.CalledProcessError :
-			sys.exit("shader compilation failed")
+			sys.exit('shader compilation failed')
 		 
 
 checkAndCompileShader('textureMix')
+checkAndCompileShader('textureRand')
 
 ri = prman.Ri() # create an instance of the RenderMan interface
 
@@ -77,15 +78,11 @@ ri.TransformEnd()
 #######################################################################
 # first teapot
 
-ri.Pattern("textureMix","textureMix", 
+ri.Pattern('textureMix','textureMix', 
 { 
-  "color cin"  : [.2, .5 ,.8], 
+  'color cin'  : [.2, .5 ,.8], 
   'string filename' : 'nccatransp.tx',
 })
-
-
-
-
 
 
 ri.Bxdf( 'PxrDisney','bxdf', 
@@ -94,12 +91,12 @@ ri.Bxdf( 'PxrDisney','bxdf',
 })
 
 
-ri.Displace('PxrDisplace','displaceTexture' ,
-{   
-  'reference float dispScalar' : ['textureMix:resultA'], 
-  'uniform float dispAmount' : [0.02],
-  'int enabled' : [1]
-})
+# ri.Displace('PxrDisplace','displaceTexture' ,
+# {   
+#   'reference float dispScalar' : ['textureMix:resultA'], 
+#   'uniform float dispAmount' : [0.02],
+#   'int enabled' : [1]
+# })
 
 ri.AttributeBegin()
       
@@ -115,6 +112,27 @@ drawTeapot(ri,x=1,ry=-45)
 # floor
 ri.AttributeBegin()
 
+ri.Pattern('textureRand','textureRand', 
+{ 
+  'color cin'  : [1.0, 1.0 ,1.0], 
+  'float scaleS' : [40],
+  'float scaleT' : [40],
+  'string filename' : 'nccatransp.tx',
+})
+
+
+ri.Bxdf( 'PxrDisney','bxdf', 
+{                         
+  'reference color baseColor' : [ 'textureRand:resultRGB']
+})
+
+
+# ri.Displace('PxrDisplace','displaceTexture' ,
+# {   
+#   'reference float dispScalar' : ['textureRand:resultA'], 
+#   'uniform float dispAmount' : [0.02],
+#   'int enabled' : [1]
+# })
 
 
 ri.TransformBegin()

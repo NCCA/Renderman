@@ -84,10 +84,23 @@ ri.Pattern('textureMix','textureMix',
   'string filename' : 'nccatransp.tx',
 })
 
+ri.Pattern('PxrFractal','fractal',
+{
+	'int surfacePosition' : [0], 
+	'int layers' : [6], 
+	'float frequency' : [1.0], 
+	'float lacunarity' : [2.0], 
+	'float dimension' : [1.0], 
+	'float erosion' : [0.0], 
+	'float variation' : [0.0], 
+	'int turbulent' : [0], 
+})
 
 ri.Bxdf( 'PxrDisney','bxdf', 
 {                         
-  'reference color baseColor' : [ 'textureMix:resultRGB']
+  'reference color baseColor' : [ 'textureMix:resultRGB'],
+  'reference float roughness' : ['fractal:resultF'], 
+
 })
 
 

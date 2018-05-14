@@ -117,10 +117,10 @@ class Obj:
 			#this directly
 			PolyData={ri.P:points}
 			# now see if we have any texture co-ordinates and add them to the dictionary if we do
-			if tx !=None :
+			if len(tx) !=0 :
 				PolyData[ri.ST]=tx
 			# check for normals and add them to the dictionary as well
-			if normals != None :
+			if len(normals) != 0 :
 				PolyData[ri.N]=normals
 			# finally we generate the Polygon from the data
 			ri.Polygon(PolyData)  #{ri.P:points,ri.N:normals,ri.ST:tx})

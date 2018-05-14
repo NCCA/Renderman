@@ -25,6 +25,11 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
   # setup the raytrace / integrators
   ri.Hider('raytrace' ,{'int incremental' :[1]})
+  ri.Attribute( 'trace',
+  { 
+    'int maxdiffusedepth' : [1], 
+    'int maxspeculardepth' : [8]
+  })
   ri.ShadingRate(shadingrate)
   ri.PixelVariance (pixelvar)
   ri.Integrator (integrator ,'integrator',integratorParams)

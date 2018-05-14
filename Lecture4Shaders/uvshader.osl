@@ -1,0 +1,7 @@
+shader uvshader(output color resultRGB=0)
+{
+
+float r=(u - floor(u));
+float g=(v - floor(v));
+resultRGB=color(r,g,0.0);
+}

@@ -88,8 +88,6 @@ ri.Patch('bilinear',{'P':face})
 
 ri.TransformEnd()
 
-
-
 # end our world
 ri.WorldEnd()
 # and finally end the rib file

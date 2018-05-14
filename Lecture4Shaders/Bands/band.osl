@@ -1,0 +1,18 @@
+shader band(
+ color C1 = color(1,0,0),
+ color C2 = color(0,0,1),
+ float begin=0.3,
+ float end=0.6,
+ string direction="vertical",
+ output	color Cout=0 
+
+)
+{
+float inTop;
+if (direction=="vertical")
+	inTop = smoothstep(begin,end,u);
+else
+	inTop = smoothstep(begin,end,v);
+	
+Cout=mix(C1,C2,inTop);	
+}

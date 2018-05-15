@@ -1,0 +1,16 @@
+surface cellnoise
+(
+ float repeatU=5,
+ float repeatV=5,
+ output color resultRGB=1,
+ output float resultF=0
+)
+{
+
+
+float uu=u*repeatU;
+float vv=v*repeatV;
+resultRGB= cellnoise(uu,vv);
+resultF =  cellnoise(uu,vv);
+
+}

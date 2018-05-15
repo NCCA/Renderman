@@ -1,0 +1,17 @@
+surface check
+(
+ color checkColour = color(0,0,0),
+ color baseColour = color(1,1,1),
+ float repeatU=5,
+ float repeatV=5,
+ output color resultRGB=1,
+ output float resultF=0,
+)
+{
+
+float sTile=floor(u*repeatU);
+float tTile=floor(v*repeatV);
+float inCheck=mod(sTile+tTile,2);
+resultRGB=mix(baseColour,checkColour,inCheck);
+resultF=inCheck;
+}

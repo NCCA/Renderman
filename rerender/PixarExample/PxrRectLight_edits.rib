@@ -1,0 +1,32 @@
+##RenderMan RIB
+version 3.04
+EditBegin "instance" 
+Bxdf "PxrDisney" "PxrDisney1" "color baseColor" [0 0 0] "string __instanceid" ["teapot_archive"]
+EditEnd 
+EditBegin "instance" 
+Bxdf "PxrDisney" "PxrDisney1" "color baseColor" [0.1 0.1 0.1] "string __instanceid" ["teapot_archive"]
+EditEnd 
+EditBegin "instance" 
+Bxdf "PxrDisney" "PxrDisney1" "color baseColor" [0.2 0.2 0.2] "string __instanceid" ["teapot_archive"]
+EditEnd 
+EditBegin "instance" 
+Bxdf "PxrDisney" "PxrDisney1" "color baseColor" [0.3 0.3 0.3] "string __instanceid" ["teapot_archive"]
+EditEnd 
+EditBegin "instance" 
+Bxdf "PxrDisney" "PxrDisney1" "color baseColor" [0.4 0.4 0.4] "string __instanceid" ["teapot_archive"]
+EditEnd 
+EditBegin "instance" 
+Bxdf "PxrDisney" "PxrDisney1" "color baseColor" [0.5 0.5 0.5] "string __instanceid" ["teapot_archive"]
+EditEnd 
+EditBegin "instance" 
+Bxdf "PxrDisney" "PxrDisney1" "color baseColor" [0.6 0.6 0.6] "string __instanceid" ["teapot_archive"]
+EditEnd 
+EditBegin "instance" 
+Bxdf "PxrDisney" "PxrDisney1" "color baseColor" [0.7 0.7 0.7] "string __instanceid" ["teapot_archive"]
+EditEnd 
+EditBegin "instance" 
+Bxdf "PxrDisney" "PxrDisney1" "color baseColor" [0.8 0.8 0.8] "string __instanceid" ["teapot_archive"]
+EditEnd 
+EditBegin "instance" 
+Bxdf "PxrDisney" "PxrDisney1" "color baseColor" [0.9 0.9 0.9] "string __instanceid" ["teapot_archive"]
+EditEnd 

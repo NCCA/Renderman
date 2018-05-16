@@ -1,0 +1,62 @@
+##RenderMan RIB
+version 3.04
+Option "ribparse" "string varsubst" [""]
+Option "ribparse" "string varsubst" ["$"]
+Option "searchpath" "string procedural" [".:${RMANTREE}/lib/plugins:@"]
+Attribute "trace" "int maxdiffusedepth" [4]
+PixelFilter "box" 1 1
+Format 512 512 1
+PixelVariance 0
+ShadingRate 2
+Hider "raytrace"
+    "int incremental" [1]
+    "int minsamples" [1] "int maxsamples" [256] 
+Display "rectlight.tif" "framebuffer" "rgba" 
+Integrator "PxrPathTracer" "handle" "int maxPathLength" [4]
+Projection "perspective" "fov" [30]
+FrameBegin 1
+	Translate 0 0 5
+	WorldBegin 
+		Attribute "visibility" "int transmission" [1]
+		AttributeBegin
+                        Attribute "identifier" "string name" ["Light0"]
+			Attribute "visibility" "int indirect" [0] "int transmission" [0] "int camera" [0]
+                        Translate 0 1 0
+                        Rotate 90 1 0 0
+                        Scale 0.5 0.5 0.5
+			Light "PxrRectLight" "Light0" "float exposure" [4]
+                            "string __instanceid" ["Light0"]
+		AttributeEnd 
+		AttributeBegin
+                    AttributeBegin 
+                        Attribute "identifier" "string name" ["left_wall"]
+			Color [0.8 0.2 0.2]
+			Bxdf "PxrDiffuse" "smooth" "color diffuseColor" [0.8 0.2 0.2]
+			Polygon "P" [-1 1 -2 -1 1 1 -1 -1 1 -1 -1 -2]
+                    AttributeEnd
+                    AttributeBegin 
+                        Attribute "identifier" "string name" ["right_wall"]
+			Color [0.2 0.2 0.8]
+			Bxdf "PxrDiffuse" "smooth" "color diffuseColor" [0.2 0.2 0.8]
+			Polygon "P" [1 -1 -2 1 -1 1 1 1 1 1 1 -2]
+                    AttributeEnd
+			Color [0.8 0.8 0.8]
+			Bxdf "PxrDiffuse" "smooth" "color diffuseColor" [0.8 0.8 0.8]
+			Polygon "P" [-1 -1 1 1 -1 1 1 -1 -2 -1 -1 -2]
+			Bxdf "PxrDiffuse" "smooth" "color diffuseColor" [0.95 0.95 0.95]
+			Polygon "P" [-1 1 1  1 1 1  1 1 -2  -1 1 -2]
+			Bxdf "PxrDiffuse" "smooth" "color diffuseColor" [0.8 0.8 0.8]
+			Polygon "P" [-1 1 1 1 1 1 1 -1 1 -1 -1 1]
+		AttributeEnd 
+		AttributeBegin
+    Attribute "identifier" "string name" ["teapot_archive"]
+			Bxdf "PxrDisney" "PxrDisney1"
+			"string __instanceid" ["teapot_archive"]
+			Translate 0 -0.75 0
+			Scale 0.25 0.25 0.25
+			Rotate -90 1 0 0
+                        #ReadArchive "teapot.rib"
+												Geometry "teapot" 
+		AttributeEnd 
+	WorldEnd 
+FrameEnd 

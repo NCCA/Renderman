@@ -127,7 +127,8 @@ ri.AttributeBegin()
 ri.Bxdf('PxrSurface', 'plastic2',
 {
 'color diffuseColor' : [0.8,0.8,0.8],
-'int diffuseDoubleSided' : [1]
+'int diffuseDoubleSided' : [1],
+'__instanceid' : ['plastic2']
 
 })
 drawScene(ri,zpos=2,ident='row2')

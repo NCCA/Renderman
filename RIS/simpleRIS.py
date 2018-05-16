@@ -14,13 +14,6 @@ ri.Display("simple.exr", "it", "rgba")
 ri.Format(1024,720,1)
 
 # setup the raytrace / integrators
-ri.Hider("raytrace" ,{"int incremental" :[1]})
-ri.PixelVariance (0.01)
-
-ri.Integrator ("PxrDefault" , "integrator")
-ri.Integrator ("PxrVCM" ,"integrator")
-ri.Integrator ("PxrDirectlighting" ,"integrator")
-ri.Integrator ("PxrPathTracer" ,"integrator")
 
 # now set the projection to perspective
 ri.Projection(ri.PERSPECTIVE,{ri.FOV:50}) 
@@ -32,8 +25,6 @@ ri.ArchiveRecord(ri.COMMENT, 'move our world back 2 in the z so we can see it')
 
 ri.TransformBegin()
 ri.AttributeBegin()
-ri.Declare("areaLight" ,"string")
-ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID:"areaLight", "float exposure"  : [6]})
 ri.Translate( 2.4 ,1 ,2)
 ri.Sphere( 0.3, -0.3, 0.3, 360)
 ri.AttributeEnd()
@@ -42,12 +33,7 @@ ri.TransformEnd()
 
 
 
-ri.Bxdf( "PxrDisney","bxdf", { 
-                        "color baseColor" : [ 0.8, 0.2, 0.2], 
-                        "float roughness" : [ 0.5 ], 
-                        "float clearcoat" : [ 0.2 ], 
-                        "float clearcoatGloss" : [1]
-                        })
+
 ri.Translate(0,0,4)
 
 ri.TransformBegin()

@@ -1,0 +1,10 @@
+shader swirl(
+float repeatU=3.0,
+float repeatV=3.0,
+output float resultF=0
+)
+{
+  float uu=mod(u*repeatU,1.0);
+  float vv=mod(v*repeatV,1.0);
+  resultF=sin(radians(uu))+cos(radians(vv));
+}

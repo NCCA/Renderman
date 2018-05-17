@@ -1,9 +1,21 @@
 #!/usr/bin/python
 import prman
-import sys,time,os
+import sys,time,os,subprocess
 sys.path.append('../../common')
 from functions import drawTeapot,drawCube
 from Camera import *
+
+
+def checkAndCompileShader(shader) :
+  	if os.path.isfile(shader+'.oso') != True  or os.stat(shader+'.osl').st_mtime - os.stat(shader+'.oso').st_mtime > 0 :
+		print 'compiling shader %s' %(shader)
+		try :
+			subprocess.check_call(['oslc', shader+'.osl'])
+		except subprocess.CalledProcessError :
+			print('shader compilation failed')
+		 
+
+
 
 ri = prman.Ri() # create an instance of the RenderMan interface
 # step one render scene to rib file

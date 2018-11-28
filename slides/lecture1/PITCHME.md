@@ -9,6 +9,7 @@
 - When Renderman was first proposed it was a C like API for the development of scene descriptions to be rendered
 - The description file produced is usually called a RIB (Renderman Interface Byte stream) file and this is then passed to the renderer
 - The description of how the surface is to be textured and shaded is determined by a number of files called shaders
+- [Renderman at 30 a Visual History](http://vfxvoice.com/renderman-at-30-a-visual-history/?fbclid=IwAR3Zt5L5CgPrY6dIUaiWjEDvrfetgbtHYQbA_oFoLrkBruA0NMkKUqUF8AQ)
 
 +++
 

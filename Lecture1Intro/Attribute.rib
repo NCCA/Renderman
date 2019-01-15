@@ -1,7 +1,7 @@
 ##RenderMan RIB
 #File Attribute.rib
 #Created by jmacey
-#Creation Date: Mon Jan 14 19:43:15 2019
+#Creation Date: Tue Jan 15 20:02:07 2019
 version 3.04999995
 Display "Attribute.exr" "framebuffer" "rgba" 
 Format 720 575 1

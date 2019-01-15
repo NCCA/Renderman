@@ -6,6 +6,12 @@ import time
 # import the python renderman library
 import prman
 
+# simple colour function to set Bxdf
+def Colour(colour) :
+  	ri.Bxdf( 'PxrDiffuse','diffuse', 
+		{
+			'color diffuseColor' : colour
+		})
 
 def TorusWave(ri,nwaves,thetamax) :
 	if(nwaves < 1) :
@@ -54,7 +60,7 @@ for frame in range(1,30) :
 	ri.Rotate(-25,1,0,0)
 	
 	ri.TransformBegin()
-	ri.Color([1,0,0])
+	Colour([1,0,0])
 	TorusWave(ri,frame,360.0)
 	ri.TransformEnd()
 	ri.WorldEnd()

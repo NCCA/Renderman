@@ -8,7 +8,7 @@ ri.Option("rib", {"string asciistyle": "indented"})
 filename = "Primitives.rib"
 # this is the begining of the rib archive generation we can only
 # make RI calls after this function else we get a core dump
-ri.Begin(filename)
+ri.Begin('__render')
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format

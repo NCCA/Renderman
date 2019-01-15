@@ -1,10 +1,10 @@
-#RenderMan RIB
-version 3.04
+##RenderMan RIB
+version 3.04999995
 Quantize "rgba" 0 0 0 0
 Option "searchpath" "string shader" ["/mapublic/shaders"]
 #File Exr.rib
 #Created by jmacey
-#Creation Date: Fri Sep 26 11:47:50 2008
+#Creation Date: Tue Jan 15 20:07:41 2019
 Display "Exr.exr" "framebuffer" "P" "string exrpixeltype" ["half"]
 Format 720 575 1
 Projection "perspective" "uniform float fov" [50]

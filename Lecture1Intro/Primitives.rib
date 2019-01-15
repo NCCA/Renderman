@@ -1,5 +1,5 @@
 ##RenderMan RIB
-version 3.04
+version 3.04999995
 Display "Primitives.exr" "it" "rgba" 
 Format 720 575 1
 Projection "perspective" "uniform float fov" [50]

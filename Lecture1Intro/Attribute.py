@@ -13,7 +13,7 @@ ri.Option("rib", {"string asciistyle": "indented"})
 filename = "Attribute.rib"
 # this is the begining of the rib archive generation we can only
 # make RI calls after this function else we get a core dump
-ri.Begin(filename)
+ri.Begin('__render')
 # ArchiveRecord is used to add elements to the rib stream in this case comments
 # note the function is overloaded so we can concatinate output
 ri.ArchiveRecord(ri.COMMENT, 'File ' +filename)
@@ -32,13 +32,17 @@ ri.Projection(ri.PERSPECTIVE,{ri.FOV:50})
 ri.WorldBegin()
 
 ri.Translate(0,0,5)
-ri.Color([1,1,1])
-ri.Opacity([1,1,1])
+ri.Bxdf( 'PxrDiffuse','diffuse', 
+{
+'color diffuseColor' : [ 1.0, 0.0, 1.0]
+})
 ri.TransformBegin()
 ri.Translate(-0.5,0,0)
 ri.AttributeBegin()
-ri.Color([0,1,1])
-ri.Opacity([0.2,0.2,0.2])
+ri.Bxdf( 'PxrDiffuse','diffuse', 
+{
+'color diffuseColor' : [ 0.0, 1.0, 1.0]
+})
 ri.Sphere(1,-1,1,360)
 ri.AttributeEnd()
 ri.TransformEnd()

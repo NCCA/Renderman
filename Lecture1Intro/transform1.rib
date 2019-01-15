@@ -1,9 +1,6 @@
 ##RenderMan RIB
-#File transform1.rib
-#Created by jmacey
-#Creation Date: Wed Feb  7 10:21:50 2018
-version 3.04
-Display "transform1.png" "file" "rgba" 
+version 3.04999995
+Display "transform1.exr" "it" "rgba" 
 Format 720 576 1
 Projection "perspective" 
 WorldBegin 

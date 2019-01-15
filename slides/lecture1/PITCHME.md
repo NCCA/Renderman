@@ -58,9 +58,15 @@ prman -t:2 HelloWorld.rib
 ```
 
 - In the example we use the default ```"framebuffer"``` display driver which will use the ```sho``` program.
-- If we wish to use the more powerful Image Tool (it) we can change the drive, however it must be running first.
+- If we wish to use the more powerful Image Tool (it) we can change the driver, however it must be running first.
 
-- alternatively we can use the ``` -d it ``` command line flag.
++++
+
+## Setting up Environment
+
+---?terminal=prman.rec&color=#7FDBFF&font=small&title=Setting Environment
+
+
 +++
 
 ## Render to file

@@ -54,12 +54,13 @@
 - To render the file use the following command line
 
 ```bash
-render -t:2 HelloWorld.rib
+prman -t:2 HelloWorld.rib
 ```
 
 - In the example we use the default ```"framebuffer"``` display driver which will use the ```sho``` program.
 - If we wish to use the more powerful Image Tool (it) we can change the drive, however it must be running first.
 
+- alternatively we can use the ``` -d it ``` command line flag.
 +++
 
 ## Render to file

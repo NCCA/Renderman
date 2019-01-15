@@ -65,7 +65,7 @@ prman -t:2 HelloWorld.rib
 
 ## Setting up Environment
 
----?terminal=prman.rec&color=#7FDBFF&font=small&title=Setting Environment
+---?terminal=prman.json&color=#7FDBFF&font=small&title=Setting Environment
 
 
 +++

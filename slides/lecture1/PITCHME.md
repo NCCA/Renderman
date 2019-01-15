@@ -63,13 +63,6 @@ prman -t:2 HelloWorld.rib
 +++
 
 
-## Setting up Environment
-
----?terminal=prman.json&color=#7FDBFF&font=small&title=Setting Environment
-
-
-+++
-
 ## Render to file
 - Typically we will render to a file on disk to do this we can specify the ```file``` driver
 

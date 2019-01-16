@@ -206,11 +206,13 @@ ri.PointsPolygons(npolys,nvertices,{ri.P:points})
 - More details can be found in [appnote 28](https://renderman.pixar.com/resources/RenderMan_20/appnote.28.html)
 - Most of this work is also part of the [OpenSubDiv API](http://graphics.pixar.com/opensubdiv/docs/intro.html)
 
-+++
 
-## Simple Subdiv
 
 +++?code=Lecture2Geo/Geometry/Subdiv/Subdiv.py&lang=python&title=Subdiv.py
+
++++?code=Lecture2Geo/Geometry/Subdiv/Sphere.py&lang=python&title=Sphere.py
+
+
 
 
 ---

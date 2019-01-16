@@ -27,10 +27,8 @@ ri.Translate(0,-0.5,2)
 ri.TransformBegin()
 ri.Rotate(45,1,1,0)
 
-
 points=[0,0,1,
 		0,1,1,
-	
 		0,0,0,
 		0,1,0,
 	]

@@ -229,14 +229,14 @@ ri.PointsPolygons(npolys,nvertices,{ri.P:points})
 
 ## Procedural Primitives
 
-- The specific syntax of the request from the renderer to the helper program is extremely simple, as follows:
+- @size[smaller](The specific syntax of the request from the renderer to the helper program is extremely simple, as follows:)
 
 ```
 fprintf(socket, "%g %s\n", detail, datablock);
 ```
-- The detail is provided first, as a single floating-point number, followed by a space, followed by the datablock and finally a newline. 
+- @size[smaller](The detail is provided first, as a single floating-point number, followed by a space, followed by the datablock and finally a newline.) 
 
-- The datablock is completely uninterpreted by the renderer or by the socket write, so any newlines or special characters should be preserved 
+- @size[smaller](The datablock is completely uninterpreted by the renderer or by the socket write, so any newlines or special characters should be preserved )
 
 +++
 

@@ -271,14 +271,14 @@ RiEnd();
 
 ## Procedural Primitives
 
-- In RIB, the syntax for specifying a RIB-generating program procedural primitive is:
+- @size[smaller](In RIB, the syntax for specifying a RIB-generating program procedural primitive is:)
 
 ```
 Procedural "RunProgram" [ "program" "datablock" ] [ bound ]
 ```
-- program is the name of the helper program to execute, and may include command line options. 
-- datablock is the generation request data block. It is an ASCII string which is meaningful to program, and adequately describes the children which are to be generated. 
-- The bound is an array of six floating point numbers which is xmin, xmax, ymin, ymax, zmin, zmax in the current object space.
+- @size[smaller](program is the name of the helper program to execute, and may include command line options. )
+- @size[smaller](datablock is the generation request data block. It is an ASCII string which is meaningful to program, and adequately describes the children which are to be generated. )
+- @size[smaller](The bound is an array of six floating point numbers which is xmin, xmax, ymin, ymax, zmin, zmax in the current object space.)
 
 
 ---

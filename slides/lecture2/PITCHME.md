@@ -70,7 +70,7 @@ f -4 -3 -2 -1
 - These are then made available to a number of methods which produced renderman output for rendering
 
 
-+++?code=PythonClasses/Obj.py&lang=python&title=Obj.py
++++?code=common/Obj.py&lang=python&title=Obj.py
 
 +++?code=Lecture2Geo/Obj2Rib/ObjTest.py&lang=python&title=ObjTest.py
 

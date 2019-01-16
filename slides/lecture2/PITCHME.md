@@ -213,6 +213,8 @@ ri.PointsPolygons(npolys,nvertices,{ri.P:points})
 +++?code=Lecture2Geo/Geometry/Subdiv/Subdiv.py&lang=python&title=Subdiv.py
 
 
+---
+
 
 ## Procedural Primitives
 

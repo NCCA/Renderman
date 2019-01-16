@@ -205,6 +205,21 @@ ri.PointsPolygons(npolys,nvertices,{ri.P:points})
 - Procedural primitives allow use to call a helper program which generates geometry on-the-fly in response to procedural primitive requests in the RIB stream. 
 - Each generated procedural primitive is described by a request to the helper program, in the form of an ASCII datablock which describes the primitive to be generated. 
 
+---
+
+## Subdivision Surfaces
+
+- Renderman supports SubDivision surfaces using the ```ri.SubdivisionMesh``` command
+- More details can be found in [appnote 28](https://renderman.pixar.com/resources/RenderMan_20/appnote.28.html)
+- Most of this work is also part of the [OpenSubDiv API](http://graphics.pixar.com/opensubdiv/docs/intro.html)
+
+---
+
+## Simple Subdiv
+
++++?code=Lecture2Geo/Geometry/Subdiv/Subdiv.py&lang=python&title=Subdiv.py
+
+
 +++
 
 ## Procedural Primitives

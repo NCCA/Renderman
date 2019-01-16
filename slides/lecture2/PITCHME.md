@@ -6,8 +6,8 @@
 
 ## The Obj File format
 
-@size[smaller](- Alias Wavefront obj files define the geometry and other properties for objects which can be easily used within animation packages. )
-@size[smaller](- Object files can be in ASCII format ```(.obj)``` or binary format ```(.mod)```. )
+- @size[smaller](Alias Wavefront obj files define the geometry and other properties for objects which can be easily used within animation packages. )
+- @size[smaller](Object files can be in ASCII format \(.obj\) or binary format \(.mod\).) 
 - For simplicity the ASCII format will be discussed here as it is easier to parse the data and is a good exercise for file and string handling. 
 - In its current release, the .obj file format supports both polygonal objects and free-form objects such as curves, nurbs etc. 
 

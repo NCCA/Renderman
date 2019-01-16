@@ -111,8 +111,9 @@ Polygon "varying float[2] st" [0 1 0.5 0 1 1] "vertex point P" [-1 -1 -2 0 1 1 1
 ## ri.GeneralPolygon
 <img src="slides/lecture2/images/General.png" width="30%">
 
-- Define a general planar concave polygon with holes. This polygon is specified by giving nloops lists of vertices. 
-- The first loop is the outer boundary of the polygon; all additional loops are holes.
+- Define a general planar concave polygon. 
+- This polygon is specified by giving nloops lists of vertices. 
+- Holes are no longer supported.
 
 +++
 

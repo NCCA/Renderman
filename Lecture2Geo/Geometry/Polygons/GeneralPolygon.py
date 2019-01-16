@@ -40,11 +40,11 @@ ri.Bxdf( 'PxrDiffuse','diffuse',
   'reference color diffuseColor'  : ['ratGrid:resultRGB']
 })
 
-points=[-2,-2,0,-2,2,0,2,2,0,2,-2,0,-1,-1,0,0,1,0,1,-1,0]
-st=[0,1, 0,0, 1,0, 1,1,  0.25,0.75, 0.5,0.25, 0.75,0.75]
+points=[-2,-2,0,-2,2,0,2,2,0,2,-2,0]
+st=[0,1, 0,0, 1,0, 1,1]
 
 
-ri.GeneralPolygon([4,3],{ri.P:points,ri.ST:st})
+ri.GeneralPolygon([4],{ri.P:points,ri.ST:st})
 
 ri.TransformEnd()
 ri.WorldEnd()

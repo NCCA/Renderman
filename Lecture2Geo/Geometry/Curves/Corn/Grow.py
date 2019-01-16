@@ -5,10 +5,10 @@ import time,random
 # import the python renderman library
 import prman
 import sys
-sys.path.append('../../../../PythonClasses')
+sys.path.append('../../../../common')
 
 from Camera import *
-from vector import *
+from Vec4 import *
 
 from random import uniform as ru
 
@@ -70,7 +70,7 @@ BuildField(1.5,2,0.1,points,width,npoints)
 #BuildField(1,1,0.5,points,width,npoints)
 
 offset=0.0
-cam=Camera(Vector(0.1,0.4,2,1),Vector(0,0,0,1),Vector(0,1,0,0))
+cam=Camera(Vec4(0.1,0.4,2,1),Vec4(0,0,0,1),Vec4(0,1,0,0))
 cam.fov=40
 
 for frame in range(0,100) :
@@ -89,7 +89,7 @@ for frame in range(0,100) :
 	# now set the projection to perspective
 	ri.Projection(ri.PERSPECTIVE,{ri.FOV:50}) 
 	
-	cam.Place(ri)
+	cam.place(ri)
 	
 	# now we start our world
 	ri.WorldBegin()

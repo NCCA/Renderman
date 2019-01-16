@@ -5,10 +5,10 @@ import time,random
 # import the python renderman library
 import prman
 import sys
-sys.path.append('../../../../PythonClasses')
+sys.path.append('../../../../common/')
 
 from Camera import *
-from vector import *
+from Vec4 import *
 
 from random import uniform as ru
 
@@ -69,7 +69,7 @@ dircount=0
 BuildField(2,0.4,0.01,points,width,npoints)
 
 offset=0.0
-cam=Camera(Vector(0.1,1.2,1,1),Vector(0,0,0,1),Vector(0,1,0,0))
+cam=Camera(Vec4(0.1,1.2,1,1),Vec4(0,0,0,1),Vec4(0,1,0,0))
 cam.fov=40
 
 for frame in range(0,1) :
@@ -90,7 +90,7 @@ for frame in range(0,1) :
 	ri.Hider( 'raytrace', {'int incremental' : [1], 'int maxsamples' : [256] })
 	ri.Integrator( 'PxrPathTracer', 'handle', {'float clampLuminance' :[10]}) 
 
-	cam.Place(ri)
+	cam.place(ri)
 	
 	# now we start our world
 	ri.WorldBegin()

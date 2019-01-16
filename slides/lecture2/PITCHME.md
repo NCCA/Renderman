@@ -212,7 +212,13 @@ ri.PointsPolygons(npolys,nvertices,{ri.P:points})
 
 +++?code=Lecture2Geo/Geometry/Subdiv/Sphere.py&lang=python&title=Sphere.py
 
++++?code=Lecture2Geo/Geometry/Subdiv/Hull.py&lang=python&title=Hull.py
 
++++?code=Lecture2Geo/Geometry/Subdiv/HullHole.py&lang=python&title=HullHole.py
+
++++?code=Lecture2Geo/Geometry/Subdiv/Crease.py&lang=python&title=Crease.py
+
++++?code=Lecture2Geo/Geometry/Subdiv/Cylinder.py&lang=python&title=Cylinder.py
 
 
 ---

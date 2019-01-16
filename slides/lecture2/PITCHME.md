@@ -284,11 +284,11 @@ Procedural "RunProgram" [ "program" "datablock" ] [ bound ]
 ---
 
 ## references
-- Renderman documentation
-- Using Procedural Primitives in PhotoRealistic RenderMan
-- PRMan for Python — A Bridge from PRMan to Python (and Back)
-- http://www.fileformat.info/format/wavefrontobj/
-- App not #19 Using the RiCurves Primitive
-- http://docs.python.org/
-- Appendix D - RenderMan Interface Bytestream Conventions
-- Application Note #3 How To Render Quickly Using PhotoRealistic RenderMan
+- @size[smaller](Renderman documentation)
+- @size[smaller](Using Procedural Primitives in PhotoRealistic RenderMan)
+- @size[smaller](PRMan for Python — A Bridge from PRMan to Python and Back)
+- @size[smaller](http://www.fileformat.info/format/wavefrontobj/)
+- @size[smaller](App not #19 Using the RiCurves Primitive)
+- @size[smaller](http://docs.python.org/)
+- @size[smaller](Appendix D - RenderMan Interface Bytestream Conventions)
+- @size[smaller](Application Note #3 How To Render Quickly Using PhotoRealistic RenderMan)

@@ -118,11 +118,11 @@ Polygon "varying float[2] st" [0 1 0.5 0 1 1] "vertex point P" [-1 -1 -2 0 1 1 1
 
 ## ri.PointsPolygon
 
-- Define npolys planar convex polygons that share vertices. 
-- The array nvertices contains the number of vertices in each polygon and has length npolys. 
-- The array vertices contains, for each polygon vertex, an index into the varying primitive variable arrays. 
-- The varying arrays are 0-based. vertices has length equal to the sum of all of the values in the nvertices array. 
-- Individual vertices in the parameterlist are thus accessed indirectly through the indices in the array vertices. 
+- @size[smaller](Define npolys planar convex polygons that share vertices. )
+- @size[smaller](The array nvertices contains the number of vertices in each polygon and has length npolys.) 
+- @size[smaller](The array vertices contains, for each polygon vertex, an index into the varying primitive variable arrays.) 
+- @size[smaller](The varying arrays are 0-based. vertices has length equal to the sum of all of the values in the nvertices array.) 
+- @size[smaller](Individual vertices in the parameterlist are thus accessed indirectly through the indices in the array vertices. )
 
 +++
 

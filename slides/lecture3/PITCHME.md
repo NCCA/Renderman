@@ -28,7 +28,7 @@
 - These provide superior memory usage, flexibility, and speed. 
 - Their visibility is a simple on and off for camera visibility.
 - PxrDomeLight - The domelight acts as the environment light for a scene and is often mapped with a high dymanic range image (HDRI).
-  - ```PxrRectLight PxrDistantLight PxrDiskLight PxrSphereLight PxrEnvDaylight PxrPortalLight , PxrDomeLight``` 
+  - @size[smaller](```PxrRectLight PxrDistantLight PxrDiskLight PxrSphereLight PxrEnvDaylight PxrPortalLight , PxrDomeLight```) 
 
 +++
 

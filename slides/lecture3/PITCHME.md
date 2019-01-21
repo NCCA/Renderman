@@ -28,7 +28,7 @@
 - @size[smaller](These provide superior memory usage, flexibility, and speed. )
 - @size[smaller](Their visibility is a simple on and off for camera visibility.)
 - @size[smaller](PxrDomeLight - The domelight acts as the environment light for a scene and is often mapped with a high dymanic range image (HDRI).)
-  - @size[smaller](```PxrRectLight PxrDistantLight PxrDiskLight PxrSphereLight PxrEnvDaylight PxrPortalLight , PxrDomeLight```) 
+  - @size[smaller](```PxrRectLight PxrDistantLight PxrDiskLight PxrSphereLight PxrEnvDaylight PxrPortalLight```) 
 
 +++
 
@@ -46,7 +46,7 @@
  - This is inefficient and should usually be avoided but may be useful for texture mapping "lights" onto futuristic objects and panels!
 
 
---
+---
 
 ## References
 

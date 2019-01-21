@@ -24,10 +24,10 @@
 
 ## Analytic Lights
 
--  These are the preferred choice. 
-- These provide superior memory usage, flexibility, and speed. 
-- Their visibility is a simple on and off for camera visibility.
-- PxrDomeLight - The domelight acts as the environment light for a scene and is often mapped with a high dymanic range image (HDRI).
+-  @size[smaller](These are the preferred choice. )
+- @size[smaller](These provide superior memory usage, flexibility, and speed. )
+- @size[smaller](Their visibility is a simple on and off for camera visibility.)
+- @size[smaller](PxrDomeLight - The domelight acts as the environment light for a scene and is often mapped with a high dymanic range image (HDRI).)
   - @size[smaller](```PxrRectLight PxrDistantLight PxrDiskLight PxrSphereLight PxrEnvDaylight PxrPortalLight , PxrDomeLight```) 
 
 +++

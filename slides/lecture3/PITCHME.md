@@ -13,7 +13,7 @@
 
 +++
 
-## Lighting A Scene
+## [Lighting A Scene](https://rmanwiki.pixar.com/display/REN22/Lighting)
 
 - There are 3 ways to light a scene
   - Analytic Lights 
@@ -30,5 +30,24 @@
 - PxrDomeLight - The domelight acts as the environment light for a scene and is often mapped with a high dymanic range image (HDRI).
   - ```PxrRectLight PxrDistantLight PxrDiskLight PxrSphereLight PxrEnvDaylight PxrPortalLight , PxrDomeLight``` 
 
++++
+
+## Mesh Lights 
+
+- These are great for using arbitrary shapes in lighting. 
+- These consume more memory since they are geometry and complex shapes may increase noise. 
+- These can make use of visibility like any other object: camera, shadow/transmission, and indirect visibility.
+  - ```PxrMeshLight ```
+
++++
+
+## Emissive Surfaces 
+ - These typically use a constant bxdf or "glow" parameter to light a scene indirectly. 
+ - This is inefficient and should usually be avoided but may be useful for texture mapping "lights" onto futuristic objects and panels!
 
 
+--
+
+## References
+
+- [Lighting](https://rmanwiki.pixar.com/display/REN22/Lighting)

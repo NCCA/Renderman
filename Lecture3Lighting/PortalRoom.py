@@ -1,11 +1,11 @@
 #!/usr/bin/python
 from __future__ import print_function
 import prman
+import ProcessCommandLine as cl
 # import the python functions
-import sys
 import sys,os.path,subprocess
-import argparse
-
+sys.path.append('../common/')
+import Mat4
 # Main rendering routine
 def main(filename,shadingrate=10,pixelvar=0.1,
          fov=48.0,width=1024,height=720,
@@ -14,11 +14,12 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   print ('shading rate {} pivel variance {} using {} {}'.format(shadingrate,pixelvar,integrator,integratorParams))
   ri = prman.Ri() # create an instance of the RenderMan interface
 
-  # this is the begining of the rib archive generation we can only
+  ri.Option("rib", {"string asciistyle": "indented,wide"})
+ # this is the begining of the rib archive generation we can only
   # make RI calls after this function else we get a core dump
   ri.Begin(filename)
   ri.Option('searchpath', {'string archive':'./assets/:@'})
-
+  ri.Option('searchpath', {'string texture':'./textures/:@'})
   # now we add the display element using the usual elements
   # FILENAME DISPLAY Type Output format
   ri.Display('rgb.exr', 'it', 'rgba')
@@ -31,11 +32,11 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Integrator (integrator ,'integrator',integratorParams)
   ri.Option( 'statistics', {'filename'  : [ 'stats.txt' ] } )
   ri.Option( 'statistics', {'endofframe' : [ 1 ] })
- 
+  
   ri.Projection(ri.PERSPECTIVE,{ri.FOV:fov})
 
   ri.Rotate(12,1,0,0)
-  ri.Translate( 0, 0.75 ,2.5)
+  ri.Translate( 0, 0.75 ,6.5)
 
 
   # now we start our world
@@ -43,35 +44,55 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   #######################################################################
   #Lighting 
   #######################################################################
-  ri.TransformBegin()
-  ri.AttributeBegin()
-  ri.Declare('dayLight' ,'string')
   
-  ri.Light( 'PxrEnvDayLight', 'dayLight', { 
-            'int month' : 6,
-            'int day' : 20,
-            'float hour' : 10
+  ri.AttributeBegin()
+  # position x,y,z rot [axis x,y,z]
+  xpos=1.0
+  positions=[[-xpos,-0.2,0,90,0,1,0],[xpos,-0.2,0,-90,0,1,0],[-xpos,-0.2,-1,90,0,1,0],[xpos,-0.2,-1,-90,0,1,0],[-xpos,-0.2,-2,90,0,1,0],[xpos,-0.2,-2,-90,0,1,0],[-xpos,-0.2,-3,90,0,1,0],[xpos,-0.2,-3,-90,0,1,0],[-xpos,-0.2,-4,90,0,1,0],[xpos,-0.2,-4,-90,0,1,0],[-xpos,-0.2,-5,90,0,1,0],[xpos,-0.2,-5,-90,0,1,0],[0,-0.2,0.8,180,0,1,0],
+  [0,2,0,0,0,1,0],[0,0.8,-1,90,1,0,0],[0,0.8,-2,90,1,0,0],[0,0.8,-3,90,1,0,0],[0,0.8,-4,90,1,0,0]]
+  lightNum=0
+  ri.Attribute( 'visibility' ,{ 'int indirect' : [0], 'int transmission' : [0] ,'int camera' : [1]})
+  # rotation matrix for the master image used in portals
+  xrot=Mat4.Mat4()
+  xrot.rotateX(90)
+  yrot=Mat4.Mat4()
+  yrot.rotateY(180)
+  tx=yrot*xrot
 
-   })
+  for p in positions :
+    ri.TransformBegin()    
+    ri.Declare('portalLight{0}'.format(lightNum) ,'string')
+    ri.Translate(p[0],p[1],p[2])
+    ri.Rotate(p[3],p[4],p[5],p[6])
+    ri.Scale(0.5,0.5,1)
+    lightNum=lightNum+1
+    ri.Light( 'PxrPortalLight', 'portalLight', { 
+              'float exposure' : 1.0,
+              'float intensity' : 2.0,
+              'string domeColorMap' : ['Luxo-Jr_4000x2000.tex'],
+              'matrix portalToDome' : tx.getMatrix(),             
+              'int cheapCaustics' : [1], 
+
+    })
+    ri.TransformEnd()
   ri.AttributeEnd()
-  ri.TransformEnd()
+
   #######################################################################
   # end lighting
   #######################################################################
 
   ri.AttributeBegin()
-  ri.Attribute( 'identifier',{ 'name' :'floor'})
-  #ri.ReadArchive('cornell.rib')
-  ri.Bxdf('PxrDiffuse', 'smooth', { 
-          'color diffuseColor' : [0.8,0.8,0.8]
-  })
-  ri.Polygon( {ri.P: [-1, -1 ,1 ,1, -1, 1, 1, -1, -2, -1, -1, -2]})
+  ri.TransformBegin()
+  ri.Attribute( 'identifier',{ 'name' :'cornell'})
+  ri.Scale(1.0,1.0,1.5)
+  ri.ReadArchive('cornell.rib')
+  ri.TransformEnd()
   ri.AttributeEnd()
 
   ri.AttributeBegin()
   ri.Attribute( 'identifier',{ 'name' :'buddha'})
   ri.TransformBegin()
-  ri.Translate(-0.5,-1,0)
+  ri.Translate(-0.5,-1,-4)
   ri.Rotate(180,0,1,0)
   ri.Scale(0.1,0.1,0.1)
   ri.Attribute( 'visibility',{ 'int transmission' : [1]})
@@ -91,6 +112,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   'color extinction' : [0.0, 0.2 ,0.0],
   
   })
+
   ri.ReadArchive('buddha.zip!buddha.rib')
   ri.TransformEnd()
   ri.AttributeEnd()
@@ -106,7 +128,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
   ri.Bxdf( 'PxrDisney','bxdf', { 'reference color baseColor' : ['starBall:Cout'] })
   ri.TransformBegin()
-  ri.Translate(0.3, -0.7 , 0.3)
+  ri.Translate(0.3, -0.7 , -4.3)
   ri.Rotate(-30,0,1,0)
   ri.Rotate(20,1,0,0)
   ri.Sphere(0.3,-0.3,0.3,360)
@@ -116,7 +138,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.AttributeBegin()
   ri.Attribute( 'identifier',{ 'name' :'teapot'})
   ri.TransformBegin()
-  ri.Translate(0, -1 , -0.8)
+  ri.Translate(0, -1 , -4.8)
   ri.Rotate(45,0,1,0)
   ri.Rotate( -90, 1 ,0 ,0)
   ri.Scale( 0.1, 0.1, 0.1) 
@@ -154,10 +176,9 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.End()
 
 
-
 def checkAndCompileShader(shader) :
   	if os.path.isfile(shader+'.oso') != True  or os.stat(shader+'.osl').st_mtime - os.stat(shader+'.oso').st_mtime > 0 :
-		print ('compiling shader %s' %(shader))
+		print( 'compiling shader %s' %(shader))
 		try :
 			subprocess.check_call(['oslc', shader+'.osl'])
 		except subprocess.CalledProcessError :
@@ -169,57 +190,6 @@ if __name__ == '__main__':
   shaderName='starBall'
   checkAndCompileShader(shaderName)
   
-  parser = argparse.ArgumentParser(description='Modify render parameters')
-  
-  parser.add_argument('--shadingrate', '-s', nargs='?', 
-                      const=10.0, default=10.0, type=float,
-                      help='modify the shading rate default to 10')
-
-  parser.add_argument('--pixelvar', '-p' ,nargs='?', 
-                      const=0.1, default=0.1,type=float,
-                      help='modify the pixel variance default  0.1')
-  parser.add_argument('--fov', '-f' ,nargs='?', 
-                      const=48.0, default=48.0,type=float,
-                      help='projection fov default 48.0')
-  parser.add_argument('--width' , '-wd' ,nargs='?', 
-                      const=1024, default=1024,type=int,
-                      help='width of image default 1024')
-  parser.add_argument('--height', '-ht' ,nargs='?', 
-                      const=720, default=720,type=int,
-                      help='height of image default 720')
-  
-  parser.add_argument('--rib', '-r' , action='count',help='render to rib not framebuffer')
-  parser.add_argument('--default', '-d' , action='count',help='use PxrDefault')
-  parser.add_argument('--vcm', '-v' , action='count',help='use PxrVCM')
-  parser.add_argument('--direct', '-t' , action='count',help='use PxrDirect')
-  parser.add_argument('--wire', '-w' , action='count',help='use PxrVisualizer with wireframe shaded')
-  parser.add_argument('--normals', '-n' , action='count',help='use PxrVisualizer with wireframe and Normals')
-  parser.add_argument('--st', '-u' , action='count',help='use PxrVisualizer with wireframe and ST')
-
-  args = parser.parse_args()
-  if args.rib :
-    filename = 'rgb.rib' 
-  else :
-    filename='__render'
-  
-  integratorParams={}
-  integrator='PxrPathTracer'
-  if args.default :
-    integrator='PxrDefault'
-  if args.vcm :
-    integrator='PxrVCM'
-  if args.direct :
-    integrator='PxrDirectLighting'
-  if args.wire :
-    integrator='PxrVisualizer'
-    integratorParams={'int wireframe' : [1], 'string style' : ['shaded']}
-  if args.normals :
-    integrator='PxrVisualizer'
-    integratorParams={'int wireframe' : [1], 'string style' : ['normals']}
-  if args.st :
-    integrator='PxrVisualizer'
-    integratorParams={'int wireframe' : [1], 'string style' : ['st']}
-
-
-  main(filename,args.shadingrate,args.pixelvar,args.fov,args.width,args.height,integrator,integratorParams)
+  cl.ProcessCommandLine('portalRoom.rib')
+  main(cl.filename,cl.args.shadingrate,cl.args.pixelvar,cl.args.fov,cl.args.width,cl.args.height,cl.integrator,cl.integratorParams)
 

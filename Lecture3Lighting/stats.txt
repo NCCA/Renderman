@@ -1,0 +1,15 @@
+Pixar PhotoRealistic RenderMan 22.1
+copyright (c) 1988-2018 Pixar.
+linked Wed Sep 05 20:21:50 2018 PDT @1890983
+build osxSierra_x86-64_clang7icc170_external_release
+
+Rendered on Wed Jan 23 14:30:03 GMT 2019
+Rendering at 1024x720 pixels, 64 maxsamples
+	"rgb.exr" (mode = rgba, type = it)
+
+       Max resident mem: 582.72 MB
+       Page faults: 33, Page reclaims: 246778, Swaps: 0
+
+       Real time:     00:05
+       User time:     00:29
+       Sys time:      00:01

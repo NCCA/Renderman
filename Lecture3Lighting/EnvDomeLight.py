@@ -1,16 +1,16 @@
 #!/usr/bin/python
+from __future__ import print_function
 import prman
 # import the python functions
 import sys
 import sys,os.path,subprocess
 import argparse
-
 # Main rendering routine
 def main(filename,shadingrate=10,pixelvar=0.1,
          fov=48.0,width=1024,height=720,
          integrator='PxrPathTracer',integratorParams={}
         ) :
-  print 'shading rate {} pivel variance {} using {} {}'.format(shadingrate,pixelvar,integrator,integratorParams)
+  print ('shading rate {} pivel variance {} using {} {}'.format(shadingrate,pixelvar,integrator,integratorParams))
   ri = prman.Ri() # create an instance of the RenderMan interface
 
   # this is the begining of the rib archive generation we can only
@@ -155,7 +155,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
 def checkAndCompileShader(shader) :
   	if os.path.isfile(shader+'.oso') != True  or os.stat(shader+'.osl').st_mtime - os.stat(shader+'.oso').st_mtime > 0 :
-		print 'compiling shader %s' %(shader)
+		print( 'compiling shader %s' %(shader))
 		try :
 			subprocess.check_call(['oslc', shader+'.osl'])
 		except subprocess.CalledProcessError :

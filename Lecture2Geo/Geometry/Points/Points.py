@@ -11,7 +11,6 @@ filename = 'Points.rib'
 ri.Begin('__render')
 
 ri.Option('searchpath', {'string shader': ['../../../Lecture1Intro/']})
-ri.Option('rib', {'string asciistyle': 'indented'})
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format

@@ -17,7 +17,7 @@ def main(argv=None):
 			print >>sys.stderr, err.msg
 			print >>sys.stderr, 'for help use --help'
 			return 2
-	BUILD='render'
+	BUILD='prman'
 	for opt, arg in opts:               
 		if opt in ('-c', '--clean'):      
 			BUILD+=' -c'

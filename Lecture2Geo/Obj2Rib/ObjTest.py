@@ -3,12 +3,12 @@
 # export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin   
 import prman
 import sys
-sys.path.append('../../PythonClasses')
+sys.path.append('../../common')
 from Obj import *
 
 objFile="troll.obj"
 
-obj=Obj(objFile,5)
+obj=Obj(objFile)
 
 
 ri = prman.Ri() # create an instance of the RenderMan interface
@@ -40,14 +40,14 @@ for frame in range(0,360,10) :
 	ri.Translate(-1,0,0)
 	ri.Rotate(frame,0,1,0)
 
-	obj.Polygon(ri,5)
+	obj.Polygon(ri)
 	ri.TransformEnd()
 	
 	
 	ri.TransformBegin()
 	ri.Rotate(frame,0,1,0)
 
-	obj.PointsPolygon(ri,5)
+	obj.PointsPolygon(ri)
 	ri.TransformEnd()
 	
 	
@@ -56,7 +56,7 @@ for frame in range(0,360,10) :
 	ri.Translate(1,0,0)
 	ri.Rotate(frame,0,1,0)
 
-	obj.SubDivisionMesh(ri,5)
+	obj.SubDivisionMesh(ri)
 	ri.TransformEnd()
 	
 	ri.WorldEnd()

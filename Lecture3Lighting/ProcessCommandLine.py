@@ -1,7 +1,7 @@
 import argparse
 
 filename='default.rib'
-integratorParams={}
+integratorParams={"int numLightSamples" : [1], "int numBxdfSamples" : [1], "int maxPathLength" : [4]}
 integrator='PxrUnified'
 args=[]
 

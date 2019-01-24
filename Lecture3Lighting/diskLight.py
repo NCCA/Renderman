@@ -39,15 +39,14 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   # now we start our world
   ri.WorldBegin()
   #######################################################################
-  #Lighting We need geo to emit light
+  #Lighting 
   #######################################################################
   ri.TransformBegin()
   ri.AttributeBegin()
-  ri.Declare('meshLight' ,'string')
-  ri.Translate(0, 1, 0)
+  ri.Declare('Light0' ,'string')
+  ri.Translate(0, 0.8, 0)
   ri.Rotate( 90, 1, 0, 0)
   ri.Scale( 0.5, 0.5 ,0.5)
-
   ri.Light( 'PxrDiskLight', 'Light0', { 'float intensity' : 30})
   ri.AttributeEnd()
   ri.TransformEnd()

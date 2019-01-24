@@ -39,7 +39,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   # now we start our world
   ri.WorldBegin()
   #######################################################################
-  #Lighting 
+  #Lighting  :- Move the light just before the celling to show direction
   #######################################################################
   ri.TransformBegin()
   ri.AttributeBegin()

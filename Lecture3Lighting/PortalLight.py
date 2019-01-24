@@ -41,7 +41,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   # now we start our world
   ri.WorldBegin()
   #######################################################################
-  #Lighting We need geo to emit light
+  #Lighting :- Note lights are transformed 
   #######################################################################
   ri.TransformBegin()
   ri.AttributeBegin()
@@ -52,7 +52,6 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
   ri.Light( 'PxrPortalLight', 'portalLight', { 
             'float exposure' : 5.0,
-            "string domeColorMap" : "Luxo-Jr_4000x2000.tex"
    })
   ri.AttributeEnd()
   ri.TransformEnd()

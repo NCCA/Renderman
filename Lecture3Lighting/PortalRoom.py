@@ -68,11 +68,9 @@ def main(filename,shadingrate=10,pixelvar=0.1,
     lightNum=lightNum+1
     ri.Light( 'PxrPortalLight', 'portalLight', { 
               'float exposure' : 1.0,
-              'float intensity' : 2.0,
+              'float intensity' : 1.0,
               'string domeColorMap' : ['Luxo-Jr_4000x2000.tex'],
               'matrix portalToDome' : tx.getMatrix(),             
-              'int cheapCaustics' : [1], 
-
     })
     ri.TransformEnd()
   ri.AttributeEnd()

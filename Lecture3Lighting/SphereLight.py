@@ -40,13 +40,12 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   # now we start our world
   ri.WorldBegin()
   #######################################################################
-  #Lighting We need geo to emit light
+  #Lighting 
   #######################################################################
   ri.TransformBegin()
   ri.AttributeBegin()
   ri.Declare('sphereLight' ,'string')
   ri.Translate(0,0.75,0)
-  #ri.Rotate(90,1,0,0)
   ri.Scale(0.125, 0.125, 0.125)
 
   ri.Light( 'PxrSphereLight', 'sphereLight', { 
@@ -69,12 +68,24 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Translate(-0.5,-1,0)
   ri.Rotate(180,0,1,0)
   ri.Scale(0.1,0.1,0.1)
-  ri.Bxdf('PxrGlass', 'greenglass',{ 
-  'float reflectionGain' : 1,
-  'color absorptionColor'  : [0.0 ,0.2, 0.0],
-  'color reflectionColor' : [0, 1 ,0],
-  'color transmissionColor' : [0, 1 ,0] 
+  ri.Attribute( 'visibility',{ 'int transmission' : [1]})
+  ri.Attribute( 'trace',
+  { 
+    'int maxdiffusedepth' : [1], 
+    'int maxspeculardepth' : [8]
   })
+  ri.Bxdf('PxrSurface', 'greenglass',{ 
+  'color refractionColor' : [0,0.9,0],
+  'float diffuseGain' : 0,
+  'color specularEdgeColor' : [0.2, 1 ,0.2],
+  'float refractionGain' : [1.0],
+  'float reflectionGain' : [1.0],
+  'float glassRoughness' : [0.01],
+  'float glassIor' : [1.5],
+  'color extinction' : [0.0, 0.2 ,0.0],
+  
+  })
+
   ri.ReadArchive('buddha.zip!buddha.rib')
   ri.TransformEnd()
   ri.AttributeEnd()
@@ -140,12 +151,12 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
 
 def checkAndCompileShader(shader) :
-  	if os.path.isfile(shader+'.oso') != True  or os.stat(shader+'.osl').st_mtime - os.stat(shader+'.oso').st_mtime > 0 :
-		print 'compiling shader %s' %(shader)
-		try :
-			subprocess.check_call(['oslc', shader+'.osl'])
-		except subprocess.CalledProcessError :
-			sys.exit('shader compilation failed')
+  if os.path.isfile(shader+'.oso') != True  or os.stat(shader+'.osl').st_mtime - os.stat(shader+'.oso').st_mtime > 0 :
+  print 'compiling shader %s' %(shader)
+  try :
+    subprocess.check_call(['oslc', shader+'.osl'])
+  except subprocess.CalledProcessError :
+    sys.exit('shader compilation failed')
 		 
 
 

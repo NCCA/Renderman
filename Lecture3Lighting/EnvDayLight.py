@@ -41,7 +41,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   # now we start our world
   ri.WorldBegin()
   #######################################################################
-  #Lighting 
+  #Lighting :- Note lights inherit transforms so best to use transform begin
   #######################################################################
   ri.TransformBegin()
   ri.AttributeBegin()

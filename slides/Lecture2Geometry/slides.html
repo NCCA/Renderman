@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Intro to Renderman</title>
+    <link rel="stylesheet" href="/jmacey/js/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="/jmacey/js/reveal.js/reveal.js-fullscreen-code.css">
+    <link rel="stylesheet" href="/jmacey//js/reveal.js/css/theme/white.css" id="theme">
+    <link rel="stylesheet" href="/jmacey//js/reveal.js/lib/css/zenburn.css">
+    <link rel="stylesheet" href="/jmacey/js/reveal.js/jonstyle.css">
+
+    <!-- to print uncomment this and pass ?print-pdf#/ to the command line --->
+    <!--- <link rel="stylesheet" href="/jmacey//js/reveal.js/css/print/pdf.css"> -->
+</head>
+
+<body>
+    <div class="reveal">
+      <div class="slides">
+        <style> .reveal section img { background:none; border:none; box-shadow:none; } </style>   
+        <!-- Slides are separated by newline + three dashes + newline, vertical slides identical but two dashes -->
+        <section data-markdown="slides.md" data-markdown data-separator="^\n---\n$" data-separator-vertical="^\n--\n$"></section>        
+       
+      </div>
+     
+    </div>
+
+    <script src="/jmacey/js/reveal.js/lib/js/head.min.js"></script>
+    <script src="/jmacey/js/reveal.js/js/reveal.js"></script>
+    <script src="/jmacey/js/jquery/jquery.min.js"></script>
+    <script>
+      // this is a uniqe id for the slide for saving notes later I will update to use IndexedDB but 
+      // this will work on all systems
+      var gSlideID='PPPLecture1';
+    </script>
+ 
+
+
+    <!-- modal for notes -->
+
+    <div id="notes" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span id="close" class="closeStyle">x</span>
+          <h3>Add Notes For Page</h3>
+          <div id="noteText" contentEditable="true" class="editdiv paper"></div> <br>
+          <button id="submit" onclick="submitNote();">submit</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="showNotes" class="modal ">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span id="closeNotes" class="closeStyle">x</span>
+      <h3>Page Notes</h3>
+      <div id="savedNotes" contentEditable="false" class="editdiv paper"></div> <br>
+      <button class="noteButton" id="copyToClipboard" onclick="copyAll();">copy all to clipboard</button>
+      <button class="noteButtonWarn" id="clearNotes" onclick="clearNotes(); " >clear page</button>
+      <button class="noteButtonWarn" id="clearAllNotes" onclick="clearAllNotes();">clear all notes</button>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 2. Create hidden header/footer <div> -->
+  <div id="hidden" style="display:none;">
+    <div id="header">
+      <div id="header-left">
+        <input id="home" type="image" src="/jmacey/js/icons/home.png" width='24%' height='24%' onclick="goHome();" title="home"> </input>
+       <!-- <input type="image" src="/jmacey/js/icons/pen.png" width='8%' height='8%' onclick="storeNote();" title="add notes"> </input>
+        <input type="image" src="/jmacey/js/icons/notes.png" width='8%' height='8%' onclick="showNotes();" title="show notes"> </input>
+      -->
+      </div>
+
+
+    <!--        
+    <div id="header-right">HEADER-RIGHT</div>
+    <div id="footer-left">FOOTER-LEFT</div>
+    -->
+    </div>  
+  </div>
+
+
+
+    <script src="/jmacey/js/reveal.js/slidefunctions.js"></script>
+  
+ 
+</div>
+</div>
+</body>
+</html>

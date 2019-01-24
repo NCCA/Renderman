@@ -56,33 +56,16 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Declare('meshLight' ,'string')
   ri.Attribute( 'identifier',{ 'name' :'ncca'})
 
-  
   ri.Light('PxrMeshLight','id',
   {
-	'float intensity' : [2.0], 
+	'float intensity' : [4.0], 
 	'float exposure' : [1], 
-	'color lightColor' : [1,1,1], 
-	'color textureColor' : [1,1,1], 
-	'int enableTemperature' : [0], 
-	'float temperature' : [6500], 
-	'float specular' : [1.0], 
-	'float diffuse' : [1.0], 
-	'float intensityNearDist' : [0.0], 
-	'int enableShadows' : [1], 
-	'color shadowColor' : [0,0,0], 
-	'float shadowDistance' : [-1], 
-	'float shadowFalloff' : [-1.0], 
-	'float shadowFalloffGamma' : [1.0], 
-	'string shadowSubset' : [''], 
-	'string shadowExcludeSubset' : [''], 
-	'int areaNormalize' : [0], 
-	'int traceLightPaths' : [0], 
-	'int thinShadow' : [1], 
-	'float importanceMultiplier' : [1.0], 
-	'string lightGroup' : [''], 
+	'color lightColor' : [0.8,.8,.8], 
+	'int enableTemperature' : [1], 
+	'float temperature' : [2500], 
+	'int areaNormalize' : [0] 
 })
 
-  
   
   ri.Bxdf ('PxrBlack' , 'black' )
   ri.Translate(0, 0.6 , 0)
@@ -91,6 +74,17 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
   ri.AttributeEnd()
   ri.TransformEnd()
+  ## light base
+  ri.TransformBegin()
+  ri.AttributeBegin()
+  ri.Bxdf ('PxrDiffuse' , 'base', {'color diffuseColor' : [0.1, 0.1 ,0.1]} )
+  ri.Translate(0, 0.65 , 0)
+  ri.Scale( 0.4, 0.01, 0.4) 
+  ri.Attribute( 'visibility',{ 'int transmission' : [0]})
+  ri.ReadArchive('lightBase.rib')
+  ri.AttributeEnd()
+  ri.TransformEnd()
+
   #######################################################################
   # end lighting
   #######################################################################

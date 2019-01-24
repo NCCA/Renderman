@@ -1,16 +1,16 @@
 #!/usr/bin/python
+from __future__ import print_function
 import prman
 # import the python functions
-import sys
+import ProcessCommandLine as cl
 import sys,os.path,subprocess
-import argparse
 
 # Main rendering routine
 def main(filename,shadingrate=10,pixelvar=0.1,
          fov=48.0,width=1024,height=720,
          integrator='PxrPathTracer',integratorParams={}
         ) :
-  print 'shading rate {} pivel variance {} using {} {}'.format(shadingrate,pixelvar,integrator,integratorParams)
+  print ('shading rate {} pivel variance {} using {} {}'.format(shadingrate,pixelvar,integrator,integratorParams))
   ri = prman.Ri() # create an instance of the RenderMan interface
 
   # this is the begining of the rib archive generation we can only
@@ -40,12 +40,12 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   # now we start our world
   ri.WorldBegin()
   #######################################################################
-  #Lighting 
+  # Lighting 
   #######################################################################
   ri.TransformBegin()
   ri.AttributeBegin()
   ri.Declare('sphereLight' ,'string')
-  ri.Translate(0,0.75,0)
+  ri.Translate(0,0.65,0)
   ri.Scale(0.125, 0.125, 0.125)
 
   ri.Light( 'PxrSphereLight', 'sphereLight', { 
@@ -152,69 +152,15 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
 def checkAndCompileShader(shader) :
   if os.path.isfile(shader+'.oso') != True  or os.stat(shader+'.osl').st_mtime - os.stat(shader+'.oso').st_mtime > 0 :
-  print 'compiling shader %s' %(shader)
-  try :
-    subprocess.check_call(['oslc', shader+'.osl'])
-  except subprocess.CalledProcessError :
-    sys.exit('shader compilation failed')
-		 
-
-
+    print( 'compiling shader %s' %(shader))
+    try :
+      subprocess.check_call(['oslc', shader+'.osl'])
+    except subprocess.CalledProcessError :
+      sys.exit('shader compilation failed')
+      
 if __name__ == '__main__':
   shaderName='starBall'
   checkAndCompileShader(shaderName)
   
-  parser = argparse.ArgumentParser(description='Modify render parameters')
-  
-  parser.add_argument('--shadingrate', '-s', nargs='?', 
-                      const=10.0, default=10.0, type=float,
-                      help='modify the shading rate default to 10')
-
-  parser.add_argument('--pixelvar', '-p' ,nargs='?', 
-                      const=0.1, default=0.1,type=float,
-                      help='modify the pixel variance default  0.1')
-  parser.add_argument('--fov', '-f' ,nargs='?', 
-                      const=48.0, default=48.0,type=float,
-                      help='projection fov default 48.0')
-  parser.add_argument('--width' , '-wd' ,nargs='?', 
-                      const=1024, default=1024,type=int,
-                      help='width of image default 1024')
-  parser.add_argument('--height', '-ht' ,nargs='?', 
-                      const=720, default=720,type=int,
-                      help='height of image default 720')
-  
-  parser.add_argument('--rib', '-r' , action='count',help='render to rib not framebuffer')
-  parser.add_argument('--default', '-d' , action='count',help='use PxrDefault')
-  parser.add_argument('--vcm', '-v' , action='count',help='use PxrVCM')
-  parser.add_argument('--direct', '-t' , action='count',help='use PxrDirect')
-  parser.add_argument('--wire', '-w' , action='count',help='use PxrVisualizer with wireframe shaded')
-  parser.add_argument('--normals', '-n' , action='count',help='use PxrVisualizer with wireframe and Normals')
-  parser.add_argument('--st', '-u' , action='count',help='use PxrVisualizer with wireframe and ST')
-
-  args = parser.parse_args()
-  if args.rib :
-    filename = 'rgb.rib' 
-  else :
-    filename='__render'
-  
-  integratorParams={}
-  integrator='PxrPathTracer'
-  if args.default :
-    integrator='PxrDefault'
-  if args.vcm :
-    integrator='PxrVCM'
-  if args.direct :
-    integrator='PxrDirectLighting'
-  if args.wire :
-    integrator='PxrVisualizer'
-    integratorParams={'int wireframe' : [1], 'string style' : ['shaded']}
-  if args.normals :
-    integrator='PxrVisualizer'
-    integratorParams={'int wireframe' : [1], 'string style' : ['normals']}
-  if args.st :
-    integrator='PxrVisualizer'
-    integratorParams={'int wireframe' : [1], 'string style' : ['st']}
-
-
-  main(filename,args.shadingrate,args.pixelvar,args.fov,args.width,args.height,integrator,integratorParams)
-
+  cl.ProcessCommandLine('SphereLight.rib')
+  main(cl.filename,cl.args.shadingrate,cl.args.pixelvar,cl.args.fov,cl.args.width,cl.args.height,cl.integrator,cl.integratorParams)

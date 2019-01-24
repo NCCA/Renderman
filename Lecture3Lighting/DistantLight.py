@@ -1,16 +1,64 @@
 #!/usr/bin/python
+from __future__ import print_function
 import prman
+import ProcessCommandLine as cl
 # import the python functions
-import sys
-import sys,os.path,subprocess
-import argparse
+import sys,os.path,subprocess,math
+
+# Modified from Renderman Examples in The renderman Companion
+# AimZ(): rotate the world so the direction vector points in
+#	positive z by rotating about the y axis, then x. The cosine
+#	of each rotation is given by components of the normalized
+#	direction vector.  Before the y rotation the direction vector
+#	might be in negative z, but not afterward.
+
+def AimZ(ri,direction) :
+	if (direction[0]==0 and direction[1]==0 and direction[2]==0) :
+		return
+	#
+	# The initial rotation about the y axis is given by the projection of
+	# the direction vector onto the x,z plane: the x and z components
+	# of the direction.
+	
+	xzlen = math.sqrt(direction[0]*direction[0]+direction[2]*direction[2])
+	if (xzlen == 0) :
+		if(direction[1] <0) :
+			yrot = 0
+		else :
+			yrot =180
+	
+	#		yrot = (direction[1] < 0) ? 180 : 0
+	else :
+		yrot = 180*math.acos(direction[2]/xzlen)/math.pi;
+	
+	
+	 # The second rotation, about the x axis, is given by the projection on
+	 # the y,z plane of the y-rotated direction vector: the original y
+	 # component, and the rotated x,z vector from above.
+	 
+	yzlen = math.sqrt(direction[1]*direction[1]+xzlen*xzlen)
+	xrot = 180*math.acos(xzlen/yzlen)/math.pi	 # yzlen should never be 0 
+	
+	if (direction[1] > 0) :
+		ri.Rotate(-xrot, 1.0, 0.0, 0.0)
+	else :
+		ri.Rotate(xrot, 1.0, 0.0, 0.0)
+	#The last rotation declared gets performed first 
+	if (direction[0] > 0) :
+		ri.Rotate(-yrot, 0.0, 1.0, 0.0)
+	else :
+		ri.Rotate(yrot, 0.0, 1.0, 0.0)
+	
+
+
+
 
 # Main rendering routine
 def main(filename,shadingrate=10,pixelvar=0.1,
          fov=48.0,width=1024,height=720,
          integrator='PxrPathTracer',integratorParams={}
         ) :
-  print 'shading rate {} pivel variance {} using {} {}'.format(shadingrate,pixelvar,integrator,integratorParams)
+  print ('shading rate {} pivel variance {} using {} {}'.format(shadingrate,pixelvar,integrator,integratorParams))
   ri = prman.Ri() # create an instance of the RenderMan interface
 
   # this is the begining of the rib archive generation we can only
@@ -45,7 +93,12 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.TransformBegin()
   ri.AttributeBegin()
   ri.Declare('distantLight' ,'string')
-  ri.Rotate(-35,1,0,0)
+#  ri.Rotate(35,0,1,0)
+  To=[0,0,0]
+  From=[1,1.5,-15]
+  direction = map(lambda x,y : x-y , To,From)
+  AimZ(ri,direction)
+
   ri.Light( 'PxrDistantLight', 'distantLight', { 
             'float intensity' : 10000,
             'float exposure' : 2.0
@@ -153,70 +206,17 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
 
 def checkAndCompileShader(shader) :
-  	if os.path.isfile(shader+'.oso') != True  or os.stat(shader+'.osl').st_mtime - os.stat(shader+'.oso').st_mtime > 0 :
-		print 'compiling shader %s' %(shader)
+  if os.path.isfile(shader+'.oso') != True  or os.stat(shader+'.osl').st_mtime - os.stat(shader+'.oso').st_mtime > 0 :
+		print ('compiling shader %s' %(shader))
 		try :
 			subprocess.check_call(['oslc', shader+'.osl'])
 		except subprocess.CalledProcessError :
 			sys.exit('shader compilation failed')
 		 
-
-
 if __name__ == '__main__':
   shaderName='starBall'
   checkAndCompileShader(shaderName)
   
-  parser = argparse.ArgumentParser(description='Modify render parameters')
-  
-  parser.add_argument('--shadingrate', '-s', nargs='?', 
-                      const=10.0, default=10.0, type=float,
-                      help='modify the shading rate default to 10')
-
-  parser.add_argument('--pixelvar', '-p' ,nargs='?', 
-                      const=0.1, default=0.1,type=float,
-                      help='modify the pixel variance default  0.1')
-  parser.add_argument('--fov', '-f' ,nargs='?', 
-                      const=48.0, default=48.0,type=float,
-                      help='projection fov default 48.0')
-  parser.add_argument('--width' , '-wd' ,nargs='?', 
-                      const=1024, default=1024,type=int,
-                      help='width of image default 1024')
-  parser.add_argument('--height', '-ht' ,nargs='?', 
-                      const=720, default=720,type=int,
-                      help='height of image default 720')
-  
-  parser.add_argument('--rib', '-r' , action='count',help='render to rib not framebuffer')
-  parser.add_argument('--default', '-d' , action='count',help='use PxrDefault')
-  parser.add_argument('--vcm', '-v' , action='count',help='use PxrVCM')
-  parser.add_argument('--direct', '-t' , action='count',help='use PxrDirect')
-  parser.add_argument('--wire', '-w' , action='count',help='use PxrVisualizer with wireframe shaded')
-  parser.add_argument('--normals', '-n' , action='count',help='use PxrVisualizer with wireframe and Normals')
-  parser.add_argument('--st', '-u' , action='count',help='use PxrVisualizer with wireframe and ST')
-
-  args = parser.parse_args()
-  if args.rib :
-    filename = 'rgb.rib' 
-  else :
-    filename='__render'
-  
-  integratorParams={}
-  integrator='PxrPathTracer'
-  if args.default :
-    integrator='PxrDefault'
-  if args.vcm :
-    integrator='PxrVCM'
-  if args.direct :
-    integrator='PxrDirectLighting'
-  if args.wire :
-    integrator='PxrVisualizer'
-    integratorParams={'int wireframe' : [1], 'string style' : ['shaded']}
-  if args.normals :
-    integrator='PxrVisualizer'
-    integratorParams={'int wireframe' : [1], 'string style' : ['normals']}
-  if args.st :
-    integrator='PxrVisualizer'
-    integratorParams={'int wireframe' : [1], 'string style' : ['st']}
-
-
-  main(filename,args.shadingrate,args.pixelvar,args.fov,args.width,args.height,integrator,integratorParams)
+  cl.ProcessCommandLine('DistantLight.rib')
+  main(cl.filename,cl.args.shadingrate,cl.args.pixelvar,cl.args.fov,cl.args.width,cl.args.height,cl.integrator,cl.integratorParams)
 

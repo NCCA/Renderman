@@ -3,13 +3,13 @@ copyright (c) 1988-2018 Pixar.
 linked Sun Dec 09 20:22:29 2018 PST @1923583
 build osxSierra_x86-64_clang7icc170_external_release
 
-Rendered on Thu Jan 24 14:44:44 GMT 2019
-Rendering at 1024x720 pixels, 256 maxsamples
+Rendered on Mon Jan 28 20:07:46 GMT 2019
+Rendering at 1024x720 pixels, 64 maxsamples
 	"rgb.exr" (mode = Ci,a, type = it)
 
-       Max resident mem: 708.74 MB
-       Page faults: 29, Page reclaims: 139654, Swaps: 0
+       Max resident mem: 345.16 MB
+       Page faults: 868, Page reclaims: 67708, Swaps: 0
 
-       Real time:     07:32
-       User time:     46:53
-       Sys time:      00:32
+       Real time:     00:06
+       User time:     00:13
+       Sys time:      00:00

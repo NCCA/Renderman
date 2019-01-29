@@ -1,6 +1,6 @@
 //Maya ASCII 2017 scene
 //Name: LightForRenderman.ma
-//Last modified: Thu, Jan 24, 2019 02:40:57 PM
+//Last modified: Thu, Jan 24, 2019 03:14:40 PM
 //Codeset: UTF-8
 requires maya "2017";
 requires -nodeType "PxrSurface" -nodeType "rmanDisplayChannel" -nodeType "d_openexr"
@@ -17,8 +17,8 @@ fileInfo "license" "education";
 createNode transform -s -n "persp";
 	rename -uid "05884B04-424B-C3E0-6EEA-00A3482624AF";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 0.28038622294528531 -2.0587122697238556 5.5981035460645208 ;
-	setAttr ".r" -type "double3" 20.744797876953012 2.3927277683285144 0.51099788829561188 ;
+	setAttr ".t" -type "double3" 2.7593275139280693 -1.3278628954540705 5.2138550724491814 ;
+	setAttr ".r" -type "double3" 14.36362874927522 25.191752779096301 0.56421752206290632 ;
 	setAttr ".rp" -type "double3" 0 0 8.8817841970012523e-16 ;
 	setAttr ".rpt" -type "double3" 6.1909794824906604e-16 -4.3271489625745078e-15 -1.0886393668934267e-15 ;
 createNode camera -s -n "perspShape" -p "persp";

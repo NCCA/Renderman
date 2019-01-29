@@ -2,7 +2,7 @@ import argparse
 
 filename='default.rib'
 integratorParams={"int numLightSamples" : [1], "int numBxdfSamples" : [1], "int maxPathLength" : [4]}
-integrator='PxrUnified'
+integrator='PxrPathTracer'
 args=[]
 
 def ProcessCommandLine(_filename) :
@@ -30,7 +30,7 @@ def ProcessCommandLine(_filename) :
                       help='height of image default 720')
   
   parser.add_argument('--rib', '-r' , action='count',help='render to rib not framebuffer')
-  parser.add_argument('--default', '-d' , action='count',help='use PxrDefault')
+  parser.add_argument('--default', '-d' , action='count',help='use PxrPathTracer')
   parser.add_argument('--vcm', '-v' , action='count',help='use PxrVCM')
   parser.add_argument('--unified', '-i' , action='count',help='use PxrUnified')
   parser.add_argument('--occlusion', '-o' , action='count',help='use Occlusion')
@@ -47,7 +47,7 @@ def ProcessCommandLine(_filename) :
     filename='__render'
   
   if args.default :
-    integrator='PxrUnified'
+    integrator='PxrPathTracer'
   if args.vcm :
     integrator='PxrVCM'
   if args.unified :

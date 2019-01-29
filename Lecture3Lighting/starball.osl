@@ -5,7 +5,7 @@ Based on starball shader in Advanced Renderman
  *   by Anthony A. Apodaca and Larry Gritz, Morgan Kaufmann, 1999.
 */
 
-shader starball(
+shader starBall(
 								color starColour = color(.8,.6,0),
 								color bandColour = color(0,0.2,.7),
 								color ballColour = color (.5,.05,.05),

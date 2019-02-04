@@ -40,7 +40,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   # now we start our world
   ri.WorldBegin()
   #######################################################################
-  #Lighting We need geo to emit light
+  #Lighting 
   #######################################################################
   ri.TransformBegin()
   ri.AttributeBegin()
@@ -91,22 +91,26 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
   ri.AttributeBegin()
   HairColour={'Blond' : [0.921, 0.898, 0.321], 
-              'Blue' : [0.1, 0.1, 0.8]}
+              'Blue' : [0.1, 0.1, 0.8],
+              'Dark' : [0.1,0.1,0.1],
+              'Red' : [1.0,0.1,0.1],
+              'Green' : [0.1,1.0,0.1]}
+
   ri.Bxdf('PxrMarschnerHair','id',
   {
   'int diffuseModelType' : [0], 
   'float diffuseGain' : [0.3], 
-  'color diffuseColor' : HairColour.get('Blue'), 
+  'color diffuseColor' : HairColour.get('Green'), 
   'float specularGainR' : [1.0], 
   'float specularGainTRT' : [1.0], 
   'float specularGainTT' : [1.0], 
   'float specularGainGLINTS' : [1.0], 
-  'color specularColorR' : [1.0,1.0,1.0], 
-  'color specularColorTRT' : HairColour.get('Blue'), 
-  'color specularColorTT' : [0.5,0.2,0.3], 
-  'float specularConeAngleR' : [8.0], 
-  'float specularConeAngleTRT' : [8.0], 
-  'float specularConeAngleTT' : [8.0], 
+  'color specularColorR' : [0.2,0.2,0.2], 
+  'color specularColorTRT' : HairColour.get('Green'), 
+  'color specularColorTT' : [0.2,0.2,0.2], 
+  'float specularConeAngleR' : [4.0], 
+  'float specularConeAngleTRT' : [4.0], 
+  'float specularConeAngleTT' : [4.0], 
   'float specularOffset' : [-3], 
   'float specularIor' : [1.55], 
   'float specularMixFresnel' : [1.0], 
@@ -116,7 +120,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   'color glowColor' : [1,1,1], 
   'float specularEnergyCompensation' : [0.0], 
   'normal eccentricityDirection' : [0,0,0], 
-  'color shadowColor' : [0.0,0.0,0.0], 
+  'color shadowColor' : [0.1,0.1,0.1], 
   'float presence' : [1.0], 
   'int inputAOV' : [0], 
   })

@@ -173,5 +173,4 @@ class Obj:
 			for x in range(0,len(self.verts[i])) :
 				v.append(self.verts[i][x])
 
-		#ri.PointsPolygons(npolys,vertices,{ri.P:v})
 		ri.SubdivisionMesh('loop', npolys, vertices, [ri.CREASE], [2, 1], [3, 0], [20], {ri.P:v})

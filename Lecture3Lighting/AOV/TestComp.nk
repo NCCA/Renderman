@@ -1,0 +1,71 @@
+#! /Applications/Nuke10.0v6/Nuke10.0v6.app/Contents/MacOS/libnuke-10.0.6.dylib -nx
+version 10.0 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="23" w="1440" h="877" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="777" stretch="1"/>
+            <splitter orientation="2">
+                <split size="500"/>
+                <dock id="" activePageId="Viewer.2" focus="true">
+                    <page id="Viewer.1"/>
+                    <page id="Viewer.2"/>
+                </dock>
+                <split size="351"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /Users/jmacey/teaching/Code/Renderman/Lecture3Lighting/AOV/TestComp.nk
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+Viewer {
+ inputs 0
+ frame 1
+ frame_range 1-100
+ channels rgb
+ name Viewer1
+ xpos 0
+ ypos 69
+}
+Read {
+ inputs 0
+ file /Users/jmacey/teaching/Code/Renderman/Lecture3Lighting/AOV/HairAOV.exr
+ format "1024 720 0 0 1024 720 1 "
+ origset true
+ name Read1
+ xpos -322
+ ypos -133
+}
+Viewer {
+ frame_range 1-100
+ channels alpha
+ name Viewer2
+ xpos -215
+ ypos 66
+}

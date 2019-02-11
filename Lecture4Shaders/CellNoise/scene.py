@@ -146,7 +146,18 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
 
   ri.AttributeBegin()
-  ri.Pattern('uvshader','uvshader')
+
+# it is sometimes easier to write an expression than a shader, SeExpr is a little 
+  # obscure check out the simple examples here https://www.disneyanimation.com/technology/seexpr.html
+  expression='''$r=($u - floor($u)); # set r to be the clamped $u texture co-ordinate 
+              $g=($v - floor($v));  # green for v co-ordinate
+              $resultRGB=[$r,$g,0]; # note we need to use [] to set a tuple
+              $resultRGB            # return colour note last element is return no ;!
+              '''
+  ri.Pattern( 'PxrSeExpr' ,'uvshader',
+  {
+    'string expression' : [ expression ]
+  })
   ri.Bxdf('PxrDiffuse', 'uv', 
   { 
     'reference color diffuseColor' : ['uvshader:resultRGB']

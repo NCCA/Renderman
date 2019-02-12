@@ -1,13 +1,22 @@
 # simple rib file for the walls of the cornell box
   AttributeBegin
-    Bxdf "PxrDiffuse" "left" "color diffuseColor" [0.8 0.2 0.2]
+  	Attribute "user" "string __materialid" ["leftWall"]
+    Bxdf "PxrDiffuse" "left" "color diffuseColor" [0.8 0.2 0.2] "string __materialid" ["leftWall"]
     Polygon "P" [-1 1 -5  -1 1 1  -1 -1 1  -1 -1 -5]
-    Bxdf "PxrDiffuse" "right" "color diffuseColor" [0.2 0.8 0.2]
+
+  	Attribute "user" "string __materialid" ["rightWall"]
+    Bxdf "PxrDiffuse" "right" "color diffuseColor" [0.2 0.8 0.2] "string __materialid" ["rightWall"]
     Polygon "P" [1 -1 -5  1 -1 1  1 1 1  1 1 -5]
-    Bxdf "PxrDiffuse" "floor" "color diffuseColor" [0.8 0.8 0.8]
+
+  	Attribute "user" "string __materialid" ["floor"]
+    Bxdf "PxrDiffuse" "floor" "color diffuseColor" [0.8 0.8 0.8] "string __materialid" ["floor"]
     Polygon "P" [-1 -1 1  1 -1 1  1 -1 -5  -1 -1 -5]
-    Bxdf "PxrDiffuse" "ceiling" "color diffuseColor" [0.95 0.95 0.95]
+
+  	Attribute "user" "string __materialid" ["ceiling"]
+    Bxdf "PxrDiffuse" "ceiling" "color diffuseColor" [0.95 0.95 0.95] "string __materialid" ["ceiling"]
     Polygon "P" [-1 1 -5  1 1 -5  1 1 1  -1 1 1]
-    Bxdf "PxrDiffuse" "back" "color diffuseColor" [0.8 0.8 0.8]
+
+  	Attribute "user" "string __materialid" ["backWall"]
+    Bxdf "PxrDiffuse" "back" "color diffuseColor" [0.8 0.8 0.8] "string __materialid" ["backWall"]
     Polygon "P" [-1 1 1  1 1 1  1 -1 1  -1 -1 1]
   AttributeEnd

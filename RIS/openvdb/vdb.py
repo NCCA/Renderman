@@ -15,17 +15,16 @@ filename = "__render"
 # make RI calls after this function else we get a core dump
 ri.Begin('__render')
 
-
 # on Version 20.12 openvdb plug is /etc  note on my mac the 
 # subsitutions don't work so need full path (Bug?)
 ri.Option("ribparse" , {"string varsubst" : ["$"]})
-ri.Option( "searchpath", { "string procedural" : [".:${RMANTREE}/etc:${RMANTREE}/lib/plugins:/Applications/Pixar/RenderManProServer-20.12/etc"]})
+ri.Option( "searchpath", { "string procedural" : [".:${RMANTREE}/etc:${RMANTREE}/lib/plugins:/Applications/Pixar/RenderManProServer-22.3/lib/plugins"]})
 
 ri.Option( "bucket" ,{"string order" : ["spiral"]})
 
 # now we add the display element using the usual elements
 # FILENAME DISPLAY Type Output format
-ri.Display("vdb.exr", "it", "rgba")
+ri.Display("vdb.exr", "openexr", "rgba")
 ri.Format(1024,720,1)
 
 # setup the raytrace / integrators
@@ -47,43 +46,14 @@ cam.place(ri)
 ri.WorldBegin()
 
 
-"""
-#Lighting We need geo to emit light
-ri.AttributeBegin()
-
-#ri.Rotate(45,0,1,0)
-ri.Declare("areaLight" ,"string")
-
-if versionMajor == 20 :
-  ri.AreaLightSource( "PxrStdAreaLight", {ri.HANDLEID : "areaLight",  "float exposure" : [8]  }) 
-else :
-  ri.Light("PxrMeshLight" ,{ ri.HANDLEID : "areaLight", "float exposure" : [8]} )
-
-
-ri.TransformBegin()
-ri.Translate(0.8,1.3,12)
-ri.Rotate(180,1,0,0)
-ri.Scale(.1,.1,.1)
-ri.Geometry("rectlight")
-ri.TransformEnd()
-ri.AttributeEnd()
-"""
 ri.AttributeBegin()
 
 ri.Declare("areaLight" ,"string")
 
-ri.AreaLightSource( "PxrStdEnvMapLight", {ri.HANDLEID:"areaLight", 
+ri.Light( "PxrDomeLight", 'domeLight',{ 
                                         "float exposure" : [1.0],
-                                        "string rman__EnvMap" : ["../usingzip/studio2.tx"]
+                                        "string lightColorMap" : ["../usingzip/studio2.tx"]
                                       })
-
-ri.TransformBegin()
-ri.Sides( 1 )
-ri.Attribute( "dice" , {"string offscreenstrategy": ["sphericalprojection"]})
-ri.ReverseOrientation()
-ri.Opacity([1, 1, 1])
-ri.Geometry('envsphere',{"constant float[2] resolution" : [2048 ,1024]})
-ri.TransformEnd()
 ri.AttributeEnd()
 
 # smoke
@@ -102,7 +72,7 @@ ri.ShadingRate(0.2)
 
 
 # now load the vdf as a volume
-ri.Volume ("blobbydso:impl_openvdb.so", [-100, 100, -100 ,100, -100 ,100] ,[0, 0, 0] , {"constant string[2] blobbydso:stringargs" : ["teapot03.vdb", "density"] ,  "varying float density" : [] })
+ri.Volume ("blobbydso:impl_openvdb.so", [-100, 100, -100 ,100, -100 ,100] ,[0, 0, 0] , {"constant string[2] blobbydso:stringargs" : ["teapot.vdb", "density"] ,  "varying float density" : [] })
 
 
 ri.AttributeEnd()

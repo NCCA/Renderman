@@ -119,7 +119,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
     ri.Displace('PxrDisplace','zbrushDisplace' ,
     {   
       'reference vector dispVector' : ['DispTransform:resultXYZ'], 
-      #'uniform float dispAmount' : [1.0],
+      'uniform float dispAmount' : [0.1],
       'int enabled' : [displace]
     })
 

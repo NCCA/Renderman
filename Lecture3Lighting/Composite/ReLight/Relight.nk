@@ -1,0 +1,220 @@
+#! /Applications/Nuke10.0v6/Nuke10.0v6.app/Contents/MacOS/libnuke-10.0.6.dylib -nx
+version 10.0 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1440" h="900" fullscreen="1" screen="0">
+        <splitter orientation="1">
+            <split size="910"/>
+            <splitter orientation="1">
+                <split size="910"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+            </splitter>
+            <split size="526"/>
+            <splitter orientation="2">
+                <split size="448"/>
+                <dock id="" hideTitles="1" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+                <split size="448"/>
+                <dock id="" hideTitles="1" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /Users/jmacey/teaching/Code/Renderman/Lecture3Lighting/Composite/ReLight/Relight.nk
+ frame 4
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+Diffuse {
+ inputs 0
+ name Diffuse1
+ xpos -365
+ ypos 441
+}
+Camera2 {
+ inputs 0
+ name Camera1
+ xpos -392
+ ypos 239
+}
+Light2 {
+ inputs 0
+ intensity 0.15
+ translate {0.2 -1.061 -1}
+ cast_shadows true
+ depthmap_slope_bias 0.01
+ name Light1
+ xpos -268
+ ypos 127
+}
+Read {
+ inputs 0
+ file /Users/jmacey/teaching/Code/Renderman/Lecture3Lighting/Composite/ReLight/ReLight.exr
+ format "1024 720 0 0 1024 720 1 "
+ origset true
+ name Read1
+ xpos -359
+ ypos -140
+}
+set N1cfa5e10 [stack 0]
+Dot {
+ name Dot2
+ xpos -530
+ ypos -109
+}
+set N29d0f880 [stack 0]
+add_layer {__Nworld __Nworld.red __Nworld.green __Nworld.blue}
+Shuffle {
+ in __Nworld
+ in2 rgba
+ name Normal
+ xpos -564
+ ypos -16
+}
+push $N29d0f880
+Dot {
+ name Dot3
+ xpos -420
+ ypos -109
+}
+add_layer {__Pworld __Pworld.red __Pworld.green __Pworld.blue}
+Shuffle {
+ in __Pworld
+ name Point
+ xpos -454
+ ypos -17
+}
+push $N1cfa5e10
+Shuffle {
+ name Shuffle1
+ xpos -359
+ ypos -17
+}
+Dot {
+ name Dot1
+ xpos -325
+ ypos 7
+}
+PositionToPoints2 {
+ inputs 3
+ display textured
+ render_mode textured
+ name PositionToPoints1
+ xpos -359
+ ypos 64
+}
+Scene {
+ inputs 2
+ name Scene1
+ xpos -399
+ ypos 127
+}
+push $N1cfa5e10
+Dot {
+ name Dot4
+ xpos -83
+ ypos -109
+}
+set N29db9660 [stack 0]
+Dot {
+ name Dot5
+ xpos 50
+ ypos -109
+}
+set N298545d0 [stack 0]
+Shuffle {
+ in __Pworld
+ name Point1
+ xpos 16
+ ypos -24
+}
+push $N29db9660
+Shuffle {
+ in __Nworld
+ in2 rgba
+ name Normal1
+ xpos -117
+ ypos -22
+}
+push $N1cfa5e10
+Dot {
+ name Dot7
+ xpos -219
+ ypos -69
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 __Nworld.red
+ from1 rgba.green
+ to1 __Nworld.green
+ from2 rgba.blue
+ to2 __Nworld.blue
+ name Copy1
+ xpos -117
+ ypos 58
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 __Pworld.red
+ from1 rgba.green
+ to1 __Pworld.green
+ from2 rgba.blue
+ to2 __Pworld.blue
+ name Copy2
+ xpos -117
+ ypos 150
+}
+ReLight {
+ inputs 4
+ normal __Nworld
+ position __Pworld
+ name ReLight1
+ xpos -133
+ ypos 260
+}
+set N29dbec80 [stack 0]
+push 0
+push $N29dbec80
+push $N298545d0
+Dot {
+ name Dot6
+ xpos 130
+ ypos -109
+}
+Dot {
+ name Dot8
+ xpos 64
+ ypos 363
+}
+Merge2 {
+ inputs 3+1
+ operation plus
+ name Merge1
+ xpos -133
+ ypos 465
+}
+Viewer {
+ frame 4
+ frame_range 1-100
+ name Viewer1
+ xpos -51
+ ypos 331
+}

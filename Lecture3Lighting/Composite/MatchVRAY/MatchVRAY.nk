@@ -1,0 +1,272 @@
+#! /Applications/Nuke10.0v6/Nuke10.0v6.app/Contents/MacOS/libnuke-10.0.6.dylib -nx
+version 10.0 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1440" h="900" fullscreen="1" screen="0">
+        <splitter orientation="1">
+            <split size="910"/>
+            <splitter orientation="1">
+                <split size="910"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+            </splitter>
+            <split size="526"/>
+            <splitter orientation="2">
+                <split size="448"/>
+                <dock id="" hideTitles="1" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+                <split size="448"/>
+                <dock id="" hideTitles="1" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /Users/jmacey/teaching/Code/Renderman/Lecture3Lighting/Composite/MatchVRAY/MatchVRAY.nk
+ last_frame 72
+ lock_range true
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+Read {
+ inputs 0
+ file /Users/jmacey/teaching/Code/Renderman/Lecture3Lighting/Composite/MatchVRAY/MatchVRAY.exr
+ format "1024 720 0 0 1024 720 1 "
+ origset true
+ name Read1
+ xpos -893
+ ypos -243
+}
+Dot {
+ name Dot1
+ xpos -750
+ ypos -212
+}
+set N21c79080 [stack 0]
+Dot {
+ name Dot2
+ xpos -665
+ ypos -212
+}
+set N21c476e0 [stack 0]
+Dot {
+ name Dot3
+ xpos -576
+ ypos -212
+}
+set N21c5b2b0 [stack 0]
+Dot {
+ name Dot4
+ xpos -488
+ ypos -212
+}
+set N21c636c0 [stack 0]
+Dot {
+ name Dot7
+ xpos -386
+ ypos -212
+}
+set N21c54250 [stack 0]
+Dot {
+ name Dot10
+ xpos -286
+ ypos -212
+}
+set N21c58570 [stack 0]
+add_layer {emissive emissive.red emissive.green emissive.blue}
+Shuffle {
+ in emissive
+ in2 rgb
+ alpha black
+ name Shuffle6
+ label "Emissive / Lights\n"
+ xpos -320
+ ypos -83
+}
+Dot {
+ name Dot11
+ xpos -286
+ ypos 227
+}
+push $N21c54250
+add_layer {specular specular.red specular.green specular.blue}
+Shuffle {
+ in specular
+ in2 rgb
+ alpha black
+ name Shuffle5
+ label specular
+ xpos -420
+ ypos -83
+}
+Dot {
+ name Dot9
+ xpos -386
+ ypos 167
+}
+push $N21c636c0
+add_layer {reflection reflection.red reflection.green reflection.blue}
+Shuffle {
+ in reflection
+ in2 rgb
+ alpha black
+ name Shuffle4
+ label "reflect\n\n"
+ xpos -522
+ ypos -82
+}
+Dot {
+ name Dot8
+ xpos -488
+ ypos 104
+}
+push $N21c5b2b0
+add_layer {rawLight rawLight.red rawLight.green rawLight.blue}
+Shuffle {
+ in rawLight
+ alpha black
+ name Shuffle3
+ label "rawLight\n"
+ xpos -610
+ ypos -82
+}
+Dot {
+ name Dot5
+ xpos -576
+ ypos -10
+}
+push $N21c476e0
+add_layer {rawGI rawGI.red rawGI.green rawGI.blue}
+Shuffle {
+ in rawGI
+ in2 rgb
+ alpha black
+ name Shuffle2
+ label "rawGI\n"
+ xpos -699
+ ypos -81
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge1
+ xpos -699
+ ypos -13
+}
+Dot {
+ name Dot6
+ xpos -665
+ ypos 25
+}
+push $N21c79080
+add_layer {albedo albedo.red albedo.green albedo.blue}
+Shuffle {
+ in albedo
+ in2 rgb
+ name Shuffle1
+ label "Diffuse\n"
+ xpos -784
+ ypos -80
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge2
+ xpos -784
+ ypos 22
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge3
+ xpos -784
+ ypos 101
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge4
+ xpos -784
+ ypos 172
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge5
+ xpos -784
+ ypos 224
+}
+set N225482e0 [stack 0]
+Constant {
+ inputs 0
+ channels rgb
+ color 1
+ name Constant1
+ xpos -359
+ ypos 259
+}
+push $N21c58570
+Dot {
+ name Dot12
+ xpos -196
+ ypos -212
+}
+add_layer {shadow shadow.red shadow.green shadow.blue}
+Shuffle {
+ in shadow
+ in2 rgba
+ alpha black
+ name Shuffle7
+ label "shadow\n"
+ xpos -230
+ ypos -85
+}
+Dot {
+ name Dot13
+ xpos -191
+ ypos 294
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge6
+ xpos -225
+ ypos 362
+}
+Invert {
+ name Invert1
+ xpos -355
+ ypos 358
+}
+push $N225482e0
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge7
+ xpos -784
+ ypos 362
+}
+Viewer {
+ inputs 2
+ frame 1
+ frame_range 1-72
+ gamma 1.15
+ translate {0.6140000224 -0.5939999819}
+ name Viewer1
+ xpos -1022
+ ypos 124
+}

@@ -25,9 +25,23 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.DisplayChannel( 'color __Nworld'  , {'string source': ['__Nworld']})
   ri.DisplayChannel( 'color __Pworld'  , {'string source': ['__Pworld']})
   ri.DisplayChannel( 'color __depth'  , {'string source': ['__depth']})
+  # same as vrayRE_Diffuse
   ri.DisplayChannel( 'color albedo'  , {'string source'  :["color lpe:nothruput;noinfinitecheck;noclamp;unoccluded;overwrite;C<.S'passthru'>*((U2L)|O)"]}) 
+  # match vrayRE_Raw_Light which is the same as direct diffuse
+  ri.DisplayChannel( 'color rawLight'  , {'string source'  :["color lpe:unoccluded;C<RD>[<L.>O]"]}) 
+  # vrayRE_Reflection  :- AOV C<R[DS]>[DS]*[LO]
+  ri.DisplayChannel( 'color reflection'  , {'string source'  :["color lpe:unoccluded;C<R[DS]>[DS]*[LO]"]}) 
+  # vrayRE_Specular  :- AOV S  
+  ri.DisplayChannel( 'color specular'  , {'string source'  :["color lpe:unoccluded;CS[DS]*[LO]"]}) 
+  # vrayRE_Raw_GI :- AOV color indirectDiffuse color lpe:C<RD>[DS]+[<L.>O]
+  ri.DisplayChannel( 'color rawGI'  , {'string source'  :["color lpe:unoccluded;C<RD>[DS]+[<L.>O]"]}) 
+  # shadow pass lpe:holdouts;unoccluded;C[DS]+<L.>
+  ri.DisplayChannel( 'color shadow'  , {'string source'  :["color lpe:shadows;C[DS]+<L.>"]}) 
+  # just the light emissive values
+  ri.DisplayChannel( 'color emissive'  , {'string source'  :["color lpe:C[<L.>O]"]}) 
 
-  ri.Display( 'ReLight.exr', 'openexr' ,'Ci,a,__Nworld,__Pworld,__depth,albedo', { 'int asrgba' : [1] , 'string exrpixeltype' : ['half'] , 'string compression' : ['zips'], 'float compressionlevel' : [45]})
+
+  ri.Display( 'MatchVRAY.exr', 'openexr' ,'Ci,a,__Nworld,__Pworld,__depth,albedo,rawLight,reflection,specular,rawGI,shadow,emissive', { 'int asrgba' : [1] , 'string exrpixeltype' : ['half'] , 'string compression' : ['zips'], 'float compressionlevel' : [45]})
 
   ri.Format(width,height,1)
 

@@ -55,6 +55,15 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
   ri.Rotate(12,1,0,0)
   ri.Translate( 0, 0.75 ,2.5)
+  ri.SampleFilter('PxrCryptomatte','Cryptomatte',
+  {
+	'string filename' : ['cryptomatte.exr'], 
+	'string manifest' : ['header'], 
+	'string layer' : ['user:__materialid'], 
+	'string attribute' : [''], 
+	'int levels' : [6], 
+	'int accuracy' : [4], 
+  })
 
   # now we start our world
   ri.WorldBegin()
@@ -81,6 +90,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.AttributeEnd()
 
   ri.AttributeBegin()
+
   ri.Attribute( 'identifier',{ 'name' :'buddha'})
   ri.TransformBegin()
   ri.Translate(-0.5,-1,0)
@@ -92,6 +102,8 @@ def main(filename,shadingrate=10,pixelvar=0.1,
     'int maxdiffusedepth' : [1], 
     'int maxspeculardepth' : [8]
   })
+  ri.Attribute( 'user', { 'string __materialid' : ['greenglass']})
+
   ri.Bxdf('PxrSurface', 'greenglass',{ 
   'color refractionColor' : [0,0.9,0],
   'float diffuseGain' : 0,
@@ -101,7 +113,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   'float glassRoughness' : [0.01],
   'float glassIor' : [1.5],
   'color extinction' : [0.0, 0.2 ,0.0],
-  
+  'string __materialid' : ['greenglass']
   })
   ri.ReadArchive('buddha.zip!buddha.rib')
   ri.TransformEnd()
@@ -115,8 +127,13 @@ def main(filename,shadingrate=10,pixelvar=0.1,
             'reference float du' : ['du:resultR'], 
             'reference float dv' : ['dv:resultR']
             })
+  ri.Attribute( 'user', { 'string __materialid' : ['ball']})
 
-  ri.Bxdf( 'PxrDisney','bxdf', { 'reference color baseColor' : ['starBall:Cout'] })
+  ri.Bxdf( 'PxrDisney','bxdf', 
+  { 
+    'reference color baseColor' : ['starBall:Cout'],
+    'string __materialid' : ['ball']
+  })
   ri.TransformBegin()
   ri.Translate(0.3, -0.7 , 0.3)
   ri.Rotate(-30,0,1,0)
@@ -131,25 +148,33 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Translate(0, -1 , -0.8)
   ri.Rotate(45,0,1,0)
   ri.Rotate( -90, 1 ,0 ,0)
-  ri.Scale( 0.1, 0.1, 0.1) 
-  ri.Bxdf('PxrSurface', 'plastic',{
-          'color diffuseColor' : [.04, .51, .1],
-          'color clearcoatFaceColor' : [.5, .5, .5], 
-          'color clearcoatEdgeColor' : [.25, .25, .25]
+  ri.Scale( 0.1, 0.1, 0.1)
+  ri.Attribute( 'user', { 'string __materialid' : ['teapot']})
+ 
+  ri.Bxdf('PxrSurface', 'plastic',
+  {
+    'color diffuseColor' : [.04, .51, .1],
+    'color clearcoatFaceColor' : [.5, .5, .5], 
+    'color clearcoatEdgeColor' : [.25, .25, .25],
+    'string __materialid' : ['teapot']
   })
   ri.Geometry('teapot')
   ri.TransformEnd()
   ri.AttributeEnd()
 
   ri.AttributeBegin()
-  ri.Bxdf('PxrSurface', 'metal', {
-          'float diffuseGain' : [0],
-          'int specularFresnelMode' : [1],
-          'color specularEdgeColor' : [1 ,1 ,1],
-          'color specularIor' : [4.3696842, 2.916713, 1.654698],
-          'color specularExtinctionCoeff' : [5.20643, 4.2313662, 3.7549689],
-          'float specularRoughness' : [0.1], 
-          'integer specularModelType' : [1] 
+  ri.Attribute( 'user', { 'string __materialid' : ['metal']})
+
+  ri.Bxdf('PxrSurface', 'metal', 
+  {
+    'float diffuseGain' : [0],
+    'int specularFresnelMode' : [1],
+    'color specularEdgeColor' : [1 ,1 ,1],
+    'color specularIor' : [4.3696842, 2.916713, 1.654698],
+    'color specularExtinctionCoeff' : [5.20643, 4.2313662, 3.7549689],
+    'float specularRoughness' : [0.1], 
+    'integer specularModelType' : [1],
+    'string __materialid' : ['metal']
   })
 
   ri.Attribute('identifier',{ 'name' :'ncca'})

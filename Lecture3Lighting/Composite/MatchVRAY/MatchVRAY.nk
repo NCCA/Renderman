@@ -1,25 +1,26 @@
-#! /Applications/Nuke10.0v6/Nuke10.0v6.app/Contents/MacOS/libnuke-10.0.6.dylib -nx
-version 10.0 v6
+#! /Applications/Nuke11.3v2/Nuke11.3v2.app/Contents/MacOS/libnuke-11.3.2.dylib -nx
+version 11.3 v2
 define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 <layout version="1.0">
-    <window x="0" y="0" w="1440" h="900" fullscreen="1" screen="0">
+    <window x="0" y="23" w="1440" h="855" screen="0">
         <splitter orientation="1">
             <split size="910"/>
             <splitter orientation="1">
                 <split size="910"/>
-                <dock id="" activePageId="Viewer.1">
-                    <page id="Viewer.1"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
                 </dock>
             </splitter>
             <split size="526"/>
             <splitter orientation="2">
-                <split size="448"/>
-                <dock id="" hideTitles="1" activePageId="Properties.1">
+                <split size="416"/>
+                <dock id="" activePageId="Properties.1">
                     <page id="Properties.1"/>
+                    <page id="uk.co.thefoundry.backgroundrenderview.1"/>
                 </dock>
-                <split size="448"/>
-                <dock id="" hideTitles="1" activePageId="DAG.1" focus="true">
-                    <page id="DAG.1"/>
+                <split size="414"/>
+                <dock id="" hideTitles="1" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
                 </dock>
             </splitter>
         </splitter>
@@ -29,6 +30,7 @@ define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 Root {
  inputs 0
  name /Users/jmacey/teaching/Code/Renderman/Lecture3Lighting/Composite/MatchVRAY/MatchVRAY.nk
+ project_directory "\[python \{nuke.script_directory()\}]"
  last_frame 72
  lock_range true
  format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
@@ -44,11 +46,48 @@ Root {
 }
 Read {
  inputs 0
- file /Users/jmacey/teaching/Code/Renderman/Lecture3Lighting/Composite/MatchVRAY/MatchVRAY.exr
+ file_type exr
+ file /Users/jmacey/teaching/Code/Renderman/Lecture3Lighting/Composite/MatchVRAY/cryptomatte.exr
+ format "1024 720 0 0 1024 720 1 "
+ origset true
+ name Read2
+ xpos -56
+ ypos -223
+}
+add_layer {user___materialid00 user___materialid00.red user___materialid00.green user___materialid00.blue user___materialid00.alpha}
+add_layer {user___materialid01 user___materialid01.red user___materialid01.green user___materialid01.blue user___materialid01.alpha}
+add_layer {user___materialid02 user___materialid02.red user___materialid02.green user___materialid02.blue user___materialid02.alpha}
+Cryptomatte {
+ name Cryptomatte1
+ xpos -56
+ ypos -86
+ matteOutput alpha
+ matteList "backWall, ball, ceiling, floor, greenglass, leftWall, metal, teapot"
+ cryptoLayer user___materialid
+ expression "((user___materialid00.red == 1.58120863827e+16 || user___materialid00.red == 1.63241480297e+22 || user___materialid00.red == 1.24762914838e+34 || user___materialid00.red == -5.18654923899e+13 || user___materialid00.red == 3.63108080347e-22 || user___materialid00.red == 3.1581494069e+28 || user___materialid00.red == -5.55222235428e-24 || user___materialid00.red == 4.64519311905e-10) ? user___materialid00.green : 0.0) + ((user___materialid00.blue == 1.58120863827e+16 || user___materialid00.blue == 1.63241480297e+22 || user___materialid00.blue == 1.24762914838e+34 || user___materialid00.blue == -5.18654923899e+13 || user___materialid00.blue == 3.63108080347e-22 || user___materialid00.blue == 3.1581494069e+28 || user___materialid00.blue == -5.55222235428e-24 || user___materialid00.blue == 4.64519311905e-10) ? user___materialid00.alpha : 0.0) + ((user___materialid01.red == 1.58120863827e+16 || user___materialid01.red == 1.63241480297e+22 || user___materialid01.red == 1.24762914838e+34 || user___materialid01.red == -5.18654923899e+13 || user___materialid01.red == 3.63108080347e-22 || user___materialid01.red == 3.1581494069e+28 || user___materialid01.red == -5.55222235428e-24 || user___materialid01.red == 4.64519311905e-10) ? user___materialid01.green : 0.0) + ((user___materialid01.blue == 1.58120863827e+16 || user___materialid01.blue == 1.63241480297e+22 || user___materialid01.blue == 1.24762914838e+34 || user___materialid01.blue == -5.18654923899e+13 || user___materialid01.blue == 3.63108080347e-22 || user___materialid01.blue == 3.1581494069e+28 || user___materialid01.blue == -5.55222235428e-24 || user___materialid01.blue == 4.64519311905e-10) ? user___materialid01.alpha : 0.0) + ((user___materialid02.red == 1.58120863827e+16 || user___materialid02.red == 1.63241480297e+22 || user___materialid02.red == 1.24762914838e+34 || user___materialid02.red == -5.18654923899e+13 || user___materialid02.red == 3.63108080347e-22 || user___materialid02.red == 3.1581494069e+28 || user___materialid02.red == -5.55222235428e-24 || user___materialid02.red == 4.64519311905e-10) ? user___materialid02.green : 0.0) + ((user___materialid02.blue == 1.58120863827e+16 || user___materialid02.blue == 1.63241480297e+22 || user___materialid02.blue == 1.24762914838e+34 || user___materialid02.blue == -5.18654923899e+13 || user___materialid02.blue == 3.63108080347e-22 || user___materialid02.blue == 3.1581494069e+28 || user___materialid02.blue == -5.55222235428e-24 || user___materialid02.blue == 4.64519311905e-10) ? user___materialid02.alpha : 0.0) + 0"
+ keyedName ""
+ previewExpression0 "((mantissa(abs(user___materialid00.red)) * 1 % 0.25) * user___materialid00.green + (mantissa(abs(user___materialid00.blue)) * 1 % 0.25) * user___materialid00.alpha + (mantissa(abs(user___materialid01.red)) * 1 % 0.25) * user___materialid01.green + (mantissa(abs(user___materialid01.blue)) * 1 % 0.25) * user___materialid01.alpha)"
+ previewExpression1 "((mantissa(abs(user___materialid00.red)) * 16 % 0.25) * user___materialid00.green + (mantissa(abs(user___materialid00.blue)) * 16 % 0.25) * user___materialid00.alpha + (mantissa(abs(user___materialid01.red)) * 16 % 0.25) * user___materialid01.green + (mantissa(abs(user___materialid01.blue)) * 16 % 0.25) * user___materialid01.alpha)"
+ previewExpression2 "((mantissa(abs(user___materialid00.red)) * 64 % 0.25) * user___materialid00.green + (mantissa(abs(user___materialid00.blue)) * 64 % 0.25) * user___materialid00.alpha + (mantissa(abs(user___materialid01.red)) * 64 % 0.25) * user___materialid01.green + (mantissa(abs(user___materialid01.blue)) * 64 % 0.25) * user___materialid01.alpha)"
+ previewExpression3 ""
+ previewChannel none
+ in00 user___materialid00
+ in01 user___materialid01
+ in02 user___materialid02
+ in03 none
+ in04 none
+ in05 none
+ in06 none
+ in07 none
+}
+Read {
+ inputs 0
+ file_type exr
+ file MatchVRAY.exr
  format "1024 720 0 0 1024 720 1 "
  origset true
  name Read1
- xpos -893
+ xpos -891
  ypos -243
 }
 Dot {
@@ -56,37 +95,49 @@ Dot {
  xpos -750
  ypos -212
 }
-set N21c79080 [stack 0]
+set N635f73d0 [stack 0]
 Dot {
  name Dot2
  xpos -665
  ypos -212
 }
-set N21c476e0 [stack 0]
+set N635f95c0 [stack 0]
 Dot {
  name Dot3
  xpos -576
  ypos -212
 }
-set N21c5b2b0 [stack 0]
+set N635fba80 [stack 0]
 Dot {
  name Dot4
  xpos -488
  ypos -212
 }
-set N21c636c0 [stack 0]
+set N6310a410 [stack 0]
+add_layer {reflection reflection.red reflection.green reflection.blue}
+Shuffle {
+ in reflection
+ in2 rgb
+ alpha black
+ name Shuffle4
+ label "reflect\n\n"
+ xpos -522
+ ypos -82
+}
+set N631e3810 [stack 0]
+push $N6310a410
 Dot {
  name Dot7
  xpos -386
  ypos -212
 }
-set N21c54250 [stack 0]
+set N631e3d00 [stack 0]
 Dot {
  name Dot10
  xpos -286
  ypos -212
 }
-set N21c58570 [stack 0]
+set N631d6770 [stack 0]
 add_layer {emissive emissive.red emissive.green emissive.blue}
 Shuffle {
  in emissive
@@ -102,7 +153,7 @@ Dot {
  xpos -286
  ypos 227
 }
-push $N21c54250
+push $N631e3d00
 add_layer {specular specular.red specular.green specular.blue}
 Shuffle {
  in specular
@@ -116,25 +167,15 @@ Shuffle {
 Dot {
  name Dot9
  xpos -386
- ypos 167
+ ypos 175
 }
-push $N21c636c0
-add_layer {reflection reflection.red reflection.green reflection.blue}
-Shuffle {
- in reflection
- in2 rgb
- alpha black
- name Shuffle4
- label "reflect\n\n"
- xpos -522
- ypos -82
-}
+push $N631e3810
 Dot {
  name Dot8
  xpos -488
  ypos 104
 }
-push $N21c5b2b0
+push $N635fba80
 add_layer {rawLight rawLight.red rawLight.green rawLight.blue}
 Shuffle {
  in rawLight
@@ -147,9 +188,9 @@ Shuffle {
 Dot {
  name Dot5
  xpos -576
- ypos -10
+ ypos -6
 }
-push $N21c476e0
+push $N635f95c0
 add_layer {rawGI rawGI.red rawGI.green rawGI.blue}
 Shuffle {
  in rawGI
@@ -164,15 +205,11 @@ Merge2 {
  inputs 2
  operation plus
  name Merge1
+ label "add lights"
  xpos -699
  ypos -13
 }
-Dot {
- name Dot6
- xpos -665
- ypos 25
-}
-push $N21c79080
+push $N635f73d0
 add_layer {albedo albedo.red albedo.green albedo.blue}
 Shuffle {
  in albedo
@@ -182,48 +219,65 @@ Shuffle {
  xpos -784
  ypos -80
 }
+ColorCorrect {
+ saturation 0.42
+ gamma 0.53
+ gain 0.27
+ shadows.saturation 1.06
+ name ColorCorrect1
+ xpos -784
+ ypos -48
+}
 Merge2 {
  inputs 2
  operation multiply
  name Merge2
+ label "Diffuse x Light\n"
  xpos -784
- ypos 22
+ ypos 44
 }
 Merge2 {
  inputs 2
  operation plus
  name Merge3
+ label "add reflect\n"
  xpos -784
- ypos 101
+ ypos 97
 }
 Merge2 {
  inputs 2
  operation plus
  name Merge4
+ label "add specular\n"
  xpos -784
- ypos 172
+ ypos 168
 }
 Merge2 {
  inputs 2
  operation plus
  name Merge5
+ label "add emissive\n"
  xpos -784
- ypos 224
+ ypos 220
 }
-set N225482e0 [stack 0]
 Constant {
  inputs 0
  channels rgb
  color 1
  name Constant1
  xpos -359
- ypos 259
+ ypos 263
 }
-push $N21c58570
+push $N631d6770
 Dot {
  name Dot12
  xpos -196
  ypos -212
+}
+Dot {
+ name Dot6
+ xpos -196
+ ypos -194
 }
 add_layer {shadow shadow.red shadow.green shadow.blue}
 Shuffle {
@@ -235,38 +289,48 @@ Shuffle {
  xpos -230
  ypos -85
 }
-Dot {
- name Dot13
- xpos -191
- ypos 294
-}
 Merge2 {
  inputs 2
  operation multiply
- name Merge6
- xpos -225
- ypos 362
+ name Merge9
+ xpos -230
+ ypos 508
 }
 Invert {
  name Invert1
- xpos -355
- ypos 358
+ xpos -230
+ ypos 562
 }
-push $N225482e0
+Grade {
+ blackpoint 0.16
+ whitepoint 0.88
+ white 1.04
+ multiply 0.72
+ name Grade1
+ xpos -360
+ ypos 566
+ disable true
+}
 Merge2 {
  inputs 2
  operation multiply
  name Merge7
- xpos -784
- ypos 362
+ xpos -800
+ ypos 542
 }
+set N63180360 [stack 0]
+push $N63180360
 Viewer {
- inputs 2
- frame 1
+ inputs 3
  frame_range 1-72
+ channels rgb
  gamma 1.15
- translate {0.6140000224 -0.5939999819}
+ colour_sample_bbox {0.6796875 0.275390625 0.681640625 0.27734375}
+ samplepoints {{0.6796875 0.275390625}
+   }
+ translate {0.0700000003 -0.5939999819}
  name Viewer1
+ selected true
  xpos -1022
  ypos 124
 }

@@ -49,9 +49,9 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
   # setup the raytrace / integrators
   ri.Hider('raytrace' ,{'int incremental' :[1],'string pixelfiltermode' : 'importance'})
+  ri.Integrator (integrator ,'integrator',integratorParams)
   ri.ShadingRate(shadingrate)
   ri.PixelVariance (pixelvar)
-  ri.Integrator (integrator ,'integrator',integratorParams)
  
   ri.Projection(ri.PERSPECTIVE,{ri.FOV:fov})
 

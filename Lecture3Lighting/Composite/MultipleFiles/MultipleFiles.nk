@@ -1,0 +1,176 @@
+#! /Applications/Nuke11.3v2/Nuke11.3v2.app/Contents/MacOS/libnuke-11.3.2.dylib -nx
+version 11.3 v2
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="23" w="1440" h="855" screen="0">
+        <splitter orientation="1">
+            <split size="910"/>
+            <splitter orientation="1">
+                <split size="910"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                </dock>
+            </splitter>
+            <split size="526"/>
+            <splitter orientation="2">
+                <split size="416"/>
+                <dock id="" activePageId="Properties.1" focus="true">
+                    <page id="Properties.1"/>
+                    <page id="uk.co.thefoundry.backgroundrenderview.1"/>
+                </dock>
+                <split size="414"/>
+                <dock id="" hideTitles="1" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /Users/jmacey/teaching/Code/Renderman/Lecture3Lighting/Composite/MultipleFiles/MultipleFiles.nk
+ project_directory "\[python \{nuke.script_directory()\}]"
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+Read {
+ inputs 0
+ file_type exr
+ file MultipleFilesAlbedo.exr
+ format "1024 720 0 0 1024 720 1 "
+ origset true
+ name Read4
+ xpos -341
+ ypos 94
+}
+Read {
+ inputs 0
+ file_type exr
+ file MultipleFilesRawLight.exr
+ format "1024 720 0 0 1024 720 1 "
+ origset true
+ name Read3
+ xpos -65
+ ypos -64
+}
+Read {
+ inputs 0
+ file_type exr
+ file MultipleFilesRawGI.exr
+ format "1024 720 0 0 1024 720 1 "
+ origset true
+ name Read2
+ xpos -194
+ ypos -63
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge1
+ label "Combine Lights\n"
+ xpos -139
+ ypos 88
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge2
+ label "Albedo *  Lights"
+ xpos -220
+ ypos 199
+}
+Read {
+ inputs 0
+ file_type exr
+ file MultipleFilesReflection.exr
+ format "1024 720 0 0 1024 720 1 "
+ origset true
+ name Read5
+ xpos -348
+ ypos 262
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge3
+ label "add Reflections"
+ xpos -220
+ ypos 286
+}
+Read {
+ inputs 0
+ file_type exr
+ file MultipleFilesSpecular.exr
+ format "1024 720 0 0 1024 720 1 "
+ origset true
+ name Read6
+ xpos -348
+ ypos 396
+}
+Merge2 {
+ inputs 2
+ name Merge4
+ label "Over Specular"
+ xpos -220
+ ypos 420
+}
+Read {
+ inputs 0
+ file_type exr
+ file MultipleFilesEmissive.exr
+ format "1024 720 0 0 1024 720 1 "
+ origset true
+ name Read7
+ label "Light Emmisive"
+ selected true
+ xpos -351
+ ypos 499
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge5
+ xpos -220
+ ypos 527
+}
+set Ndf2c2c0 [stack 0]
+ColorCorrect {
+ saturation 1.1
+ contrast 0.64
+ gain 0.88
+ shadows.saturation 1.26
+ shadows.contrast 0.78
+ name ColorCorrect1
+ xpos -220
+ ypos 576
+}
+Read {
+ inputs 0
+ file_type exr
+ file MultipleFilesRGBA.exr
+ format "1024 720 0 0 1024 720 1 "
+ origset true
+ name Read1
+ label "Rendered Final Pass"
+ xpos -347
+ ypos -61
+}
+push $Ndf2c2c0
+push $Ndf2c2c0
+Viewer {
+ inputs 2
+ frame_range 1-100
+ translate {0.07800000161 -0.2039999962}
+ name Viewer1
+ xpos 189
+ ypos 489
+}

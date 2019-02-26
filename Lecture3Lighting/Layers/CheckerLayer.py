@@ -49,7 +49,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Rotate(-90,1,0,0)
   ri.Rotate(100,0,0,1)
   ri.Light( 'PxrDomeLight', 'domeLight', { 
-            'string lightColorMap'  : 'Luxo-Jr_4000x2000.tex'
+            #'string lightColorMap'  : 'Luxo-Jr_4000x2000.tex'
    })
   ri.AttributeEnd()
   ri.TransformEnd()
@@ -59,64 +59,61 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 
   ri.AttributeBegin()
   ri.Attribute( 'identifier',{ 'name' :'floor'})
+  # going to create a manifold to repeat for the first checker 
   ri.Pattern( 'PxrManifold2D', 'manifold1',
   {
-    'float scaleS'  : [6],
+    'float scaleS' : [6],
     'float scaleT' : [6] 
   })
-  ri.Pattern( 'PxrManifold2D', 'manifold2',
-  {
-    'float scaleS'  : [12],
-    'float scaleT' : [12] 
-  })
-
+  # white and blue check pattern
   ri.Pattern( 'PxrChecker' ,'checker1', 
   {
-     "reference struct manifold" : ["manifold1:result"],
-     "color colorA"  : [1, 1, 1],
-    "color colorB"  : [0, 0 ,1],
-    "int dimensions"  : [2]
+    'reference struct manifold' : ['manifold1:result'],
+    'color colorA'  : [1, 1, 1],
+    'color colorB'  : [0, 0 ,1],
+    'int dimensions'  : [2]
   })
+  # change these repeats to see different effects
+  ri.Pattern( 'PxrManifold2D', 'manifold2',
+  {
+    'float scaleS' : [12],
+    'float scaleT' : [12] 
+  })
+  # red and yellow check pattern
   ri.Pattern( 'PxrChecker' ,'checker2', 
   {
-     "reference struct manifold" : ["manifold2:result"],
-     "color colorA"  : [1, 0, 0],
-    "color colorB"  : [1, 1 ,0],
-    "int dimensions"  : [2]
+    'reference struct manifold' : ['manifold2:result'],
+    'color colorA'  : [1, 0, 0],
+    'color colorB'  : [1, 1 ,0],
+    'int dimensions'  : [2]
   })
-
-  ri.Pattern ('PxrLayer' ,'Layer1',
-  { 
-    'reference color diffuseColor' : ['checker1:resultRGB'] 
-  })
-
-  ri.Pattern ('PxrLayer' ,'Layer2',
-  { 
-    'reference color diffuseColor' : ['checker2:resultRGB'] 
-  })
-
+  
+  # we can now add this to the mixer (this is just an OSL shader shipped with prman see sdk download for source)
   ri.Pattern( 'PxrLayerMixer', 'layerMixer', 
   {
   'int enableDiffuseAlways' : [1],
   'int baselayer_enableDiffuse' : [1],
-  'float layer1Mask' : [0.6]  ,
+  'float layer1Mask' : [0.605]  ,
   'int layer1Enabled' : [1],
   'int layer1_enableDiffuse' : [1],
-  'reference color baselayer_diffuseColor' : ['Layer1:pxrMaterialOut_diffuseColor'], 
-  'reference float baselayer_diffuseGain' : ['Layer1:pxrMaterialOut_diffuseGain'], 
+  'reference color baselayer_diffuseColor' : ['checker1:resultRGB'], 
+  'float baselayer_diffuseGain' : [0.5],
   'float layer2Mask' : [0.3]  ,
   'int layer2Enabled' : [1],
   'int layer2_enableDiffuse' : [1],
-  'reference color layer1_diffuseColor' : ['Layer2:pxrMaterialOut_diffuseColor'],
-  'reference float layer1_diffuseGain' :  ['Layer2:pxrMaterialOut_diffuseGain'],
+  'reference color layer1_diffuseColor' : ['checker2:resultRGB'],
+  'float layer1_diffuseGain' :  [0.5],
   })
-  ri.Bxdf( 'PxrLayerSurface', 'PxrLayerSurface1',
+
+  ri.Bxdf( 'PxrSurface', 'PxrLayerSurface1',
   {
-     'reference color diffuseColor' : ['layerMixer:pxrMaterialOut_diffuseColor']   
+     'reference color diffuseColor' : ['layerMixer:pxrMaterialOut_diffuseColor'],
+     'reference color specularFaceColor' : ['layerMixer:pxrMaterialOut_diffuseColor'],
+        
   })
   ri.TransformBegin()
-  ri.Translate(0,0,2)
-  ri.Rotate(-20,1,0,0)
+  ri.Translate(0,0,1)
+  ri.Rotate(-90,1,0,0)
   ri.Rotate(-45,0,1,0)
  # ri.Rotate(90,0,0,1)
   
@@ -124,8 +121,6 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Polygon( {ri.P: [-1, -1 ,1 ,1, -1, 1, 1, -1, -1, -1, -1, -1]})
   ri.TransformEnd()
   ri.AttributeEnd()
-
-
 
   # end our world
   ri.WorldEnd()

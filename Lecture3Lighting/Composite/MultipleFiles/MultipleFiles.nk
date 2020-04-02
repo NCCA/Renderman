@@ -2,27 +2,30 @@
 version 11.3 v2
 define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 <layout version="1.0">
-    <window x="0" y="23" w="1440" h="855" screen="0">
+    <window x="0" y="23" w="1440" h="833" screen="0">
         <splitter orientation="1">
-            <split size="910"/>
-            <splitter orientation="1">
-                <split size="910"/>
-                <dock id="" activePageId="DAG.1">
-                    <page id="DAG.1"/>
-                </dock>
-            </splitter>
-            <split size="526"/>
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="777" stretch="1"/>
             <splitter orientation="2">
-                <split size="416"/>
-                <dock id="" activePageId="Properties.1" focus="true">
-                    <page id="Properties.1"/>
-                    <page id="uk.co.thefoundry.backgroundrenderview.1"/>
-                </dock>
-                <split size="414"/>
-                <dock id="" hideTitles="1" activePageId="Viewer.1">
+                <split size="474"/>
+                <dock id="" activePageId="Viewer.1" focus="true">
                     <page id="Viewer.1"/>
                 </dock>
+                <split size="334"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
             </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+                <page id="uk.co.thefoundry.backgroundrenderview.1"/>
+            </dock>
         </splitter>
     </window>
 </layout>
@@ -45,22 +48,12 @@ Root {
 Read {
  inputs 0
  file_type exr
- file MultipleFilesAlbedo.exr
- format "1024 720 0 0 1024 720 1 "
- origset true
- name Read4
- xpos -341
- ypos 94
-}
-Read {
- inputs 0
- file_type exr
  file MultipleFilesRawLight.exr
  format "1024 720 0 0 1024 720 1 "
  origset true
  name Read3
- xpos -65
- ypos -64
+ xpos -164
+ ypos 64
 }
 Read {
  inputs 0
@@ -69,24 +62,34 @@ Read {
  format "1024 720 0 0 1024 720 1 "
  origset true
  name Read2
- xpos -194
- ypos -63
+ xpos -274
+ ypos 65
 }
 Merge2 {
  inputs 2
  operation multiply
  name Merge1
  label "Combine Lights\n"
- xpos -139
- ypos 88
+ xpos -149
+ ypos 203
+}
+Read {
+ inputs 0
+ file_type exr
+ file MultipleFilesAlbedo.exr
+ format "1024 720 0 0 1024 720 1 "
+ origset true
+ name Read4
+ xpos -406
+ ypos 179
 }
 Merge2 {
  inputs 2
  operation multiply
  name Merge2
  label "Albedo *  Lights"
- xpos -220
- ypos 199
+ xpos -278
+ ypos 203
 }
 Read {
  inputs 0
@@ -95,16 +98,16 @@ Read {
  format "1024 720 0 0 1024 720 1 "
  origset true
  name Read5
- xpos -348
- ypos 262
+ xpos -406
+ ypos 266
 }
 Merge2 {
  inputs 2
  operation plus
  name Merge3
  label "add Reflections"
- xpos -220
- ypos 286
+ xpos -278
+ ypos 290
 }
 Read {
  inputs 0
@@ -113,15 +116,15 @@ Read {
  format "1024 720 0 0 1024 720 1 "
  origset true
  name Read6
- xpos -348
- ypos 396
+ xpos -406
+ ypos 400
 }
 Merge2 {
  inputs 2
  name Merge4
  label "Over Specular"
- xpos -220
- ypos 420
+ xpos -278
+ ypos 424
 }
 Read {
  inputs 0
@@ -131,16 +134,15 @@ Read {
  origset true
  name Read7
  label "Light Emmisive"
- selected true
- xpos -351
- ypos 499
+ xpos -409
+ ypos 498
 }
 Merge2 {
  inputs 2
  operation plus
- name Merge5
- xpos -220
- ypos 527
+ name Emissive
+ xpos -278
+ ypos 531
 }
 set Ndf2c2c0 [stack 0]
 ColorCorrect {
@@ -150,9 +152,10 @@ ColorCorrect {
  shadows.saturation 1.26
  shadows.contrast 0.78
  name ColorCorrect1
- xpos -220
- ypos 576
+ xpos -278
+ ypos 580
 }
+push $Ndf2c2c0
 Read {
  inputs 0
  file_type exr
@@ -161,16 +164,15 @@ Read {
  origset true
  name Read1
  label "Rendered Final Pass"
- xpos -347
- ypos -61
+ xpos -405
+ ypos 66
 }
-push $Ndf2c2c0
-push $Ndf2c2c0
 Viewer {
  inputs 2
  frame_range 1-100
- translate {0.07800000161 -0.2039999962}
+ translate {0.02499999851 -0.2899999917}
  name Viewer1
- xpos 189
- ypos 489
+ selected true
+ xpos -113
+ ypos 422
 }

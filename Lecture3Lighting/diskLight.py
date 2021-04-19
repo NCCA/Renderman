@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from __future__ import print_function
 import prman,os
+import subprocess
 import ProcessCommandLine as cl
 
 
@@ -148,10 +149,10 @@ def main(filename,shadingrate=10,pixelvar=0.1,
 def checkAndCompileShader(shader) :
   if os.path.isfile(shader+'.oso') != True  or os.stat(shader+'.osl').st_mtime - os.stat(shader+'.oso').st_mtime > 0 :
     print ('compiling shader %s' %(shader))
-    try :
-      subprocess.check_call(['oslc', shader+'.osl'])
-    except subprocess.CalledProcessError :
-      sys.exit('shader compilation failed')
+  try :
+    subprocess.check_call(['oslc', shader+'.osl'])
+  except subprocess.CalledProcessError :
+    sys.exit('shader compilation failed')
       
 if __name__ == '__main__':
   shaderName='starBall'

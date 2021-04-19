@@ -1,7 +1,7 @@
 import argparse
 
 filename='default.rib'
-integratorParams={"int numLightSamples" : [1], "int numBxdfSamples" : [1], "int maxPathLength" : [4]}
+integratorParams={"int numLightSamples" : [1], "int numBxdfSamples" : [1], "int maxIndirectBounces" : [4]}
 integrator='PxrPathTracer'
 args=[]
 

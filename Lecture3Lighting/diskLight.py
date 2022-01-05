@@ -4,12 +4,13 @@ import prman,os
 import subprocess
 import ProcessCommandLine as cl
 
+
 # Main rendering routine
 def main(filename,shadingrate=10,pixelvar=0.1,
-         fov=45.0,width=1024,height=720,
+         fov=48.0,width=1024,height=720,
          integrator='PxrPathTracer',integratorParams={}
         ) :
-  print ("shading rate {} pivel variance {} using {} {}".format(shadingrate,pixelvar,integrator,integratorParams))
+  print ('shading rate {} pivel variance {} using {} {}'.format(shadingrate,pixelvar,integrator,integratorParams))
   ri = prman.Ri() # create an instance of the RenderMan interface
 
   # this is the begining of the rib archive generation we can only
@@ -23,87 +24,32 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Format(width,height,1)
 
   # setup the raytrace / integrators
-  ri.Option( 'bucket' , {'string order' : ['horizontal'] })
-
-  ri.Hider('raytrace' ,{
-           'int incremental' :[1],
-           'int minsamples' : [16],
-           'int maxsamples' : [256],
-           })
+  ri.Hider('raytrace' ,{'int incremental' :[1]})
   ri.ShadingRate(shadingrate)
   ri.PixelVariance (pixelvar)
   ri.Integrator (integrator ,'integrator',integratorParams)
-
-  ri.Attribute('visibility' , {
-               'int transmission' :[1], 
-               'int indirect' : [1]
-               })
-  ri.Attribute( 'trace', {'int maxdiffusedepth' : [5] ,'int maxspeculardepth' : [5]})
   ri.Option( 'statistics', {'filename'  : [ 'stats.txt' ] } )
   ri.Option( 'statistics', {'endofframe' : [ 1 ] })
+ 
   ri.Projection(ri.PERSPECTIVE,{ri.FOV:fov})
 
   ri.Rotate(12,1,0,0)
   ri.Translate( 0, 0.75 ,2.5)
-  ri.SampleFilter('PxrCryptomatte','Cryptomatte',
-  {
-	'string filename' : ['cryptomatte.exr'], 
-	'string manifest' : ['header'], 
-	'string layer' : ['user:__materialid'], 
-	'string attribute' : [''], 
-	'int levels' : [6], 
-	'int accuracy' : [4], 
-  })
 
   # now we start our world
   ri.WorldBegin()
-
-  
-
   #######################################################################
-  # Lighting 
+  #Lighting  :- Move the light just before the celling to show direction
   #######################################################################
   ri.TransformBegin()
   ri.AttributeBegin()
-  ri.Declare('meshLight' ,'string')
-  ri.Attribute( 'identifier',{ 'name' :'ncca'})
-
-  ri.Light('PxrMeshLight','id',
-  {
-	'float intensity' : [4.0], 
-	'float exposure' : [1], 
-	'color lightColor' : [0.8,.8,.8], 
-	'int enableTemperature' : [1], 
-	'float temperature' : [2500], 
-	'int areaNormalize' : [0] 
-})
-
-  
-  ri.Bxdf ('PxrBlack' , 'black' )
-  ri.Translate(0, 0.6 , 0)
-  ri.Scale( 0.1, 0.1, 0.1) 
-  ri.ReadArchive('light.rib')
-
+  ri.Declare('Light0' ,'string')
+  ri.Translate(0, 0.8, 0)
+  ri.Rotate( 90, 1, 0, 0)
+  ri.Scale( 0.5, 0.5 ,0.5)
+  ri.Light( 'PxrDiskLight', 'Light0', { 'float intensity' : 30})
   ri.AttributeEnd()
   ri.TransformEnd()
-  ## light base
-  ri.TransformBegin()
-  ri.AttributeBegin()		
-  ri.Attribute( 'user', { 'string __materialid' : ['base']})
-
-  ri.Bxdf ('PxrDiffuse' , 'base', 
-  {
-    'color diffuseColor' : [0.1, 0.1 ,0.1],
-    'string __materialid' : ['base']
- 
-  })
-  ri.Translate(0, 0.65 , 0)
-  ri.Scale( 0.4, 0.01, 0.4) 
-  ri.Attribute( 'visibility',{ 'int transmission' : [0]})
-  ri.ReadArchive('lightBase.rib')
-  ri.AttributeEnd()
-  ri.TransformEnd()
-
   #######################################################################
   # end lighting
   #######################################################################
@@ -117,7 +63,7 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Attribute( 'identifier',{ 'name' :'buddha'})
   ri.TransformBegin()
   ri.Translate(-0.5,-1,0)
-  ri.Rotate(-180,0,1,0)
+  ri.Rotate(180,0,1,0)
   ri.Scale(0.1,0.1,0.1)
   ri.Attribute( 'visibility',{ 'int transmission' : [1]})
   ri.Attribute( 'trace',
@@ -125,7 +71,6 @@ def main(filename,shadingrate=10,pixelvar=0.1,
     'int maxdiffusedepth' : [1], 
     'int maxspeculardepth' : [8]
   })
-  ri.Attribute( 'user', { 'string __materialid' : ['greenglass']})
   ri.Bxdf('PxrSurface', 'greenglass',{ 
   'color refractionColor' : [0,0.9,0],
   'float diffuseGain' : 0,
@@ -135,30 +80,26 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   'float glassRoughness' : [0.01],
   'float glassIor' : [1.5],
   'color extinction' : [0.0, 0.2 ,0.0],
-  'string __materialid' : ['greenglass']
- 
+  
   })
   ri.ReadArchive('buddha.zip!buddha.rib')
   ri.TransformEnd()
   ri.AttributeEnd()
 
   ri.AttributeBegin()
+  ri.Attribute( 'identifier',{ 'name' :'sphere'})
   ri.Pattern('PxrVariable','du', {'string variable': 'du', 'string type' : 'float'})
   ri.Pattern('PxrVariable','dv', {'string variable': 'dv', 'string type' : 'float'})
   ri.Pattern('starBall','starBall', { 
             'reference float du' : ['du:resultR'], 
             'reference float dv' : ['dv:resultR']
             })
-  ri.Attribute( 'user', { 'string __materialid' : ['ball']})
-  ri.Bxdf( 'PxrDisney','ball', 
-  { 
-    'reference color baseColor' : ['starBall:Cout'],
-    'string __materialid' : ['ball']
-  })
-  
-  ri.Attribute( 'identifier',{ 'name' :'sphere'})
+
+  ri.Bxdf( 'PxrDisney','bxdf', { 'reference color baseColor' : ['starBall:Cout'] })
   ri.TransformBegin()
   ri.Translate(0.3, -0.7 , 0.3)
+  ri.Rotate(-30,0,1,0)
+  ri.Rotate(20,1,0,0)
   ri.Sphere(0.3,-0.3,0.3,360)
   ri.TransformEnd()
   ri.AttributeEnd()
@@ -169,32 +110,25 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   ri.Translate(0, -1 , -0.8)
   ri.Rotate(45,0,1,0)
   ri.Rotate( -90, 1 ,0 ,0)
-  ri.Scale( 0.1, 0.1, 0.1)
-  ri.Attribute( 'user', { 'string __materialid' : ['teapot']})
-
+  ri.Scale( 0.1, 0.1, 0.1) 
   ri.Bxdf('PxrSurface', 'plastic',{
           'color diffuseColor' : [.04, .51, .1],
           'color clearcoatFaceColor' : [.5, .5, .5], 
-          'color clearcoatEdgeColor' : [.25, .25, .25],
-          'string __materialid' : ['teapot']
-  }) 
+          'color clearcoatEdgeColor' : [.25, .25, .25]
+  })
   ri.Geometry('teapot')
   ri.TransformEnd()
   ri.AttributeEnd()
+
   ri.AttributeBegin()
-  ri.Attribute( 'user', { 'string __materialid' : ['metal']})
-
-  ri.Bxdf('PxrSurface', 'metal', 
-  {
-  'float diffuseGain' : [0],
-  'int specularFresnelMode' : [1],
-  'color specularEdgeColor' : [1 ,1 ,1],
-  'color specularIor' : [4.3696842, 2.916713, 1.654698],
-  'color specularExtinctionCoeff' : [5.20643, 4.2313662, 3.7549689],
-  'float specularRoughness' : [0.1], 
-  'integer specularModelType' : [1] ,
-  'string __materialid' : ['metal']
-
+  ri.Bxdf('PxrSurface', 'metal', {
+          'float diffuseGain' : [0],
+          'int specularFresnelMode' : [1],
+          'color specularEdgeColor' : [1 ,1 ,1],
+          'color specularIor' : [4.3696842, 2.916713, 1.654698],
+          'color specularExtinctionCoeff' : [5.20643, 4.2313662, 3.7549689],
+          'float specularRoughness' : [0.1], 
+          'integer specularModelType' : [1] 
   })
 
   ri.Attribute('identifier',{ 'name' :'ncca'})
@@ -210,6 +144,8 @@ def main(filename,shadingrate=10,pixelvar=0.1,
   # and finally end the rib file
   ri.End()
 
+
+
 def checkAndCompileShader(shader) :
   if os.path.isfile(shader+'.oso') != True  or os.stat(shader+'.osl').st_mtime - os.stat(shader+'.oso').st_mtime > 0 :
     print ('compiling shader %s' %(shader))
@@ -217,11 +153,12 @@ def checkAndCompileShader(shader) :
     subprocess.check_call(['oslc', shader+'.osl'])
   except subprocess.CalledProcessError :
     sys.exit('shader compilation failed')
-		 
+      
 if __name__ == '__main__':
   shaderName='starBall'
   checkAndCompileShader(shaderName)
   
-  cl.ProcessCommandLine('CryptoMatte.rib')
+  cl.ProcessCommandLine('DiskLight.rib')
   main(cl.filename,cl.args.shadingrate,cl.args.pixelvar,cl.args.fov,cl.args.width,cl.args.height,cl.integrator,cl.integratorParams)
+
 

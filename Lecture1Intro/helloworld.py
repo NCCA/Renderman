@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # for bash we need to add the following to our .bashrc
 # export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin
 

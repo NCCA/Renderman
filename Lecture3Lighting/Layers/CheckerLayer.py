@@ -1,190 +1,204 @@
 #!/usr/bin/python
 from __future__ import print_function
 import prman
+
 # import the python functions
 import sys
-import sys,os.path,subprocess
+import sys, os.path, subprocess
 import argparse
+
 # Main rendering routine
-def main(filename,shadingrate=10,pixelvar=0.1,
-         fov=48.0,width=1024,height=720,
-         integrator='PxrPathTracer',integratorParams={}
-        ) :
-  print ('shading rate {} pivel variance {} using {} {}'.format(shadingrate,pixelvar,integrator,integratorParams))
-  ri = prman.Ri() # create an instance of the RenderMan interface
+def main(
+    filename,
+    shadingrate=10,
+    pixelvar=0.1,
+    fov=48.0,
+    width=1024,
+    height=720,
+    integrator="PxrPathTracer",
+    integratorParams={},
+):
+    print("shading rate {} pivel variance {} using {} {}".format(shadingrate, pixelvar, integrator, integratorParams))
+    ri = prman.Ri()  # create an instance of the RenderMan interface
 
-  # this is the begining of the rib archive generation we can only
-  # make RI calls after this function else we get a core dump
-  ri.Begin(filename)
-  ri.Option('searchpath', {'string archive':'../assets/:@'})
-  ri.Option('searchpath', {'string texture':'../textures/:@'})
+    # this is the begining of the rib archive generation we can only
+    # make RI calls after this function else we get a core dump
+    ri.Begin(filename)
+    ri.Option("searchpath", {"string archive": "../assets/:@"})
+    ri.Option("searchpath", {"string texture": "../textures/:@"})
 
-  # now we add the display element using the usual elements
-  # FILENAME DISPLAY Type Output format
-  ri.Display('checkerLayer.exr', 'it', 'rgba')
-  ri.Format(width,height,1)
+    # now we add the display element using the usual elements
+    # FILENAME DISPLAY Type Output format
+    ri.Display("checkerLayer.exr", "it", "rgba")
+    ri.Format(width, height, 1)
 
-  # setup the raytrace / integrators
-  ri.Hider('raytrace' ,{'int incremental' :[1]})
-  ri.ShadingRate(shadingrate)
-  ri.PixelVariance (pixelvar)
-  ri.Integrator (integrator ,'integrator',integratorParams)
-  ri.Option( 'statistics', {'filename'  : [ 'stats.txt' ] } )
-  ri.Option( 'statistics', {'endofframe' : [ 1 ] })
- 
-  ri.Projection(ri.PERSPECTIVE,{ri.FOV:fov})
+    # setup the raytrace / integrators
+    ri.Hider("raytrace", {"int incremental": [1]})
+    ri.ShadingRate(shadingrate)
+    ri.PixelVariance(pixelvar)
+    ri.Integrator(integrator, "integrator", integratorParams)
+    ri.Option("statistics", {"filename": ["stats.txt"]})
+    ri.Option("statistics", {"endofframe": [1]})
 
-  ri.Rotate(2,1,0,0)
-  ri.Translate( 0, 0.75 ,4.5)
+    ri.Projection(ri.PERSPECTIVE, {ri.FOV: fov})
 
+    ri.Rotate(2, 1, 0, 0)
+    ri.Translate(0, 0.75, 4.5)
 
-  # now we start our world
-  ri.WorldBegin()
-  #######################################################################
-  #Lighting We need geo to emit light
-  #######################################################################
-  ri.TransformBegin()
-  ri.AttributeBegin()
-  ri.Declare('domeLight' ,'string')
-  ri.Rotate(-90,1,0,0)
-  ri.Rotate(100,0,0,1)
-  ri.Light( 'PxrDomeLight', 'domeLight', { 
+    # now we start our world
+    ri.WorldBegin()
+    #######################################################################
+    # Lighting We need geo to emit light
+    #######################################################################
+    ri.TransformBegin()
+    ri.AttributeBegin()
+    ri.Declare("domeLight", "string")
+    ri.Rotate(-90, 1, 0, 0)
+    ri.Rotate(100, 0, 0, 1)
+    ri.Light(
+        "PxrDomeLight",
+        "domeLight",
+        {
             #'string lightColorMap'  : 'Luxo-Jr_4000x2000.tex'
-   })
-  ri.AttributeEnd()
-  ri.TransformEnd()
-  #######################################################################
-  # end lighting
-  #######################################################################
+        },
+    )
+    ri.AttributeEnd()
+    ri.TransformEnd()
+    #######################################################################
+    # end lighting
+    #######################################################################
 
-  ri.AttributeBegin()
-  ri.Attribute( 'identifier',{ 'name' :'floor'})
-  # going to create a manifold to repeat for the first checker 
-  ri.Pattern( 'PxrManifold2D', 'manifold1',
-  {
-    'float scaleS' : [6],
-    'float scaleT' : [6] 
-  })
-  # white and blue check pattern
-  ri.Pattern( 'PxrChecker' ,'checker1', 
-  {
-    'reference struct manifold' : ['manifold1:result'],
-    'color colorA'  : [1, 1, 1],
-    'color colorB'  : [0, 0 ,1],
-    'int dimensions'  : [2]
-  })
-  # change these repeats to see different effects
-  ri.Pattern( 'PxrManifold2D', 'manifold2',
-  {
-    'float scaleS' : [12],
-    'float scaleT' : [12] 
-  })
-  # red and yellow check pattern
-  ri.Pattern( 'PxrChecker' ,'checker2', 
-  {
-    'reference struct manifold' : ['manifold2:result'],
-    'color colorA'  : [1, 0, 0],
-    'color colorB'  : [1, 1 ,0],
-    'int dimensions'  : [2]
-  })
-  
-  # we can now add this to the mixer (this is just an OSL shader shipped with prman see sdk download for source)
-  ri.Pattern( 'PxrLayerMixer', 'layerMixer', 
-  {
-  'int enableDiffuseAlways' : [1],
-  'int baselayer_enableDiffuse' : [1],
-  'float layer1Mask' : [0.605]  ,
-  'int layer1Enabled' : [1],
-  'int layer1_enableDiffuse' : [1],
-  'reference color baselayer_diffuseColor' : ['checker1:resultRGB'], 
-  'float baselayer_diffuseGain' : [0.5],
-  'float layer2Mask' : [0.3]  ,
-  'int layer2Enabled' : [1],
-  'int layer2_enableDiffuse' : [1],
-  'reference color layer1_diffuseColor' : ['checker2:resultRGB'],
-  'float layer1_diffuseGain' :  [0.5],
-  })
+    ri.AttributeBegin()
+    ri.Attribute("identifier", {"name": "floor"})
+    # going to create a manifold to repeat for the first checker
+    ri.Pattern("PxrManifold2D", "manifold1", {"float scaleS": [6], "float scaleT": [6]})
+    # white and blue check pattern
+    ri.Pattern(
+        "PxrChecker",
+        "checker1",
+        {
+            "reference struct manifold": ["manifold1:result"],
+            "color colorA": [1, 1, 1],
+            "color colorB": [0, 0, 1],
+            "int dimensions": [2],
+        },
+    )
+    # change these repeats to see different effects
+    ri.Pattern("PxrManifold2D", "manifold2", {"float scaleS": [12], "float scaleT": [12]})
+    # red and yellow check pattern
+    ri.Pattern(
+        "PxrChecker",
+        "checker2",
+        {
+            "reference struct manifold": ["manifold2:result"],
+            "color colorA": [1, 0, 0],
+            "color colorB": [1, 1, 0],
+            "int dimensions": [2],
+        },
+    )
 
-  ri.Bxdf( 'PxrSurface', 'PxrLayerSurface1',
-  {
-     'reference color diffuseColor' : ['layerMixer:pxrMaterialOut_diffuseColor'],
-     'reference color specularFaceColor' : ['layerMixer:pxrMaterialOut_diffuseColor'],
-        
-  })
-  ri.TransformBegin()
-  ri.Translate(0,0,1)
-  ri.Rotate(-90,1,0,0)
-  ri.Rotate(-45,0,1,0)
- # ri.Rotate(90,0,0,1)
-  
-  ri.Scale(2,2,2)
-  ri.Polygon( {ri.P: [-1, -1 ,1 ,1, -1, 1, 1, -1, -1, -1, -1, -1]})
-  ri.TransformEnd()
-  ri.AttributeEnd()
+    # we can now add this to the mixer (this is just an OSL shader shipped with prman see sdk download for source)
+    ri.Pattern(
+        "PxrLayerMixer",
+        "layerMixer",
+        {
+            "int enableDiffuseAlways": [1],
+            "int baselayer_enableDiffuse": [1],
+            "float layer1Mask": [0.605],
+            "int layer1Enabled": [1],
+            "int layer1_enableDiffuse": [1],
+            "reference color baselayer_diffuseColor": ["checker1:resultRGB"],
+            "float baselayer_diffuseGain": [0.5],
+            "float layer2Mask": [0.3],
+            "int layer2Enabled": [1],
+            "int layer2_enableDiffuse": [1],
+            "reference color layer1_diffuseColor": ["checker2:resultRGB"],
+            "float layer1_diffuseGain": [0.5],
+        },
+    )
 
-  # end our world
-  ri.WorldEnd()
-  # and finally end the rib file
-  ri.End()
+    ri.Bxdf(
+        "PxrSurface",
+        "PxrLayerSurface1",
+        {
+            "reference color diffuseColor": ["layerMixer:pxrMaterialOut_diffuseColor"],
+            "reference color specularFaceColor": ["layerMixer:pxrMaterialOut_diffuseColor"],
+        },
+    )
+    ri.TransformBegin()
+    ri.Translate(0, 0, 1)
+    ri.Rotate(-90, 1, 0, 0)
+    ri.Rotate(-45, 0, 1, 0)
+    # ri.Rotate(90,0,0,1)
 
+    ri.Scale(2, 2, 2)
+    ri.Polygon({ri.P: [-1, -1, 1, 1, -1, 1, 1, -1, -1, -1, -1, -1]})
+    ri.TransformEnd()
+    ri.AttributeEnd()
 
-
-		 
-
-
-if __name__ == '__main__':
-  
-  parser = argparse.ArgumentParser(description='Modify render parameters')
-  
-  parser.add_argument('--shadingrate', '-s', nargs='?', 
-                      const=10.0, default=10.0, type=float,
-                      help='modify the shading rate default to 10')
-
-  parser.add_argument('--pixelvar', '-p' ,nargs='?', 
-                      const=0.1, default=0.1,type=float,
-                      help='modify the pixel variance default  0.1')
-  parser.add_argument('--fov', '-f' ,nargs='?', 
-                      const=48.0, default=48.0,type=float,
-                      help='projection fov default 48.0')
-  parser.add_argument('--width' , '-wd' ,nargs='?', 
-                      const=1024, default=1024,type=int,
-                      help='width of image default 1024')
-  parser.add_argument('--height', '-ht' ,nargs='?', 
-                      const=720, default=720,type=int,
-                      help='height of image default 720')
-  
-  parser.add_argument('--rib', '-r' , action='count',help='render to rib not framebuffer')
-  parser.add_argument('--default', '-d' , action='count',help='use PxrDefault')
-  parser.add_argument('--vcm', '-v' , action='count',help='use PxrVCM')
-  parser.add_argument('--direct', '-t' , action='count',help='use PxrDirect')
-  parser.add_argument('--wire', '-w' , action='count',help='use PxrVisualizer with wireframe shaded')
-  parser.add_argument('--normals', '-n' , action='count',help='use PxrVisualizer with wireframe and Normals')
-  parser.add_argument('--st', '-u' , action='count',help='use PxrVisualizer with wireframe and ST')
-
-  args = parser.parse_args()
-  if args.rib :
-    filename = 'checkerLayer.rib' 
-  else :
-    filename='__render'
-  
-  integratorParams={}
-  integrator='PxrPathTracer'
-  if args.default :
-    integrator='PxrDefault'
-  if args.vcm :
-    integrator='PxrVCM'
-  if args.direct :
-    integrator='PxrDirectLighting'
-  if args.wire :
-    integrator='PxrVisualizer'
-    integratorParams={'int wireframe' : [1], 'string style' : ['shaded']}
-  if args.normals :
-    integrator='PxrVisualizer'
-    integratorParams={'int wireframe' : [1], 'string style' : ['normals']}
-  if args.st :
-    integrator='PxrVisualizer'
-    integratorParams={'int wireframe' : [1], 'string style' : ['st']}
+    # end our world
+    ri.WorldEnd()
+    # and finally end the rib file
+    ri.End()
 
 
-  main(filename,args.shadingrate,args.pixelvar,args.fov,args.width,args.height,integrator,integratorParams)
+if __name__ == "__main__":
 
+    parser = argparse.ArgumentParser(description="Modify render parameters")
+
+    parser.add_argument(
+        "--shadingrate",
+        "-s",
+        nargs="?",
+        const=10.0,
+        default=10.0,
+        type=float,
+        help="modify the shading rate default to 10",
+    )
+
+    parser.add_argument(
+        "--pixelvar", "-p", nargs="?", const=0.1, default=0.1, type=float, help="modify the pixel variance default  0.1"
+    )
+    parser.add_argument(
+        "--fov", "-f", nargs="?", const=48.0, default=48.0, type=float, help="projection fov default 48.0"
+    )
+    parser.add_argument(
+        "--width", "-wd", nargs="?", const=1024, default=1024, type=int, help="width of image default 1024"
+    )
+    parser.add_argument(
+        "--height", "-ht", nargs="?", const=720, default=720, type=int, help="height of image default 720"
+    )
+
+    parser.add_argument("--rib", "-r", action="count", help="render to rib not framebuffer")
+    parser.add_argument("--default", "-d", action="count", help="use PxrDefault")
+    parser.add_argument("--vcm", "-v", action="count", help="use PxrVCM")
+    parser.add_argument("--direct", "-t", action="count", help="use PxrDirect")
+    parser.add_argument("--wire", "-w", action="count", help="use PxrVisualizer with wireframe shaded")
+    parser.add_argument("--normals", "-n", action="count", help="use PxrVisualizer with wireframe and Normals")
+    parser.add_argument("--st", "-u", action="count", help="use PxrVisualizer with wireframe and ST")
+
+    args = parser.parse_args()
+    if args.rib:
+        filename = "checkerLayer.rib"
+    else:
+        filename = "__render"
+
+    integratorParams = {}
+    integrator = "PxrPathTracer"
+    if args.default:
+        integrator = "PxrDefault"
+    if args.vcm:
+        integrator = "PxrVCM"
+    if args.direct:
+        integrator = "PxrDirectLighting"
+    if args.wire:
+        integrator = "PxrVisualizer"
+        integratorParams = {"int wireframe": [1], "string style": ["shaded"]}
+    if args.normals:
+        integrator = "PxrVisualizer"
+        integratorParams = {"int wireframe": [1], "string style": ["normals"]}
+    if args.st:
+        integrator = "PxrVisualizer"
+        integratorParams = {"int wireframe": [1], "string style": ["st"]}
+
+    main(filename, args.shadingrate, args.pixelvar, args.fov, args.width, args.height, integrator, integratorParams)

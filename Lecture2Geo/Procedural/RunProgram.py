@@ -1,19 +1,18 @@
 #!/usr/bin/python
 # for bash we need to add the following to our .bashrc
-# export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin   
+# export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin
 import getpass
-import time,random
+import time, random
+
 # import the python renderman library
 import prman
 
-def Colour(colour) :
-  	ri.Bxdf( 'PxrDiffuse','bxdf', 
-	{
-		'color diffuseColor' : colour
-	})
+
+def Colour(colour):
+    ri.Bxdf("PxrDiffuse", "bxdf", {"color diffuseColor": colour})
 
 
-ri = prman.Ri() # create an instance of the RenderMan interface
+ri = prman.Ri()  # create an instance of the RenderMan interface
 ri.Option("rib", {"string asciistyle": "indented"})
 
 filename = "runprogram.rib"
@@ -25,12 +24,12 @@ ri.Begin(filename)
 # FILENAME DISPLAY Type Output format
 ri.Display("runprogram.exr", "file", "rgba")
 # Specify PAL resolution 1:1 pixel Aspect ratio
-ri.Format(720,576,1)
+ri.Format(720, 576, 1)
 # now set the projection to perspective
-ri.Projection(ri.PERSPECTIVE,{ri.FOV:60}) 
+ri.Projection(ri.PERSPECTIVE, {ri.FOV: 60})
 
 ri.Identity()
-ri.ConcatTransform( [1.0,0.0,0.0,0.0,0.0,0.9,-0.4,0.0,0.0,0.4,0.9,0.0,-0.0,-0.0,16.925824,1.0])
+ri.ConcatTransform([1.0, 0.0, 0.0, 0.0, 0.0, 0.9, -0.4, 0.0, 0.0, 0.4, 0.9, 0.0, -0.0, -0.0, 16.925824, 1.0])
 
 # now we start our world
 ri.WorldBegin()
@@ -38,28 +37,28 @@ ri.WorldBegin()
 
 ri.TransformBegin()
 Colour([1, 0, 0])
-ri.Translate( 0 ,-1 ,0) 
+ri.Translate(0, -1, 0)
 
 # param width height depth Case Height Rotation Angle
-program='Procedural "RunProgram" ["spiral.py" "1 0.2 0.35 20 5"] [-5 5 -5 5 -35 35]\n'
-ri.ArchiveRecord(ri.VERBATIM,program)
+program = 'Procedural "RunProgram" ["spiral.py" "1 0.2 0.35 20 5"] [-5 5 -5 5 -35 35]\n'
+ri.ArchiveRecord(ri.VERBATIM, program)
 
 ri.TransformEnd()
 ri.TransformBegin()
-Colour([1, 1 ,1])
-ri.Translate( -6 ,-1, 0)	
+Colour([1, 1, 1])
+ri.Translate(-6, -1, 0)
 # param width height depth Case Height Rotation Angle
-program='Procedural "RunProgram" ["spiral.py" "5 0.5 1.5 10 15"] [-5 5 -5 5 -35 35]\n'
-ri.ArchiveRecord(ri.VERBATIM,program)
+program = 'Procedural "RunProgram" ["spiral.py" "5 0.5 1.5 10 15"] [-5 5 -5 5 -35 35]\n'
+ri.ArchiveRecord(ri.VERBATIM, program)
 
 ri.TransformEnd()
 
 ri.TransformBegin()
 Colour([1, 0, 1])
-ri.Translate( 6, -1, 0)
+ri.Translate(6, -1, 0)
 # param width height depth Case Height Rotation Angle
-program='Procedural "RunProgram" ["spiral.py" "2 0.3 0.3 10 12"] [-5 5 -5 5 -35 35]\n'
-ri.ArchiveRecord(ri.VERBATIM,program)
+program = 'Procedural "RunProgram" ["spiral.py" "2 0.3 0.3 10 12"] [-5 5 -5 5 -35 35]\n'
+ri.ArchiveRecord(ri.VERBATIM, program)
 ri.TransformEnd()
 
 ri.WorldEnd()

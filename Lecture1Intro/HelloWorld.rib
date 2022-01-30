@@ -5,9 +5,9 @@ Display "HelloWorld.exr" "it" "rgba"
 Format 720 576 1
 Projection "perspective" 
 WorldBegin
-#move our world back 2 in the z so we can see it
-Translate 0 0 2
-#draw a sphere primitive
-Sphere 1 -1 1 360
-#end our world
+	#move our world back 2 in the z so we can see it
+	Translate 0 0 2
+	#draw a sphere primitive
+	Sphere 1 -1 1 360
+	#end our world
 WorldEnd

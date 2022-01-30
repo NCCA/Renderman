@@ -11,11 +11,11 @@ def main(argv=None):
 	try:
 		try:
 			opts, args = getopt.getopt(argv[1:], 'c', ['clean'])
-		except getopt.error, msg:
+		except getopt.error, msg :
 			raise Usage(msg)
     	except Usage, err:
-			print >>sys.stderr, err.msg
-			print >>sys.stderr, 'for help use --help'
+			print (sys.stderr, err.msg)
+			print (sys.stderr, 'for help use --help')
 			return 2
 	BUILD='prman'
 	for opt, arg in opts:               
@@ -25,7 +25,7 @@ def main(argv=None):
 	FileNames=sorted(os.listdir('.'))
 	for Files in FileNames :
 		if (Files.endswith('.rib')  ):
-			print 'Rendering ',Files
+			print( 'Rendering ',Files)
 			os.system(BUILD+' '+Files)
 					
 if __name__ == '__main__':

@@ -33,12 +33,12 @@
 import os, commands, getopt, sys
 
 def usage():
-	print "PrettyRib"
-	print "(C) Jon Macey jmacey@bmth.ac.uk"
-	print "_______________________________________"
-	print "-h print this help"
-	print """ Basically PrettyRib adds indentation to a rib file created by prman's python binding \n
-	This is only to make the output more readable for inspection etc"""
+	print ("PrettyRib")
+	print ("(C) Jon Macey jmacey@bmth.ac.uk")
+	print ("_______________________________________")
+	print ("-h print this help")
+	print (""" Basically PrettyRib adds indentation to a rib file created by prman's python binding \n
+	This is only to make the output more readable for inspection etc""")
 
 # exception class for command line arguments
 class Usage(Exception):
@@ -55,7 +55,7 @@ EndTokens=["WorldEnd" ,"TransformEnd","AttributeEnd","FrameEnd","MotionEnd" ,"So
 # finally we save back to the same file name
 
 def RibTidy(File) :
-	print "opening : "+File
+	print ("opening : "+File)
 	# default to no tabs
 	TABLEVEL=""
 	# open the file
@@ -95,7 +95,7 @@ def RibTidy(File) :
 	op = open(File,'w')
 	op.write(opdata)
 	# tell the user were finished.
-	print "Done "
+	print( "Done ")
 
 
 def main(argv=None):
@@ -107,8 +107,8 @@ def main(argv=None):
 		except getopt.error, msg:
 			raise Usage(msg)
     	except Usage, err:
-			print >>sys.stderr, err.msg
-			print >>sys.stderr, "for help use --help"
+			print (sys.stderr, err.msg)
+			print (sys.stderr, "for help use --help")
 			return 2
 	for opt, arg in opts:               
 		if opt in ("-h", "--help"):      
@@ -118,7 +118,7 @@ def main(argv=None):
 	for Files in argv[1:] :
 		# if it end in rib then process it so we can use wildcards 
 		if (Files.endswith('.rib') ):
-			print "Adding indentation to "+Files
+			print ("Adding indentation to "+Files)
 			RibTidy(Files)
 
 if __name__ == "__main__":

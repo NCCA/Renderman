@@ -1,0 +1,32 @@
+/* 
+Based on starball shader in Advanced Renderman 
+* Reference:
+ *   _Advanced RenderMan: Creating CGI for Motion Picture_, 
+ *   by Anthony A. Apodaca and Larry Gritz, Morgan Kaufmann, 1999.
+*/
+
+shader starBall(
+								color starColour = color(.8,.6,0),
+								color bandColour = color(0,0.2,.7),
+								color ballColour = color (.5,.05,.05),
+								float du = 0 [[int lockgeom = 0]],
+              	float dv = 0 [[int lockgeom = 0]],
+								output	color Cout=0 
+						)
+{
+  float ddv = 2*abs(dv);
+  float ddu = 2*abs(du); 
+	float ang = mod (u*360, 144);
+	float ht = .3090/sin(((ang+18)*.01745));
+	ang = mod ((1-u)*360, 144);
+	float ht1 = .3090/sin(((ang+18)*.01745));
+	ht = max (ht, ht1);
+	ht1 = ht*.5-min(v*2, 1);
+	ht1 = clamp (ht1, -ddu, ddu)/(ddu*2)+.5;
+	ht = ht/2 - min((1-v)*2, 1);
+	ht1 = ht1 + clamp(ht, -ddu, ddu)/(ddu*2)+.5;
+
+	Cout = mix (starColour, ballColour, ht1);
+	Cout = mix (bandColour, Cout, clamp(abs(v-0.5)-0.1, 0, ddv)/ddv);
+
+}

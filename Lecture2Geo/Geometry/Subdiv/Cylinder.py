@@ -59,7 +59,7 @@ ri.SubdivisionMesh(
     [ri.CREASE, ri.CREASE],
     [5, 1, 5, 1],
     [1, 5, 7, 0, 1, 3, 4, 6, 2, 3],
-    [10, 10],
+    [1, 5],
     {ri.P: points},
 )
 

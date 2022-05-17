@@ -1,7 +1,8 @@
 #!/usr/bin/python
-import sys, os.path
 import argparse
 import collections
+import os.path
+import sys
 import xml.etree.ElementTree
 
 
@@ -11,7 +12,9 @@ def processArgFile(file, output):
     pluginName = file[file.rfind("/") + 1 : -5]
     e = xml.etree.ElementTree.parse(file).getroot()
     shaderType = e.find("shaderType/tag").attrib.get("value")
-    shaderType = "".join(shaderType[0].upper() + shaderType[1:])  # First letter is capital bxdf to Bxdf
+    shaderType = "".join(
+        shaderType[0].upper() + shaderType[1:]
+    )  # First letter is capital bxdf to Bxdf
     # May also have Filter types such as LightFilter (lightFilter)
     shaderType = shaderType.replace("filter", "Filter")
     strings = ""
@@ -27,7 +30,9 @@ def processArgFile(file, output):
             elif dataType == "string":
                 defaultValue = "'" + defaultValue + "'"  # strings need to be quoted
             elif dataType == "float":
-                defaultValue = defaultValue.replace("f", "")  # seems some floats us 0.0f
+                defaultValue = defaultValue.replace(
+                    "f", ""
+                )  # seems some floats us 0.0f
             strings += '\t"%s %s"  [%s] \n' % (dataType, name, defaultValue)
         page = e.findall("page")
 
@@ -41,7 +46,9 @@ def processArgFile(file, output):
                 elif dataType == "string":
                     defaultValue = "'" + defaultValue + "'"  # strings need to be quoted
                 elif dataType == "float":
-                    defaultValue = defaultValue.replace("f", "")  # seems some floats us 0.0f
+                    defaultValue = defaultValue.replace(
+                        "f", ""
+                    )  # seems some floats us 0.0f
                 strings += '\t"%s %s"  [%s] \n' % (dataType, name, defaultValue)
 
     elif output == "python":
@@ -58,7 +65,9 @@ def processArgFile(file, output):
             else:
                 defaultValue = defaultValue.replace(" ", ",")  # add , between values
                 if dataType == "float":
-                    defaultValue = defaultValue.replace("f", "")  # seems some floats us 0.0f
+                    defaultValue = defaultValue.replace(
+                        "f", ""
+                    )  # seems some floats us 0.0f
             strings += "\t'%s %s' : [%s], \n" % (dataType, name, defaultValue)
         page = e.findall("page")
 
@@ -72,9 +81,13 @@ def processArgFile(file, output):
                 elif dataType == "string":
                     defaultValue = "'" + defaultValue + "'"  # strings need to be quoted
                 else:
-                    defaultValue = defaultValue.replace(" ", ",")  # add , between values
+                    defaultValue = defaultValue.replace(
+                        " ", ","
+                    )  # add , between values
                     if dataType == "float":
-                        defaultValue = defaultValue.replace("f", "")  # seems some floats us 0.0f
+                        defaultValue = defaultValue.replace(
+                            "f", ""
+                        )  # seems some floats us 0.0f
                 strings += "\t'%s %s' : [%s], \n" % (dataType, name, defaultValue)
 
         strings += "})\n"
@@ -127,11 +140,26 @@ def main(directory, output, outputFile):
 if __name__ == "__main__":
     description = """'Read Renderman .cpp plugin files and report on params, by default it will scan the directory passed for .cpp files and process them one at a time and print out the parameters"""
     parser = argparse.ArgumentParser(description=description)
-    parser.add_argument("directory", help="directory to use can be explicit single file", action="store", default=".")
-    parser.add_argument("--rib", "-r", action="count", help="render to rib not framebuffer")
-    parser.add_argument("--py", "-p", action="count", help="render to rib not framebuffer")
     parser.add_argument(
-        "--file", "-f", nargs="?", const="", default="", type=str, help="dump output to file not stdout"
+        "directory",
+        help="directory to use can be explicit single file",
+        action="store",
+        default=".",
+    )
+    parser.add_argument(
+        "--rib", "-r", action="count", help="render to rib not framebuffer"
+    )
+    parser.add_argument(
+        "--py", "-p", action="count", help="render to rib not framebuffer"
+    )
+    parser.add_argument(
+        "--file",
+        "-f",
+        nargs="?",
+        const="",
+        default="",
+        type=str,
+        help="dump output to file not stdout",
     )
 
     output = ""

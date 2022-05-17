@@ -1,10 +1,15 @@
 #!/usr/bin/python
 from __future__ import print_function
+
+import os.path
+import subprocess
+import sys
+
 import prman
 
 # import the python functions
 import ProcessCommandLine as cl
-import sys, os.path, subprocess
+
 
 # Main rendering routine
 def main(
@@ -17,7 +22,11 @@ def main(
     integrator="PxrPathTracer",
     integratorParams={},
 ):
-    print("shading rate {} pivel variance {} using {} {}".format(shadingrate, pixelvar, integrator, integratorParams))
+    print(
+        "shading rate {} pivel variance {} using {} {}".format(
+            shadingrate, pixelvar, integrator, integratorParams
+        )
+    )
     ri = prman.Ri()  # create an instance of the RenderMan interface
 
     # this is the begining of the rib archive generation we can only
@@ -73,7 +82,7 @@ def main(
     ri.Rotate(180, 0, 1, 0)
     ri.Scale(0.1, 0.1, 0.1)
     ri.Attribute("visibility", {"int transmission": [1]})
-    ri.Attribute("trace", {"int maxdiffusedepth": [1], "int maxspeculardepth": [8]})
+    ri.Attribute("trace", {"int maxdiffusedepth": [1], "int maxspeculardepth": [2]})
     ri.Bxdf(
         "PxrSurface",
         "greenglass",
@@ -97,7 +106,11 @@ def main(
     ri.Attribute("identifier", {"name": "sphere"})
     ri.Pattern("PxrVariable", "du", {"string variable": "du", "string type": "float"})
     ri.Pattern("PxrVariable", "dv", {"string variable": "dv", "string type": "float"})
-    ri.Pattern("starBall", "starBall", {"reference float du": ["du:resultR"], "reference float dv": ["dv:resultR"]})
+    ri.Pattern(
+        "starBall",
+        "starBall",
+        {"reference float du": ["du:resultR"], "reference float dv": ["dv:resultR"]},
+    )
 
     ri.Bxdf("PxrDisney", "bxdf", {"reference color baseColor": ["starBall:Cout"]})
     ri.TransformBegin()

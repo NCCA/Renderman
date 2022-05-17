@@ -55,6 +55,7 @@ def main(
     ri.Declare("domeLight", "string")
     ri.Rotate(-90, 1, 0, 0)
     ri.Rotate(100, 0, 0, 1)
+    ri.Attribute("visibility", {"int camera": [0]})
     ri.Light("PxrDomeLight", "domeLight", {"string lightColorMap": "Luxo-Jr_4000x2000.tex"})
     ri.AttributeEnd()
     ri.TransformEnd()

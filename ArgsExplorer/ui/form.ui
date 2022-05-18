@@ -14,7 +14,7 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0">
+   <item row="0" column="1">
     <widget class="QSplitter" name="main_splitter">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -32,6 +32,16 @@
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QTreeView" name="args_tree_view"/>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="expand_all">
+         <property name="text">
+          <string>exppand all</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

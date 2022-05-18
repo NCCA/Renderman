@@ -1,29 +1,15 @@
 #!/usr/bin/env python
 try:  # support either PyQt5 or 6
     from PySide2.QtCore import *
-    from PySide2.QtGui import (
-        QColor,
-        QFont,
-        QFontMetrics,
-        QStandardItem,
-        QStandardItemModel,
-        QTextCursor,
-    )
+    from PySide2.QtGui import *
     from PySide2.QtUiTools import QUiLoader
     from PySide2.QtWidgets import QApplication, QMainWindow, QStatusBar, QWidget
 
     PySideVersion = 2
 except ImportError:
     print("trying PySide6")
-    from PySide6.QtCore import QEvent, QFile, QObject, QSettings, QSize, Qt
-    from PySide6.QtGui import (
-        QColor,
-        QFont,
-        QFontMetrics,
-        QStandardItem,
-        QStandardItemModel,
-        QTextCursor,
-    )
+    from PySide6.QtCore import *
+    from PySide6.QtGui import *
     from PySide6.QtUiTools import QUiLoader
     from PySide6.QtWidgets import QApplication, QMainWindow, QStatusBar, QWidget
 
@@ -57,20 +43,25 @@ class ArgsExplorer(QMainWindow):
 
         self.find_args_files()
         self.create_tree_view()
-        self.ui.args_tree_view.clicked.connect(self.update_selection)
-        self.ui.args_tree_view.setHeaderHidden(True)
+
+        # setup editor fonts
         font = QFont()
         font.setFamily("Courier")
         font.setStyleHint(QFont.Monospace)
         font.setFixedPitch(True)
         font.setPointSize(20)
         metrics = QFontMetrics(font)
-        self.ui.rib.tabStopWidth = 2  # * metrics.width(" ")
         self.ui.rib.setFont(font)
         self.ui.python.setFont(font)
-        self.ui.python.tabStopWidth = 2  # * metrics.width(" ")
-
+        self.ui.rib.setTabStopDistance(
+            QFontMetricsF(self.ui.rib.font()).horizontalAdvance(" ") * 2
+        )
         self.ui.rib.setFont(font)
+
+        self.ui.python.setTabStopDistance(
+            QFontMetricsF(self.ui.python.font()).horizontalAdvance(" ") * 2
+        )
+
         self.ui.python.setFont(font)
 
         self.ui.copy_python.pressed.connect(
@@ -78,6 +69,11 @@ class ArgsExplorer(QMainWindow):
         )
         self.ui.copy_rib.pressed.connect(
             lambda: self.copy_to_clipboard(self.ui.rib.toPlainText())
+        )
+        self.ui.expand_all.stateChanged.connect(
+            lambda state: self.ui.args_tree_view.expandAll()
+            if state
+            else self.ui.args_tree_view.collapseAll()
         )
 
         self.settings = QSettings("settings.ini", QSettings.IniFormat)
@@ -143,6 +139,17 @@ class ArgsExplorer(QMainWindow):
                 item.setEditable(False)
                 row.appendRow(item)
             self.data_model.appendRow(row)
+        # setup the tree view
+        self.ui.args_tree_view.clicked.connect(self.update_selection)
+        self.ui.args_tree_view.setHeaderHidden(True)
+        self.ui.args_tree_view.setFocus()
+        if self.ui.expand_all.isChecked():
+            self.ui.args_tree_view.expandAll()
+        else:
+            self.ui.args_tree_view.collapseAll()
+        self.ui.args_tree_view.setCurrentIndex(
+            self.ui.args_tree_view.model().index(0, 0)
+        )
 
     def generate_shader_text(self, path, name):
         self.ui.rib.clear()

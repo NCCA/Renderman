@@ -31,7 +31,11 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QTreeView" name="args_tree_view"/>
+        <widget class="QTreeView" name="args_tree_view">
+         <property name="mouseTracking">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="expand_all">
@@ -45,60 +49,41 @@
        </item>
       </layout>
      </widget>
-     <widget class="QTabWidget" name="detail_tab">
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="tabWidget_2Page1" native="true">
-       <attribute name="title">
-        <string>Code</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="1" column="0">
-         <widget class="QGroupBox" name="groupBox">
-          <property name="title">
-           <string>RIB</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
-            <widget class="QPlainTextEdit" name="rib"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="copy_rib">
-             <property name="text">
-              <string>copy</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QGroupBox" name="groupBox_2">
-          <property name="title">
-           <string>Python</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-            <widget class="QPlainTextEdit" name="python"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="copy_python">
-             <property name="text">
-              <string>copy</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Details</string>
-       </attribute>
-      </widget>
+     <widget class="QGroupBox" name="detail_tab">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="0">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>RIB</string>
+         </property>
+         <layout class="QVBoxLayout" name="rib_layout">
+          <item>
+           <widget class="QPushButton" name="copy_rib">
+            <property name="text">
+             <string>copy</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Python</string>
+         </property>
+         <layout class="QVBoxLayout" name="python_layout">
+          <item>
+           <widget class="QPushButton" name="copy_python">
+            <property name="text">
+             <string>copy</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>

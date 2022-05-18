@@ -12,34 +12,37 @@ except ImportError:
 
     PySideVersion = 6
 
-import sys
-
 
 class PlainTextEdit(QPlainTextEdit):
+    """
+    Need to override the simple QPlainTextEdit so we can capture the
+    ToolTip event and create custom ones from us.
+    """
+
     def __init__(self, parent=None):
-        """init the class and setup dialog"""
-        # Python 3 does inheritance differently to 2 so support both
-        if sys.version_info.major == 3:
-            super().__init__(parent)
-        # python 2
-        else:
-            super(PlainTextEdit, self).__init__(parent)
+        super().__init__(parent)
         self.setMouseTracking(True)
         self.parent = parent
 
     def event(self, event):
+        """going to re-implement the event for tool tips then
+        pass on to parent if not a tool tip
+        """
         if event.type() is QEvent.ToolTip:
+            # Grab the help event and get the position
             helpEvent = QHelpEvent(event)
             pos = QPoint(helpEvent.pos())
-            # pos.setX(pos.x() - self.viewportMargins().left())
-            # pos.setY(pos.y() - self.viewportMargins().top())
-
+            # find text under the cursos and lookup
             cursor = self.cursorForPosition(pos)
             cursor.select(QTextCursor.WordUnderCursor)
-            QToolTip.setFont(self.font())
-            QToolTip.showText(
-                helpEvent.globalPos(), self.parent.help_text.get(cursor.selectedText())
-            )
+            # help text is not the best, form to HTML and paragraph
+            raw_text = self.parent.help_text.get(cursor.selectedText())
+            if raw_text is not None:
+                raw_text = raw_text.replace(". ", ".<br/><p/>")
+                help_text = f"<html><p/>{raw_text}</html>"
+
+                QToolTip.showText(helpEvent.globalPos(), help_text)
+
             return True
         else:
             return QPlainTextEdit.event(self, event)

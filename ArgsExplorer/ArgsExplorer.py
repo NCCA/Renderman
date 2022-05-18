@@ -3,14 +3,7 @@ try:  # support either PyQt5 or 6
     from PySide2.QtCore import *
     from PySide2.QtGui import *
     from PySide2.QtUiTools import QUiLoader
-    from PySide2.QtWidgets import (
-        QApplication,
-        QFontDialog,
-        QMainWindow,
-        QMenu,
-        QStatusBar,
-        QWidget,
-    )
+    from PySide2.QtWidgets import *
 
     PySideVersion = 2
 except ImportError:
@@ -18,14 +11,7 @@ except ImportError:
     from PySide6.QtCore import *
     from PySide6.QtGui import *
     from PySide6.QtUiTools import QUiLoader
-    from PySide6.QtWidgets import (
-        QApplication,
-        QFontDialog,
-        QMainWindow,
-        QMenu,
-        QStatusBar,
-        QWidget,
-    )
+    from PySide6.QtWidgets import *
 
     PySideVersion = 6
 
@@ -35,18 +21,14 @@ import sys
 import xml.etree.ElementTree
 from pathlib import Path
 
+from Highlighter import Highlighter
 from PlainTextEdit import PlainTextEdit
 
 
 class ArgsExplorer(QMainWindow):
     def __init__(self, rmantree, parent=None):
         """init the class and setup dialog"""
-        # Python 3 does inheritance differently to 2 so support both
-        if sys.version_info.major == 3:
-            super().__init__(parent)
-        # python 2
-        else:
-            super(ArgsExplorer, self).__init__(parent)
+        super().__init__(parent)
         loader = QUiLoader()
         self.rmantree = rmantree
         file = QFile("./ui/form.ui")
@@ -59,7 +41,6 @@ class ArgsExplorer(QMainWindow):
         self.find_args_files()
         self.create_tree_view()
         self.setMouseTracking(True)
-
         self.python = PlainTextEdit(self)
         self.ui.python_layout.insertWidget(0, self.python)
         self.rib = PlainTextEdit(self)
@@ -79,6 +60,9 @@ class ArgsExplorer(QMainWindow):
 
         self.loadSettings()
         self.create_menu_bar()
+        self.highlighter = Highlighter()
+        self.highlighter.setDocument(self.python.document())
+
         self.ui.show()
 
     def loadSettings(self):
@@ -98,6 +82,7 @@ class ArgsExplorer(QMainWindow):
         )
         self.settings.endGroup()
         self.set_editor_fonts(font)
+        QToolTip.setFont(font)
 
     def closeEvent(self, event):
         """on close we save to settings.ini using QSettings"""
@@ -117,7 +102,12 @@ class ArgsExplorer(QMainWindow):
         menu = self.menuBar()
         export_menu = QMenu("&File", self)
         export_menu.addAction("Export")
+        change_rmantree = QAction("Change RMANTREE", self)
+        export_menu.addAction(change_rmantree)
+        change_rmantree.triggered.connect(self.change_rmantree)
+
         menu.addMenu(export_menu)
+
         # font menu
         font_menu = QMenu("&Font", self)
         change_font_action = QAction("Change Font", self)
@@ -130,7 +120,23 @@ class ArgsExplorer(QMainWindow):
         if ok:
             self.set_editor_fonts(font)
 
+    def change_rmantree(self):
+        """change the renderman location if we have another version"""
+        rmantree = QFileDialog.getExistingDirectory(
+            self,
+            "Choose Renderman Location",
+            QDir.currentPath(),
+            QFileDialog.ShowDirsOnly,
+        )
+        if rmantree is not None:
+            self.rmantree = rmantree
+            self.find_args_files()
+            self.create_tree_view()
+            self.rib.clear()
+            self.python.clear()
+
     def set_editor_fonts(self, font):
+        """allow the editor to change fonts"""
         metrics = QFontMetrics(font)
         self.rib.setTabStopDistance(
             QFontMetricsF(self.rib.font()).horizontalAdvance(" ") * self.tab_size
@@ -142,12 +148,13 @@ class ArgsExplorer(QMainWindow):
         self.python.setFont(font)
 
     def copy_to_clipboard(self, text):
-
+        """copy text to clipboard!"""
         clipboard = QApplication.clipboard()
         clipboard.clear(mode=clipboard.Clipboard)
         clipboard.setText(text, mode=clipboard.Clipboard)
 
     def update_selection(self):
+        """This updates the selection when the tree is changed"""
         index = self.ui.args_tree_view.currentIndex()
         # grab the full file path
         path = self.ui.args_tree_view.model().data(index, 1)
@@ -156,10 +163,12 @@ class ArgsExplorer(QMainWindow):
             self.generate_shader_text(path, name)
 
     def find_args_files(self):
+        """get the args file from the tree view selected"""
         self.arg_files = list(Path(self.rmantree).glob("**/*.args"))
         self.statusBar().showMessage(f"Found {len(self.arg_files)} argument files")
 
     def create_tree_view(self):
+        """Fill in the tree view from the args files found"""
         self.data_model = QStandardItemModel()
         self.ui.args_tree_view.setModel(self.data_model)
         self.ui.args_tree_view.selectionModel().selectionChanged.connect(
@@ -203,6 +212,8 @@ class ArgsExplorer(QMainWindow):
         )
 
     def generate_shader_text(self, path, name):
+        """This will generate the rib / python shader text to be put
+        into the text editors"""
         self.rib.clear()
         self.python.clear()
         self.help_text.clear()
@@ -224,7 +235,8 @@ class ArgsExplorer(QMainWindow):
             help_text = p.find(f"help")
             if help_text is not None:
                 htext = help_text.text
-                htext.lstrip()
+                htext = htext.lstrip()
+                htext = htext.replace("\n", " ")
             else:
                 htext = "No Help for this item"
             self.help_text[name] = htext
@@ -251,7 +263,9 @@ class ArgsExplorer(QMainWindow):
                 help_text = param.find(f"help")
                 if help_text is not None:
                     htext = help_text.text
-                    htext.lstrip()
+                    htext = htext.lstrip()
+                    htext = htext.replace("\n", " ")
+
                 else:
                     htext = "No Help for this item"
                 self.help_text[name] = htext
@@ -286,6 +300,10 @@ if __name__ == "__main__":
         sys.exit(os.EX_CONFIG)
 
     app = QApplication(sys.argv)
+    app.setStyleSheet(
+        "QToolTip { color: #000000; background-color: #ffff00; border: 0px; }"
+    )
+
     app.setOrganizationName("NCCA")
     app.setOrganizationDomain("ncca.bournemouth.ac.uk")
     app.setApplicationName("ArgsExplorer")

@@ -309,4 +309,7 @@ if __name__ == "__main__":
     app.setApplicationName("ArgsExplorer")
     window = ArgsExplorer(rmantree)
     window.show()
-    app.exec()
+    if PySideVersion == 6 :
+        app.exec()
+    else :
+        app.exec_()

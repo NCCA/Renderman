@@ -1,9 +1,20 @@
 import re
 import sys
 
-from PySide6.QtCore import Qt
-from PySide6.QtGui import *
-from PySide6.QtWidgets import *
+try:  # support either PyQt5 or 6
+    from PySide2.QtCore import Qt
+    from PySide2.QtGui import *
+    from PySide2.QtWidgets import *
+
+    PySideVersion = 2
+except ImportError:
+    print("trying PySide6")
+    from PySide6.QtCore import Qt
+    from PySide6.QtGui import *
+    from PySide6.QtWidgets import *
+
+    PySideVersion = 6
+
 
 
 class Highlighter(QSyntaxHighlighter):

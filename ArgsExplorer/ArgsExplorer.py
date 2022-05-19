@@ -60,8 +60,10 @@ class ArgsExplorer(QMainWindow):
 
         self.loadSettings()
         self.create_menu_bar()
-        self.highlighter = Highlighter()
-        self.highlighter.setDocument(self.python.document())
+        self.highlighter_python = Highlighter()
+        self.highlighter_python.setDocument(self.python.document())
+        self.highlighter_rib = Highlighter()
+        self.highlighter_rib.setDocument(self.rib.document())
 
         self.ui.show()
 
@@ -116,7 +118,7 @@ class ArgsExplorer(QMainWindow):
         menu.addMenu(font_menu)
 
     def change_font(self):
-        (ok, font) = QFontDialog.getFont(QFont(), self)
+        (ok, font) = QFontDialog.getFont(self.rib.font(), self)
         if ok:
             self.set_editor_fonts(font)
 
@@ -174,21 +176,37 @@ class ArgsExplorer(QMainWindow):
         self.ui.args_tree_view.selectionModel().selectionChanged.connect(
             self.update_selection
         )
-
+        progress = QProgressDialog()
+        progress.setMinimum(0)
+        progress.setLabelText("Scanning Args Files")
+        progress.setMaximum(len(self.arg_files))
+        progress.setAutoClose(True)
+        progress.setCancelButton(None)
+        # progress.raise_()
+        # progress.show()
         # First we scan all the files to find the Core Shader Types and create empty dictionary for them
         shader_types = dict()
-        for arg_file in self.arg_files:
+        for i, arg_file in enumerate(self.arg_files):
+            progress.setValue(i)
+            print(arg_file)
             tree = xml.etree.ElementTree.parse(arg_file).getroot()
-            shader_type = tree.find("shaderType/tag").attrib.get("value")
-            shader_type = "".join(shader_type[0].upper() + shader_type[1:])
-            shader_types[shader_type] = list()
+            try:  # sometimes this is missing
+                shader_type = tree.find("shaderType/tag").attrib.get("value")
+                shader_type = "".join(shader_type[0].upper() + shader_type[1:])
+                shader_types[shader_type] = list()
+            except AttributeError:
+                shader_types["Misc"] = list()
         # Now we have the core types add the actual shaders to them
-        for arg_file in self.arg_files:
-            tree = xml.etree.ElementTree.parse(arg_file).getroot()
-            shader_type = tree.find("shaderType/tag").attrib.get("value")
-            shader_type = "".join(shader_type[0].upper() + shader_type[1:])
-            shader_types[shader_type].append([arg_file.stem, arg_file])
 
+        for i, arg_file in enumerate(self.arg_files):
+            progress.setValue(i)
+            tree = xml.etree.ElementTree.parse(arg_file).getroot()
+            try:
+                shader_type = tree.find("shaderType/tag").attrib.get("value")
+                shader_type = "".join(shader_type[0].upper() + shader_type[1:])
+                shader_types[shader_type].append([arg_file.stem, arg_file])
+            except AttributeError:
+                shader_types["Misc"].append([arg_file.stem, arg_file])
         for shader in shader_types:
             row = QStandardItem(shader)
             row.setEditable(False)
@@ -210,6 +228,7 @@ class ArgsExplorer(QMainWindow):
         self.ui.args_tree_view.setCurrentIndex(
             self.ui.args_tree_view.model().index(0, 0)
         )
+        progress.close()
 
     def generate_shader_text(self, path, name):
         """This will generate the rib / python shader text to be put
@@ -218,14 +237,16 @@ class ArgsExplorer(QMainWindow):
         self.python.clear()
         self.help_text.clear()
         tree = xml.etree.ElementTree.parse(path).getroot()
-        shader_type = tree.find("shaderType/tag").attrib.get("value")
-        shader_type = "".join(
-            shader_type[0].upper() + shader_type[1:]
-        )  # First letter is capital bxdf to Bxdf
-        # May also have Filter types such as LightFilter (lightFilter)
-        shader_type = shader_type.replace("filter", "Filter")
-
-        self.rib.appendPlainText(f"{shader_type} {name}")
+        try:
+            shader_type = tree.find("shaderType/tag").attrib.get("value")
+            shader_type = "".join(
+                shader_type[0].upper() + shader_type[1:]
+            )  # First letter is capital bxdf to Bxdf
+            # May also have Filter types such as LightFilter (lightFilter)
+            shader_type = shader_type.replace("filter", "Filter")
+        except AttributeError:
+            shader_type = "Misc"
+        self.rib.appendPlainText(f'{shader_type} "{name}"')
         self.python.appendPlainText(f'ri.{shader_type}("{name}","id",')
         self.python.appendPlainText("{")
 

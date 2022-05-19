@@ -10,15 +10,15 @@ class Highlighter(QSyntaxHighlighter):
     def __init__(self, parent=None):
         super().__init__(parent)
         self._mapping = {}
-        # define pattern rule #1: ri.XXX
-        class_format = QTextCharFormat()
-        class_format.setForeground(Qt.GlobalColor.blue)
-        class_format.setFontWeight(QFont.Weight.Bold)
-        pattern = r"^ri.[^\(]*"
-        self._mapping[pattern] = class_format
+        # define pattern rule #1: ri.XXX and Plugin names
+        shader_format = QTextCharFormat()
+        shader_format.setForeground(QColor(83, 150, 206))
+        shader_format.setFontWeight(QFont.Weight.Bold)
+        pattern = r"(^ri.[^\(]*)|(Bxdf |(Pattern )|SampleFilter |DisplayFilter |Displaydriver |Projection|Integrator|Displacement)|(Light )|(LightFilter )"
+        self._mapping[pattern] = shader_format
         # keywords
         keywords_format = QTextCharFormat()
-        keywords_format.setForeground(Qt.GlobalColor.green)
+        keywords_format.setForeground(QColor(206, 145, 120))
         keywords_format.setFontWeight(QFont.Weight.Bold)
         # \\b \\b matches whole word boundary
         pattern = [
@@ -35,6 +35,18 @@ class Highlighter(QSyntaxHighlighter):
         ]
         for p in pattern:
             self._mapping[p] = keywords_format
+        # Brackets and Quotes
+        brackets_format = QTextCharFormat()
+        brackets_format.setForeground(QColor(254, 240, 0))
+        shader_format.setFontWeight(QFont.Weight.Bold)
+        pattern = r"\(|\)|\[|\]|\{|\|\'|\"|\,\}"
+        self._mapping[pattern] = brackets_format
+        # Numbers 181,206,168
+        numbers_format = QTextCharFormat()
+        numbers_format.setForeground(QColor(181, 206, 168))
+        numbers_format.setFontWeight(QFont.Weight.Bold)
+        pattern = r"[0-9]+"
+        self._mapping[pattern] = numbers_format
 
     def add_mapping(self, pattern, pattern_format):
         self._mapping[pattern] = pattern_format

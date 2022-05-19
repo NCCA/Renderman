@@ -23,6 +23,7 @@ class PlainTextEdit(QPlainTextEdit):
         super().__init__(parent)
         self.setMouseTracking(True)
         self.parent = parent
+        self.setStyleSheet("background-color: rgb(30,30,30);color : rgb(250,250,250);")
 
     def event(self, event):
         """going to re-implement the event for tool tips then

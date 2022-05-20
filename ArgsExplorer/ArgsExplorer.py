@@ -18,6 +18,7 @@ except ImportError:
 import collections
 import os
 import sys
+import time
 import xml.etree.ElementTree
 from pathlib import Path
 
@@ -64,12 +65,14 @@ class ArgsExplorer(QMainWindow):
         self.highlighter_python.setDocument(self.python.document())
         self.highlighter_rib = Highlighter()
         self.highlighter_rib.setDocument(self.rib.document())
-
         self.ui.show()
 
     def loadSettings(self):
         """Load in the setting.ini file if exists to setup our env from last time"""
-        self.settings = QSettings("settings.ini", QSettings.IniFormat)
+        print(Path.home().root + "/.arg_exploer_settings.ini")
+        self.settings = QSettings(
+            str(Path.home()) + "/.arg_exploer_settings.ini", QSettings.IniFormat
+        )
         self.resize(self.settings.value("size", QSize(1024, 800)))
         splitterSettings = self.settings.value("splitter")
         self.ui.main_splitter.restoreState(splitterSettings)
@@ -103,7 +106,10 @@ class ArgsExplorer(QMainWindow):
         # export menu
         menu = self.menuBar()
         export_menu = QMenu("&File", self)
-        export_menu.addAction("Export")
+        export = QAction("Export", self)
+        export.triggered.connect(self.export_to_md)
+        export_menu.addAction(export)
+
         change_rmantree = QAction("Change RMANTREE", self)
         export_menu.addAction(change_rmantree)
         change_rmantree.triggered.connect(self.change_rmantree)
@@ -155,6 +161,37 @@ class ArgsExplorer(QMainWindow):
         clipboard.clear(mode=clipboard.Clipboard)
         clipboard.setText(text, mode=clipboard.Clipboard)
 
+    def export_to_md(self):
+        file_name, _ = QFileDialog.getSaveFileName(
+            self,
+            "Export Markdown",
+            "untitled.md",
+            ("Text (*.md *.txt)"),
+        )
+        if file_name is not None:
+            with open(file_name, "w") as export_file:
+                view = self.ui.args_tree_view
+                model = view.model()
+                for row in range(model.rowCount()):
+                    item = model.index(row, 0)
+                    for sub_row in range(model.rowCount(item)):
+                        sub_item_idx = model.index(sub_row, 0, item)
+                        view.setCurrentIndex(sub_item_idx)
+                        rib_document = self.rib.document()
+                        first_line = rib_document.findBlockByLineNumber(0)
+                        title = first_line.text().split(" ")
+                        title[1] = title[1].replace('"', "")
+                        export_file.write(f"# {title[0]}\n\n")
+                        export_file.write(f"## Plugin : {title[1]}\n\n")
+                        export_file.write("### Python format\n\n")
+                        export_file.write("```python\n")
+                        export_file.write(self.python.toPlainText())
+                        export_file.write("\n```\n")
+                        export_file.write("### Rib format\n")
+                        export_file.write("\n```C++\n")
+                        export_file.write(self.rib.toPlainText())
+                        export_file.write("\n```\n")
+
     def update_selection(self):
         """This updates the selection when the tree is changed"""
         index = self.ui.args_tree_view.currentIndex()
@@ -176,19 +213,9 @@ class ArgsExplorer(QMainWindow):
         self.ui.args_tree_view.selectionModel().selectionChanged.connect(
             self.update_selection
         )
-        progress = QProgressDialog()
-        progress.setMinimum(0)
-        progress.setLabelText("Scanning Args Files")
-        progress.setMaximum(len(self.arg_files))
-        progress.setAutoClose(True)
-        progress.setCancelButton(None)
-        # progress.raise_()
-        # progress.show()
         # First we scan all the files to find the Core Shader Types and create empty dictionary for them
         shader_types = dict()
         for i, arg_file in enumerate(self.arg_files):
-            progress.setValue(i)
-            print(arg_file)
             tree = xml.etree.ElementTree.parse(arg_file).getroot()
             try:  # sometimes this is missing
                 shader_type = tree.find("shaderType/tag").attrib.get("value")
@@ -199,7 +226,6 @@ class ArgsExplorer(QMainWindow):
         # Now we have the core types add the actual shaders to them
 
         for i, arg_file in enumerate(self.arg_files):
-            progress.setValue(i)
             tree = xml.etree.ElementTree.parse(arg_file).getroot()
             try:
                 shader_type = tree.find("shaderType/tag").attrib.get("value")
@@ -228,7 +254,6 @@ class ArgsExplorer(QMainWindow):
         self.ui.args_tree_view.setCurrentIndex(
             self.ui.args_tree_view.model().index(0, 0)
         )
-        progress.close()
 
     def generate_shader_text(self, path, name):
         """This will generate the rib / python shader text to be put
@@ -330,7 +355,7 @@ if __name__ == "__main__":
     app.setApplicationName("ArgsExplorer")
     window = ArgsExplorer(rmantree)
     window.show()
-    if PySideVersion == 6 :
+    if PySideVersion == 6:
         app.exec()
-    else :
+    else:
         app.exec_()

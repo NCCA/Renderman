@@ -31,8 +31,14 @@ class PlainTextEdit(QPlainTextEdit):
         """
         if event.type() is QEvent.ToolTip:
             # Grab the help event and get the position
-            helpEvent = QHelpEvent(event)
-            pos = QPoint(helpEvent.pos())
+            if PySideVersion == 6 :
+                helpEvent = QHelpEvent(event)
+                pos = QPoint(helpEvent.pos())
+
+            else :
+                helpEvent= event #QHelpEvent(event,event.pos(),event.globalPos())
+                pos = QPoint(helpEvent.pos())
+    
             # find text under the cursos and lookup
             cursor = self.cursorForPosition(pos)
             cursor.select(QTextCursor.WordUnderCursor)

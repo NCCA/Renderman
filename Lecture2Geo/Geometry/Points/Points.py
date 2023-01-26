@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 import prman
 
 from random import uniform as ru

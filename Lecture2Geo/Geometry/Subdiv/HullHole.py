@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # import the python renderman library
 import prman
 

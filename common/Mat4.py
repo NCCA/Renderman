@@ -1,4 +1,4 @@
-import math, operator
+import math, operator,functools
 
 """ simple 4x4 matrix class some code modified from here
 http://code.activestate.com/recipes/578131-a-simple-matrix-class/
@@ -71,7 +71,7 @@ class Mat4:
         return mat
 
     def getMatrix(self):
-        return reduce(operator.concat, self.m)
+        return functools.reduce(operator.concat, self.m)
 
     def __mul__(self, rhs):
         mat_t = rhs.getTranspose()

@@ -1,5 +1,4 @@
-#!/usr/bin/python
-from __future__ import print_function
+#!/usr/bin/env python
 import prman, os
 import ProcessCommandLine as cl
 

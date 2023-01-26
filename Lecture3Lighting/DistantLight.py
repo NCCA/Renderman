@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 from __future__ import print_function
 import prman
 import ProcessCommandLine as cl
@@ -99,7 +99,8 @@ def main(
     #  ri.Rotate(35,0,1,0)
     To = [0, 0, 0]
     From = [1, 1.5, -15]
-    direction = map(lambda x, y: x - y, To, From)
+    #direction = map(lambda x, y: x - y, To, From)
+    direction = [x-y for x,y in zip( To,From)] 
     AimZ(ri, direction)
 
     ri.Light("PxrDistantLight", "distantLight", {"float intensity": 10000, "float exposure": 2.0})

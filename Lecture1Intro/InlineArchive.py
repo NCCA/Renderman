@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # for bash we need to add the following to our .bashrc
 # export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin
 # import the python renderman library

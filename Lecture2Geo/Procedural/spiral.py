@@ -10,7 +10,8 @@
 ######################################################################
 
 
-import sys, math
+import math
+import sys
 
 # grab the function ptr to write should speed things up.
 Write = sys.stdout.write

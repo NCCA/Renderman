@@ -34,7 +34,7 @@ ri.Curves("cubic", [4], "nonperiodic", {ri.P: points, ri.WIDTH: width})
 
 ri.Bxdf("PxrDiffuse", "bxdf", {"color diffuseColor": [0, 0, 1]})
 points2 = [0, 0, 0, 3, 4, 5, -1, -0.5, 1, 2, 0.5, 1, 1, 0, -1]
-ri.Curves("linear", [5], "nonperiodic", {ri.P: points2, ri.CONSTANTWIDTH: [0.075]})
+ri.Curves("linear", [5], "nonperiodic", {ri.P: points2, "constant float width": [0.075]})
 
 
 ri.TransformEnd()

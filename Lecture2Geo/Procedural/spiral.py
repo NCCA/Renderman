@@ -96,6 +96,8 @@ if __name__ == "__main__":
             RotationAngle = float(datablock[4])
             # do an explicit TransformBegin
             Write("TransformBegin\n")
+            Write('Attribute "identifier" "name" ["Center"]')
+
             # now the centeral cylinder
             Write("Rotate -90 1 0 0\n")
             Write("Cylinder 0.1  %f 1 360\n" % (StairHeight * height))
@@ -106,6 +108,8 @@ if __name__ == "__main__":
             Write("TransformBegin\n")
             # loop and build the blocks
             while i <= StairHeight:
+                Write('Attribute "identifier" "name" ["Step{i}"]')
+
                 Block(width, height, depth)
                 Write("Translate 0 %f 0\n" % height)
                 Write("Rotate %f 0 1 0\n" % RotationAngle)
@@ -113,8 +117,8 @@ if __name__ == "__main__":
             Write("TransformEnd\n")
 
             # we now close the rib stream and get the  next datablock  if there  is  one
-
-            Write("\377")
+            sys.stdout.buffer.write(b"\377")
+            #Write("\377")
             sys.stdout.flush()
         # read the next line
         args = sys.stdin.readline()

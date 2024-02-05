@@ -9,16 +9,19 @@ WorldBegin
 	TransformBegin 
 		Bxdf "PxrDiffuse" "bxdf" "color diffuseColor" [1 0 0]
 		Translate 0 -1 0
+		Attribute "identifier" "name" ["Spiral1"]
 		Procedural "RunProgram" ["spiral.py" "1 0.2 0.35 20 5"] [-5 5 -5 5 -35 35]
 	TransformEnd 
 	TransformBegin 
 		Bxdf "PxrDiffuse" "bxdf" "color diffuseColor" [1 1 1]
 		Translate -6 -1 0
+		Attribute "identifier" "name" ["Spiral2"]
 		Procedural "RunProgram" ["spiral.py" "5 0.5 1.5 10 15"] [-5 5 -5 5 -35 35]
 	TransformEnd 
 	TransformBegin 
 		Bxdf "PxrDiffuse" "bxdf" "color diffuseColor" [1 0 1]
 		Translate 6 -1 0
+		Attribute "identifier" "name" ["Spiral3"]
 		Procedural "RunProgram" ["spiral.py" "2 0.3 0.3 10 12"] [-5 5 -5 5 -35 35]
 	TransformEnd 
 WorldEnd 

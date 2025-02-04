@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env rmanpy
 from __future__ import print_function
 import prman
 

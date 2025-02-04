@@ -1,4 +1,4 @@
-#!/usr/bin/env rmanpy
+#!/usr/bin/env rmanpy3
 import prman
 
 # import the python functions
@@ -6,17 +6,17 @@ import sys
 import sys, os.path, subprocess
 import argparse
 
-sys.path.append("../../common")
+sys.path.append("../common")
 from functions import drawTeapot, drawCube
 from Camera import *
 
 
-def drawScene(ri, zpos=0, yoffset=0):
+def drawScene(ri, zpos=0):
 
     ri.AttributeBegin()
     ri.Attribute("identifier", {"name": "torus"})
     ri.TransformBegin()
-    ri.Translate(-1.7, 0.5 + yoffset, zpos + 0.1)
+    ri.Translate(-1.5, 0.5, zpos + 0.1)
     ri.Rotate(45, 0, 1, 0)
     ri.Scale(0.2, 0.2, 0.2)
     ri.Torus(1.00, 0.5, 0, 360, 360)
@@ -26,9 +26,9 @@ def drawScene(ri, zpos=0, yoffset=0):
     ri.AttributeBegin()
     ri.Attribute("identifier", {"name": "teapot"})
     ri.TransformBegin()
-    ri.Translate(-1, yoffset, zpos)
+    ri.Translate(-1, 0, zpos)
     ri.Rotate(-90, 1, 0, 0)
-    ri.Scale(0.15, 0.15, 0.15)
+    ri.Scale(0.1, 0.1, 0.1)
     ri.Geometry("teapot")
     ri.TransformEnd()
     ri.AttributeEnd()
@@ -36,20 +36,22 @@ def drawScene(ri, zpos=0, yoffset=0):
     ri.AttributeBegin()
     ri.Attribute("identifier", {"name": "sphere"})
     ri.TransformBegin()
-    ri.Translate(0, 0.3 + yoffset, zpos)
+    ri.Translate(0, 0.3, zpos)
     ri.Sphere(0.3, -1, 1, 360)
     ri.TransformEnd()
     ri.AttributeEnd()
 
     ri.AttributeBegin()
     ri.Attribute("identifier", {"name": "cube"})
-    drawCube(ri, x=1.0, y=0.25 + yoffset, z=zpos, ry=45.0, sx=0.5, sy=0.5, sz=0.5)
+    ri.TransformBegin()
+    drawCube(ri, x=1.0, y=0.25, z=zpos, ry=45.0, sx=0.5, sy=0.5, sz=0.5)
+    ri.TransformEnd()
     ri.AttributeEnd()
 
     ri.AttributeBegin()
     ri.TransformBegin()
     ri.Attribute("identifier", {"name": "disk"})
-    ri.Translate(1.8, 0.5 + yoffset, zpos)
+    ri.Translate(1.8, 0.5, zpos)
     ri.Scale(0.4, 0.4, 0.4)
     ri.Disk(0, 1, 360)
     ri.TransformEnd()
@@ -86,12 +88,11 @@ def main(
     ri.Integrator(integrator, "integrator", integratorParams)
     ri.Option("statistics", {"filename": ["stats.txt"]})
     ri.Option("statistics", {"endofframe": [1]})
-    ri.Option("searchpath", {"string texture": "../:@"})
-    ri.Option("searchpath", {"string shader": "../:./:@"})
+    ri.Attribute("Ri", {"int Sides": [2]})
     ri.Projection(ri.PERSPECTIVE, {ri.FOV: fov})
 
     # Simple translate for our camera
-    cam = Camera(Vec4(-0.2, 1.5, 4.5), Vec4(0, 0, 0), Vec4(0, 1, 0))
+    cam = Camera(Vec4(-1, 1.5, 3), Vec4(0, 0, 0), Vec4(0, 1, 0))
     cam.place(ri)
 
     # now we start our world
@@ -103,57 +104,66 @@ def main(
     ri.TransformBegin()
     ri.AttributeBegin()
     ri.Declare("domeLight", "string")
-    ri.Rotate(45, 0, 1, 0)
     ri.Rotate(-90, 1, 0, 0)
     ri.Rotate(100, 0, 0, 1)
-    ri.Light("PxrDomeLight", "domeLight", {"string lightColorMap": "Env_StinsonBeach_1350PM_2k.17.tex"})
+    ri.Light("PxrDomeLight", "domeLight")
     ri.AttributeEnd()
     ri.TransformEnd()
     #######################################################################
 
-    ri.Pattern("check", "check", {})
+    ri.Bxdf("LamaConductor","id",
+    {
+	"color tint" : [1.0,1.0,1.0],
+	"int fresnelMode" : [0],
+	"color reflectivity" : [0.9450,0.7772,0.3737],
+	"color edgeColor" : [0.7137,0.7373,0.4550],
+	"color IOR" : [0.18,0.42,1.37],
+	"color extinction" : [3.42,2.35,1.77],
+	"float roughness" : [0.1],
+	"normal normal" : [0.0,0.0,0.0],
+	"normal conductorNormal" : [0.0,0.0,0.0],
+	"color shadowColor" : [0.0,0.0,0.0],
+	"float tailMix" : [0.0],
+	"float tailLength" : [0.5],
+	"float anisotropy" : [0.0],
+	"vector anisotropyDirection" : [0.0,0.0,0.0],
+	"float anisotropyRotation" : [0.0],
+	"int overrideExteriorIOR" : [0],
+	"float exteriorIOR" : [1.0],
+	"int edgeColorMode" : [0],
+	"float energyCompensation" : [1.0],
+	"int bumpShadowing" : [1],
+	"float surfaceMollification" : [1.0],
+	"float motionMollification" : [0.0],
+	"string lobeName" : ['specular'],
+	"string matte" : [''],
+    })
 
-    ri.Bxdf(
-        "PxrSurface", "plastic", {"reference color diffuseColor": ["check:resultRGB"], "int diffuseDoubleSided": [1]}
-    )
     drawScene(ri, 0)
-    ri.Pattern(
-        "check",
-        "check",
-        {"float repeatU": [10], "float repeatV": [10], "color baseColour": [1, 1, 1], "color checkColour": [0, 0, 0]},
-    )
-
-    ri.Bxdf(
-        "PxrDisney",
-        "bxdf",
-        {
-            "reference color baseColor": ["check:resultRGB"],
-        },
-    )
     drawScene(ri, 1)
-
-    ri.Pattern(
-        "check",
-        "check",
-        {"float repeatU": [15], "float repeatV": [15], "color baseColour": [0, 1, 1], "color checkColour": [1, 0, 0]},
-    )
-    ri.Bxdf(
-        "PxrSurface", "plastic", {"reference color diffuseColor": ["check:resultRGB"], "int diffuseDoubleSided": [1]}
-    )
     drawScene(ri, 2)
 
     ri.AttributeBegin()
-    ri.Pattern("uvshader", "uvshader")
-    ri.Bxdf("PxrDiffuse", "uv", {"reference color diffuseColor": ["uvshader:resultRGB"]})
-    drawScene(ri, zpos=-1, yoffset=0.4)
+    drawScene(ri, -1)
     ri.AttributeEnd()
 
     ri.AttributeBegin()
     # floor
-    ri.Bxdf("PxrDiffuse", "white", {"color diffuseColor": [0.8, 0.8, 0.8]})
+    ri.Bxdf("LamaDiffuse","lammadiffuse",
+    {
+	"color diffuseColor" : [0.58,0.58,0.58],
+	"float roughness" : [0.5],
+	"color shadowColor" : [0.0,0.0,0.0],
+	"float energyCompensation" : [1.0],
+	"int bumpShadowing" : [1],
+	"string lobeName" : ['diffuse'],
+	"string matte" : [''],
+    })
+
     ri.Attribute("identifier", {"name": "floor"})
     ri.TransformBegin()
     s = 5.0
+    ri.Rotate(-180, 1, 0, 0)
     face = [-s, 0, -s, s, 0, -s, -s, 0, s, s, 0, s]
     ri.Patch("bilinear", {"P": face})
 
@@ -166,23 +176,8 @@ def main(
     ri.End()
 
 
-def checkAndCompileShader(shader):
-    if (
-        os.path.isfile(shader + ".oso") != True
-        or os.stat(shader + ".osl").st_mtime - os.stat(shader + ".oso").st_mtime > 0
-    ):
-        print("compiling shader %s" % (shader))
-        try:
-            subprocess.check_call(["oslc", shader + ".osl"])
-        except subprocess.CalledProcessError:
-            sys.exit("shader compilation failed")
-
 
 if __name__ == "__main__":
-    shaderName = "../uvshader"
-    checkAndCompileShader(shaderName)
-    checkAndCompileShader("check")
-
     parser = argparse.ArgumentParser(description="Modify render parameters")
 
     parser.add_argument(
@@ -199,7 +194,7 @@ if __name__ == "__main__":
         "--pixelvar", "-p", nargs="?", const=0.1, default=0.1, type=float, help="modify the pixel variance default  0.1"
     )
     parser.add_argument(
-        "--fov", "-f", nargs="?", const=65.0, default=65.0, type=float, help="projection fov default 65.0"
+        "--fov", "-f", nargs="?", const=48.0, default=48.0, type=float, help="projection fov default 48.0"
     )
     parser.add_argument(
         "--width", "-wd", nargs="?", const=1024, default=1024, type=int, help="width of image default 1024"

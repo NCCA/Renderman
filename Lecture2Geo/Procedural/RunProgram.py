@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env rmanpy
 # for bash we need to add the following to our .bashrc
 # export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin
 import getpass
@@ -41,6 +41,7 @@ ri.Translate(0, -1, 0)
 
 # param width height depth Case Height Rotation Angle
 program = 'Procedural "RunProgram" ["spiral.py" "1 0.2 0.35 20 5"] [-5 5 -5 5 -35 35]\n'
+ri.Attribute("identifier", {"name": "Spiral1"})
 ri.ArchiveRecord(ri.VERBATIM, program)
 
 ri.TransformEnd()
@@ -49,6 +50,7 @@ Colour([1, 1, 1])
 ri.Translate(-6, -1, 0)
 # param width height depth Case Height Rotation Angle
 program = 'Procedural "RunProgram" ["spiral.py" "5 0.5 1.5 10 15"] [-5 5 -5 5 -35 35]\n'
+ri.Attribute("identifier", {"name": "Spiral2"})
 ri.ArchiveRecord(ri.VERBATIM, program)
 
 ri.TransformEnd()
@@ -58,6 +60,7 @@ Colour([1, 0, 1])
 ri.Translate(6, -1, 0)
 # param width height depth Case Height Rotation Angle
 program = 'Procedural "RunProgram" ["spiral.py" "2 0.3 0.3 10 12"] [-5 5 -5 5 -35 35]\n'
+ri.Attribute("identifier", {"name": "Spiral3"})
 ri.ArchiveRecord(ri.VERBATIM, program)
 ri.TransformEnd()
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env rmanpy
 import os, sys, re, getopt, getpass
 
 # load Qube's python module

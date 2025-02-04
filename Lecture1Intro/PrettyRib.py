@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env rmanpy
 #
 # (Copyright (C) 2008  Jonathan Macey jmacey@bournemouth.ac.uk
 #

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env rmanpy
 # for bash we need to add the following to our .bashrc
 # export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin
 import prman

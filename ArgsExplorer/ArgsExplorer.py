@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env rmanpy
 try:  # support either PyQt5 or 6
     from PySide2.QtCore import *
     from PySide2.QtGui import *

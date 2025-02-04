@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-# on mac I'm using rmanpy which is 2.7 so best to be safe
-from __future__ import print_function, division
+
 import sys
 import os
 import time
@@ -48,6 +47,19 @@ def createSphere(scene, group):
     transform.Scale(0.3, 0.3, 0.3)
     quadric.SetTransform(transform)
     scene.Root().AddChild(quadric)
+
+
+
+def buddha(scene,group,ri) :
+    #ri.ReadArchive("buddha.zip!buddha.rib",None)
+    #Procedural(self, data, bound, sfunc, ffunc)
+    white = scene.CreateMaterial(None)
+    bxdf = rman.scenegraph.Shader("Bxdf", "PxrDiffuse", "white")
+    bxdf.params.SetColor("diffuseColor", (0.8, 0.8, 0.8))
+    white.SetBxdf(bxdf)
+    bound=[-20.5 ,20.5 ,-20.5 ,20.5 ,-20.5 ,20.5]
+    ri.Procedural(["teapot.rib"],bound,"ProcDelayedReadArchive",None)
+    
 
 
 def cornellBox(scene, group):
@@ -109,14 +121,15 @@ scene.SetIntegrator(integrator)
 
 # Set scene options
 options = rman.Types.RtParamList()
-options.SetString(Constants.k_bucket_order, "circle")
+#options.SetString(Constants.k_bucket_order, "circle")
 options.SetIntegerArray(Constants.k_Ri_FormatResolution, [1024, 1024], 2)
 options.SetFloat(Constants.k_Ri_FormatPixelAspectRatio, 1.0)
 options.SetFloat(Constants.k_ShadingRate, 1.0)
 options.SetFloat(Constants.k_Ri_PixelVariance, 0.1)
 
+
 options.SetString(Constants.k_searchpath_archive, "../../Lecture3/assets/:@")
-options.SetString(Constants.k_searchpath_shader, "./:@")
+options.SetString(Constants.k_searchpath_shader, "../../Lecture3Lighting/:@")
 
 scene.SetOptions(options)
 
@@ -140,6 +153,7 @@ group.AddChild(light)
 
 cornellBox(scene, group)
 createSphere(scene, group)
+buddha(scene,group,riContext)
 
 # Create render camera and parent under a group
 cameraGroup = scene.CreateGroup("cameraGroup")

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """ Parse a renderman plugin source file and print useful info! """
 import sys, os.path
 import argparse

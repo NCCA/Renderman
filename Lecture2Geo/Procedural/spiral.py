@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env rmanpy
 
 ######################################################################
 # spiral.py Renderman Procedural Usage

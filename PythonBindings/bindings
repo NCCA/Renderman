@@ -1,0 +1,61 @@
+#!/bin/bash
+"exec" "/Applications/Pixar/RenderManProServer-25.2/bin/rmanpy3" "$0"
+
+import code
+import sys
+import os
+import time
+
+# Find pythonbindings directory and append python path
+RMANTREE = os.getenv("RMANTREE")
+assert os.path.isdir(RMANTREE), "RMANTREE is invalid"
+PYTHONBINDINGS = os.path.abspath(os.path.join(RMANTREE, "bin", "pythonbindings"))
+if PYTHONBINDINGS not in sys.path:
+    sys.path.append(PYTHONBINDINGS)
+
+# Now import rman modules
+import rman
+# Grab an instance of the rman ctl module (bit like ri in the old API)
+rictl = rman.RiCtl.Get()
+rictl.PRManBegin(sys.argv)
+
+# Acquire scene graph interface and check version
+sgmngr = rman.scenegraph.Get()
+if sgmngr.GetVersion() != 3:
+    print("wrong version of API")
+    sys.exit()
+
+
+# Create the scene
+config = rman.Types.RtParamList()
+renderConfig = rman.Types.RtParamList()
+statsSession = rman.Stats.AddSession("stats")
+scene = sgmngr.CreateScene(config, renderConfig, statsSession)
+
+# import pydoc
+# file = open("rmanhelp.txt","w")
+# modules=[rman.Ctx,
+#     rman.Dspy,
+#     rman.EventCallbacks,
+#    rman.RiCtl,
+#     rman.SGManager,
+#     rman.Stats,
+#     rman.Tokens,
+#     rman.Types,
+#     rman.pxrcore,
+#     rman.scenegraph,
+# ]
+
+# for module in modules :
+#     strhelp = pydoc.render_doc(module, "Help on %s\n",renderer=pydoc.plaintext)
+#     print("**************************************************")
+#     print(strhelp)
+#     print("**************************************************")
+
+
+code.interact(local=locals())
+
+
+
+
+

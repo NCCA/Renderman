@@ -1,0 +1,7 @@
+[project]
+name = "renderman"
+version = "0.1.0"
+description = "Project for the Renderman Demos"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["numpy","nccapy","pytest","ruff"]

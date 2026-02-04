@@ -1,4 +1,4 @@
-#!/usr/bin/env rmanpy
+#!/usr/bin/env rmanpy3
 
 import os, commands, getopt, sys			
 class Usage(Exception):

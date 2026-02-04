@@ -1,6 +1,4 @@
-#!/usr/bin/env rmanpy
-# on mac I'm using rmanpy which is 2.7 so best to be safe
-from __future__ import print_function, division
+#!/usr/bin/env rmanpy3
 import sys
 import os
 import time

@@ -1,4 +1,4 @@
-#!/usr/bin/env rmanpy
+#!/usr/bin/env rmanpy3
 # import the python renderman library
 import prman
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env rmanpy
+#!/usr/bin/env rmanpy3
 # for bash we need to add the following to our .bashrc
 import prman
 from Emitter import *

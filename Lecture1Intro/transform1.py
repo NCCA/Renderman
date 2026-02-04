@@ -1,4 +1,4 @@
-#!/usr/bin/env rmanpy
+#!/usr/bin/env rmanpy3
 # import the python renderman library
 import prman
 
@@ -16,11 +16,11 @@ ri.Display("transform1.exr", "it", "rgba")
 ri.Format(720, 576, 1)
 # now set the projection to perspective
 ri.Projection(ri.PERSPECTIVE)
+ri.Translate(0, 0, 2)
 
 # now we start our world
 ri.WorldBegin()
 # move back 2 in the z so we can see what we are rendering
-ri.Translate(0, 0, 2)
 ri.Translate(-1, 0, 0)
 ri.Sphere(1, -1, 1, 360)
 ri.Translate(1, 0, 0)

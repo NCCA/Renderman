@@ -1,5 +1,4 @@
-#!/usr/bin/env rmanpy
-from __future__ import print_function
+#!/usr/bin/env rmanpy3
 
 import os.path
 import subprocess

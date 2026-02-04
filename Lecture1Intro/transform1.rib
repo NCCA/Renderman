@@ -1,12 +1,12 @@
 ##RenderMan RIB
 version 3.04999995
-Display "transform1.exr" "it" "rgba" 
+Display "transform1.exr" "it" "rgba"
 Format 720 576 1
-Projection "perspective" 
-WorldBegin 
+Projection "perspective"
+WorldBegin
 Translate 0 0 2
 Translate -1 0 0
-Sphere 1 -1 1 360 
+Sphere 1 -1 1 360
 Translate 1 0 0
-Sphere 1 -1 1 360 
-WorldEnd 
+Sphere 1 -1 1 360
+WorldEnd

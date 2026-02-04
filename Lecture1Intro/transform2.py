@@ -1,4 +1,4 @@
-#!/usr/bin/env rmanpy
+#!/usr/bin/env rmanpy3
 # import the python renderman library
 import prman
 
@@ -14,7 +14,7 @@ ri.Begin("__render")
 # FILENAME DISPLAY Type Output format
 ri.Display("transform2.exr", "it", "rgba")
 # Specify PAL resolution 1:1 pixel Aspect ratio
-ri.Format(720, 575, 1)
+ri.Format(720, 575, 1.2)
 # now set the projection to perspective
 ri.Projection(ri.PERSPECTIVE)
 

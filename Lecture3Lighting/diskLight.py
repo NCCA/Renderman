@@ -1,4 +1,4 @@
-#!/usr/bin/env rmanpy
+#!/usr/bin/env rmanpy3
 import prman, os
 import subprocess
 import ProcessCommandLine as cl

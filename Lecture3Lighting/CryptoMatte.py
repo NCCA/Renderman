@@ -1,5 +1,6 @@
 #!/usr/bin/env rmanpy3
-import prman, os
+import prman
+import os
 import subprocess
 import ProcessCommandLine as cl
 

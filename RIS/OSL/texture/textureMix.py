@@ -1,5 +1,7 @@
 #!/usr/bin/python
-import prman, os, subprocess
+import prman
+import os
+import subprocess
 
 # import the python functions
 import sys

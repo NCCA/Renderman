@@ -1,5 +1,8 @@
 #!/usr/bin/env rmanpy3
-import prman, os, sys, subprocess
+import prman
+import os
+import sys
+import subprocess
 
 sys.path.append("../../")
 import ProcessCommandLine as cl

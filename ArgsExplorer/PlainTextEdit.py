@@ -8,7 +8,7 @@ except ImportError:
     print("trying PySide6")
     from PySide6.QtCore import *
     from PySide6.QtGui import *
-    from PySide6.QtWidgets import QPlainTextEdit, QToolTip, QWidget
+    from PySide6.QtWidgets import QPlainTextEdit, QToolTip
 
     PySideVersion = 6
 

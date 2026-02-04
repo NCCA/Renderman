@@ -2,7 +2,9 @@
 import sys
 
 sys.path.append("../common")
-import prman, os, Transformation
+import prman
+import os
+import Transformation
 import ProcessCommandLine as cl
 
 # Main rendering routine

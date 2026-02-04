@@ -1,5 +1,8 @@
 #!/usr/bin/env rmanpy3
-import os, sys, re, getopt, getpass
+import os
+import sys
+import re
+import getpass
 
 # load Qube's python module
 if "QBDIR" in os.environ:
@@ -13,17 +16,12 @@ import qb
 
 # now Qt in the Uni I need PyQt4 at home 5
 if "--PyQt5" in sys.argv:
-    from PyQt5.QtCore import QFile, QFileInfo, QPoint, QRect, QSettings, QSize, Qt, QTextStream
-    from PyQt5.QtGui import QIcon, QKeySequence, QClipboard
     from PyQt5.QtWidgets import (
         QLabel,
         QLineEdit,
-        QAction,
         QApplication,
-        QFileDialog,
         QMainWindow,
         QMessageBox,
-        QTextEdit,
         QGroupBox,
         QGridLayout,
         QPushButton,
@@ -33,17 +31,12 @@ if "--PyQt5" in sys.argv:
     )
 
 else:
-    from PyQt4.QtCore import QFile, QFileInfo, QPoint, QRect, QSettings, QSize, Qt, QTextStream
-    from PyQt4.QtGui import QIcon, QKeySequence, QClipboard
     from PyQt4.QtGui import (
         QLabel,
         QLineEdit,
-        QAction,
         QApplication,
-        QFileDialog,
         QMainWindow,
         QMessageBox,
-        QTextEdit,
         QGroupBox,
         QGridLayout,
         QPushButton,

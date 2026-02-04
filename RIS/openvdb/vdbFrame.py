@@ -2,7 +2,8 @@
 import prman
 
 # import the python functions
-import sys, os, glob
+import sys
+import glob
 
 sys.path.append("../common")
 from Camera import *

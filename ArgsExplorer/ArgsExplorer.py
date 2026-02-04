@@ -15,10 +15,8 @@ except ImportError:
 
     PySideVersion = 6
 
-import collections
 import os
 import sys
-import time
 import xml.etree.ElementTree
 from pathlib import Path
 
@@ -278,7 +276,7 @@ class ArgsExplorer(QMainWindow):
         for p in tree.findall("param"):
             data_type = p.get("type")
             name = p.get("name")
-            help_text = p.find(f"help")
+            help_text = p.find("help")
             if help_text is not None:
                 htext = help_text.text
                 htext = htext.lstrip()
@@ -306,7 +304,7 @@ class ArgsExplorer(QMainWindow):
                 data_type = param.get("type")
                 name = param.get("name")
                 default_value = param.get("default")
-                help_text = param.find(f"help")
+                help_text = param.find("help")
                 if help_text is not None:
                     htext = help_text.text
                     htext = htext.lstrip()

@@ -2,16 +2,16 @@
 import prman
 
 # import the python functions
-import sys, os.path, subprocess
+import sys
+import os.path
+import subprocess
 import argparse
 
 sys.path.append("../../common")
-from functions import drawTeapot
 import Obj
 from Camera import Camera
 from Vec4 import Vec4
 from Transformation import *
-import random
 
 
 def main(

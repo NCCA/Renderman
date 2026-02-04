@@ -2,7 +2,8 @@
 # for bash we need to add the following to our .bashrc
 # export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin
 import getpass
-import time, random, math
+import time
+import random
 
 # import the python renderman library
 import prman

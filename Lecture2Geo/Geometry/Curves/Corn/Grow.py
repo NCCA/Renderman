@@ -1,7 +1,7 @@
 #!/usr/bin/env rmanpy3
 # for bash we need to add the following to our .bashrc
 # export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin
-import time, random
+import random
 
 # import the python renderman library
 import prman
@@ -12,7 +12,6 @@ sys.path.append("../../../../common")
 from Camera import *
 from Vec4 import *
 
-from random import uniform as ru
 
 
 def BuildField(wi, depth, inc, points, width, npoints):

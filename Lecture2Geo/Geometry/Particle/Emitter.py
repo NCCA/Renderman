@@ -1,10 +1,5 @@
-import sys
-import math
-import getpass
-import time
-import prman
 from Particle import *
-import time, random
+import random
 
 
 class Emitter:

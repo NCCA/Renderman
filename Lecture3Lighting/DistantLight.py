@@ -3,7 +3,10 @@ import prman
 import ProcessCommandLine as cl
 
 # import the python functions
-import sys, os.path, subprocess, math
+import sys
+import os.path
+import subprocess
+import math
 
 # Modified from Renderman Examples in The renderman Companion
 # AimZ(): rotate the world so the direction vector points in

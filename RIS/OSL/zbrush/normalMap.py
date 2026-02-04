@@ -5,12 +5,10 @@ import prman
 import sys
 
 sys.path.append("../../common")
-from functions import drawTeapot
 import Obj
 from Camera import Camera
 from Vec4 import Vec4
 from Transformation import *
-import random
 
 
 ri = prman.Ri()  # create an instance of the RenderMan interface

@@ -1,5 +1,4 @@
 import re
-import sys
 
 try:  # support either PyQt5 or 6
     from PySide2.QtCore import Qt
@@ -9,7 +8,6 @@ try:  # support either PyQt5 or 6
     PySideVersion = 2
 except ImportError:
     print("trying PySide6")
-    from PySide6.QtCore import Qt
     from PySide6.QtGui import *
     from PySide6.QtWidgets import *
 

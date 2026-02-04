@@ -3,9 +3,10 @@ import prman
 
 # import the python functions
 import sys
-import sys, os.path, subprocess
+import os.path
+import subprocess
 import argparse
-import os, sys
+import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 

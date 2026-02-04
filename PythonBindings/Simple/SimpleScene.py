@@ -1,7 +1,6 @@
 #!/usr/bin/env rmanpy3
 import sys
 import os
-import time
 
 # Find pythonbindings directory and append python path
 RMANTREE = os.getenv("RMANTREE")

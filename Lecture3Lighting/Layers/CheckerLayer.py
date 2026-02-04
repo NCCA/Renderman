@@ -2,8 +2,6 @@
 import prman
 
 # import the python functions
-import sys
-import sys, os.path, subprocess
 import argparse
 
 # Main rendering routine

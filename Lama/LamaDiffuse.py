@@ -3,11 +3,10 @@ import prman
 
 # import the python functions
 import sys
-import sys, os.path, subprocess
 import argparse
 
 sys.path.append("../common")
-from functions import drawTeapot, drawCube
+from functions import drawCube
 from Camera import *
 
 

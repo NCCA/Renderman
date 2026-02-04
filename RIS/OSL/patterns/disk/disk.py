@@ -2,7 +2,9 @@
 import prman
 
 # import the python functions
-import sys, os.path, subprocess
+import sys
+import os.path
+import subprocess
 
 sys.path.append("../../../common")
 from functions import drawTeapot

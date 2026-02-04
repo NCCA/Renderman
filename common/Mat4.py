@@ -1,4 +1,6 @@
-import math, operator,functools
+import math
+import operator
+import functools
 
 """ simple 4x4 matrix class some code modified from here
 http://code.activestate.com/recipes/578131-a-simple-matrix-class/

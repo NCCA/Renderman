@@ -1,8 +1,3 @@
-import sys
-import math
-import getpass
-import time
-import prman
 
 
 class Particle:

@@ -1,8 +1,11 @@
 #!/usr/bin/env rmanpy3
-import sys, subprocess
+import sys
+import subprocess
 
 sys.path.append("../../common")
-import prman, os, Transformation
+import prman
+import os
+import Transformation
 import ProcessCommandLine as cl
 
 # Main rendering routine

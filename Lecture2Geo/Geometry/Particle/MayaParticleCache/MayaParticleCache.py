@@ -1,7 +1,7 @@
 #!/usr/bin/env rmanpy3
 # for bash we need to add the following to our .bashrc
 # export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin
-import os, sys, time, random
+import os
 
 # import the python renderman library
 import prman

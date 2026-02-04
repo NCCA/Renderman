@@ -1,5 +1,6 @@
 #!/usr/bin/env rmanpy3
-import prman, os
+import prman
+import os
 import ProcessCommandLine as cl
 
 # Main rendering routine

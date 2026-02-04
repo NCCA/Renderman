@@ -1,7 +1,5 @@
 # import the python renderman library
-import prman
 from Vec4 import Vec4
-import math
 
 
 class Camera:

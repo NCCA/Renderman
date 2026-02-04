@@ -1,12 +1,11 @@
 #!/usr/bin/env rmanpy3
 # for bash we need to add the following to our .bashrc
 # export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin
-import time, random
+import random
 
 # import the python renderman library
 import prman
 
-from random import uniform as ru
 
 
 def buildField(wi, depth, inc, points, width, npoints):

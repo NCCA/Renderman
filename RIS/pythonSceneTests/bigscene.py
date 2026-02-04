@@ -5,7 +5,6 @@ import prman
 import sys
 
 sys.path.append("../common")
-from functions import drawTeapot
 import Obj
 from Camera import Camera
 from Vec4 import Vec4

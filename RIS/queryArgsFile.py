@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 import argparse
-import collections
 import os.path
-import sys
 import xml.etree.ElementTree
 
 

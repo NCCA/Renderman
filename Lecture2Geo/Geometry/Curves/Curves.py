@@ -1,10 +1,8 @@
 #!/usr/bin/env rmanpy3
-import time, random
 
 # import the python renderman library
 import prman
 
-from random import uniform as ru
 
 ri = prman.Ri()  # create an instance of the RenderMan interface
 ri.Option("rib", {"string asciistyle": "indented"})

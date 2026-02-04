@@ -10,7 +10,6 @@
 ######################################################################
 
 
-import math
 import sys
 
 # grab the function ptr to write should speed things up.

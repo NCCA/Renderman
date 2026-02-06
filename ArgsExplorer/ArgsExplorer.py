@@ -1,42 +1,67 @@
-#!/usr/bin/env rmanpy3
-try:  # support either PyQt5 or 6
-    from PySide2.QtCore import *
-    from PySide2.QtGui import *
-    from PySide2.QtUiTools import QUiLoader
-    from PySide2.QtWidgets import *
-
-    PySideVersion = 2
-except ImportError:
-    print("trying PySide6")
-    from PySide6.QtCore import *
-    from PySide6.QtGui import *
-    from PySide6.QtUiTools import QUiLoader
-    from PySide6.QtWidgets import *
-
-    PySideVersion = 6
-
+#!/usr/bin/env -S uv run --script
 import os
 import sys
-import xml.etree.ElementTree
+import xml.etree.ElementTree as ET
 from pathlib import Path
+from typing import Any, Dict, Optional
+
+from PySide6.QtCore import QDir, QEvent, QFile, QSettings, QSize
+from PySide6.QtGui import (
+    QAction,
+    QFont,
+    QFontMetrics,
+    QFontMetricsF,
+    QStandardItem,
+    QStandardItemModel,
+    QTextCursor,
+)
+from PySide6.QtUiTools import QUiLoader
+from PySide6.QtWidgets import (
+    QApplication,
+    QFileDialog,
+    QFontDialog,
+    QMainWindow,
+    QMenu,
+    QToolTip,
+)
 
 from Highlighter import Highlighter
 from PlainTextEdit import PlainTextEdit
 
 
 class ArgsExplorer(QMainWindow):
-    def __init__(self, rmantree, parent=None):
-        """init the class and setup dialog"""
+    """A Qt-based GUI application for exploring Renderman shader arguments.
+
+    This application loads RenderMan .args files and displays shader parameters
+    in an interactive tree view, with the ability to export shader syntax in
+    both Python and RIB formats.
+    """
+
+    def __init__(self, rmantree: str, parent: Optional[QMainWindow] = None) -> None:
+        """Initialize the ArgsExplorer application.
+
+        Args:
+            rmantree: The absolute path to the RenderMan installation directory.
+            parent: The parent widget for this QMainWindow.
+        """
         super().__init__(parent)
         loader = QUiLoader()
-        self.rmantree = rmantree
+        self.rmantree: str = rmantree
+        self.tab_size: int = 2
+        self.help_text: Dict[str, str] = dict()
+        self.arg_files: list[Path] = []
+        self.data_model: QStandardItemModel
+        self.settings: QSettings
+        self.highlighter_python: Highlighter
+        self.highlighter_rib: Highlighter
+        self.python: PlainTextEdit
+        self.rib: PlainTextEdit
+
         file = QFile("./ui/form.ui")
         file.open(QFile.ReadOnly)
         self.ui = loader.load(file, self)
         file.close()
         self.setWindowTitle("Renderman Argument Explorer")
-        self.tab_size = 2
-        self.help_text = dict()
         self.find_args_files()
         self.create_tree_view()
         self.setMouseTracking(True)
@@ -45,16 +70,10 @@ class ArgsExplorer(QMainWindow):
         self.rib = PlainTextEdit(self)
         self.ui.rib_layout.insertWidget(0, self.rib)
 
-        self.ui.copy_python.pressed.connect(
-            lambda: self.copy_to_clipboard(self.python.toPlainText())
-        )
-        self.ui.copy_rib.pressed.connect(
-            lambda: self.copy_to_clipboard(self.rib.toPlainText())
-        )
+        self.ui.copy_python.pressed.connect(lambda: self.copy_to_clipboard(self.python.toPlainText()))
+        self.ui.copy_rib.pressed.connect(lambda: self.copy_to_clipboard(self.rib.toPlainText()))
         self.ui.expand_all.stateChanged.connect(
-            lambda state: self.ui.args_tree_view.expandAll()
-            if state
-            else self.ui.args_tree_view.collapseAll()
+            lambda state: (self.ui.args_tree_view.expandAll() if state else self.ui.args_tree_view.collapseAll())
         )
 
         self.loadSettings()
@@ -65,12 +84,14 @@ class ArgsExplorer(QMainWindow):
         self.highlighter_rib.setDocument(self.rib.document())
         self.ui.show()
 
-    def loadSettings(self):
-        """Load in the setting.ini file if exists to setup our env from last time"""
+    def loadSettings(self) -> None:
+        """Load settings from the .arg_explorer_settings.ini file if it exists.
+
+        Restores the application window size, splitter state, expansion state,
+        and font settings from the previous session.
+        """
         print(Path.home().root + "/.arg_exploer_settings.ini")
-        self.settings = QSettings(
-            str(Path.home()) + "/.arg_exploer_settings.ini", QSettings.IniFormat
-        )
+        self.settings = QSettings(str(Path.home()) + "/.arg_exploer_settings.ini", QSettings.IniFormat)
         self.resize(self.settings.value("size", QSize(1024, 800)))
         splitterSettings = self.settings.value("splitter")
         self.ui.main_splitter.restoreState(splitterSettings)
@@ -87,8 +108,15 @@ class ArgsExplorer(QMainWindow):
         self.set_editor_fonts(font)
         QToolTip.setFont(font)
 
-    def closeEvent(self, event):
-        """on close we save to settings.ini using QSettings"""
+    def closeEvent(self, event: QEvent) -> None:
+        """Handle the window close event and save settings.
+
+        Saves the current application state including window size, splitter
+        configuration, and font settings to the settings file.
+
+        Args:
+            event: The close event.
+        """
         self.settings.setValue("size", self.size())
         self.settings.setValue("splitter", self.ui.main_splitter.saveState())
         self.settings.setValue("expand_all", self.ui.expand_all.isChecked())
@@ -100,8 +128,12 @@ class ArgsExplorer(QMainWindow):
         self.settings.setValue("font-italic", font.italic())
         self.settings.endGroup()
 
-    def create_menu_bar(self):
-        # export menu
+    def create_menu_bar(self) -> None:
+        """Create the application menu bar with File and Font menus.
+
+        Sets up the File menu with Export and Change RMANTREE options,
+        and the Font menu with Change Font option.
+        """
         menu = self.menuBar()
         export_menu = QMenu("&File", self)
         export = QAction("Export", self)
@@ -121,13 +153,19 @@ class ArgsExplorer(QMainWindow):
         change_font_action.triggered.connect(self.change_font)
         menu.addMenu(font_menu)
 
-    def change_font(self):
+    def change_font(self) -> None:
+        """Display a font dialog and apply the selected font to both editors."""
         (ok, font) = QFontDialog.getFont(self.rib.font(), self)
         if ok:
             self.set_editor_fonts(font)
 
-    def change_rmantree(self):
-        """change the renderman location if we have another version"""
+    def change_rmantree(self) -> None:
+        """Change the RenderMan installation location.
+
+        Displays a directory dialog allowing the user to select a different
+        RenderMan installation. Updates the argument files list and refreshes
+        the tree view and text editors.
+        """
         rmantree = QFileDialog.getExistingDirectory(
             self,
             "Choose Renderman Location",
@@ -141,25 +179,37 @@ class ArgsExplorer(QMainWindow):
             self.rib.clear()
             self.python.clear()
 
-    def set_editor_fonts(self, font):
-        """allow the editor to change fonts"""
+    def set_editor_fonts(self, font: QFont) -> None:
+        """Set the font for both editor windows.
+
+        Applies the specified font to both the Python and RIB text editors
+        and updates the tab stop distance.
+
+        Args:
+            font: The font to apply to the editors.
+        """
         metrics = QFontMetrics(font)
-        self.rib.setTabStopDistance(
-            QFontMetricsF(self.rib.font()).horizontalAdvance(" ") * self.tab_size
-        )
-        self.python.setTabStopDistance(
-            QFontMetricsF(self.python.font()).horizontalAdvance(" ") * self.tab_size
-        )
+        self.rib.setTabStopDistance(QFontMetricsF(self.rib.font()).horizontalAdvance(" ") * self.tab_size)
+        self.python.setTabStopDistance(QFontMetricsF(self.python.font()).horizontalAdvance(" ") * self.tab_size)
         self.rib.setFont(font)
         self.python.setFont(font)
 
-    def copy_to_clipboard(self, text):
-        """copy text to clipboard!"""
+    def copy_to_clipboard(self, text: str) -> None:
+        """Copy text to the system clipboard.
+
+        Args:
+            text: The text to copy to the clipboard.
+        """
         clipboard = QApplication.clipboard()
         clipboard.clear(mode=clipboard.Clipboard)
         clipboard.setText(text, mode=clipboard.Clipboard)
 
-    def export_to_md(self):
+    def export_to_md(self) -> None:
+        """Export shader arguments to a Markdown file.
+
+        Generates a Markdown document containing all shader types and their
+        parameters in both Python and RIB format.
+        """
         file_name, _ = QFileDialog.getSaveFileName(
             self,
             "Export Markdown",
@@ -190,8 +240,12 @@ class ArgsExplorer(QMainWindow):
                         export_file.write(self.rib.toPlainText())
                         export_file.write("\n```\n")
 
-    def update_selection(self):
-        """This updates the selection when the tree is changed"""
+    def update_selection(self) -> None:
+        """Update the text editors when a tree view item is selected.
+
+        Retrieves the file path and shader name of the selected tree item
+        and generates the corresponding Python and RIB shader text.
+        """
         index = self.ui.args_tree_view.currentIndex()
         # grab the full file path
         path = self.ui.args_tree_view.model().data(index, 1)
@@ -199,22 +253,28 @@ class ArgsExplorer(QMainWindow):
         if path is not None:
             self.generate_shader_text(path, name)
 
-    def find_args_files(self):
-        """get the args file from the tree view selected"""
+    def find_args_files(self) -> None:
+        """Discover all RenderMan .args files in the RMANTREE directory.
+
+        Searches recursively for .args files and updates the status bar with
+        the count of files found.
+        """
         self.arg_files = list(Path(self.rmantree).glob("**/*.args"))
         self.statusBar().showMessage(f"Found {len(self.arg_files)} argument files")
 
-    def create_tree_view(self):
-        """Fill in the tree view from the args files found"""
+    def create_tree_view(self) -> None:
+        """Populate the tree view from the discovered args files.
+
+        Scans all argument files to find unique shader types and organizes
+        them hierarchically in the tree view by type.
+        """
         self.data_model = QStandardItemModel()
         self.ui.args_tree_view.setModel(self.data_model)
-        self.ui.args_tree_view.selectionModel().selectionChanged.connect(
-            self.update_selection
-        )
+        self.ui.args_tree_view.selectionModel().selectionChanged.connect(self.update_selection)
         # First we scan all the files to find the Core Shader Types and create empty dictionary for them
         shader_types = dict()
         for i, arg_file in enumerate(self.arg_files):
-            tree = xml.etree.ElementTree.parse(arg_file).getroot()
+            tree = ET.parse(arg_file).getroot()
             try:  # sometimes this is missing
                 shader_type = tree.find("shaderType/tag").attrib.get("value")
                 shader_type = "".join(shader_type[0].upper() + shader_type[1:])
@@ -224,7 +284,7 @@ class ArgsExplorer(QMainWindow):
         # Now we have the core types add the actual shaders to them
 
         for i, arg_file in enumerate(self.arg_files):
-            tree = xml.etree.ElementTree.parse(arg_file).getroot()
+            tree = ET.parse(arg_file).getroot()
             try:
                 shader_type = tree.find("shaderType/tag").attrib.get("value")
                 shader_type = "".join(shader_type[0].upper() + shader_type[1:])
@@ -249,22 +309,26 @@ class ArgsExplorer(QMainWindow):
             self.ui.args_tree_view.expandAll()
         else:
             self.ui.args_tree_view.collapseAll()
-        self.ui.args_tree_view.setCurrentIndex(
-            self.ui.args_tree_view.model().index(0, 0)
-        )
+        self.ui.args_tree_view.setCurrentIndex(self.ui.args_tree_view.model().index(0, 0))
 
-    def generate_shader_text(self, path, name):
-        """This will generate the rib / python shader text to be put
-        into the text editors"""
+    def generate_shader_text(self, path: Path, name: str) -> None:
+        """Generate RIB and Python shader text for the text editors.
+
+        Parses the .args XML file and generates formatted shader parameter
+        declarations in both RIB and Python formats. Stores help text for
+        each parameter.
+
+        Args:
+            path: Path to the .args file to parse.
+            name: The name of the shader.
+        """
         self.rib.clear()
         self.python.clear()
         self.help_text.clear()
-        tree = xml.etree.ElementTree.parse(path).getroot()
+        tree = ET.parse(path).getroot()
         try:
             shader_type = tree.find("shaderType/tag").attrib.get("value")
-            shader_type = "".join(
-                shader_type[0].upper() + shader_type[1:]
-            )  # First letter is capital bxdf to Bxdf
+            shader_type = "".join(shader_type[0].upper() + shader_type[1:])  # First letter is capital bxdf to Bxdf
             # May also have Filter types such as LightFilter (lightFilter)
             shader_type = shader_type.replace("filter", "Filter")
         except AttributeError:
@@ -317,19 +381,13 @@ class ArgsExplorer(QMainWindow):
                 if default_value == None:
                     default_value = "'No Value'"  # sometimes there is no default
                 elif data_type == "string":
-                    default_value = (
-                        "'" + default_value + "'"
-                    )  # strings need to be quoted
+                    default_value = "'" + default_value + "'"  # strings need to be quoted
                 elif data_type == "float":
-                    default_value = default_value.replace(
-                        "f", ""
-                    )  # seems some floats us 0.0f
+                    default_value = default_value.replace("f", "")  # seems some floats us 0.0f
                 self.rib.appendPlainText(f'"{data_type} {name}"  [{default_value}]')
                 # need commas for python
                 default_value = default_value.replace(" ", ",")
-                self.python.appendPlainText(
-                    f'\t"{data_type} {name}" : [{default_value}],'
-                )
+                self.python.appendPlainText(f'\t"{data_type} {name}" : [{default_value}],')
 
         # Close python dictionary to end
         self.python.appendPlainText("})")
@@ -344,16 +402,11 @@ if __name__ == "__main__":
         sys.exit(os.EX_CONFIG)
 
     app = QApplication(sys.argv)
-    app.setStyleSheet(
-        "QToolTip { color: #000000; background-color: #ffff00; border: 0px; }"
-    )
+    app.setStyleSheet("QToolTip { color: #000000; background-color: #ffff00; border: 0px; }")
 
     app.setOrganizationName("NCCA")
     app.setOrganizationDomain("ncca.bournemouth.ac.uk")
     app.setApplicationName("ArgsExplorer")
     window = ArgsExplorer(rmantree)
     window.show()
-    if PySideVersion == 6:
-        app.exec()
-    else:
-        app.exec_()
+    app.exec()

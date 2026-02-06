@@ -201,8 +201,8 @@ class ArgsExplorer(QMainWindow):
             text: The text to copy to the clipboard.
         """
         clipboard = QApplication.clipboard()
-        clipboard.clear(mode=clipboard.Clipboard)
-        clipboard.setText(text, mode=clipboard.Clipboard)
+        clipboard.clear()
+        clipboard.setText(text)
 
     def export_to_md(self) -> None:
         """Export shader arguments to a Markdown file.

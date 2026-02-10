@@ -10,4 +10,6 @@ dependencies = [
     "pytest",
     "ruff",
     "ncca-ngl>=0.5.3",
+    "requests>=2.32.5",
+    "tdqm>=0.0.1",
 ]

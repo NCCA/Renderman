@@ -9,8 +9,19 @@ import requests
 from ncca.ngl import Mat4, PrimData, Transform, Vec3, prim_data_to_ri_points_polygons, renderman_look_at
 from tqdm import tqdm
 
+# Not ideal be we need to create an instance of the RenderMan interface, this is global and is basically
+# the RenderMan interface context. You can have many context if you need them
+ri = prman.Ri()  # create an instance of the RenderMan interface
+
 
 def check_and_download_hdr(filename: str, url: str):
+    """
+    Check if the HDR file exists, if not download it and convert it to a texture file using txmake.
+    Args:
+        filename: The name of the HDR file.
+        url: The URL to download the HDR file from.
+
+    """
     if not Path(filename).exists():
         print(f"{filename} not present downloading it")
         resp = requests.get(url, stream=True, verify=False)
@@ -29,10 +40,20 @@ def check_and_download_hdr(filename: str, url: str):
         print("done")
 
 
-def random_material(ri, colour):
+def random_material(colour):
+    """
+    Generate a random material with the given colour, this outputs directly to the current ri context so much be called
+    in the correct place to be effective.
+
+    Args:
+        colour (list): A list of three floats representing the RGB colour values.
+
+    Returns:
+        None
+    """
     materials = [
         lambda: ri.Bxdf("LamaConductor", "conductor", {"color tint": colour}),
-        # lambda: ri.Bxdf("LamaDielectric", "id", {"color reflectionTint": colour}),
+        lambda: ri.Bxdf("LamaDielectric", "id", {"color reflectionTint": colour}),
         lambda: ri.Bxdf("PxrSurface", "pxrsurface", {"color diffuseColor": colour}),
         lambda: ri.Bxdf("PxrDisney", "id", {"color baseColor": colour}),
         lambda: ri.Bxdf("LamaDiffuse", "id", {"color color": colour, "color diffuseColor": colour}),
@@ -40,57 +61,37 @@ def random_material(ri, colour):
     random.choice(materials)()
 
 
-def main():
-    ri = prman.Ri()  # create an instance of the RenderMan interface
+def render_floor(plane):
+    tx = Transform()
+    ri.AttributeBegin()
+    ri.Bxdf("PxrDiffuse", "brown", {"color diffuseColor": [0.737, 0.505, 0.37]})
+    ri.Attribute("identifier", {"name": "floor"})
+    ri.TransformBegin()
+    tx.set_position(0, -0.5, 0)
+    ri.Transform(tx.get_matrix().to_list())
+    ri.ObjectInstance(plane)
+    ri.TransformEnd()
+    ri.AttributeEnd()
 
-    filename = "__render"
-    ri.Begin(filename)
-    ri.Hider("raytrace", {"int incremental": [1]})
-    ri.Attribute("Ri", {"int Sides": [2]})
 
-    ri.PixelFilter("gaussian", 2.0, 2.0)
-
-    ri.Integrator(
-        "PxrPathTracer",
-        "integrator",
-        {
-            "int maxIndirectBounces": 10,
-            "int rouletteDepth": 4,
-            "float rouletteThreshold": 0.2,
-            "int clampDepth": 2,
-            "string sampleMode": "bxdf",
-            "int allowCaustics": 0,
-            "int risPathGuiding": 1,
-        },
-    )
-
-    ri.Option("hider", {"int minsamples": 4, "int maxsamples": 1024})
-    ri.Option("statistics", {"filename": ["stats.txt"]})
-    ri.Option("statistics", {"endofframe": [1]})
-
-    ri.ShadingRate(0.05)
-    ri.PixelVariance(0.0)
-    # FILENAME DISPLAY Type Output format
-    ri.Display("PyNGL.exr", "it", "rgba")
-    ri.Format(1024, 720, 1.2)
-    ri.Projection(ri.PERSPECTIVE, {ri.FOV: [55]})
-
-    look = renderman_look_at(Vec3(0.5, 3, 58), Vec3(0, 0, 0), Vec3(0, 1, 0))
-    ri.Identity()
-    ri.Transform(look.to_list())
-    # f-stop focalLength focalDistance
-    # ri.DepthOfField(22, 1.5, 9)
-
-    # now we start our world
-    ri.WorldBegin()
+def generate_model_instances():
+    """
+    Generate model instances for the scene as well as the floor material
+    Note that this actually writes the data to the current ri context immediately so this needs to be
+    called before any other ObjectInstance calls that refere to these ID's
+    Returns:
+        models (list): List of model instances (str,Transform)
+        plane (str): instance string for the plane
+    """
     models = []
-    random.seed(1234)
-
     big_tx = Transform()
     big_tx.set_scale(0.2, 0.2, 0.2)
     unit_tx = Transform()
-    unit_tx.set_position(0, 1.0, 0)
+    unit_tx.set_position(0, 1.1, 0)
     unit_tx.set_scale(2, 2, 2)
+    teapot_tx = Transform()
+    teapot_tx.set_position(0, 1.0, 0)
+    teapot_tx.set_scale(2, 2, 2)
     platonic_tx = Transform()
     platonic_tx.set_position(0, 1, 0)
     meshes = [
@@ -98,7 +99,7 @@ def main():
         ("buddah", big_tx),
         ("dragon", big_tx),
         ("troll", unit_tx),
-        ("teapot", unit_tx),
+        ("teapot", teapot_tx),
         ("icosahedron", platonic_tx),
         ("tetrahedron", platonic_tx),
         ("octahedron", platonic_tx),
@@ -124,16 +125,14 @@ def main():
     ri.Translate(0, 0.5, 0)
     ri.PointsPolygons(nvertices, vertices, parameterlist)
     ri.TransformEnd()
-    models.append(id)
     ri.ObjectEnd()
+    return models, plane
 
-    #######################################################################
-    # Lighting We need geo to emit light
-    #######################################################################
+
+def create_light():
     ri.TransformBegin()
     ri.AttributeBegin()
     ri.Declare("domeLight", "string")
-    # ri.Rotate(45, 0, 1, 0)
     ri.Rotate(-90, 1, 0, 0)
     ri.Rotate(100, 0, 0, 1)
     ri.Light(
@@ -143,37 +142,79 @@ def main():
     )
     ri.AttributeEnd()
     ri.TransformEnd()
-    #######################################################################
 
+
+def setup_scene():
+    ri.Hider("raytrace", {"int incremental": [1]})
+    ri.Attribute("Ri", {"int Sides": [2]})
+
+    ri.PixelFilter("gaussian", 2.0, 2.0)
+
+    ri.Integrator(
+        "PxrPathTracer",
+        "integrator",
+        {
+            "int maxIndirectBounces": 10,
+            "int rouletteDepth": 4,
+            "float rouletteThreshold": 0.2,
+            "int clampDepth": 2,
+            "string sampleMode": "bxdf",
+            "int allowCaustics": 1,
+            "int risPathGuiding": 1,
+        },
+    )
+
+    ri.Option("hider", {"int minsamples": 4, "int maxsamples": 1024})
+    ri.Option("statistics", {"filename": ["stats.txt"]})
+    ri.Option("statistics", {"endofframe": [1]})
+
+    ri.ShadingRate(0.1)
+    ri.PixelVariance(0.001)
+    ri.Display("PyNGL.exr", "it", "rgba")
+    i.Format(1024, 720, 1.0)
+    # 4K
+    # ri.Format(4096, 2160, 1.0)
+    ri.Projection(ri.PERSPECTIVE, {ri.FOV: [55]})
+
+    look = renderman_look_at(Vec3(0.5, 3, 75), Vec3(0, 0, 0), Vec3(0, 1, 0))
+    ri.Identity()
+    ri.Transform(look.to_list())
+    # f-stop focalLength focalDistance
+    # ri.DepthOfField(22, 1.5, 9)
+
+
+def main():
+    render_to_it = False
+    ri.Begin("__render" if render_to_it else "PyNGLScene.rib")
+    setup_scene()
+    # now we start our world
+    ri.WorldBegin()
+    # this returns the id's of the object instances created in the function
+    models, plane = generate_model_instances()
+    create_light()
+    # enable transparency and tracing
+    ri.Attribute("visibility", {"int transmission": [1]})
+    ri.Attribute("trace", {"int maxdiffusedepth": [1], "int maxspeculardepth": [2]})
+
+    # now instance the meshes with random materials
     tx = Transform()
-    for x in range(-40, 42, 3):
-        for z in range(-50, 62, 3):
+
+    for z in range(-50, 62, 3):
+        model = random.choice(models)
+        for x in range(-40, 42, 3):
             tx.reset()
             tx.set_position(x, 0, z)
             tx.set_rotation(0, -90 + random.randint(-20, 20), 0)
             ri.TransformBegin()
             ri.Transform(tx.get_matrix().to_list())
+            ri.AttributeBegin()
             colour = [random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1)]
-            ri.Attribute("visibility", {"int transmission": [1]})
-            ri.Attribute("trace", {"int maxdiffusedepth": [1], "int maxspeculardepth": [2]})
-
-            random_material(ri, colour)
-
-            ri.ObjectInstance(random.choice(models))
-
+            random_material(colour)
+            ri.ObjectInstance(model)
+            ri.AttributeEnd()
             ri.TransformEnd()
 
-    ri.AttributeBegin()
-    ri.Bxdf("PxrDiffuse", "white", {"color diffuseColor": [0.8, 0.8, 0.8]})
-    ri.Attribute("identifier", {"name": "floor"})
-    ri.TransformBegin()
-    tx.reset()
-    tx.set_position(0, -0.5, 0)
-    ri.Transform(tx.get_matrix().to_list())
-    ri.ObjectInstance(plane)
-    ri.TransformEnd()
-    ri.AttributeEnd()
-
+    render_floor(plane)
     ri.WorldEnd()
     # and finally end the rib file
     ri.End()
@@ -183,4 +224,6 @@ if __name__ == "__main__":
     HDR_FILE = "autumn_hilly_field_8k.exr"
     URL = "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/8k/autumn_hilly_field_8k.exr"
     check_and_download_hdr(HDR_FILE, URL)
+    # good seeds (rabbit front 12434) (teapot 134) (icosahedron 12) (troll 666  )
+    random.seed(12434)
     main()

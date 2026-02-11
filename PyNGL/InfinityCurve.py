@@ -103,10 +103,10 @@ def quarter_cylinder_cove(
     U, V = np.meshgrid(u, v)
 
     # Calculate points from parameters
-    X = -half_w + U * width
+    X = half_w - U * width
     angle = V * (np.pi / 2.0)
     Y = radius * (1 - np.cos(angle))
-    Z = radius * (np.sin(angle) - 1)
+    Z = radius * (1 - np.sin(angle))
 
     # Reshape points into a (N, 3) array
     points = np.vstack([X.ravel(), Y.ravel(), Z.ravel()]).T
@@ -121,7 +121,8 @@ def quarter_cylinder_cove(
     v2 = (R + 1) * cols + C + 1
     v3 = (R + 1) * cols + C
 
-    verts = np.vstack([v0.ravel(), v1.ravel(), v2.ravel(), v3.ravel()]).T.flatten()
+    # reverse vertex order to flip normals
+    verts = np.vstack([v0.ravel(), v3.ravel(), v2.ravel(), v1.ravel()]).T.flatten()
     nverts = np.full((rows - 1) * width_divs, 4, dtype=int).tolist()
 
     P = points.flatten().tolist()

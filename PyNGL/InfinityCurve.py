@@ -61,6 +61,9 @@ def infinity_cove(
     points[:, 0] = np.tile(x_coords, rows)
     points[:, 1] = np.repeat(z_profile[:, 1], cols)
     points[:, 2] = np.repeat(z_profile[:, 0], cols)
+    # Negate X and Z for 180 degree rotation in Y
+    points[:, 0] *= -1
+    points[:, 2] *= -1
     # --- Build quad faces using numpy ---
     r = np.arange(rows - 1)
     c = np.arange(width_divs)
@@ -71,7 +74,8 @@ def infinity_cove(
     v2 = (R + 1) * cols + C + 1
     v3 = (R + 1) * cols + C
 
-    verts = np.vstack([v0.ravel(), v1.ravel(), v2.ravel(), v3.ravel()]).T.flatten()
+    # reverse vertex order to flip normals
+    verts = np.vstack([v0.ravel(), v3.ravel(), v2.ravel(), v1.ravel()]).T.flatten()
     nverts = np.full((rows - 1) * width_divs, 4, dtype=int).tolist()
 
     # Flatten point list for RenderMan

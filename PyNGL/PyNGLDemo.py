@@ -9,6 +9,8 @@ import requests
 from ncca.ngl import Mat4, PrimData, Transform, Vec3, prim_data_to_ri_points_polygons, renderman_look_at
 from tqdm import tqdm
 
+from InfinityCurve import subdiv_cove_volume
+
 # Not ideal be we need to create an instance of the RenderMan interface, this is global and is basically
 # the RenderMan interface context. You can have many context if you need them
 ri = prman.Ri()  # create an instance of the RenderMan interface
@@ -70,6 +72,8 @@ def render_floor(plane):
     tx.set_position(0, -0.5, 0)
     ri.Transform(tx.get_matrix().to_list())
     ri.ObjectInstance(plane)
+    # subdiv_cove_volume(ri, width=180.0, height=10.0, depth=140.0, crease=2.5)
+
     ri.TransformEnd()
     ri.AttributeEnd()
 
@@ -171,7 +175,7 @@ def setup_scene():
     ri.ShadingRate(0.1)
     ri.PixelVariance(0.001)
     ri.Display("PyNGL.exr", "it", "rgba")
-    i.Format(1024, 720, 1.0)
+    ri.Format(1024, 720, 1.0)
     # 4K
     # ri.Format(4096, 2160, 1.0)
     ri.Projection(ri.PERSPECTIVE, {ri.FOV: [55]})
@@ -184,7 +188,7 @@ def setup_scene():
 
 
 def main():
-    render_to_it = False
+    render_to_it = True
     ri.Begin("__render" if render_to_it else "PyNGLScene.rib")
     setup_scene()
     # now we start our world

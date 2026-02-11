@@ -76,7 +76,7 @@ def infinity_cove(
 
     # Flatten point list for RenderMan
     P = points.flatten().tolist()
-
+    # output to stream
     ri.PointsPolygons(nverts, verts.tolist(), {"P": P})
 
 

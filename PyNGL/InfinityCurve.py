@@ -229,6 +229,7 @@ if __name__ == "__main__":
         infinity_cove(
             ri, width=4, depth=4, height=10, radius=2, width_divs=20, depth_divs=200, curve_divs=200, height_divs=200
         )
+
         ri.TransformEnd()
 
         ri.TransformBegin()
@@ -238,7 +239,11 @@ if __name__ == "__main__":
         ri.TransformBegin()
         ri.Translate(4, 0, 0)
         subdiv_cove_volume(ri, width=4.0, height=4.0, depth=4.0, crease=1.5)
-
+        ri.TransformBegin()
+        ri.Rotate(180, 0, 1, 0)
+        ri.Scale(2, 2, 2)
+        ri.ReadArchive("YourMeshHere.rib.gz")
+        ri.TransformEnd()
         ri.TransformEnd()
         ri.TransformEnd()
         ri.WorldEnd()

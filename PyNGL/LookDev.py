@@ -9,7 +9,7 @@ import requests
 from ncca.ngl import Mat4, PrimData, Transform, Vec3, prim_data_to_ri_points_polygons, renderman_look_at
 from tqdm import tqdm
 
-from ColourMatching import render_colorchecker
+from ColourMatching import render_colorchecker, render_refballs
 from InfinityCurve import subdiv_cove_volume
 
 # Not ideal be we need to create an instance of the RenderMan interface, this is global and is basically
@@ -62,84 +62,6 @@ def random_material(colour):
         lambda: ri.Bxdf("LamaDiffuse", "id", {"color color": colour, "color diffuseColor": colour}),
     ]
     random.choice(materials)()
-
-
-import prman
-
-
-def get_colorchecker_linear():
-    """
-    Returns list of (name, (r,g,b)) in linear sRGB
-    """
-
-    return [
-        ("Dark Skin", (0.180, 0.083, 0.058)),
-        ("Light Skin", (0.540, 0.305, 0.223)),
-        ("Blue Sky", (0.122, 0.198, 0.337)),
-        ("Foliage", (0.095, 0.150, 0.057)),
-        ("Blue Flower", (0.240, 0.215, 0.445)),
-        ("Bluish Green", (0.134, 0.503, 0.401)),
-        ("Orange", (0.672, 0.214, 0.032)),
-        ("Purplish Blue", (0.081, 0.104, 0.380)),
-        ("Moderate Red", (0.527, 0.104, 0.129)),
-        ("Purple", (0.109, 0.041, 0.149)),
-        ("Yellow Green", (0.338, 0.510, 0.055)),
-        ("Orange Yellow", (0.752, 0.367, 0.035)),
-        ("Blue", (0.040, 0.046, 0.305)),
-        ("Green", (0.063, 0.296, 0.067)),
-        ("Red", (0.428, 0.035, 0.045)),
-        ("Yellow", (0.812, 0.594, 0.013)),
-        ("Magenta", (0.496, 0.095, 0.306)),
-        ("Cyan", (0.003, 0.245, 0.356)),
-        ("White", (0.897, 0.897, 0.893)),
-        ("Neutral 8", (0.604, 0.604, 0.604)),
-        ("Neutral 6.5", (0.352, 0.352, 0.352)),
-        ("Neutral 5", (0.203, 0.203, 0.201)),
-        ("Neutral 3.5", (0.089, 0.089, 0.089)),
-        ("Black", (0.034, 0.034, 0.034)),
-    ]
-
-
-def render_colorchecker(ri, patch_size=1.0, gap=0.1):
-    """
-    Render a 6x4 grid of color checker patches using PxrDiffuse
-    """
-
-    colors = get_colorchecker_linear()
-
-    cols = 6
-    rows = 4
-
-    for i, (name, color) in enumerate(colors):
-        row = i // cols
-        col = i % cols
-
-        x = col * (patch_size + gap)
-        y = -row * (patch_size + gap)
-
-        # Define square polygon (XY plane)
-        P = [
-            x,
-            y,
-            0,
-            x + patch_size,
-            y,
-            0,
-            x + patch_size,
-            y - patch_size,
-            0,
-            x,
-            y - patch_size,
-            0,
-        ]
-
-        ri.AttributeBegin()
-
-        ri.Bxdf("PxrDiffuse", f"diffuse_{i}", {"color diffuseColor": color})
-
-        ri.Polygon({"P": P})
-
-        ri.AttributeEnd()
 
 
 def render_floor():
@@ -234,38 +156,18 @@ def main():
         "plastic",
         {
             "color diffuseColor": [0.9, 0.1, 0.1],
-            "color clearcoatFaceColor": [0.5, 0.5, 0.5],
-            "color clearcoatEdgeColor": [0.25, 0.25, 0.25],
         },
     )
     ri.ReadArchive("YourMeshHere.rib.gz")
     ri.TransformEnd()
-
-    # Spheres
-    ri.TransformBegin()
-    ri.Translate(1.5, -0.2, 1.2)
-    ri.Scale(0.18, 0.18, 0.18)
-    ri.Bxdf(
-        "PxrDiffuse",
-        "greu",
-        {
-            "color diffuseColor": [0.5, 0.5, 0.5],
-        },
-    )
-    ri.Sphere(1, -1, 1, 360)
-    ri.TransformEnd()
-    ri.TransformBegin()
-    ri.Translate(1.0, -0.2, 1.2)
-    ri.Scale(0.18, 0.18, 0.18)
-    ri.Bxdf("LamaConductor", "conductor", {"color tint": [0.5, 0.5, 0.5]})
-
-    ri.Sphere(1, -1, 1, 360)
-    ri.TransformEnd()
+    render_refballs(ri, (1.0, -0.25, 1.2), (0.2, 0.2, 0.2))
 
     ri.TransformBegin()
-    ri.Translate(-1.2, 0, 1.2)
+    tx = Transform()
+    tx.set_rotation(-45, 45, 0)
+    tx.set_position(-1.2, -0.1, 1.2)
+    ri.Transform(tx.get_matrix().to_list())
     render_colorchecker(ri, 0.1, 0.01)
-
     ri.TransformEnd()
 
     render_floor()
